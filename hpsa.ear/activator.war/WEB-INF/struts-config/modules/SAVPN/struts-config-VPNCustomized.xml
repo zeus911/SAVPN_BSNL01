@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE struts-config PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+"http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="ChannelizedInterfaceForm" 
+			type="com.hp.ov.activator.inventory.SAVPN.ChannelizedInterfaceForm"/>
+		<form-bean name="RouterInterfaceUploadForm" 
+			type="com.hp.ov.activator.inventory.SAVPN.RouterInterfaceUploadForm"/>
+		<form-bean name="AggregatedRouterForm" 
+			type="com.hp.ov.activator.inventory.SAVPN.AggregatedRouterForm"/>
+		<form-bean name="InterfaceRecoveryForm" 
+			type="com.hp.ov.activator.inventory.SAVPN.InterfaceRecoveryForm"/>
+		<form-bean name="RouterRecoveryForm" 
+			type="com.hp.ov.activator.inventory.SAVPN.RouterRecoveryForm"/>
+			<form-bean name="ControllerRecoveryForm" 
+			type="com.hp.ov.activator.inventory.SAVPN.ControllerRecoveryForm"/>
+		<form-bean name="PEAccessNetworkForm" 
+			type="com.hp.ov.activator.inventory.SAVPN.PEAccessNetworkForm"/>
+		<form-bean name="ASBRRateLimitForm" 
+			type="com.hp.ov.activator.inventory.SAVPN.ASBRRateLimitForm"/>
+	  <form-bean name="EXPMappingForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.EXPMappingForm"/>
+
+	</form-beans>
+
+
+	<action-mappings>
+		 <action path="/UpdateCommitEXPMappingAction"
+			type="com.hp.ov.activator.inventory.SAVPN.UpdateCommitEXPMappingAction"
+			name="EXPMappingForm"
+			scope="request"
+			input="UpdateFormInput">
+			<forward name="not-found" path="/jsp/inventory/UpdateInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="success" path="/SearchCommitEXPMappingAction.do?tab_name=tmp4_0"/>
+      <forward name="failure" path="/jsp/inventory/UpdateInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="UpdateFormInput" path="/jsp/inventory/SAVPN/UpdateEXPMapping.jsp" contextRelative="true"/>
+		</action>
+
+     <action path="/UpdateCommitASBRRateLimitAction"
+			type="com.hp.ov.activator.inventory.SAVPN.UpdateCommitASBRRateLimitAction"
+			name="ASBRRateLimitForm"
+			scope="request"
+			input="UpdationFormASBRRateLimitInput">
+			<forward name="success" path="/jsp/inventory/SAVPN/ViewSuccess.jsp" contextRelative="true"/>
+			<forward name="error" path="/UpdateFormASBRRateLimitAction.do"/>
+			<forward name="failure" path="/jsp/inventory/CreationInstanceFailure.jsp" contextRelative="true"/>
+			<forward name="UpdationFormASBRRateLimitInput" path="/UpdateFormASBRRateLimitAction.do"/>
+		</action>
+		<action path="/CreationCommitInterfaceRecoveryAction"
+			type="com.hp.ov.activator.inventory.SAVPN.CreationCommitInterfaceRecoveryAction"
+			name="InterfaceRecoveryForm"
+			scope="request"
+			input="CreationFormInterfaceInput">
+			<forward name="success" path="/jsp/inventory/SAVPN/CommitInterfaceRecovery.jsp" contextRelative="true"/>
+			<forward name="error" path="/CreationFormInterfaceRecoveryAction.do"/>
+			<forward name="failure" path="/jsp/inventory/CreationInstanceFailure.jsp" contextRelative="true"/>
+			<forward name="CreationFormInterfaceInput" path="/CreationFormInterfaceRecoveryAction.do"/>
+		</action>
+		<action path="/CreationCommitRouterRecoveryAction"
+			type="com.hp.ov.activator.inventory.SAVPN.CreationCommitRouterRecoveryAction"
+			name="RouterRecoveryForm"
+			scope="request"
+			input="CreationFormRouterInput">
+			<forward name="success" path="/jsp/inventory/SAVPN/CommitRouterRecovery.jsp" contextRelative="true"/>
+			<forward name="error" path="/CreationFormRouterRecoveryAction.do"/>
+			<forward name="failure" path="/jsp/inventory/CreationInstanceFailure.jsp" contextRelative="true"/>
+			<forward name="CreationFormRouterInput" path="/CreationFormRouterRecoveryAction.do"/>
+		</action>
+		<action path="/CreationCommitControllerRecoveryAction"
+			type="com.hp.ov.activator.inventory.SAVPN.CreationCommitControllerRecoveryAction"
+			name="ControllerRecoveryForm"
+			scope="request"
+			input="CreationFormControllerInput">
+			<forward name="success" path="/jsp/inventory/SAVPN/CommitControllerRecovery.jsp" contextRelative="true"/>
+			<forward name="error" path="/CreationFormControllerRecoveryAction.do"/>
+			<forward name="failure" path="/jsp/inventory/CreationInstanceFailure.jsp" contextRelative="true"/>
+			<forward name="CreationFormControllerInput" path="/CreationFormControllerRecoveryAction.do"/>
+		</action>
+		<action path="/CreationCommitAggregatedRouterAction"
+			type="com.hp.ov.activator.inventory.SAVPN.CreationCommitAggregatedRouterAction"
+			name="AggregatedRouterForm"
+			scope="request"
+			input="CreationFormAggregatedRouterInput">
+			<forward name="success" path="/jsp/inventory/SAVPN/ViewAggregatedRouter.jsp" contextRelative="true"/>
+			<forward name="error" path="/CreationFormAggregatedRouterAction.do"/>
+			<forward name="failure" path="/jsp/inventory/CreationInstanceFailure.jsp" contextRelative="true"/>
+			<forward name="CreationFormAggregatedRouterInput" path="/CreationFormAggregatedRouterAction.do"/>
+		</action>
+		<action path="/QueueFormAction"
+			type="com.hp.ov.activator.inventory.SAVPN.QueueFormAction"
+			name="QueueForm"
+			scope="request"
+			validate="false"
+			input="ViewQueueInput">
+			<forward name="not-found" path="/jsp/inventory/UpdateInstanceFailure.jsp" contextRelative="true"/>
+			<forward name="success" path="/jsp/inventory/RefreshTree.jsp" contextRelative="true"/>
+			<!--<forward name="success" path="/ViewFormQueueAction.do"/>-->
+			<forward name="failure" path="/jsp/inventory/UpdateInstanceFailure.jsp" contextRelative="true"/>
+			<forward name="ViewQueueInput" path="/jsp/inventory/SAVPN/ViewQueue.jsp" contextRelative="true"/>
+		</action>
+		<action path="/AttachFormPEAccessNetworkAction"
+			type="com.hp.ov.activator.inventory.SAVPN.AttachFormPEAccessNetworkAction"
+			name="PEAccessNetworkForm"
+			scope="request"
+			validate="false"
+			input="CreationPEAccessNetworkInput">
+			<forward name="success" path="/jsp/inventory/SAVPN/CreationPEAccessNetwork.jsp" contextRelative="true"/>
+			<forward name="failure" path="/jsp/inventory/CreationInstanceFailure.jsp" contextRelative="true"/>
+			<forward name="CreationPEAccessNetworkInput" path="/jsp/inventory/SAVPN/CreationPEAccessNetwork.jsp" contextRelative="true"/>
+		</action>
+		<action path="/AttachCommitPEAccessNetworkAction"
+			type="com.hp.ov.activator.inventory.SAVPN.AttachCommitPEAccessNetworkAction"
+			name="PEAccessNetworkForm"
+			scope="request"
+			input="AttachFormPEInput">
+			<forward name="success" path="/jsp/inventory/SAVPN/ViewPEAccessNetwork.jsp" contextRelative="true"/>
+			<forward name="error" path="/AttachFormPEAccessNetworkAction.do"/>
+			<forward name="failure" path="/jsp/inventory/CreationInstanceFailure.jsp" contextRelative="true"/>
+			<forward name="AttachFormPEInput" path="/AttachFormPEAccessNetworkAction.do"/>
+		</action>
+
+      <action path="/NNMiInterfaceGroupViewFormAction" type="com.hp.ov.activator.inventory.SAVPN.NNMiInterfaceGroupViewFormAction"
+      validate="false">
+      <forward name="success" path="/jsp/inventory/SAVPN/ShowNNMInterfaceGroupView.jsp" contextRelative="true" />
+    </action>
+<action path="/CreationCommitIPNetAction"
+      type="com.hp.ov.activator.inventory.SAVPN.CreationCommitIPNetAction"
+      name="IPNetForm"
+      scope="request"
+      input="CreationCommitInput">
+      <forward name="success" path="/ViewFormIPNetAction.do"/>
+      <forward name="error" path="/CreationFormIPNetAction.do"/>
+      <forward name="failure" path="/jsp/inventory/CreationInstanceFailure.jsp"    contextRelative="true"/>
+      <forward name="CreationCommitInput" path="/CreationFormIPNetAction.do"/>
+ </action>
+
+	</action-mappings>
+
+
+    <message-resources null="false" key="InventoryResources"
+		parameter="InventoryResources"/>
+	<message-resources null="false" key="ChannelizedInterfaceApplicationResources"
+		parameter="resources.SAVPN.ChannelizedInterfaceApplicationResources"/>
+	<message-resources null="false" key="RouterInterfaceUploadApplicationResources"
+		parameter="resources.SAVPN.RouterInterfaceUploadApplicationResources"/>
+	<message-resources null="false" key="AggregatedRouterResources"
+		parameter="resources.SAVPN.AggregatedRouterResources"/>
+	<message-resources null="false" key="InterfaceRecoveryApplicationResources"
+		parameter="resources.SAVPN.InterfaceRecoveryApplicationResources"/>
+	<message-resources null="false" key="RouterRecoveryApplicationResources"
+		parameter="resources.SAVPN.RouterRecoveryApplicationResources"/>
+		<message-resources null="false" key="ControllerRecoveryApplicationResources"
+		parameter="resources.SAVPN.ControllerRecoveryApplicationResources"/>
+	<message-resources null="false" key="PEAccessNetworkApplicationResources"
+		parameter="resources.SAVPN.PEAccessNetworkApplicationResources"/>
+        <message-resources null="false" key="ASBRRateLimitApplicationResources"
+		parameter="resources.SAVPN.ASBRRateLimitApplicationResources"/>
+	<message-resources null="false" key="SuccessApplicationResources"
+		parameter="resources.SAVPN.SuccessApplicationResources"/>
+
+</struts-config>
+

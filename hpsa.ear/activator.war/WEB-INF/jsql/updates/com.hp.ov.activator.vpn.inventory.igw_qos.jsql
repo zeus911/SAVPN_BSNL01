@@ -1,0 +1,9 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+UPDATE
+  igw_qos
+SET
+  NAME = ?, COMMANDS = ?
+WHERE
+  QOS_ID = ?
+

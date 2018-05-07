@@ -1,0 +1,16 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+SELECT
+  igw_qos.NAME		igw_qos_NAME,
+  igw_qos.QOS_ID		igw_qos_QOS_ID,
+  igw_qos.COMMANDS		igw_qos_COMMANDS
+FROM
+  igw_qos   igw_qos
+WHERE
+  igw_qos.QOS_ID = ?
+ORDER BY 
+igw_qos.QOS_ID
+
+
+@ order:1;igw_qos.QOS_ID
+@ alias:own_table_alias;igw_qos

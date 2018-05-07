@@ -1,0 +1,51 @@
+/**************************************************************************/
+/*  HP Service Activator                                                  */
+/*  (c) Copyright 2014 Hewlett-Packard Development Company, L.P.          */
+/**************************************************************************/
+
+html {
+  font-family: Verdana, Helvetica, Arial, Sans-serif;
+}
+
+.contextMenu,.messageContextMenu {
+  position: absolute;
+  top: 0px;
+  background-color: #e6e6e6;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #efefef #505050 #505050 #efefef;
+  visibility: hidden;
+  border-left: 1px solid black;
+  border-top: 1px solid black;
+  border-bottom: 3px solid black;
+  border-right: 3px solid black;
+  padding: 3px;
+  z-index: 101;
+}
+
+.contextMenu {
+  width: 160;
+}
+
+.messageContextMenu {
+  width: 203;
+}
+
+.menuItem    { cursor: pointer;
+               background-color: transparent;
+               padding-left: 5px;
+               color: black;
+               font-size: 8pt;
+               width:  90%; 
+             }
+	   
+.menuItemOn  { cursor: pointer;
+               font-size: 8pt;
+               background-color: #cccccc;
+               padding-left: 5px;
+               width:  100%; 
+             }
+
+.contextEntry {
+               cursor: pointer;
+             }

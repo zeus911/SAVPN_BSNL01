@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE Bean SYSTEM "bean.dtd">
+<!--
+###############################################################################
+#
+#    (c) Copyright 2003-2010 Hewlett-Packard Development Company, L.P.
+#
+###############################################################################
+###############################################################################
+#
+# $Source: /tmp/vpn/SA_VPN_SP/jboss/server/default/deploy/crmportal.sar/crm.war/WEB-INF/src/inventory/service.xml,v $
+# $Revision: 1.9 $
+# $Date: 2010-10-05 14:19:04 $
+# $Author: shiva $
+#
+###############################################################################
+#
+# <Description> 
+#
+###############################################################################
+-->
+
+
+<Bean>
+  <Name>Service</Name>
+  <Solution>CRM</Solution>
+  <ConstraintName>crm_service</ConstraintName>
+  <Package>com.hp.ov.activator.crmportal.bean</Package>
+  <DBTable>crm_service</DBTable>
+  <DBAlias>crm_service</DBAlias>
+
+  <Fields>
+     <Field update ="false">
+        <Name>ServiceId</Name>
+        <Type>String</Type>
+        <Description>Unique service identifier</Description>
+     </Field>
+     <Field mandatory="false">
+        <Name>PresName</Name>
+        <Type>String</Type>
+        <Description>The presentation name of the service</Description>
+     </Field>
+     <Field>
+        <Name>State</Name>
+        <Type>String</Type>
+        <Description>The state of the service</Description>
+     </Field>
+     <Field mandatory="false">
+        <Name>SubmitDate</Name>
+        <Type>String</Type>
+        <Description>The date of creation</Description>
+     </Field>
+     <Field mandatory="false">
+        <Name>ModifyDate</Name>
+        <Type>String</Type>
+        <Description>The date of last modification</Description>
+     </Field>
+     <Field>
+        <Name>Type</Name>
+        <Type>String</Type>
+        <Description>The type of the service</Description>
+     </Field>
+     <Field>
+        <Name>CustomerId</Name>
+        <Type>String</Type>
+        <Description>Reference to the parent customer</Description>
+     </Field>
+     <Field mandatory="false">
+        <Name>ParentServiceId</Name>
+        <Type>String</Type>
+        <Description>Key to parent service. Null if this is the parent service</Description>
+     </Field>
+     <Field mandatory="false">
+        <Name>EndTime</Name>
+        <Type>String</Type>
+        <Description>The possible end time of providing the service</Description>
+     </Field>
+     <Field>
+      <Name>NextOperationTime</Name>
+      <Type>long</Type>
+      <Description>Time of the next periodic activation</Description>
+    </Field>
+    <Field>
+      <Name>LastUpdateTime</Name>
+      <Type>long</Type>
+      <Description>Time of the update of the service</Description>
+    </Field>
+
+
+  </Fields>
+
+  <Keys>
+    <Key pk="true">
+      <KeyField>ServiceId</KeyField>
+    </Key>
+    <Key foreignBean="Customer">
+      <KeyField foreignField="CustomerId">CustomerId</KeyField>
+    </Key>
+    <Key foreignBean="ServiceType">
+      <KeyField foreignField="Name">Type</KeyField>
+    </Key>
+    <Key foreignBean="Service">
+      <KeyField foreignField="ServiceId">ParentServiceId</KeyField>
+    </Key>
+    <Key foreignBean="State">
+      <KeyField foreignField="Name">State</KeyField>
+    </Key>
+    <Key>
+      <KeyField>NextOperationTime</KeyField>
+    </Key>
+  </Keys>
+
+  <!-- These are the operations to generate for this bean -->
+  <Operations>
+    <Store/>
+    <Update/>
+    <Remove/>
+
+    <!-- findAll method -->
+    <FindBy>
+      <OrderField>PresName</OrderField>
+    </FindBy>
+
+    <FindBy key="State">
+      <OrderField>ServiceId</OrderField>
+    </FindBy>
+
+    <FindBy key="Type">
+      <OrderField>ServiceId</OrderField>
+    </FindBy>
+
+    <FindBy key="CustomerId">
+      <OrderField>PresName</OrderField>
+    </FindBy>
+
+    <FindBy key="ParentServiceId">
+      <OrderField>PresName</OrderField>
+    </FindBy>
+  </Operations>
+</Bean>
+

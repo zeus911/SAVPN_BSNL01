@@ -1,0 +1,120 @@
+/**************************************************************************/
+/*                                                                      */
+/*   ©(c) Copyright 2003-2010 Hewlett-Packard Development Company, L.P.   */
+/**************************************************************************/
+
+
+h1 {    font-family: Verdana, Helvetica, Arial, Sans-serif; font-size: 16pt; color: #2A3FAA;}
+h2 {    font-family: Tahoma,Arial,Helvetica,sans-serif; font-size: 14pt;        color: #2A3FAA;}
+h3{     font-family: Tahoma,Arial,Helvetica,sans-serif; font-size: 12pt;        color: #2A3FAA;}
+h4{     font-family: Tahoma,Arial,Helvetica,sans-serif; font-size: 10pt;        color: #2A3FAA;}
+h5{     font-family: Tahoma,Arial,Helvetica,sans-serif; font-size: 20pt;        color: #000000;}
+
+A: {
+	TEXT-DECORATION: none;
+	color:#ffffff;
+}
+A:link {
+	TEXT-DECORATION: none;
+	color:#ffffff;
+}
+
+A:visited {
+	TEXT-DECORATION: none;
+	color:#ffffff;}
+
+A:active {
+	TEXT-DECORATION: none;
+}
+A:hover {
+	TEXT-DECORATION: underline;
+}
+body {      font-family: Verdana, Helvetica, Arial, Sans-serif;
+			font-size: 9pt
+			color: black;
+	}
+
+td.title {       font-size: 11pt;  font-weight: bold;      color: white ;   align: left;       background-color: #6699CC;}
+
+td {
+	font-family: Verdana, Helvetica, Arial, Sans-serif;
+	font-size: 9pt;
+ 	align: left;
+	background-color: #eeeeee;
+	}
+
+td.frame {       background: #FFCC98;}
+th { background: #336699;      font-family: Verdana, Helvetica, Arial, Sans-serif;     font-size: 10pt;     font-weight: bold;     color: white;     align:left;      valign:top; text-align:left }
+th.center { background: #336699;      font-family: Verdana, Helvetica, Arial, Sans-serif;     font-size: 10pt;     font-weight: bold;     color: white;     align:left;      valign:top; text-align:center }
+
+th.frame {     background: #986430;}.field {        font-family: Verdana, Helvetica, Arial, Sans-serif;   font-size: 8pt; color: black;}.option {       font-family: Verdana, Helvetica, Arial, Sans-serif;       font-size: 8pt; color: white;       background-color: cyan;}.white {       background-color: white;}
+
+.list1 {
+	background-color: #e5e5e5;
+ 	align: left;
+}
+
+.list0 {
+	background-color: #eeeeee;
+ 	align: left;
+}
+
+td.red {
+	background-color: red;
+ 	align: left;
+}
+
+td.cyan {
+	background-color: cyan;
+ 	align: left;
+}
+
+td.lightgreen {
+	background-color: lightgreen;
+ 	align: left;
+}
+
+td.khaki {
+	background-color: khaki;
+ 	align: left;
+}
+
+
+td.white {
+	background-color: white;
+}
+
+td.cyan {
+	background-color: #99ccff;
+}
+
+.field {
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+	font-size: 8pt;
+
+}
+
+#req {
+	color: Red;
+	font-weight: bold;
+}
+
+#opc {
+	color: Blue;
+}
+
+.subheadNoLink {
+    font-family: Verdana, Helvetica, Arial, Sans-serif;
+    font-size: 10pt;
+    font-weight: bold;
+}
+
+
+.subheadNoLinkWhite {
+    font-family: Verdana, Helvetica, Arial, Sans-serif;
+    font-size: 10pt;
+    font-weight: bold;
+    color: white;
+}
+
+

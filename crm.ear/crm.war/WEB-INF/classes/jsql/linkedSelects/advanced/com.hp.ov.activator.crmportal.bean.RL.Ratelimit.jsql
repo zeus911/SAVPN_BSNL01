@@ -1,0 +1,18 @@
+## Generated using InventoryBuilder v.V61
+## Object class com.hp.ov.activator.inventorybuilder.sql.routes.FindByArraySQLRoute
+SELECT
+  V_RateLimit.RateLimit		V_RateLimit_RateLimit,
+  V_RateLimit.Value		V_RateLimit_Value,
+  V_RateLimit.Description		V_RateLimit_Description
+FROM
+  V_RateLimit   V_RateLimit
+WHERE
+  V_RateLimit.RateLimit IN [selectIN_?]
+
+
+
+@ order:1;select_IN_substitution
+@ opt:RateLimit;V_RateLimit;V_RateLimit;RateLimit
+@ opt:Description;V_RateLimit;V_RateLimit;Description
+@ opt:Value;V_RateLimit;V_RateLimit;Value
+@ alias:primary_key;V_RateLimit.RateLimit

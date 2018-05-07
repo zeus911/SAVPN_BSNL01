@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure>
+    <deployment>
+        <dependencies>
+            <module name="com.hp.ov.activator.oracle" services="export" />
+            <module name="org.apache.xerces" services="export" />
+            <module name="org.jboss.ironjacamar.jdbcadapters" services="export" />
+            <module name="org.apache.log4j" services="export" />
+            <module name="org.jboss.dmr" services="export" />
+            <module name="org.jboss.remote-naming" services="export" />
+            <module name="org.hornetq" services="export" />
+        </dependencies>
+    </deployment>
+</jboss-deployment-structure>
+

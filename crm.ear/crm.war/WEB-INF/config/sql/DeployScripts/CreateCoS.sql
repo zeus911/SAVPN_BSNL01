@@ -1,0 +1,5 @@
+-- Deployment and table moved to SA
+--insert into CRM_COS (Name, Description, ValueOrder, ISPARENT__) values ('Real-Time', 'The premium service', 0, 0);
+--insert into CRM_COS (Name, Description, ValueOrder, ISPARENT__) values ('Gold', 'The next best service', 1, 0);
+--insert into CRM_COS (Name, Description, ValueOrder, ISPARENT__) values ('Silver', 'Third best service', 2, 0);
+--insert into CRM_COS (Name, Description, ValueOrder, ISPARENT__) values ('Best-Effort', 'No guaranties', 3, 0);

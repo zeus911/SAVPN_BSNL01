@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:p="http://primefaces.org/ui">
+<h:head>
+  <title>Success</title>
+  <script type="text/javascript" src="/activator/javascript/saUtilities.js" />
+  <script type="text/javascript">
+			A4J.AJAX.onError = function(req, status, message) {
+				window.alert("Encountered error " + message
+						+ ". Closing the window");
+				window.close();
+			}
+
+			A4J.AJAX.onExpired = function(loc, expiredMsg) {
+				window.alert("Session timed out... Closing the window");
+				window.close();
+			}
+		</script>
+  <link rel="stylesheet" type="text/css" href="/activator/css/primefaces/hpsa.css" />
+   <style type="text/css">
+    .hpsa_head {
+      border:0px !important;
+      border-collapse:collapse;
+      padding:0px !important;
+      cellspacing:0px;
+      width:100%;
+      background-color:#336699;
+    }
+    .col1 {
+      border:0px !important;
+      border-collapse:collapse;
+      padding:0px;
+      align:left;
+    }
+    .col2 {
+      border:0px !important;
+      border-collapse:collapse;
+      padding:0px;
+      width:100%;
+    }
+    .col3 {
+      border:0px !important;
+      border-collapse:collapse;
+      padding:0px;
+      align:right;
+    }
+  </style></h:head>
+<body onmousemove="logoutTimerReset();" onkeydown="logoutTimerReset();">
+  <h:form>
+    <h:panelGrid columns="4" columnClasses="col1,col1,col2,col3" styleClass="hpsa_head">
+      <h:graphicImage value="/images/HPLogo-small.gif" />
+      <h:graphicImage value="/images/sa_name.png" />
+      <h:graphicImage value="/images/1x1.gif" />
+      <h:graphicImage value="/images/wires_pad_left.jpg" />
+    </h:panelGrid>
+
+    <p:spacer height="6" />
+
+    <p:panel>
+      <h:panelGrid columns="1" width="100%">
+        <h:panelGroup>
+          <h:outputText value="#{debug_msg.submit_success}">
+          </h:outputText>
+        </h:panelGroup>
+        <h:panelGroup>
+          <h:commandButton id="close" value="#{debug_msg.close}" onclick="window.close()" />
+        </h:panelGroup>
+      </h:panelGrid>
+    </p:panel>
+    
+  </h:form>
+</body>
+</html>

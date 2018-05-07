@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<!--
+********* IMPORTANT: This UI is also included in the Service Order View UI (SOV UI). Any changes made in this UI must be also made in SOV UI, and vice versa. *********
+-->
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+  <link rel="stylesheet" type="text/css" href="/activator/css/primefaces/hpsa.css" />
+  <script type="text/javascript" src="/activator/javascript/saUtilities.js" ></script>
+  
+</h:head>
+
+<body onmousemove="logoutTimerReset();" onkeydown="logoutTimerReset();">
+
+<h:outputText value="#{auditrb.title}" class="frame-header" />
+
+<h:form id="form">
+
+<p:growl id="growl" showDetail="true"/>
+
+<p:panel id="srchpnl" style="text-align:right;">
+  <h:outputText value="#{auditrb.filter}: " rendered="#{auditManager.storedFiltersAvailable}" />
+  <h:selectOneMenu id="filters" value="#{auditManager.selectedFilterId}" valueChangeListener="#{auditManager.onSelectedFilterChange}" label="#{auditrb.filter}"
+      update=":form:messages,:form:dlgfilter,:form:current_filter" onchange="submit()" rendered="#{auditManager.storedFiltersAvailable}">
+    <f:selectItem itemValue="" itemLabel="#{auditrb.no_filter}" />
+    <f:selectItems value="#{auditManager.filters}" var="f" itemLabel="#{f.solution} #{f.name}" itemValue="#{f.id}" />
+  </h:selectOneMenu>
+  <p:spacer width="10" />
+  <p:commandButton value="#{auditrb.reset}" partialSubmit="true" process=":form:srchpnl" update=":form:messages,:form:srchpnl,:form:current_filter,:form:growl"
+      actionListener="#{auditManager.reset}" />
+  <p:spacer width="10" />
+  <p:commandButton value="#{auditrb.filter}" partialSubmit="true" process=":form:srchpnl" update=":form:growl"
+      actionListener="#{auditManager.filter}" oncomplete="PF('dlgfilter').show();" />
+</p:panel>
+
+<p:panel id="current_filter" header="#{auditrb.applied_filter}" toggleable="true" closable="false" toggleSpeed="500" visible="#{auditManager.isFilterApplied}">
+  <p:panelGrid columns="14" cellpadding="5" style="width:100%;" styleClass="datagrid">
+    <h:outputText value="#{auditrb.filter_name}: " rendered="#{auditManager.isFilterNameApplied}" />
+    <h:outputText value="#{auditManager.appliedFilterName}" rendered="#{auditManager.isFilterNameApplied}" />
+    <h:outputText value="#{auditrb.filter_solution}: " rendered="#{auditManager.isFilterSolutionApplied}" />
+    <h:outputText value="#{auditManager.appliedFilterSolution}" rendered="#{auditManager.isFilterSolutionApplied}" />
+    <h:outputText value="#{auditrb.filter_role}: " rendered="#{auditManager.isFilterRoleApplied}" />
+    <h:outputText value="#{auditManager.appliedFilterRole}" rendered="#{auditManager.isFilterRoleApplied}" />
+    <h:outputText value="#{auditrb.filter_host_name}: " rendered="#{auditManager.isFilterHostNameApplied}" />
+    <h:outputText value="#{auditManager.appliedFilterHostName}" rendered="#{auditManager.isFilterHostNameApplied}" />
+    <h:outputText value="#{auditrb.filter_service_id}: " rendered="#{auditManager.isFilterServiceIdApplied}" />
+    <h:outputText value="#{auditManager.appliedFilterServiceId}" rendered="#{auditManager.isFilterServiceIdApplied}" />
+    <h:outputText value="#{auditrb.filter_order_id}: " rendered="#{auditManager.isFilterOrderIdApplied}" />
+    <h:outputText value="#{auditManager.appliedFilterOrderId}" rendered="#{auditManager.isFilterOrderIdApplied}" />
+    <h:outputText value="#{auditrb.filter_type}: " rendered="#{auditManager.isFilterTypeApplied}" />
+    <h:outputText value="#{auditManager.appliedFilterType}" rendered="#{auditManager.isFilterTypeApplied}" />
+    <h:outputText value="#{auditrb.filter_state}: " rendered="#{auditManager.isFilterStateApplied}" />
+    <h:outputText value="#{auditManager.appliedFilterState}" rendered="#{auditManager.isFilterStateApplied}" />
+    <h:outputText value="#{auditrb.filter_event_type}: " rendered="#{auditManager.isFilterEventTypeApplied}" />
+    <h:outputText value="#{auditManager.appliedFilterEventType}" rendered="#{auditManager.isFilterEventTypeApplied}" />
+    <h:outputText value="#{auditrb.filter_start_date}: " rendered="#{auditManager.isFilterStartDateApplied}" />
+    <h:outputText value="#{auditManager.appliedFilterStartDateAsString}" rendered="#{auditManager.isFilterStartDateApplied}" />
+    <h:outputText value="#{auditrb.filter_start_time}: " rendered="#{auditManager.isFilterStartTimeApplied}" />
+    <h:outputText value="#{auditManager.appliedFilterStartTimeAsString}" rendered="#{auditManager.isFilterStartTimeApplied}" />
+    <h:outputText value="#{auditrb.filter_end_date}: " rendered="#{auditManager.isFilterEndDateApplied}" />
+    <h:outputText value="#{auditManager.appliedFilterEndDateAsString}" rendered="#{auditManager.isFilterEndDateApplied}" />
+    <h:outputText value="#{auditrb.filter_end_time}: " rendered="#{auditManager.isFilterEndTimeApplied}" />
+    <h:outputText value="#{auditManager.appliedFilterEndTimeAsString}" rendered="#{auditManager.isFilterEndTimeApplied}" />
+    <h:outputText value="#{auditrb.filter_class_name}: " rendered="#{auditManager.isFilterClassNameApplied}" />
+    <h:outputText value="#{auditManager.appliedFilterClassName}" rendered="#{auditManager.isFilterClassNameApplied}" />
+    <h:outputText value="#{auditrb.filter_job_id}: " rendered="#{auditManager.isFilterJobIdApplied}" />
+    <h:outputText value="#{auditManager.appliedFilterJobId}" rendered="#{auditManager.isFilterJobIdApplied}" />
+    <h:outputText value="#{auditrb.filter_user_name}: " rendered="#{auditManager.isFilterUserNameApplied}" />
+    <h:outputText value="#{auditManager.appliedFilterUserName}" rendered="#{auditManager.isFilterUserNameApplied}" />
+    <h:outputText value="#{auditrb.filter_workflow_name}: " rendered="#{auditManager.isFilterWorkflowNameApplied}" />
+    <h:outputText value="#{auditManager.appliedFilterWorkflowName}" rendered="#{auditManager.isFilterWorkflowNameApplied}" />
+    <h:outputText value="#{auditrb.filter_step_name}: " rendered="#{auditManager.isFilterStepNameApplied}" />
+    <h:outputText value="#{auditManager.appliedFilterStepName}" rendered="#{auditManager.isFilterStepNameApplied}" />
+    <h:outputText value="#{auditrb.filter_message}: " rendered="#{auditManager.isFilterMessageApplied}" />
+    <h:outputText value="#{auditManager.appliedFilterMessage}" rendered="#{auditManager.isFilterMessageApplied}" />
+  </p:panelGrid>
+</p:panel>
+
+<p:contextMenu for="messages" id="ops" style="width:210px;">
+  <p:menuitem value="#{auditrb.open_instance}" icon="ui-icon-stop" onclick="openInstance();" />
+  <p:menuitem value="#{auditrb.open_new_instance}" icon="ui-icon-stop" onclick="openNewInstance();" />
+</p:contextMenu>
+<p:dataTable id="messages" var="message" value="#{auditManager.messages}" selection="#{auditManager.selectedMessage}" selectionMode="single"
+    lazy="true" paginator="true" rows="#{auditManager.pageSize}" sortOrder="descending"
+    paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+    emptyMessage="#{auditrb.empty_messages}" resizableColumns="true" style="margin-top:10px;" tableStyle="table-layout:auto;">
+  <p:ajax event="contextMenu" listener="#{auditManager.onRowSelect}" update=":form:growl,:form:oi,:form:oni"/>
+  <p:columns value="#{auditManager.columns}" var="column" sortBy="#{column.property}" columnIndexVar="colIndex" style="white-space:normal" >
+    <f:facet name="header">
+      #{column.header}
+    </f:facet>
+    #{message[column.property]}
+  </p:columns>
+</p:dataTable>
+
+<p:remoteCommand id="oi" name="openInstance" update=":form:dlgdetails,:form:growl" oncomplete="openInstanceDetails();">
+  <f:setPropertyActionListener value="#{auditManager.selectedMessage.auditId}" target="#{requestScope.audit_id}" />
+</p:remoteCommand>
+
+<p:remoteCommand id="oni" name="openNewInstance" update=":form:dlgdetails" oncomplete="openNewInstanceDetails();">
+  <f:setPropertyActionListener value="#{auditManager.selectedMessage.auditId}" target="#{requestScope.audit_id}" />
+</p:remoteCommand>
+
+<p:dialog id="dlgdetails" widgetVar="dlgdetails" header="#{auditrb.detail_header}">
+  <script>
+  function getInstanceDetailsUrl()
+  {
+    return "./detail.jsf?#{auditManager.auditIdParameterName}=#{requestScope.audit_id}";
+  }
+  function openNewInstanceDetails()
+  {
+    setTimeout("_openNewInstanceDetails()", 1000);
+  }
+  function _openNewInstanceDetails()
+  {
+    var win = window.open(getInstanceDetailsUrl(), '_blank', 'resizable=yes,status=no,width=500,height=424,scrollbars=yes');
+    win.focus();
+    if (window.top.auditWindowsArray == null) {
+      window.top.auditWindowsArray = new Array();
+    }
+    window.top.auditWindowsArray.push(win);
+  }
+  function openInstanceDetails() {
+    setTimeout("_openInstanceDetails()", 1000);
+  }
+  function _openInstanceDetails() {
+    var win = null;
+    if (window.top.auditWindowsArray == null) {
+      window.top.auditWindowsArray = new Array();
+    }
+    for (var i = 0; i &lt; window.top.auditWindowsArray.length &amp;&amp; win == null; i++) {
+      if (window.top.auditWindowsArray[i] != null &amp;&amp; !window.top.auditWindowsArray[i].closed) {
+        win = window.top.auditWindowsArray[i];
+      }
+    }
+    if (win == null) {
+      win = window.open(getInstanceDetailsUrl(), '_blank', 'resizable=yes,status=no,width=500,height=424,scrollbars=yes');
+      window.top.auditWindowsArray.push(win);
+    } else {
+      win.document.location = getInstanceDetailsUrl();
+    }
+    win.focus();
+  }
+  </script>
+</p:dialog>
+
+<p:dialog id="dlgfilter" widgetVar="dlgfilter" header="#{auditrb.filter}" showEffect="fade" hideEffect="fade" modal="true" width="500" draggable="true">
+  <p:panel id="filterns" style="margin-top:10px;" rendered="#{auditManager.storedFiltersAvailable}">
+  <p:panelGrid cellpadding="5" style="width:100%; text-align:left;" styleClass="datagrid">
+    <p:row>
+    <p:column>
+      <h:outputText value="#{auditrb.filter_name}: " />
+    </p:column>
+    <p:column>
+      <p:autoComplete value="#{auditManager.creatingFilterName}" completeMethod="#{auditManager.completeFilterNames}" style="width:100%;" />
+    </p:column>
+    <p:column>
+      <h:outputText value="#{auditrb.filter_solution}: " />
+    </p:column>
+    <p:column>
+      <p:autoComplete value="#{auditManager.creatingFilterSolution}" completeMethod="#{auditManager.completeSolutionNames}" style="width:100%;" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column colspan="4" style="text-align:right;">
+      <p:commandButton value="#{auditrb.load}" type="submit"
+        update=":form:filterns,:form:filterdata,:form:growl" actionListener="#{auditManager.load}"
+        partialSubmit="true" process=":form:filterns"/>
+      <p:spacer width="10" />
+      <p:commandButton value="#{auditrb.delete}" type="submit"
+        update=":form:filterns,:form:filterdata,:form:filters,:form:growl" actionListener="#{auditManager.delete}"
+        partialSubmit="true" process=":form:filterns"/>
+    </p:column>
+    </p:row>
+  </p:panelGrid>
+  </p:panel>
+  <p:panelGrid id="filterdata" cellpadding="5" style="width:100%; text-align:left; margin-top:10px;" styleClass="datagrid">
+    <p:row>
+    <p:column>
+    <h:outputText value="#{auditrb.filter_role}: " />
+    </p:column>
+    <p:column colspan="3">
+    <h:selectOneMenu value="#{auditManager.creatingFilterRole}" label="#{auditrb.filter_role}" style="width:100%;">
+      <f:selectItem itemValue="" itemLabel="#{auditrb.no_role}" />
+      <f:selectItems value="#{auditManager.roleNames}" />
+    </h:selectOneMenu>
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{auditrb.filter_host_name}: " />
+    </p:column>
+    <p:column colspan="3">
+    <h:selectOneMenu value="#{auditManager.creatingFilterHostName}" label="#{auditrb.filter_host_name}" style="width:100%;">
+      <f:selectItem itemValue="" itemLabel="#{auditrb.all_hosts}" />
+      <f:selectItems value="#{auditManager.hostNames}" />
+    </h:selectOneMenu>
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{auditrb.filter_service_id}: " />
+    </p:column>
+    <p:column colspan="3">
+    <h:inputText value="#{auditManager.creatingFilterServiceId}" style="width:100%;" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{auditrb.filter_order_id}: " />
+    </p:column>
+    <p:column colspan="3">
+    <h:inputText value="#{auditManager.creatingFilterOrderId}" style="width:100%;" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{auditrb.filter_type}: " />
+    </p:column>
+    <p:column colspan="3">
+    <h:inputText value="#{auditManager.creatingFilterType}" style="width:100%;" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{auditrb.filter_state}: " />
+    </p:column>
+    <p:column colspan="3">
+    <h:inputText value="#{auditManager.creatingFilterState}" style="width:100%;" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{auditrb.filter_event_type}: " />
+    </p:column>
+    <p:column colspan="3">
+    <h:inputText value="#{auditManager.creatingFilterEventType}" style="width:100%;" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{auditrb.filter_start_date}: " />
+    </p:column>
+    <p:column>
+    <p:calendar value="#{auditManager.creatingFilterStartDate}" locale="#{auditManager.locale}" pattern="#{auditManager.localeDatePattern}" style="width:100%;" />
+    </p:column>
+    <p:column>
+    <h:outputText value="#{auditrb.filter_start_time}: " />
+    </p:column>
+    <p:column>
+    <p:calendar value="#{auditManager.creatingFilterStartTime}" pattern="HH:mm" timeOnly="true" style="width:100%;" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{auditrb.filter_end_date}: " />
+    </p:column>
+    <p:column>
+    <p:calendar value="#{auditManager.creatingFilterEndDate}" locale="#{auditManager.locale}" pattern="#{auditManager.localeDatePattern}" style="width:100%;" />
+    </p:column>
+    <p:column>
+    <h:outputText value="#{auditrb.filter_end_time}: " />
+    </p:column>
+    <p:column>
+    <p:calendar value="#{auditManager.creatingFilterEndTime}" pattern="HH:mm" timeOnly="true" style="width:100%;" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{auditrb.filter_class_name}: " />
+    </p:column>
+    <p:column colspan="3">
+    <h:inputText value="#{auditManager.creatingFilterClassName}" style="width:100%;" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{auditrb.filter_job_id}: " />
+    </p:column>
+    <p:column colspan="3">
+    <h:inputText value="#{auditManager.creatingFilterJobId}" style="width:100%;" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{auditrb.filter_user_name}: " />
+    </p:column>
+    <p:column colspan="3">
+    <h:inputText value="#{auditManager.creatingFilterUserName}" style="width:100%;" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{auditrb.filter_workflow_name}: " />
+    </p:column>
+    <p:column colspan="3">
+    <h:inputText value="#{auditManager.creatingFilterWorkflowName}" style="width:100%;" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{auditrb.filter_step_name}: " />
+    </p:column>
+    <p:column colspan="3">
+    <h:inputText value="#{auditManager.creatingFilterStepName}" style="width:100%;" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{auditrb.filter_message}: " />
+    </p:column>
+    <p:column colspan="3">
+    <h:inputTextarea value="#{auditManager.creatingFilterMessage}" style="width:100%;"/>
+    </p:column>
+    </p:row>
+  </p:panelGrid>
+  <p:panel style="text-align:right; margin-top:10px;">
+    <p:commandButton value="#{auditrb.save}" type="submit" rendered="#{auditManager.storedFiltersAvailable}"
+      update=":form:srchpnl,:form:messages,:form:growl" actionListener="#{auditManager.save}"
+      partialSubmit="true" process="@this,:form:dlgfilter" oncomplete="PF('dlgfilter').hide();"/>
+    <p:spacer width="10" />
+    <p:commandButton value="#{auditrb.apply}" type="submit"
+      update=":form:srchpnl,:form:current_filter,:form:messages,:form:growl" actionListener="#{auditManager.apply}"
+      partialSubmit="true" process="@this,:form:dlgfilter" oncomplete="PF('dlgfilter').hide();"/>
+    <p:spacer width="10" />
+    <p:commandButton value="#{auditrb.cancel}" type="button" onclick="PF('dlgfilter').hide();"/>
+  </p:panel>
+</p:dialog>
+
+<p:ajaxStatus id="ajaxStatusPanel" style="position:fixed; right:5px; bottom:5px; width:32px; height:32px;">
+  <f:facet name="start">
+    <h:graphicImage value="#{request.contextPath}/../../activator/images/primefaces/throbber.gif" />
+  </f:facet>
+  <f:facet name="complete">
+    <h:outputText value="" />
+  </f:facet>
+</p:ajaxStatus>
+
+</h:form>
+
+</body>
+
+</html>

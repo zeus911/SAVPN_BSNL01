@@ -1,0 +1,101 @@
+/**************************************************************************/
+/*    hp OpenView service activator                                       */
+/*    (c) Copyright 2010 Hewlett-Packard Development Company, L.P.		  */
+/**************************************************************************/
+
+.logFileTable{
+	border: 0;
+	width: 100%;
+}
+.fileMouseOver{
+	padding-left: 5px;
+	color: /*c:blck*/#000000;
+	font-family: Verdana, Helvetica, Arial, Sans-serif;
+   font-size: 8pt;
+	/*These both properties needed to show hand correctly in IE and NS, do not revers them*/
+	cursor: pointer;
+	cursor: hand;
+	width: 20%; 
+	background-color: /*c:mdgy*/#b9b8bb;
+}
+
+.fileUnSelected{
+	padding-left: 5px;
+	color: /*c:blck*/#000000;
+	font-family: Verdana, Helvetica, Arial, Sans-serif;
+   font-size: 8pt;
+	/*These both properties needed to show hand correctly in IE and NS, do not revers them*/
+	cursor: pointer;
+	cursor: hand;
+	width: 20%; 
+	background-color: /*c:ltgy*/#e5e8e8;
+}
+
+.fileSelected{
+	padding-left: 5px;
+	color: /*c:blck*/#000000;
+	font-family: Verdana, Helvetica, Arial, Sans-serif;
+   font-size: 8pt;
+	/*These both properties needed to show hand correctly in IE and NS, do not revers them*/
+	cursor: pointer;
+	cursor: hand;
+	width: 20%; 
+	background-color: /*c:gy20*/#cccccc;
+}
+
+.FileTr{
+	height: 10px;
+}
+
+.line { 
+     background-color: /*c:sabl*/#0096d6;
+     font-weight: bold;
+     color: /*c:sabl*/#0096d6;
+}
+
+.separator {
+    padding: 0px 0px 0px 0px;
+    margin: 3px 0px 3px 0px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow: hidden;
+    width: 100%;
+    height: 2px;
+    background: /*c:sabl*/#0096d6;
+}
+
+.logFileDiv{
+	height:65%; 
+	overflow:auto;
+}
+
+.logFileBody{
+	margin-bottom: 0px;
+	margin-top: 0px;
+	margin-left: 15px;
+	margin-right: 15px;
+	margin: 0px 15px 0px 15px;
+	overflow-y: hidden;
+	overflow-x: hidden;
+	overflow: hidden;
+}
+
+a{
+   text-decoration: none;
+   color: /*c:blck*/#000000;
+}
+
+a:link {
+	text-decoration: none;
+   color: /*c:blck*/#000000;
+}
+
+a:visited {
+   text-decoration: none;
+   color: /*c:blck*/#000000;
+}
+
+a:active {
+   text-decoration: none;
+   color: /*c:blck*/#000000;
+}

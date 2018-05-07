@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--
+********* IMPORTANT: This UI is also included in the Service Order View UI (SOV UI). Any changes made in this UI must be also made in SOV UI, and vice versa. *********
+-->
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:util="http://java.sun.com/jsf/composite/components/util">
+
+<h:head>
+  <title>Service Order View</title>
+  <link rel="stylesheet" type="text/css" href="/activator/css/primefaces/hpsa.css" />
+  <link rel="stylesheet" type="text/css" href="/activator/css/track.css" />
+  <script type="text/javascript" src="/activator/javascript/saUtilities.js" ></script>
+</h:head>
+
+<body onmousemove="logoutTimerReset();" onkeydown="logoutTimerReset();">
+
+<h:outputText value="#{activationrb.track_activations}" class="frame-header" />
+
+<h:form id="form">
+
+<p:growl id="growl" showDetail="true"/>
+
+<p:contextMenu for="activeTxTable" style="width:200px;">
+  <p:menuitem value="#{activationrb.view_activation_detail}" onclick="showActiveTransactionDetails();" icon="ui-icon ui-icon-search" />
+</p:contextMenu>
+
+<p:dataTable id="activeTxTable" value="#{activeTransactionManager.activeTransactions}" var="row" rowKey="#{row.id}" tableStyle="table-layout:auto;"
+    selection="#{activeTransactionManager.selectedActiveTransactionData}" selectionMode="single" emptyMessage="#{activationrb.no_track_activations}">
+  <p:ajax event="contextMenu" listener="#{activeTransactionManager.onRowSelect}" update=":form:growl,:form:dlgdetails" />
+  <p:columns columnIndexVar="colIndex" value="#{activeTransactionManager.activeTransactionFields}" var="col" style="white-space:normal">
+    <f:facet name="header">
+      <h:outputText value="#{col.header}" />
+    </f:facet>
+    <h:outputText value="#{row[col.property]}" />
+  </p:columns>
+</p:dataTable>
+
+<p:poll interval="#{activeTransactionManager.refreshRate}" update=":form:growl,:form:activeTxTable" listener="#{activeTransactionManager.onPoll}" />
+
+<p:dialog id="dlgdetails" widgetVar="dlgdetails" header="#{auditrb.detail_header}">
+  <script>
+  function getInstanceDetailsUrl()
+  {
+    return "/activator/track?transactionSeqId=#{activeTransactionManager.selectedActiveTransactionData.transactionSequence}";
+  }
+  function openNewInstanceDetails()
+  {
+    setTimeout("_openNewInstanceDetails()", 1000);
+  }
+  function _openNewInstanceDetails()
+  {
+    var win = window.open(getInstanceDetailsUrl(), '_blank', 'resizable=yes,status=no,width=750,height=300,scrollbars=yes');
+    win.focus();
+    if (window.top.auditWindowsArray == null) {
+      window.top.auditWindowsArray = new Array();
+    }
+    window.top.auditWindowsArray.push(win);
+  }
+  </script>
+</p:dialog>
+
+<ui:insert name="atdet" >
+  <ui:include src="#{request.contextPath}/../jsf/activation/details.xhtml" >
+    <ui:param name="id" value="#{activeTransactionManager.selectedActiveTransactionData.transactionSequence}" />
+  </ui:include>
+</ui:insert>
+
+<p:ajaxStatus id="ajaxStatusPanel" style="position:fixed; right:5px; bottom:5px; width:32px; height:32px;">
+  <f:facet name="start">
+    <h:graphicImage value="#{request.contextPath}/../../activator/images/primefaces/throbber.gif" />
+  </f:facet>
+  <f:facet name="complete">
+    <h:outputText value="" />
+  </f:facet>
+</p:ajaxStatus>
+
+</h:form>
+
+</body>
+
+</html>

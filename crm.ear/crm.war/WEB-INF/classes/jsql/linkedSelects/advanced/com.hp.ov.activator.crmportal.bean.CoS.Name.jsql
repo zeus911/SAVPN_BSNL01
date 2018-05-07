@@ -1,0 +1,18 @@
+## Generated using InventoryBuilder v.V61
+## Object class com.hp.ov.activator.inventorybuilder.sql.routes.FindByArraySQLRoute
+SELECT
+  CoS.Name		CoS_Name,
+  CoS.Description		CoS_Description,
+  CoS.conform_dscp		CoS_conform_dscp
+FROM
+  CoS   CoS
+WHERE
+  CoS.Name IN [selectIN_?]
+
+
+
+@ order:1;select_IN_substitution
+@ opt:Name;CoS;CoS;Name
+@ opt:Description;CoS;CoS;Description
+@ opt:conform_dscp;CoS;CoS;conform_dscp
+@ alias:primary_key;CoS.Name

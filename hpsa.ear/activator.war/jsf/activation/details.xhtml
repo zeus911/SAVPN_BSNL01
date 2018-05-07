@@ -1,0 +1,39 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:util="http://java.sun.com/jsf/composite/components/util">
+
+<p:growl id="atgrowl" showDetail="true"/>
+
+<p:dialog id="dlgatdet" widgetVar="dlgatdet" showEffect="fade" hideEffect="fade" modal="true" width="600" draggable="true" resizable="true" style="text-align:center;" >
+  <f:facet name="header">
+    <h:outputText value="#{activationrb.transaction_details}" />
+  </f:facet>
+  <p:outputPanel id="atop">
+  <p:panel rendered="#{!activeTransactionDetailsManager.activeTransactionFound}">
+    <h:outputText value="#{activationrb.no_track_activation}" />
+  </p:panel>
+  <p:dataList id="atpg" value="#{activeTransactionDetailsManager.trackDescriptors}" var="td" type="none" styleClass="datagrid" rendered="#{activeTransactionDetailsManager.activeTransactionFound}">
+    <p:dataTable var="p" value="#{td.properties}" resizableColumns="true" style="text-align:left;" tableStyle="table-layout:auto;">
+      <p:column headerText="#{activationrb.property_name}" style="width:25%" styleClass="#{p.className}">
+        <h:outputText value="#{p.name}" />
+      </p:column>
+      <p:column headerText="#{activationrb.property_value}" style="75%" styleClass="#{p.className}">
+        <h:outputText value="#{p.value}" />
+      </p:column>
+    </p:dataTable>
+  </p:dataList>
+  <p:commandButton value="#{activationrb.ok}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" onclick="PF('dlgatdet').hide();" style="margin-top:10px;" />
+  <p:poll interval="#{activeTransactionDetailsManager.refreshRate}" update="atgrowl,atop" listener="#{activeTransactionDetailsManager.onPoll}" rendered="#{activeTransactionDetailsManager.activeTransactionFound}" />
+  </p:outputPanel>
+</p:dialog>
+
+<p:remoteCommand name="showActiveTransactionDetails" update="atop" oncomplete="PF('dlgatdet').show();" >
+  <f:setPropertyActionListener value="#{id}" target="#{activeTransactionDetailsManager.activeTransactionId}" />
+</p:remoteCommand>
+
+</ui:composition>

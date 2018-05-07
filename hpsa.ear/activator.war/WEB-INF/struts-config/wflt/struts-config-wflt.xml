@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+
+<struts-config>
+
+    <form-beans>
+	<form-bean name="WFLTForm" type="com.hp.ov.activator.mwfm.servlet.inventory.wflt.struts.form.WFLTForm">
+ 	</form-bean>
+	</form-beans>
+
+    <action-mappings>
+		
+	<action path="/StartWorkflow" forward="/jsp/wflt/inventoryStartWorkflow.jsp"/>
+ 	<action path="/CasePacketComposerActionWFLT"
+ 		type="com.hp.ov.activator.mwfm.servlet.inventory.wflt.struts.action.CasePacketComposerAction"
+ 		name="WFLTForm">
+		<forward name="create_service" path="/CreateJobService.do"/>
+		<forward name="update_service" path="/UpdateJobService.do"/>
+		<forward name="success" path="/ExecuteWFActionWFLT.do"/>
+		<forward name="failure" path="/jsp/wflt/error.jsp"/>
+	</action>
+	<action path="/CreateJobService" 
+		type="com.hp.ov.activator.mwfm.servlet.inventory.wflt.struts.action.CreateJobService" 
+		name="WFLTForm">
+		<forward name="success" path="/ExecuteWFActionWFLT.do"/>
+		<forward name="failure" path="/jsp/wflt/errorStartingWorkflow.jsp"/>
+	</action>
+	<action path="/UpdateJobService" 
+		type="com.hp.ov.activator.mwfm.servlet.inventory.wflt.struts.action.UpdateJobService" 
+		name="WFLTForm">
+		<forward name="success" path="/ExecuteWFActionWFLT.do"/>
+		<forward name="failure" path="/jsp/wflt/errorStartingWorkflow.jsp"/>
+	</action>
+	<action path="/ExecuteWFActionWFLT"
+		type="com.hp.ov.activator.mwfm.servlet.inventory.wflt.struts.action.ExecuteWFAction"
+		name="WFLTForm">
+		<forward name="success" path="/GenericCheckJobActionWFLT.do"/>
+		<forward name="failure" path="/jsp/wflt/errorStartingWorkflow.jsp"/>
+	</action>
+	<action path="/GenericCheckJobActionWFLT"
+		type="com.hp.ov.activator.mwfm.servlet.inventory.wflt.struts.action.GenericCheckJobAction"
+		name="WFLTForm">
+		<forward name="finish" path="/jsp/wflt/finish.jsp"/>
+		<forward name="interact" path="/jsp/wflt/interact.jsp"/>
+		<forward name="statusUpdate" path="/jsp/wflt/statusUpdate.jsp"/>
+		<forward name="failure" path="/jsp/wflt/error.jsp"/>
+	</action>
+	<action path="/DeleteMessagesWFLT"
+		type="com.hp.ov.activator.mwfm.servlet.inventory.wflt.struts.action.DeleteMessages"
+		name="WFLTForm">
+		<forward name="success" path="/jsp/wflt/finish.jsp"/>
+		<forward name="failure" path="/jsp/wflt/error.jsp"/>
+	</action>
+
+ 	</action-mappings>
+
+	<!--<message-resources parameter="com.hp.spain.wflt.struts.ApplicationResources" key="ApplicationResourcesWFLT"/>-->
+
+</struts-config>

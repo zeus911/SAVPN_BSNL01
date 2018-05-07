@@ -1,0 +1,18 @@
+## Generated using InventoryBuilder v.V61
+## Object class com.hp.ov.activator.inventorybuilder.sql.routes.FindByArraySQLRoute
+SELECT
+  crm_servicetype.Name		crm_servicetype_Name,
+  crm_servicetype.ParentServType		crm_servicetype_ParentServType,
+  crm_servicetype.Description		crm_servicetype_Description
+FROM
+  crm_servicetype   crm_servicetype
+WHERE
+  crm_servicetype.ParentServType IN [selectIN_?]
+
+
+
+@ order:1;select_IN_substitution
+@ opt:Name;crm_servicetype;crm_servicetype;Name
+@ opt:Description;crm_servicetype;crm_servicetype;Description
+@ opt:ParentServType;crm_servicetype;crm_servicetype;ParentServType
+@ alias:primary_key;crm_servicetype.Name

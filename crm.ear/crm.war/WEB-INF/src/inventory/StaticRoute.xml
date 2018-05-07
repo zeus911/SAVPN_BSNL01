@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE Bean SYSTEM "bean.dtd">
+
+<Bean>
+    <Name>StaticRoute</Name>
+    <Solution>CRM</Solution>
+    <Package>com.hp.ov.activator.crmportal.bean</Package>
+    <DBTable>crm_staticRoute</DBTable>
+	<DBAlias>crm_staticRoute</DBAlias>
+    <Fields>
+        <Field mandatory="false">
+            <Name>AttachmentId</Name>
+            <Type>String</Type>
+            <Description>Service identifier for the attachment</Description>
+            <ShowConditions>
+                <ShowCondition empty="false">
+                    <FieldName>AttachmentId</FieldName>
+                    <Pattern>^\\S+$</Pattern>
+                </ShowCondition>
+            </ShowConditions>	
+        </Field>
+        <Field mandatory="false">
+			<Name>StaticRouteAddress</Name>
+			<Type>String</Type>
+			<Description>Static route for customer site</Description>
+		</Field>
+    </Fields>
+    <Keys>
+		<Key pk="true">
+            <KeyField>AttachmentId</KeyField>
+            <KeyField>StaticRouteAddress</KeyField>
+        </Key>
+		<Key foreignBean = "Service" includeBean="true" restrict="true">
+            <KeyField foreignField="ServiceId">AttachmentId</KeyField>
+        </Key>		
+    </Keys>
+    <!-- These are the operations to generate for this bean -->
+    <Operations>
+        <Store/>
+        <Remove/>
+        <!-- findAll method -->
+        <FindBy>
+            <OrderField>AttachmentId</OrderField>
+            <OrderField>StaticRouteAddress</OrderField>
+        </FindBy>
+        <FindBy>
+            <OrderField>AttachmentId</OrderField>
+        </FindBy>
+    </Operations>
+</Bean>
+

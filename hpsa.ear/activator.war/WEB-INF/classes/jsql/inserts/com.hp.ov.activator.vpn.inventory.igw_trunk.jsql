@@ -1,0 +1,7 @@
+## Generated using InventoryBuilder v. V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+INSERT INTO igw_trunk
+  (TRUNK_ID, TRUNKTYPE_ID, NAME, LINK_TYPE, STATUS, SUBMIT_DATA, isparent__)
+VALUES
+  (?, ?, ?, ?, ?, ?, ?)
+

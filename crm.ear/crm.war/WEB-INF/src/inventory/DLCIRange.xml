@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE Bean SYSTEM "bean.dtd">
+<!--
+######################################################################
+#
+# (c) Copyright 2003-2010 Hewlett-Packard Development Company, L.P. 
+#
+######################################################################
+
+
+###############################################################################
+#
+# $Source: /tmp/vpn/SA_VPN_SP/jboss/server/default/deploy/crmportal.sar/crm.war/WEB-INF/src/inventory/DLCIRange.xml,v $
+# $Revision: 1.7 $
+# $Date: 2010-10-05 14:19:04 $
+# $Author: shiva $
+#
+#
+###############################################################################
+#
+# <Description> 
+#
+###############################################################################
+-->
+
+<Bean>
+    <Name>DLCIRange</Name>
+	<Solution>CRM</Solution>
+    <Package>com.hp.ov.activator.crmportal.bean</Package>
+    <DBTable>V_DLCIRange</DBTable>
+	 <DBAlias>V_DLCIRange</DBAlias>
+    <Fields>		 
+         <Field update ="false">
+            <Name>Usage</Name>
+            <Type>String</Type>
+            <Description>Purpose of the DLCI (Direct/Reserved etc)</Description>
+        </Field>
+		<Field update ="false">
+            <Name>Allocation</Name>
+            <Type>String</Type>
+            <Description>Internal for auto-selection, external for user selection</Description>
+            <ListOfValues>
+                <Value>Internal</Value>
+                <Value>External</Value>
+            </ListOfValues>
+        </Field>		
+        <Field integerFormat="false" update ="false">
+            <Name>StartValue</Name>
+            <Type>int</Type>
+            <Description>First DLCI value in the range</Description>
+        </Field>
+	   <Field integerFormat="false">
+            <Name>EndValue</Name>
+            <Type>int</Type>
+            <Description>Last DLCI value in the range</Description>
+        </Field>
+		<Field mandatory="false">
+            <Name>Description</Name>
+            <Type>String</Type>
+            <Description>Information about the range</Description>
+        </Field>
+        <Field create="false" update="false" >
+            <Name>Region</Name>
+            <Type>String</Type>
+            <Description>The Region to which the DLCI Range Belongs to</Description>
+        </Field>
+
+    </Fields>
+
+    <Keys>
+
+	  <Key pk="true">            
+            <KeyField>Usage</KeyField>
+			<KeyField>Allocation</KeyField>
+			<KeyField>StartValue</KeyField>
+			<KeyField>Region</KeyField>
+        </Key>		              
+	<Key>
+			<KeyField>Usage</KeyField>
+			<KeyField>Allocation</KeyField>
+			<KeyField>Region</KeyField>
+	</Key>
+      <Key foreignBean="Region" >
+      <KeyField foreignField="Name">Region</KeyField>
+    </Key>
+
+
+    </Keys>
+
+    <!-- These are the operations to generate for this bean -->
+    <Operations>
+        <Store/>
+        <Update/>
+        <Remove/>  
+		<FindBy key="Region"/>
+		
+		<FindBy>
+            <OrderField>StartValue</OrderField>
+        </FindBy>
+    </Operations>
+	<Validation>
+		int SART_VALUE = 100;
+        int END_VALUE = 1000;
+		String exception_message="StartValue should be greater than "+SART_VALUE+" and less than "+END_VALUE;
+	   	if (StartValue &lt; SART_VALUE )
+   		throw new RuntimeException (exception_message);
+
+		if (StartValue &gt; END_VALUE)
+		throw new RuntimeException (exception_message);
+
+		if (EndValue &lt; SART_VALUE )
+   		throw new RuntimeException (exception_message);
+
+		if (EndValue &gt; END_VALUE)
+   		throw new RuntimeException (exception_message);
+
+		if(EndValue &lt; StartValue)
+		throw new RuntimeException ("EndValue should be greater than StartValue");	
+	</Validation>
+</Bean>
+

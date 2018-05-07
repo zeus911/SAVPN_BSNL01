@@ -1,0 +1,24 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+SELECT
+  CRM_MESSAGE.responseData		CRM_MESSAGE_responseData,
+  CRM_MESSAGE.serviceId		CRM_MESSAGE_serviceId,
+  CRM_MESSAGE.data		CRM_MESSAGE_data,
+  CRM_MESSAGE.state		CRM_MESSAGE_state,
+  CRM_MESSAGE.sequenceId		CRM_MESSAGE_sequenceId,
+  CRM_MESSAGE.messageId		CRM_MESSAGE_messageId
+FROM
+  CRM_MESSAGE   CRM_MESSAGE
+WHERE
+  CRM_MESSAGE.sequenceId IN [selectIN_?]
+
+
+
+@ order:1;select_IN_substitution
+@ opt:sequenceId;CRM_MESSAGE;CRM_MESSAGE;sequenceId
+@ opt:messageId;CRM_MESSAGE;CRM_MESSAGE;messageId
+@ opt:serviceId;CRM_MESSAGE;CRM_MESSAGE;serviceId
+@ opt:state;CRM_MESSAGE;CRM_MESSAGE;state
+@ opt:data;CRM_MESSAGE;CRM_MESSAGE;data
+@ opt:responseData;CRM_MESSAGE;CRM_MESSAGE;responseData
+@ alias:primary_key;CRM_MESSAGE.sequenceId

@@ -1,0 +1,6 @@
+<Users>
+  <User name="admin" roles="admin,operator"/>
+  <User name="operator" roles="operator"/>
+  <User name="visitor" roles="observer"/>
+  <Default-roles>observer</Default-roles>
+</Users>

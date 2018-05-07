@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+
+<struts-config>
+
+    <form-beans>
+	<form-bean name="InventoryTreeForm" type="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.form.InventoryTreeForm"/>
+		<form-bean name="ExtAttributeClassForm" 
+			type="com.hp.ov.activator.extAttribute.action.ExtAttributeClassForm"/>
+        <form-bean name="InventoryToModule"
+            type="org.apache.struts.action.DynaActionForm" >
+            <form-property name="hpsa_inventory_switch_struts_prefix" type="java.lang.String"/>
+            <form-property name="hpsa_inventory_switch_struts_page" type="java.lang.String"/>
+            <form-property name="fsbeans" type="java.lang.String[]"/>
+            <form-property name="fsbeanclasses" type="java.lang.String[]"/>
+            <form-property name="fsbeanpositions" type="java.lang.String[]"/>
+            <form-property name="fsattributes" type="java.lang.String[]"/>
+            <form-property name="fsvalues" type="java.lang.String[]"/>
+            <form-property name="fsoperators" type="java.lang.String[]"/>
+            <form-property name="fsvalues2" type="java.lang.String[]"/>
+            <form-property name="fsexact" type="java.lang.String[]"/>
+            <form-property name="fstype" type="java.lang.String[]"/>
+            <form-property name="ndid" type="java.lang.String"/>
+            <form-property name="vi" type="java.lang.String"/>
+            <form-property name="tabname" type="java.lang.String"/>
+            <form-property name="view" type="java.lang.String"/>
+            <form-property name="allfsattributes" type="java.lang.String[]"/>
+        </form-bean>
+	</form-beans>
+
+    <action-mappings>
+    	<action
+       path="/inventory/ext_attribute_class" 
+       type="com.hp.ov.activator.extAttribute.action.CreationFormExtAttributeClassAction" 
+       name="ExtAttributeClassForm"
+			 scope="request"
+			 validate="false">
+       
+			 <forward name="success" path="/inventory/listExtAttributeClassAction.do"/>
+			 <forward name="failure" path="/inventory/listExtAttributeClassAction.do"/>
+			 <forward name="error" path="/jsp/inventory/SearchInstanceFailure.jsp"/>
+      </action>
+      
+     	<action
+       path="/inventory/listExtAttributeClassAction" 
+       type="com.hp.ov.activator.extAttribute.action.SearchCommitExtAttributeClassAction" 
+       name="ExtAttributeClassForm"
+			 scope="request"
+			 validate="false">
+        <forward name="not-found" path="/jsp/inventory/SearchListExtAttributeClass.jsp"/>
+			 <forward name="success" path="/jsp/inventory/SearchListExtAttributeClass.jsp"/>
+			 <forward name="failure" path="/jsp/inventory/SearchInstanceFailure.jsp"/>
+      </action>
+      
+       	<action
+       path="/inventory/creationExtAction" 
+       type="com.hp.ov.activator.extAttribute.action.CreationCommitExtAttributeClassAction" 
+       name="ExtAttributeClassForm"
+			 scope="request"
+			 validate="false">
+			 <forward name="success" path="/inventory/ext_attribute_class.do"/>
+			 <forward name="failure" path="/inventory/ext_attribute_class.do"/>
+      </action>
+      <!--delete action-->
+    
+        	<action
+       path="/inventory/deleteExtAttribute" 
+       type="com.hp.ov.activator.extAttribute.action.DeleteCommitExtAttributeClassAction" 
+       name="ExtAttributeClassForm"
+			 scope="request"
+			 validate="false">
+			 <forward name="success" path="/inventory/ext_attribute_class.do"/>
+			 <forward name="failure" path="/inventory/ext_attribute_class.do"/>
+      </action>
+      
+      
+  <action path="/OpenInventoryFG" forward="/jsp/inventory-gui/inventory/inventory.jsp" name="InventoryTreeForm"/>
+  <action path="/GetTreeInstanceAction" type="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.action.GetTreeInstanceAction" name="InventoryTreeForm">
+    <forward name="success" path="/jsp/inventory-gui/inventory/inventorytree/inventoryTree.jsp"/>
+    <forward name="failure" path="/jsp/inventory-gui/inventory/inventorytree/inventoryTreeError.jsp"/>
+    <forward name="loadfiltererror" path="/jsp/inventory-gui/inventory/inventorytree/inventoryTreeFilterError.jsp"/>
+  </action>
+  <action path="/GetFullTreeInstanceAction" type="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.action.GetFullTreeInstanceAction">
+    <forward name="success" path="/jsp/inventory-gui/inventory/inventorytree/inventoryTree.jsp"/>
+    <forward name="failure" path="/jsp/inventory-gui/inventory/inventorytree/inventoryTreeError.jsp"/>
+  </action>
+	<action path="/GetTreeDefinitionAction" type="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.action.GetTreeDefinitionAction" name="InventoryTreeForm">
+		<forward name="success" path="/jsp/inventory-gui/inventory/inventorytree/inventoryTree.jsp"/>
+		<forward name="failure" path="/jsp/inventory-gui/inventory/inventorytree/inventoryTreeError.jsp"/>
+	</action>
+	<action path="/RefreshTreeAction" type="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.action.RefreshTreeAction" name="InventoryTreeForm">
+		<forward name="success" path="/jsp/inventory-gui/inventory/inventorytree/inventoryTree.jsp"/>
+		<forward name="failure" path="/jsp/inventory-gui/inventory/inventorytree/inventoryTreeError.jsp"/>
+	</action>
+	<action path="/OpenBranchAction" type="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.action.OpenBranchAction" name="InventoryTreeForm">
+		<forward name="success" path="/jsp/inventory-gui/inventory/inventorytree/openBranch.jsp"/>
+		<forward name="failure" path="/jsp/inventory-gui/inventory/inventorytree/inventoryHiddenTreeError.jsp"/>
+	</action>
+	<action path="/ScrollBranchAction" type="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.action.ScrollBranchAction" name="InventoryTreeForm">
+		<forward name="success" path="/jsp/inventory-gui/inventory/inventorytree/openBranch.jsp"/>
+		<forward name="rootrefresh" path="/jsp/inventory-gui/inventory/inventorytree/inventoryTree.jsp"/>
+		<forward name="failure" path="/jsp/inventory-gui/inventory/inventorytree/inventoryHiddenTreeError.jsp"/>
+	</action>
+	<action path="/SearchBranchAction" type="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.action.SearchBranchAction" name="InventoryTreeForm">
+		<forward name="success" path="/jsp/inventory-gui/inventory/inventorytree/openBranch.jsp"/>
+		<forward name="notFound" path="/jsp/inventory-gui/inventory/inventorytree/openBranch.jsp?found=false"/>
+		<forward name="failure" path="/jsp/inventory-gui/inventory/inventorytree/inventoryHiddenTreeError.jsp"/>
+	</action>
+	<action path="/AdvancedSearchAction" type="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.action.AdvancedSearchAction" name="InventoryTreeForm">
+		<forward name="success" path="/jsp/inventory-gui/inventory/inventorytree/inventoryTreeSearch.jsp"/>
+		<forward name="failure" path="/jsp/inventory-gui/inventory/error.jsp"/>
+	</action>
+	<action path="/AdvancedSearchGetValuesAction" type="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.action.AdvancedSearchGetValuesAction" name="InventoryTreeForm">
+		<forward name="success" path="/jsp/inventory-gui/inventory/inventorytree/inventoryTreeAdvancedSearchGetValues.jsp"/>
+		<forward name="failure" path="/jsp/inventory-gui/inventory/error.jsp"/>
+	</action>
+    <action path="/AdvancedSearchCommitAction" type="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.action.AdvancedSearchCommitAction" name="InventoryTreeForm">
+        <forward name="success" path="/jsp/inventory-gui/inventory/inventorytree/inventoryTreeSearchResults.jsp"/>
+        <forward name="noResult" path="/jsp/inventory-gui/inventory/inventorytree/inventoryTreeSearchNoResults.jsp"/>
+        <forward name="failure" path="/jsp/inventory-gui/inventory/error.jsp"/>
+    </action>
+    <action path="/SaveAdvancedSearchCommitAction" type="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.action.SaveAdvancedSearchCommitAction" name="InventoryTreeForm">
+        <forward name="success" path="/jsp/inventory-gui/inventory/inventorytree/inventoryTreeSearchSaved.jsp"/>
+        <forward name="failure" path="/jsp/inventory-gui/inventory/inventorytree/inventoryTreeSearchSavedError.jsp"/>
+    </action>
+	<action path="/GetPartialTreeInstanceAction" type="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.action.GetPartialTreeInstanceAction" name="InventoryTreeForm">
+		<forward name="success" path="/jsp/inventory-gui/inventory/inventorytree/inventoryTree.jsp"/>
+		<forward name="failure" path="/jsp/inventory-gui/inventory/inventorytree/inventoryTreeError.jsp"/>
+	</action>
+	<action path="/CleanSessionActionFT" type="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.action.CleanSessionAction" name="InventoryTreeForm">
+		<forward name="success" path="/jsp/inventory-gui/inventory/noOps.jsp"/>
+		<forward name="successnoOps" path="/jsp/inventory-gui/inventory/noOps.jsp"/>
+		<forward name="successnoTree" path="/jsp/inventory-gui/inventory/noTree.jsp"/>
+		<forward name="failure" path="/jsp/inventory-gui/inventory/error.jsp"/>
+	</action>
+	    <action path="/GetFilterFieldsAction" type="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.action.GetFilterAction" name="InventoryTreeForm">
+        <forward name="success" path="/jsp/inventory-gui/inventory/inventorytree/filter.jsp"/>
+        <forward name="failure" path="/jsp/inventory-gui/inventory/inventorytree/filterError.jsp"/>
+    </action>
+    <action path="/SaveFilterAction" type="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.action.SaveFilterAction" name="InventoryTreeForm">
+        <forward name="success" path="/GetFilterFieldsAction.do"/>
+        <forward name="failure" path="/jsp/inventory-gui/inventory/inventorytree/filterSaveError.jsp"/>
+    </action>
+	<action path="/inventory/InstanceReleaseAction" type="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.action.InstanceReleaseAction" name="InventoryTreeForm">
+		<forward name="success" path="/jsp/inventory-gui/inventory/inventorytree/InstanceReleaseForm.jsp"/>
+		<forward name="failure" path="/jsp/inventory-gui/inventory/inventorytree/InstanceReleaseError.jsp"/>
+	</action>
+	<action path="/inventory/InstanceReleaseCommitAction" type="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.action.InstanceReleaseCommitAction" name="InventoryTreeForm">
+		<forward name="success" path="/jsp/inventory-gui/inventory/inventorytree/InstanceReleaseSuccess.jsp"/>
+		<forward name="failure" path="/jsp/inventory-gui/inventory/inventorytree/InstanceReleaseError.jsp"/>
+	</action>
+	<action path="/inventory/InstanceReserveAction" type="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.action.InstanceReserveAction" name="InventoryTreeForm">
+		<forward name="success" path="/jsp/inventory-gui/inventory/inventorytree/InstanceReserveForm.jsp"/>
+		<forward name="failure" path="/jsp/inventory-gui/inventory/inventorytree/InstanceReserveError.jsp"/>
+	</action>
+	<action path="/inventory/InstanceReserveCommitAction" type="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.action.InstanceReserveCommitAction" name="InventoryTreeForm">
+		<forward name="success" path="/jsp/inventory-gui/inventory/inventorytree/InstanceReserveSuccess.jsp"/>
+		<forward name="failure" path="/jsp/inventory-gui/inventory/inventorytree/InstanceReserveError.jsp"/>
+	</action>
+	<action path="/inventory/StartWorkflow"
+		type="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.action.startworkflowFormAction"  name="InventoryTreeForm">
+		<forward name="success" path="/jsp/inventory-gui/inventory/inventorytree/startworkflowForm.jsp"/>
+		<forward name="failure" path="/jsp/inventory-gui/inventory/inventorytree/errorStartingWorkflow.jsp"/>
+	</action>
+	<action path="/inventory/StartWorkflowSubmitAction"
+		type="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.action.startworkflowSubmitAction" name="InventoryTreeForm">
+		<forward name="startjob_success" path="/jsp/inventory-gui/inventory/inventorytree/startworkflow_startjob_result.jsp"/>
+		<forward name="startandwaitjob_success" path="/jsp/inventory-gui/inventory/inventorytree/startworkflow_startandwaitjob_result.jsp"/>
+		<forward name="input" path="/jsp/inventory-gui/inventory/inventorytree/startworkflowForm.jsp"/>
+		<forward name="failure" path="/jsp/inventory-gui/inventory/inventorytree/errorStartingWorkflow.jsp"/>
+	</action>
+
+	
+<!-- For Struts modules -->
+  <action path="/inventory/toModule"   type="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.action.ModuleSwitchAction" name="InventoryToModule"/>
+
+	</action-mappings>
+
+	<controller locale="true" nocache="true"/>
+	
+    <message-resources null="false" key="InventoryResources" parameter="InventoryResources"/>
+	<message-resources parameter="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.ApplicationResources" key="ApplicationResourcesFT"/>
+	<message-resources parameter="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.ApplicationResourcesFG" key="ApplicationResourcesFG"/>
+	<message-resources parameter="com.hp.ov.activator.mwfm.servlet.inventory.inventorytree.struts.Inventory" key="InventoryFG"/>
+<message-resources null="false" key="ExtAttributeClassApplicationResources"
+		parameter="com.hp.ov.activator.extAttribute.action.ExtAttributeClassApplicationResources"/>
+</struts-config>

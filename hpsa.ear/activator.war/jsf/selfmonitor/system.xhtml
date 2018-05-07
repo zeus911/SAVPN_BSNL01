@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+  <link rel="stylesheet" type="text/css" href="/activator/css/primefaces/hpsa.css" />
+  <script type="text/javascript" src="/activator/javascript/saUtilities.js" ></script>
+</h:head>
+
+<body onmousemove="logoutTimerReset();" onkeydown="logoutTimerReset();">
+
+<h:form id="form">
+
+<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
+<p:panel id="srchpnl" style="text-align:right;">
+  <h:outputText value="#{smrb.cluster_node_name}:" />
+  <h:selectOneMenu value="#{systemMonitorManager.selectedClusterNodeName}" style="margin-left:5px;">
+    <f:selectItems value="#{systemMonitorManager.clusterNodeNames}" />
+  </h:selectOneMenu>
+  <h:outputText value="#{smrb.granularity}:" style="margin-left:10px;" />
+  <h:selectOneMenu value="#{systemMonitorManager.granularity}" style="margin-left:5px;">
+    <f:selectItems value="#{systemMonitorManager.granularities}" var="gr" itemLabel="#{gr.label}" itemValue="#{gr.granularity}"/>
+  </h:selectOneMenu>
+  <p:commandButton value="#{smrb.ok}" styleClass="ui-confirmdialog-yes" icon="ui-icon-search" style="margin-left:10px;"
+      partialSubmit="true" process=":form:srchpnl" actionListener="#{systemMonitorManager.search}"
+      update=":form:messages,:form:ap:mttl,:form:ap:mbody,:form:ap:wtttl,:form:ap:wtbody,:form:ap:atttl,:form:ap:atbody,:form:ap:aqsttl,:form:ap:aqsbody,:form:ap:tjttl,:form:ap:tjbody,:form:ap:usttl,:form:ap:usbody" />
+</p:panel>
+
+<p:accordionPanel id="ap" multiple="true">
+  <p:tab>
+    <f:facet name="title">
+      <p:outputPanel id="mttl">
+      <div style="width:200px; display:inline-block;">
+      <h:graphicImage value="#{request.contextPath}/../../activator/images/selfmonitor/percent#{systemMonitorManager.currentHeapMemoryPercentImageName}.png" style="margin-right:5px;"/>
+      <h:outputText value="#{smrb.memory_heap}: " />
+      <h:outputText value="#{systemMonitorManager.currentHeapMemory.percentUsed}" >
+        <f:convertNumber type="percent" />
+      </h:outputText>
+      </div>
+      <h:graphicImage value="#{request.contextPath}/../../activator/images/selfmonitor/percent#{systemMonitorManager.currentNonHeapMemoryPercentImageName}.png" style="margin-right:5px;"/>
+      <h:outputText value="#{smrb.memory_non_heap}: " />
+      <h:outputText value="#{systemMonitorManager.currentNonHeapMemory.percentUsed}" >
+        <f:convertNumber type="percent" />
+      </h:outputText>
+      </p:outputPanel>
+    </f:facet>
+    <p:outputPanel id="mbody">
+      <p:panelGrid styleClass="datagrid">
+      <p:row>
+        <p:column colspan="2" style="text-align:center;">
+          <p:graphicImage value="#{systemMonitorManager.memoryCartesianModel}" cache="false" rendered="#{systemMonitorManager.smmConfigured}"/>
+          <h:outputText value="#{smrb.smm_not_configured}" rendered="#{!systemMonitorManager.smmConfigured}"/>
+        </p:column>
+      </p:row>
+      <p:row rendered="#{systemMonitorManager.cliAvailable}">
+        <p:column style="text-align:right;">
+          <p:panelGrid columns="3" cellpadding="2" style="display:inline;">
+            <f:facet name="header">
+              #{smrb.memory_heap}
+            </f:facet>
+            <h:outputText value="#{smrb.memory_init}:" />
+            <h:outputText value="#{systemMonitorManager.currentHeapMemory.init} #{smrb.bytes}" />
+            <h:outputText value="#{systemMonitorManager.currentHeapMemory.initMb} #{smrb.megabytes}" />
+            <h:outputText value="#{smrb.memory_used}:" />
+            <h:outputText value="#{systemMonitorManager.currentHeapMemory.used} #{smrb.bytes}" />
+            <h:outputText value="#{systemMonitorManager.currentHeapMemory.usedMb} #{smrb.megabytes}" />
+            <h:outputText value="#{smrb.memory_committed}:" />
+            <h:outputText value="#{systemMonitorManager.currentHeapMemory.committed} #{smrb.bytes}" />
+            <h:outputText value="#{systemMonitorManager.currentHeapMemory.committedMb} #{smrb.megabytes}" />
+            <h:outputText value="#{smrb.memory_max}:" />
+            <h:outputText value="#{systemMonitorManager.currentHeapMemory.maximum} #{smrb.bytes}" />
+            <h:outputText value="#{systemMonitorManager.currentHeapMemory.maximumMb} #{smrb.megabytes}" />
+          </p:panelGrid>
+        </p:column>
+        <p:column style="text-align:left;">
+          <p:panelGrid columns="3" cellpadding="2">
+            <f:facet name="header">
+              #{smrb.memory_non_heap}
+            </f:facet>
+            <h:outputText value="#{smrb.memory_init}:" />
+            <h:outputText value="#{systemMonitorManager.currentNonHeapMemory.init} #{smrb.bytes}" />
+            <h:outputText value="#{systemMonitorManager.currentNonHeapMemory.initMb} #{smrb.megabytes}" />
+            <h:outputText value="#{smrb.memory_used}:" />
+            <h:outputText value="#{systemMonitorManager.currentNonHeapMemory.used} #{smrb.bytes}" />
+            <h:outputText value="#{systemMonitorManager.currentNonHeapMemory.usedMb} #{smrb.megabytes}" />
+            <h:outputText value="#{smrb.memory_committed}:" />
+            <h:outputText value="#{systemMonitorManager.currentNonHeapMemory.committed} #{smrb.bytes}" />
+            <h:outputText value="#{systemMonitorManager.currentNonHeapMemory.committedMb} #{smrb.megabytes}" />
+            <h:outputText value="#{smrb.memory_max}:" />
+            <h:outputText value="#{systemMonitorManager.currentNonHeapMemory.maximum} #{smrb.bytes}" />
+            <h:outputText value="#{systemMonitorManager.currentNonHeapMemory.maximumMb} #{smrb.megabytes}" />
+          </p:panelGrid>
+        </p:column>
+      </p:row>
+      <p:row rendered="#{!systemMonitorManager.cliAvailable}">
+        <p:column colspan="2">
+          <h:outputText value="#{smrb.jboss_not_available}" />
+        </p:column>
+      </p:row>
+      </p:panelGrid>
+    </p:outputPanel>
+  </p:tab>
+  <p:tab>
+    <f:facet name="title">
+      <p:outputPanel id="wtttl">
+      <h:outputText value="#{smrb.worker_threads}: #{systemMonitorManager.currentWorkerThread.currentThreads}" />
+      </p:outputPanel>
+    </f:facet>
+    <p:outputPanel id="wtbody">
+      <p:panelGrid styleClass="datagrid">
+      <p:row>
+        <p:column colspan="2" style="text-align:center;">
+          <p:graphicImage value="#{systemMonitorManager.wtCartesianModel}" cache="false" rendered="#{systemMonitorManager.smmConfigured}"/>
+          <h:outputText value="#{smrb.smm_not_configured}" rendered="#{!systemMonitorManager.smmConfigured}"/>
+        </p:column>
+      </p:row>
+      </p:panelGrid>
+    </p:outputPanel>
+  </p:tab>
+  <p:tab>
+    <f:facet name="title">
+      <p:outputPanel id="atttl">
+      <h:outputText value="#{smrb.activation_threads}: #{systemMonitorManager.currentActivationThread.currentThreads}" />
+      </p:outputPanel>
+    </f:facet>
+    <p:outputPanel id="atbody">
+      <p:panelGrid styleClass="datagrid">
+      <p:row>
+        <p:column colspan="2" style="text-align:center;">
+          <p:graphicImage value="#{systemMonitorManager.atCartesianModel}" cache="false" rendered="#{systemMonitorManager.smmConfigured}"/>
+          <h:outputText value="#{smrb.smm_not_configured}" rendered="#{!systemMonitorManager.smmConfigured}"/>
+        </p:column>
+      </p:row>
+      </p:panelGrid>
+    </p:outputPanel>
+  </p:tab>
+  <p:tab>
+    <f:facet name="title">
+      <p:outputPanel id="aqsttl">
+      <h:outputText value="#{smrb.activator_queue_size}: #{systemMonitorManager.currentActivationQueueSize.queueSize}" />
+      </p:outputPanel>
+    </f:facet>
+    <p:outputPanel id="aqsbody">
+      <p:panelGrid styleClass="datagrid">
+      <p:row>
+        <p:column colspan="2" style="text-align:center;">
+          <p:graphicImage value="#{systemMonitorManager.aqsCartesianModel}" cache="false" rendered="#{systemMonitorManager.smmConfigured}"/>
+          <h:outputText value="#{smrb.smm_not_configured}" rendered="#{!systemMonitorManager.smmConfigured}"/>
+        </p:column>
+      </p:row>
+      </p:panelGrid>
+    </p:outputPanel>
+  </p:tab>
+  <p:tab>
+    <f:facet name="title">
+      <p:outputPanel id="tjttl">
+      <h:outputText value="#{smrb.max_items_work_list_length}: #{systemMonitorManager.currentTotalJobs.totalJobs}" />
+      </p:outputPanel>
+    </f:facet>
+    <p:outputPanel id="tjbody">
+      <p:panelGrid styleClass="datagrid">
+      <p:row>
+        <p:column colspan="2" style="text-align:center;">
+          <p:graphicImage value="#{systemMonitorManager.totalJobsCartesianModel}" cache="false" rendered="#{systemMonitorManager.smmConfigured}"/>
+          <h:outputText value="#{smrb.smm_not_configured}" rendered="#{!systemMonitorManager.smmConfigured}"/>
+        </p:column>
+      </p:row>
+      </p:panelGrid>
+    </p:outputPanel>
+  </p:tab>
+  <p:tab>
+    <f:facet name="title">
+      <p:outputPanel id="usttl">
+      <h:outputText value="#{smrb.users}: #{systemMonitorManager.currentUserSessions.sessionNumber}" />
+      </p:outputPanel>
+    </f:facet>
+    <p:outputPanel id="usbody">
+      <p:panelGrid styleClass="datagrid">
+      <p:row>
+        <p:column colspan="2" style="text-align:center;">
+          <p:graphicImage value="#{systemMonitorManager.userSessionsCartesianModel}" cache="false" rendered="#{systemMonitorManager.smmConfigured}"/>
+          <h:outputText value="#{smrb.smm_not_configured}" rendered="#{!systemMonitorManager.smmConfigured}"/>
+        </p:column>
+      </p:row>
+      </p:panelGrid>
+    </p:outputPanel>
+  </p:tab>
+</p:accordionPanel>
+
+<p:ajaxStatus id="ajaxStatusPanel" style="position:fixed; right:5px; bottom:5px; width:32px; height:32px;">
+  <f:facet name="start">
+    <h:graphicImage value="#{request.contextPath}/../../activator/images/primefaces/throbber.gif" />
+  </f:facet>
+  <f:facet name="complete">
+    <h:outputText value="" />
+  </f:facet>
+</p:ajaxStatus>
+
+</h:form>
+
+</body>
+
+</html>

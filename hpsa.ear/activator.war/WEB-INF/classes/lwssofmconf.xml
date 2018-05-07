@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lwsso-config xmlns="http://www.hp.com/astsecurity/idmenablmentfw/lwsso/2.0">
+  <enableLWSSO enableLWSSOFramework="false" enableCookieCreation="true" cookieCreationType="LWSSO"/>
+    <webui>
+      <validation>
+        <in-ui-lwsso>
+          <lwssoValidation  id="ID000001">
+            <domain>foo.com</domain>
+            <crypto cipherType="symmetricBlockCipher"
+                      engineName="AES" 
+                      paddingModeName="CBC" 
+                      keySize="256"
+                      encodingMode="Base64Url"
+                      initString="This is a test string">
+            </crypto>
+          </lwssoValidation>
+        </in-ui-lwsso>
+      </validation>
+
+      <creation>
+        <lwssoCreationRef>
+          <lwssoValidationRef refid="ID000001"/>
+          <expirationPeriod>60</expirationPeriod>
+        </lwssoCreationRef>
+      </creation>
+
+      <logoutURLs>
+        <url parameterName="reallyLogout" parameterValue="yes">
+          .*activator/jsp/logout.jsp.*
+        </url>
+        <url>
+          .*activator/jsp/logout.jsp.*
+        </url>
+      </logoutURLs>
+
+      <nonsecureURLs>
+        <url>.*lwsso.*login.*</url>
+      </nonsecureURLs>
+
+      <protectedDomains>
+        <url>foo.com</url>
+
+      </protectedDomains>
+    </webui>
+</lwsso-config>

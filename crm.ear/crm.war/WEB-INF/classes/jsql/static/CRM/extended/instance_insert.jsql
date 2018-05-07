@@ -1,0 +1,1 @@
+INSERT INTO hpia_instance_attributes VALUES (?, ?, ?, ?, ?)

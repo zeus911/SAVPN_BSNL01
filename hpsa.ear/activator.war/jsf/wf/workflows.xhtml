@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+  <link rel="stylesheet" type="text/css" href="/activator/css/primefaces/hpsa.css" />
+  <style>
+  .td-error
+  {
+    background:/*c:red*/ #ff0000;
+  }
+  .td-warning
+  {
+    background:/*c:yllw*/ #ffff44;  
+  }
+  </style>
+  <script type="text/javascript" src="/activator/javascript/saUtilities.js" ></script>
+</h:head>
+
+<body onmousemove="logoutTimerReset();" onkeydown="logoutTimerReset();">
+
+<h:outputText value="#{wfrb.available_workflows}" class="frame-header" />
+
+<h:form id="form">
+
+<p:growl id="growl" showDetail="true"/>
+
+<p:contextMenu for="wfs" style="width:210px;">
+  <p:menuitem value="#{wfrb.start_workflow_op}" icon="ui-icon-play" actionListener="#{workflowManager.startJob}" update=":form:growl"
+      rendered="#{workflowManager.isStartJobOperationAllowed}" />
+  <p:menuitem value="#{wfrb.schedule_workflow_op}" icon="ui-icon-gear" oncomplete="createSchedule();PF('dlgmodsch').show();" update=":form:dlgmodsch,:form:growl"
+      actionListener="#{workflowManager.onSchedule}" rendered="#{workflowManager.isScheduleJobOperationAllowed}" />
+  <p:menuitem value="#{wfrb.reload_workflows_op}" icon="ui-icon-refresh" update=":form:wfs,:form:growl" actionListener="#{workflowManager.reloadWorkflows}"
+      rendered="#{workflowManager.isReloadOperationAllowed}" />
+  <p:menuitem value="#{wfrb.debug_workflow_op}" icon="ui-icon-wrench" actionListener="#{workflowManager.debugJob}" update=":form:growl"
+      rendered="#{workflowManager.isDebugJobOperationAllowed}" />
+</p:contextMenu>
+
+<p:dataTable id="wfs" var="wf" value="#{workflowManager.workflows}" selection="#{workflowManager.selectedWorkflow}" selectionMode="single"
+    rowStyleClass="#{wf.state == wf.errorState ? 'td-error' : wf.state == wf.warningState ? 'td-warning' : null}" tableStyle="table-layout:auto;">
+  <p:ajax event="contextMenu" listener="#{workflowManager.onRowSelect}" />
+  <p:column headerText="#{wfrb.name}" >
+    <h:outputText value="#{wf.name}" title="#{wf.error}" />
+  </p:column>
+  <p:column headerText="#{wfrb.description}">
+    <h:outputText value="#{wf.description}" title="#{wf.error}" />
+  </p:column>
+</p:dataTable>
+
+<ui:insert name="scheduler" >
+  <ui:include src="#{request.contextPath}/../jsf/scheduler/scheduler.xhtml" >
+    <ui:param name="workflowName" value="#{workflowManager.selectedWorkflow.name}" />
+  </ui:include>
+</ui:insert>
+
+<p:ajaxStatus id="ajaxStatusPanel" style="position:fixed; right:5px; bottom:5px; width:32px; height:32px;">
+  <f:facet name="start">
+    <h:graphicImage value="#{request.contextPath}/../../activator/images/primefaces/throbber.gif" />
+  </f:facet>
+  <f:facet name="complete">
+    <h:outputText value="" />
+  </f:facet>
+</p:ajaxStatus>
+
+</h:form>
+
+</body>
+
+</html>

@@ -1,0 +1,448 @@
+/*******************************************************************************/
+/*  HP Service Activator                                                       */
+/*  (c) Copyright 2014 Hewlett-Packard Development Company, L.P.		       */
+/*******************************************************************************/
+
+/**************************************************/
+/*  Set font family                               */
+/**************************************************/
+html {
+  font-family: Verdana, Helvetica, Arial, Sans-serif;
+}
+
+/**************************************************/
+/*    Table styles                                */
+/**************************************************/
+table {
+  border: 0px;
+  border-collapse: collapse;
+  border-spacing: 0px;
+  padding: 0px;
+}
+
+.activatorTable {
+  width: 100%;
+}
+
+.tableHeading {
+  background: /*c:sabl*/ #0096d6;
+  font-size: 10pt;
+  font-weight: bold;
+  color: /*c:whit*/ #ffffff;
+  text-align: left;
+  vertical-align: top;
+}
+
+.mainHeading {
+  background: /*c:sabl*/ #0096d6;
+  font-size: 8pt;
+  line-height: 1.5;
+  color: /*c:whit*/ #ffffff;
+  text-align: left;
+  vertical-align: middle;
+  border: 2px solid /*c:whit*/ #ffffff;
+  /** padding: 1px, 3px;*/
+}
+
+td.mainHeading a:visited,td.mainHeading a:active,td.mainHeading a {
+  color: /*c:whit*/ #ffffff;
+}
+
+.queueHeading {
+  background: #3399CC;
+  font-size: 8pt;
+  line-height: 1.3;
+  color: /*c:blck*/ #000000;
+  text-align: left;
+  vertical-align: middle;
+  /** padding: 1px, 3px; */
+}
+
+.tableRowError {
+  background-color: /*c:red*/ #ff000;
+  font-size: 8pt;
+}
+
+.tableRowWarning {
+  background-color: /*c:yllw*/ #ffff44;
+  font-size: 8pt;
+}
+
+.tableRow,.tableRowInfo {
+  background-color: /*c:ltgy*/ #e5e8e8;
+  font-size: 10pt;
+}
+
+.tableOddRow {
+  background-color: /*c:ltgy*/ #e5e8e8;
+  cursor: pointer;
+}
+
+.tableOddRowNoPointer {
+  background-color: /*c:ltgy*/ #e5e8e8;
+}
+
+.tableEvenRow {
+  background-color: /*c:gy20*/ #cccccc;
+  cursor: pointer;
+}
+
+.tableEvenRowNoPointer {
+  background-color: /*c:gy20*/ #cccccc;
+}
+
+.tableRowSelect {
+  background-color: #afafaf;
+  cursor: pointer;
+  width: auto;
+}
+
+.tableCell {
+  font-size: 8pt;
+  color: /*c:blck*/ #000000;
+  border: 2px solid /*c:whit*/ #ffffff;
+  padding: 1px, 3px;
+  cursor: pointer;
+}
+
+.tableCellNoPointer {
+  font-size: 8pt;
+  color: /*c:blck*/ #000000;
+  border: 2px solid /*c:whit*/ #ffffff;
+  padding: 1px, 3px;
+}
+
+/**************************************************/
+/*    Main navigation bar styles                  */
+/**************************************************/
+.navHeading,.navSubHeading {
+  background: /*c:sabl*/ #0096d6;
+  font-weight: bold;
+  color: /*c:whit*/ #ffffff;
+  text-align: left;
+}
+
+.navHeading {
+  font-size: 9pt;
+}
+
+.navSubHeading {
+  font-size: 8pt;
+}
+
+.navRow {
+  background: /*c:ltgy*/ #e5e8e8;
+  font-size: 8pt;
+  color: /*c:blck*/ #000000;
+  text-align: left;
+}
+
+/**************************************************/
+/*    Navigation bar action menu styles           */
+/**************************************************/
+.actRow,.actHeading,.actSubHeading {
+  text-align: left;
+}
+
+.actRow,.actSubHeading {
+  font-size: 8pt;
+  color: /*c:blck*/ #000000;
+}
+
+.actHeading,.actSubHeading {
+  font-weight: bold;
+}
+
+.actRow {
+  background: /*c:ltgy*/ #e5e8e8;
+}
+
+.actHeading {
+  background: /*c:sabl*/ #0096d6;
+  font-size: 9pt;
+  color: /*c:whit*/ #ffffff;
+}
+
+.actSubHeading {
+  background: /*c:saab*/ #007dba;
+}
+
+/**************************************************/
+/*    Link Styles                                 */
+/**************************************************/
+a {
+  text-decoration: none;
+  color: /*c:saab*/ #007dba;
+}
+
+a:link,a:visited,a:active {
+  text-decoration: none;
+  color: /*c:blck*/ #000000;
+}
+
+.link {
+  color: /*c:saab*/ #007dba;
+}
+
+.link:hover {
+  color: /*c:sahb*/ #006699;
+}
+
+/**************************************************/
+/*    Header styles                               */
+/**************************************************/
+h1,h2,h3 {
+  color: /*c:sabl*/ #0096d6;
+}
+
+h1 {
+  font-size: 16pt;
+}
+
+h2 {
+  font-size: 12pt;
+}
+
+h3 {
+  font-size: 10pt;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 8pt;
+  color: /*c:whit*/ #ffffff;
+  line-height: .9;
+}
+
+.welcome {
+  font-size: 7pt;
+  color: /*c:whit*/ #ffffff;
+  vertical-align: top;
+}
+
+body {
+  font-size: 8pt
+}
+
+/**************************************************/
+/*    Track page styles                           */
+/**************************************************/
+td.UNDO,td.INTERRUPTED,td.DOING,td.DONE,td.ACTIVE,td.STATE,td.JOBID,td.TRANSACTIONSEQID,td.WORKFLOW,td.STARTTIME {
+  font-size: 8pt;
+  color: /*c:blck*/ #000000;
+  text-align: left;
+  border-right: 1px solid /*c:gy65*/ #5a5a5a;
+  border-bottom: 1px solid /*c:gy65*/ #5a5a5a;
+}
+
+td.UNDO,td.INTERRUPTED,td.JOBID {
+  background-color: /*c:ltrd*/ #f7d7d7;
+}
+
+td.DOING {
+  background-color: /*c:sapl*/ #822980;
+}
+
+td.DONE {
+  background-color: /*c:sabl*/ #0096d6;
+}
+
+td.ACTIVE,td.STATE,td.HOSTNAME,td.TRANSACTIONSEQID,td.WORKFLOW,td.STARTTIME {
+  background-color: /*c:ltgy*/ #e5e8e8;
+}
+
+/**************************************************/
+/*    About styles                                */
+/**************************************************/
+.about {
+  font-size: 8pt;
+  font-weight: bold;
+  text-align: center;
+  color: /*c:sabl*/ #0096d6;;
+}
+
+/**************************************************/
+/*    Style to create horizontal bar              */
+/**************************************************/
+.separator {
+  padding: 0px 0px 0px 0px;
+  margin: 0px 4px 0px 4px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  overflow: hidden;
+  width: 100%;
+  height: 2px;
+  background: /*c:sabl*/ #0096d6;
+}
+
+/**************************************************/
+/*    From "saAudit.css"                          */
+/**************************************************/
+.pageHead {
+  font-size: 12pt;
+  font-weight: bold;
+  color: /*c:sabl*/ #0096d6;
+  vertical-align: top;
+  text-align: left;
+  padding: 5px 0px 10px 0px;
+}
+
+.filterTextTd,.filterTextTd_left,.filterTextTd_small,.error {
+  padding: 5px 5px 5px 5px;
+  font-size: 10pt;
+}
+
+.filterTextTd {
+  font-weight: bold;
+  text-align: right;
+}
+
+.filterTextTd_left {
+  font-weight: bold;
+  text-align: left;
+}
+
+.filterTextTd_small {
+  font-weight: normal;
+  text-align: left;
+}
+
+.error {
+  text-align: left;
+  color: Red;
+}
+
+.filterTable {
+  font-size: 12pt;
+  width: 100%;
+}
+
+.operatorFilterHeader {
+  padding: 3px 2px 3px 2px;
+  padding-right: 2px;
+  padding-left: 2px;
+  padding-bottom: 3px;
+  padding-top: 3px;
+  width: 100%;
+  font-size: 10pt;
+  color: /*c:blck*/ #000000;
+  font-weight: bold;
+  background: #EFEFEF;
+}
+
+.operatorFilterText {
+  font-size: 10pt;
+  color: black;
+  padding: 0px 3px 0px 3px;
+  padding-right: 3px;
+  padding-left: 3px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+}
+
+.dateInputTriger {
+  cursor: pointer;
+}
+
+.simpleText {
+  font-size: 10pt;
+  color: black;
+}
+
+.statsTable {
+  border: 1px solid White;
+}
+
+.statsNote {
+  font-size: 9pt;
+  color: /*c:blck*/ #000000;
+  font-weight: bolder;
+}
+
+.infoHead {
+  font-size: 8pt;
+  font-weight: bold;
+  color: black;
+  width: 20%;
+  border-right: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+}
+
+.infoValue {
+  font-size: 8pt;
+  color: black;
+  border-right: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+}
+
+.filterClnTable {
+  font-size: 12pt;
+  width: 300px;
+}
+
+.tableCellInfo {
+  font-size: 8pt;
+  color: black;
+}
+
+.filterShowTable {
+  font-size: 10pt;
+  width: 100%;
+  color: black;
+  padding: 0px 0px 0px 0px;
+  border: 0px;
+}
+
+.filterShowTdHeader {
+  font-weight: bold;
+  color: #08396B;
+  padding: 0px 0px 0px 0px;
+  background: #cccccc;
+}
+
+.filterShowTd {
+  width: 12%;
+  font-weight: bold;
+  font-size: 8pt;
+  padding: 0px 0px 0px 0px;
+  text-align: right;
+  background: #efefef;
+}
+
+.filterShowTdValue {
+  width: 8%;
+  font-size: 8pt;
+  padding: 0px 0px 0px 0px;
+  text-align: left;
+  border-right: 1px solid #efefef;
+  border-bottom: 1px solid #efefef;
+}
+
+/*************************************************************************************************/
+.fgError {
+  color: /*c:red*/ #ff0000;
+}
+
+.bgError {
+  background: /*c:red*/ #ff0000;
+}
+
+.bgWarning {
+  background: /*c:yllw*/ #ffff44;
+}
+
+.bgInfoOdd {
+  background: /*c:ltgy*/ #e5e8e8;
+}
+
+.bgInfoEven {
+  background: /*c:gy20*/ #cccccc;
+}
+
+.bgDebug {
+  background: /*c:gy5*/ #f2f2f2;
+}
+
+.bgDebug2 {
+  background: /*c:whit*/ #ffffff;
+}

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE taglib
+  PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN"
+  "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+
+<taglib>
+  <tlibversion>1.0</tlibversion>
+  <jspversion>1.1</jspversion>
+  <shortname>block</shortname>
+  <uri>http://merentoamimismo.com/soyasi</uri>
+  <info>Ya veremos</info>
+  
+  <tag>
+    <name>space</name>
+    <!-- <tagclass>com.hp.spain.hputils.taglib.block.Space</tagclass> -->
+    <tagclass>com.hp.ov.activator.inventory.taglib.block.Space</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <attribute>
+      <name>align</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>	
+  </tag>
+  
+  <tag>
+    <name>wall</name>
+    <!-- <tagclass>com.hp.spain.hputils.taglib.block.Wall</tagclass> -->
+    <tagclass>com.hp.ov.activator.inventory.taglib.block.Wall</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <attribute>
+      <name>width</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>	
+  </tag>
+
+  <tag>
+    <name>block</name>
+   <!--  <tagclass>com.hp.spain.hputils.taglib.block.Block</tagclass> -->
+    <tagclass>com.hp.ov.activator.inventory.taglib.block.Block</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <attribute>
+      <name>title</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>verticalAlign</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>width</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>shadow</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>	
+  </tag>
+
+</taglib>

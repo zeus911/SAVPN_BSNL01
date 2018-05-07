@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE Bean SYSTEM "bean.dtd">
+<!--
+
+###############################################################################
+#
+#    (c) Copyright 2003-2010 Hewlett-Packard Development Company, L.P.
+#
+###############################################################################
+
+-->
+<Bean>
+    <Name>Profile</Name>
+	  <Solution>CRM</Solution>
+    <Package>com.hp.ov.activator.crmportal.bean</Package>
+    <DBTable>V_QoSProfile</DBTable>
+	<DBAlias>V_QoSProfile</DBAlias>
+    <!-- Name , Description, Level, info-->
+    <Fields>
+
+        <Field mandatory="false" >
+            <Name>CustomerId</Name>
+            <Type>String</Type>
+            <Description>The id of customer-owner</Description>
+        </Field>
+
+        <Field>
+            <Name>Prefix</Name>
+            <Type>String</Type>
+            <Description>The prefix of the profile</Description>
+        </Field>
+
+        <Field update ="false">
+            <Name>QoSProfileName</Name>
+            <Type>String</Type>
+            <Description>The name of profile</Description>
+        </Field>
+
+        <Field mandatory="false">
+            <Name>Description</Name>
+            <Type>String</Type>
+            <Description>The description of profile</Description>
+        </Field>
+
+        <Field>
+            <Name>Layer</Name>
+            <Type>String</Type>
+            <Description>Layer of Traffic class 2 or 3</Description>
+            <ListOfValues>
+                <Value>layer 3</Value>
+                <Value>layer 2</Value>
+            </ListOfValues>
+        </Field>
+
+        <Field>
+            <Name>PEQoSProfileName</Name>
+            <Type>String</Type>
+            <Description>PE QoS profile name in case of CE based QoS</Description>
+        </Field>
+        
+        
+           <Field>
+	              <Name>Compliant</Name>
+	              <Type>String</Type>
+	              <Description>States the degree of compliance</Description>
+	              <ListOfValues>
+	                  <Value>compliant</Value>
+	                  <Value>partial compliant</Value>
+	  				<Value>non compliant</Value>
+	              </ListOfValues>
+        </Field>
+
+    </Fields>
+
+    <Keys>
+
+        <Key pk="true" >
+            <KeyField>QoSProfileName</KeyField>
+        </Key>
+
+        <Key>
+            <KeyField>Layer</KeyField>
+        </Key>
+
+        <Key>
+            <KeyField>CustomerId</KeyField>
+        </Key>
+
+        <Key>
+            <KeyField>CustomerId</KeyField>
+            <KeyField>Layer</KeyField>
+        </Key>
+
+
+    </Keys>
+
+    <!-- These are the operations to generate for this bean -->
+    <Operations>
+        <Store/>
+        <Update/>
+        <Remove/>
+        <!-- findAll method -->
+    </Operations>
+
+    <!--
+      <Roles>
+        <Store>InvManager</Store>
+        <Update>InvManager</Update>
+        <Remove>InvManager</Remove>
+      </Roles>
+    -->
+
+
+</Bean>
+

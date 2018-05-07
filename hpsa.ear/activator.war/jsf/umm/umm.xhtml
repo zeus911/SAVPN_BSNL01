@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<!--
+******************************************************************
+  HPE Service Activator
+  (c) Copyright 2016 Hewlett Packard Enterprise Development LP
+*******************************************************************
+-->
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:util="http://java.sun.com/jsf/composite/components/util">
+
+<h:head>
+<link rel="stylesheet" type="text/css" href="/activator/css/primefaces/hpsa.css" />
+<script type="text/javascript" src="/activator/javascript/saUtilities.js" ></script>
+<script>
+function onload() {
+<c:choose>
+  <c:when test="${ ummManager.isCreatingUser }">
+  createUser();
+  </c:when>
+  <c:when test="${ ummManager.isCreatingRole }">
+  createRole();
+  </c:when>
+  <c:when test="${ ummManager.isCreatingTeam }">
+  createTeam();
+  </c:when>
+</c:choose>
+}
+</script>
+</h:head>
+
+<body onmousemove="logoutTimerReset();" onkeydown="logoutTimerReset();" onload="onload();" style="margin-top:0px; padding-top:0px;">
+
+<h:outputText value="#{ummrb.user_management}" class="frame-header" />
+
+<h:form id="form">
+
+<p:growl id="growl" showDetail="true"/>
+
+<p:tabView id="tabview" activeIndex="#{ummManager.activeTabIndex}" dynamic="true" cache="false">
+  <p:ajax event="tabChange" listener="#{ummManager.onTabChange}" update=":form:tabview" />
+  <p:tab id="utab" title="#{ummrb.users}" rendered="#{ummManager.isUsersTabAllowed}">
+    <p:contextMenu for="users" style="width:200px;">
+      <p:menuitem value="#{ummrb.update_user_op}" icon="ui-icon-pencil" onclick="modifyUser();"
+          rendered="#{ummManager.isUpdateUserOperationAllowed}" />
+      <p:menuitem value="#{ummrb.copy_user_op}" icon="ui-icon-copy" onclick="copyUser();"
+          rendered="#{ummManager.isCopyUserOperationAllowed}" />
+      <p:menuitem value="#{ummrb.assign_roles_op}" icon="ui-icon-key " onclick="PF('dlgasrusr').show();"
+          rendered="#{ummManager.isAssignRolesToUserOperationAllowed}" />
+      <p:menuitem value="#{ummrb.delete_user_op}" icon="ui-icon-close" onclick="PF('dlgdelusr').show();"
+          rendered="#{ummManager.isDeleteUserOperationAllowed}" />
+      <p:menuitem value="#{ummrb.disable_enable_user_op}" icon="ui-icon-locked" onclick="PF('dlgedusr').show();"
+          rendered="#{ummManager.isDisableUserOperationAllowed}" />
+    </p:contextMenu>
+    <p:dataTable id="users" var="user" value="#{ummManager.users}" tableStyle="table-layout:auto;"
+        selection="#{ummManager.selectedUser}" selectionMode="single" rowKey="#{user.name}"
+        emptyMessage="#{ummrb.empty_users}">
+      <p:ajax event="contextMenu" listener="#{ummManager.onUserRowSelect}" update=":form:growl,:form:dlgdelusrttl,:form:dlgedusr,:form:dlgasrusrttl,:form:dlgasrusr,:form:dlgasrusrbody"/>
+      <p:column headerText="#{ummrb.user_name}" sortBy="#{user.name}">
+        <h:outputText value="#{user.name}" />
+      </p:column>
+      <p:column headerText="#{ummrb.real_name}" sortBy="#{user.realName}">
+        <h:outputText value="#{user.realName}" />
+      </p:column>
+      <p:column headerText="#{ummrb.company}" sortBy="#{user.company}">
+        <h:outputText value="#{user.company}" />
+      </p:column>
+      <p:column headerText="#{ummrb.description}" sortBy="#{user.description}">
+        <h:outputText value="#{user.description}" />
+      </p:column>
+      <p:column headerText="#{ummrb.system_user}" sortBy="#{user.systemUserAS}">
+        <h:outputText value="#{user.systemUserAS}" />
+      </p:column>
+      <p:column headerText="#{ummrb.status}" sortBy="#{user.status}">
+        <h:outputText value="#{user.status}" />
+      </p:column>
+    </p:dataTable>
+  </p:tab>
+  <p:tab id="rtab" title="#{ummrb.roles}">
+    <p:contextMenu for="roles" style="width:230px;">
+      <p:menuitem value="#{ummrb.update_role_op}" icon="ui-icon-pencil" onclick="modifyRole();"
+          rendered="#{ummManager.isUpdateRoleOperationAllowed}" />
+      <p:menuitem value="#{ummrb.delete_role_op}" icon="ui-icon-close" onclick="PF('dlgdelrl').show();"
+          rendered="#{ummManager.isDeleteRoleOperationAllowed}" />
+      <p:menuitem value="#{ummrb.assign_operation_types_op}" icon="ui-icon-key" onclick="PF('dlgasorl').show();"
+          rendered="#{ummManager.isAssignOperationTypesOperationAllowed}" />
+      <p:menuitem value="#{ummrb.assign_branch_types_op}" icon="ui-icon-key" onclick="PF('dlgasbrl').show();"
+          rendered="#{ummManager.isAssignBranchTypesOperationAllowed}" />
+      <p:menuitem value="#{ummrb.assign_view_op}" icon="ui-icon-key" onclick="PF('dlgasvrl').show();"
+          rendered="#{ummManager.isAssignTreesOperationAllowed}" />
+      <p:menuitem value="#{ummrb.assign_diagram_operation_types_op}" icon="ui-icon-key" onclick="PF('dlgasdorl').show();"
+          rendered="#{ummManager.isAssignDiagramOperationTypesOperationAllowed}" />
+    </p:contextMenu>
+    <p:dataTable id="roles" var="role" value="#{ummManager.roles}" tableStyle="table-layout:auto;"
+        selection="#{ummManager.selectedRole}" selectionMode="single" rowKey="#{role.name}"
+        emptyMessage="#{ummrb.empty_roles}">
+      <p:ajax event="contextMenu" listener="#{ummManager.onRoleRowSelect}"
+          update=":form:growl,:form:dlgdelrlttl,:form:dlgasorlttl,:form:dlgasorlbody,:form:dlgasbrlttl,:form:dlgasbrlbody,:form:dlgasvrlttl,:form:dlgasvrlbody,:form:dlgasdorlttl,:form:dlgasdorlbody" />
+      <p:column headerText="#{ummrb.role_name}" sortBy="#{role.name}">
+        <h:outputText value="#{role.name}" />
+      </p:column>
+      <p:column headerText="#{ummrb.description}" sortBy="#{role.description}">
+        <h:outputText value="#{role.description}" />
+      </p:column>
+    </p:dataTable>
+  </p:tab>
+  <p:tab id="ttab" title="#{ummrb.teams}" rendered="#{ummManager.isTeamsTabAllowed}">
+    <p:contextMenu for="teams" style="width:200px;">
+      <p:menuitem value="#{ummrb.update_team_op}" icon="ui-icon-pencil" onclick="modifyTeam();"
+          rendered="#{ummManager.isUpdateTeamOperationAllowed}" />
+      <p:menuitem value="#{ummrb.delete_team_op}" icon="ui-icon-close" onclick="PF('dlgdeltm').show();"
+          rendered="#{ummManager.isDeleteTeamOperationAllowed}" />
+      <p:menuitem value="#{ummrb.assign_roles_op}" icon="ui-icon-key" onclick="PF('dlgastm').show();"
+          rendered="#{ummManager.isAssignRolesToTeamOperationAllowed}" />
+    </p:contextMenu>
+    <p:dataTable id="teams" var="team" value="#{ummManager.teams}" tableStyle="table-layout:auto;"
+        selection="#{ummManager.selectedTeam}" selectionMode="single" rowKey="#{team.name}"
+        emptyMessage="#{ummrb.empty_teams}">
+      <p:ajax event="contextMenu" listener="#{ummManager.onTeamRowSelect}" update=":form:growl,:form:dlgdeltmttl,:form:dlgastmttl,:form:dlgasufbody,:form:dlgastm" />
+      <p:column headerText="#{ummrb.team_name}" sortBy="#{team.name}">
+        <h:outputText value="#{team.name}" />
+      </p:column>
+      <p:column headerText="#{ummrb.description}" sortBy="#{team.description}">
+        <h:outputText value="#{team.description}" />
+      </p:column>
+    </p:dataTable>
+  </p:tab>
+  <p:tab id="otab" title="#{ummrb.operation_types}">
+    <p:dataTable id="optypes" var="ot" value="#{ummManager.operationTypes}" tableStyle="table-layout:auto;"
+        selection="#{ummManager.selectedOperationType}" selectionMode="single" rowKey="#{ot.id}"
+        emptyMessage="#{ummrb.empty_operation_types}">
+      <p:ajax event="contextMenu" listener="#{ummManager.onOperationTypeRowSelect}" update=":form:growl" />
+      <p:column headerText="#{ummrb.solution_name}" sortBy="#{ot.solutionName}">
+        <h:outputText value="#{ot.solutionName}" />
+      </p:column>
+      <p:column headerText="#{ummrb.view_name}" sortBy="#{ot.viewName}">
+        <h:outputText value="#{ot.viewName}" />
+      </p:column>
+      <p:column headerText="#{ummrb.operation_type_name}" sortBy="#{ot.operationTypeName}">
+        <h:outputText value="#{ot.operationTypeName}" />
+      </p:column>
+      <p:column headerText="#{ummrb.description}" sortBy="#{ot.description}">
+        <h:outputText value="#{ot.description}" />
+      </p:column>
+    </p:dataTable>
+  </p:tab>
+  <p:tab id="btab" title="#{ummrb.branch_types}">
+    <p:dataTable id="brtypes" var="bt" value="#{ummManager.branchTypes}" tableStyle="table-layout:auto;"
+        selection="#{ummManager.selectedBranchType}" selectionMode="single" rowKey="#{bt.id}"
+        emptyMessage="#{ummrb.empty_branch_types}">
+      <p:ajax event="contextMenu" listener="#{ummManager.onBranchTypeRowSelect}" update=":form:growl" />
+      <p:column headerText="#{ummrb.solution_name}" sortBy="#{bt.solutionName}">
+        <h:outputText value="#{bt.solutionName}" />
+      </p:column>
+      <p:column headerText="#{ummrb.view_name}" sortBy="#{bt.viewName}">
+        <h:outputText value="#{bt.viewName}" />
+      </p:column>
+      <p:column headerText="#{ummrb.branch_type_name}" sortBy="#{bt.branchTypeName}">
+        <h:outputText value="#{bt.branchTypeName}" />
+      </p:column>
+      <p:column headerText="#{ummrb.description}" sortBy="#{bt.description}">
+        <h:outputText value="#{bt.description}" />
+      </p:column>
+    </p:dataTable>
+  </p:tab>
+  <p:tab id="vtab" title="#{ummrb.trees}">
+    <p:dataTable id="trees" var="vt" value="#{ummManager.treeDefinitions}" tableStyle="table-layout:auto;"
+        selection="#{ummManager.selectedTree}" selectionMode="single" rowKey="#{vt.id}"
+        emptyMessage="#{ummrb.empty_trees}">
+      <p:ajax event="contextMenu" listener="#{ummManager.onTreeRowSelect}" update=":form:growl" />
+      <p:column headerText="#{ummrb.solution_name}" sortBy="#{vt.solutionName}">
+        <h:outputText value="#{vt.solutionName}" />
+      </p:column>
+      <p:column headerText="#{ummrb.solution_label}" sortBy="#{vt.solutionLabel}">
+        <h:outputText value="#{vt.solutionLabel}" />
+      </p:column>
+      <p:column headerText="#{ummrb.solution_sequence}" sortBy="#{vt.solutionSequence}">
+        <h:outputText value="#{vt.solutionSequence}" />
+      </p:column>
+      <p:column headerText="#{ummrb.view_name}" sortBy="#{vt.viewName}">
+        <h:outputText value="#{vt.viewName}" />
+      </p:column>
+      <p:column headerText="#{ummrb.view_sequence}" sortBy="#{vt.viewSequence}">
+        <h:outputText value="#{vt.viewSequence}" />
+      </p:column>
+      <p:column headerText="#{ummrb.description}" sortBy="#{vt.description}">
+        <h:outputText value="#{vt.description}" />
+      </p:column>
+    </p:dataTable>
+  </p:tab>
+  <p:tab id="ftab" title="#{ummrb.filters}">
+    <p:contextMenu for="filters" style="width:200px;">
+      <p:menuitem value="#{ummrb.assign_users_to_filter_op}" icon="ui-icon-key" onclick="PF('dlgasuf').show();"
+          rendered="#{ummManager.isAssignUsersToFilterOperationAllowed}" />
+      <p:menuitem value="#{ummrb.delete_filter_op}" icon="ui-icon-close" onclick="PF('dlgdelf').show();"
+          rendered="#{ummManager.isDeleteFilterOperationAllowed}" />
+    </p:contextMenu>
+    <p:dataTable id="filters" var="filter" value="#{ummManager.filters}" tableStyle="table-layout:auto;"
+        selection="#{ummManager.selectedFilter}" selectionMode="single" rowKey="#{filter.id}"
+        emptyMessage="#{ummrb.empty_filters}">
+      <p:ajax event="contextMenu" listener="#{ummManager.onFilterRowSelect}" update=":form:growl,:form:dlgdelfttl,:form:dlgasufttl,:form:dlgasufbody" />
+      <p:column headerText="#{ummrb.solution_name}" sortBy="#{filter.solutionName}">
+        <h:outputText value="#{filter.solutionName}" />
+      </p:column>
+      <p:column headerText="#{ummrb.view_name}" sortBy="#{filter.viewName}">
+        <h:outputText value="#{filter.viewName}" />
+      </p:column>
+      <p:column headerText="#{ummrb.filter_name}" sortBy="#{filter.filterName}">
+        <h:outputText value="#{filter.filterName}" />
+      </p:column>
+      <p:column headerText="#{ummrb.description}" sortBy="#{filter.description}">
+        <h:outputText value="#{filter.description}" />
+      </p:column>
+    </p:dataTable>
+  </p:tab>
+  <p:tab id="stab" title="#{ummrb.searches}">
+    <p:contextMenu for="searches" style="width:200px;">
+      <p:menuitem value="#{ummrb.assign_users_to_search_op}" icon="ui-icon-key" onclick="PF('dlgasus').show();"
+          rendered="#{ummManager.isAssignUsersToSearchOperationAllowed}" />
+      <p:menuitem value="#{ummrb.delete_search_op}" icon="ui-icon-close" onclick="PF('dlgdels').show();"
+          rendered="#{ummManager.isDeleteSearchOperationAllowed}" />
+    </p:contextMenu>
+    <p:dataTable id="searches" var="search" value="#{ummManager.searches}" tableStyle="table-layout:auto;"
+        selection="#{ummManager.selectedSearch}" selectionMode="single" rowKey="#{search.id}"
+        emptyMessage="#{ummrb.empty_searches}">
+      <p:ajax event="contextMenu" listener="#{ummManager.onSearchRowSelect}" update=":form:growl,:form:dlgdelsttl,:form:dlgasusttl,:form:dlgasusbody" />
+      <p:column headerText="#{ummrb.solution_name}" sortBy="#{search.solutionName}">
+        <h:outputText value="#{search.solutionName}" />
+      </p:column>
+      <p:column headerText="#{ummrb.view_name}" sortBy="#{search.viewName}">
+        <h:outputText value="#{search.viewName}" />
+      </p:column>
+      <p:column headerText="#{ummrb.search_name}" sortBy="#{search.searchName}">
+        <h:outputText value="#{search.searchName}" />
+      </p:column>
+      <p:column headerText="#{ummrb.description}" sortBy="#{search.description}">
+        <h:outputText value="#{search.description}" />
+      </p:column>
+    </p:dataTable>
+  </p:tab>
+  <p:tab id="dotab" title="#{ummrb.diagram_operation_types}">
+    <p:dataTable id="doptypes" var="ot" value="#{ummManager.diagramOperationTypes}" tableStyle="table-layout:auto;"
+        selection="#{ummManager.selectedDiagramOperationType}" selectionMode="single" rowKey="#{ot.id}"
+        emptyMessage="#{ummrb.empty_diagram_operation_types}">
+      <p:ajax event="contextMenu" listener="#{ummManager.onDiagramOperationTypeRowSelect}" update=":form:growl" />
+      <p:column headerText="#{ummrb.solution_name}" sortBy="#{ot.solutionName}">
+        <h:outputText value="#{ot.solutionName}" />
+      </p:column>
+      <p:column headerText="#{ummrb.diagram_name}" sortBy="#{ot.diagramName}">
+        <h:outputText value="#{ot.diagramName}" />
+      </p:column>
+      <p:column headerText="#{ummrb.diagram_operation_type_name}" sortBy="#{ot.operationTypeName}">
+        <h:outputText value="#{ot.operationTypeName}" />
+      </p:column>
+      <p:column headerText="#{ummrb.description}" sortBy="#{ot.description}">
+        <h:outputText value="#{ot.description}" />
+      </p:column>
+    </p:dataTable>
+  </p:tab>
+</p:tabView>
+
+<p:confirmDialog id="dlgdelusr" widgetVar="dlgdelusr" header="#{ummrb.delete_user_op}" showEffect="fade" hideEffect="fade">
+  <f:facet name="message">
+    <h:outputFormat id="dlgdelusrttl" value="#{ummrb.delete_user_confirm}">
+      <f:param value="#{ummManager.selectedUser.name}" />
+    </h:outputFormat>
+  </f:facet>
+  <p:commandButton value="#{ummrb.ok}" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      update=":form:tabview,:form:growl" actionListener="#{ummManager.deleteUser}" onclick="PF('dlgdelusr').hide();"/>
+  <p:commandButton value="#{ummrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgdelusr').hide();"/>
+</p:confirmDialog>
+
+<p:confirmDialog id="dlgedusr" widgetVar="dlgedusr" header="#{ummManager.disableEnableHeader}" message="#{ummManager.disableEnableMessage}" showEffect="fade" hideEffect="fade">
+  <p:commandButton value="#{ummrb.ok}" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      update=":form:tabview,:form:growl" actionListener="#{ummManager.disableEnableUser}" onclick="PF('dlgedusr').hide();"/>
+  <p:commandButton value="#{ummrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgedusr').hide();"/>
+</p:confirmDialog>
+
+<p:dialog id="dlgasrusr" widgetVar="dlgasrusr" showEffect="fade" hideEffect="fade" modal="true" width="500" draggable="false" resizable="false" >
+  <f:facet name="header">
+    <h:outputFormat id="dlgasrusrttl" value="#{ummrb.assign_roles_header}">
+      <f:param value="#{ummManager.selectedUser.name}" />
+    </h:outputFormat>
+  </f:facet>
+  <p:pickList id="dlgasrusrbody" value="#{ummManager.roleDMM}" var="role" itemLabel="#{role}" itemValue="#{role}" />
+  <p:commandButton value="#{ummrb.ok}" type="submit" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      partialSubmit="true" process="dlgasrusr" actionListener="#{ummManager.assignRolesToUser}"
+      update=":form:tabview,:form:growl" onclick="PF('dlgasrusr').hide();"/>
+  <p:commandButton value="#{ummrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgasrusr').hide();"/>
+</p:dialog>
+
+<ui:insert name="useredit" >
+  <ui:include src="#{request.contextPath}/../jsf/umm/user.xhtml" >
+    <ui:param name="username" value="#{ummManager.selectedUser.name}" />
+  </ui:include>
+</ui:insert>
+
+<p:confirmDialog id="dlgdelrl" widgetVar="dlgdelrl" header="#{ummrb.delete_role_op}" showEffect="fade" hideEffect="fade">
+  <f:facet name="message">
+    <h:outputFormat id="dlgdelrlttl" value="#{ummrb.delete_role_confirm}">
+      <f:param value="#{ummManager.selectedRole.name}" />
+    </h:outputFormat>
+  </f:facet>
+  <p:commandButton value="#{ummrb.ok}" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      update=":form:tabview,:form:growl" actionListener="#{ummManager.deleteRole}" onclick="PF('dlgdelrl').hide();"/>
+  <p:commandButton value="#{ummrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgdelrl').hide();"/>
+</p:confirmDialog>
+
+<p:dialog id="dlgasorl" widgetVar="dlgasorl" showEffect="fade" hideEffect="fade" modal="true" width="500" draggable="false" resizable="false" >
+  <f:facet name="header">
+    <h:outputFormat id="dlgasorlttl" value="#{ummrb.assign_operation_types_header}">
+      <f:param value="#{ummManager.selectedRole.name}" />
+    </h:outputFormat>
+  </f:facet>
+  <p:pickList id="dlgasorlbody" value="#{ummManager.operationTypeDMM}" var="ot" itemValue="#{ot.id}" itemLabel="#{ot.operationTypeName}">
+    <f:facet name="sourceCaption">#{ummrb.available}</f:facet>
+    <f:facet name="targetCaption">#{ummrb.assigned}</f:facet>
+    <p:ajax event="transfer" listener="#{ummManager.onTransferOperationType}" />
+    <p:column style="width:33%" header="#{ummrb.solution_name}">
+      #{ot.solutionName}
+    </p:column>
+    <p:column style="width:33%" header="#{ummrb.view_name}">
+      #{ot.viewName}
+    </p:column>
+    <p:column style="width:34%" header="#{ummrb.operation_type_name}">
+      #{ot.operationTypeName}
+    </p:column>
+  </p:pickList>
+  <p:commandButton value="#{ummrb.ok}" type="submit" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      partialSubmit="true" process="dlgasorl" actionListener="#{ummManager.assignOperationTypesToRole}"
+      update=":form:tabview,:form:growl" onclick="PF('dlgasorl').hide();"/>
+  <p:commandButton value="#{ummrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgasorl').hide();"/>
+</p:dialog>
+
+<p:dialog id="dlgasbrl" widgetVar="dlgasbrl" showEffect="fade" hideEffect="fade" modal="true" width="500" draggable="false" resizable="false" >
+  <f:facet name="header">
+    <h:outputFormat id="dlgasbrlttl" value="#{ummrb.assign_branch_types_header}">
+      <f:param value="#{ummManager.selectedRole.name}" />
+    </h:outputFormat>
+  </f:facet>
+  <p:pickList id="dlgasbrlbody" value="#{ummManager.branchTypeDMM}" var="bt" itemValue="#{bt.id}" itemLabel="#{bt.branchTypeName}">
+    <f:facet name="sourceCaption">#{ummrb.available}</f:facet>
+    <f:facet name="targetCaption">#{ummrb.assigned}</f:facet>
+    <p:ajax event="transfer" listener="#{ummManager.onTransferBranchType}" />
+    <p:column style="width:33%" header="#{ummrb.solution_name}">
+      #{bt.solutionName}
+    </p:column>
+    <p:column style="width:33%" header="#{ummrb.view_name}">
+      #{bt.viewName}
+    </p:column>
+    <p:column style="width:34%" header="#{ummrb.branch_type_name}">
+      #{bt.branchTypeName}
+    </p:column>
+  </p:pickList>
+  <p:commandButton value="#{ummrb.ok}" type="submit" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      partialSubmit="true" process="dlgasbrl" actionListener="#{ummManager.assignBranchTypesToRole}"
+      update=":form:tabview,:form:growl" onclick="PF('dlgasbrl').hide();"/>
+  <p:commandButton value="#{ummrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgasbrl').hide();"/>
+</p:dialog>
+
+<p:dialog id="dlgasvrl" widgetVar="dlgasvrl" showEffect="fade" hideEffect="fade" modal="true" width="500" draggable="false" resizable="false" >
+  <f:facet name="header">
+    <h:outputFormat id="dlgasvrlttl" value="#{ummrb.assign_view_header}">
+      <f:param value="#{ummManager.selectedRole.name}" />
+    </h:outputFormat>
+  </f:facet>
+  <p:pickList id="dlgasvrlbody" value="#{ummManager.treeDMM}" var="vt" itemValue="#{vt.id}" itemLabel="#{vt.viewName}">
+    <f:facet name="sourceCaption">#{ummrb.available}</f:facet>
+    <f:facet name="targetCaption">#{ummrb.assigned}</f:facet>
+    <p:ajax event="transfer" listener="#{ummManager.onTransferTreeDefinition}" />
+    <p:column style="width:33%" header="#{ummrb.solution_name}">
+      #{vt.solutionName}
+    </p:column>
+    <p:column style="width:33%" header="#{ummrb.view_name}">
+      #{vt.viewName}
+    </p:column>
+  </p:pickList>
+  <p:commandButton value="#{ummrb.ok}" type="submit" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      partialSubmit="true" process="dlgasvrl" actionListener="#{ummManager.assignTreeDefinitionToRole}"
+      update=":form:tabview,:form:growl" onclick="PF('dlgasvrl').hide();"/>
+  <p:commandButton value="#{ummrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgasvrl').hide();"/>
+</p:dialog>
+
+<p:dialog id="dlgasdorl" widgetVar="dlgasdorl" showEffect="fade" hideEffect="fade" modal="true" width="500" draggable="false" resizable="false" >
+  <f:facet name="header">
+    <h:outputFormat id="dlgasdorlttl" value="#{ummrb.assign_diagram_operation_types_header}">
+      <f:param value="#{ummManager.selectedRole.name}" />
+    </h:outputFormat>
+  </f:facet>
+  <p:pickList id="dlgasdorlbody" value="#{ummManager.diagramOperationTypeDMM}" var="ot" itemValue="#{ot.id}" itemLabel="#{ot.operationTypeName}">
+    <f:facet name="sourceCaption">#{ummrb.available}</f:facet>
+    <f:facet name="targetCaption">#{ummrb.assigned}</f:facet>
+    <p:ajax event="transfer" listener="#{ummManager.onTransferDiagramOperationType}" />
+    <p:column style="width:33%" header="#{ummrb.solution_name}">
+      #{ot.solutionName}
+    </p:column>
+    <p:column style="width:33%" header="#{ummrb.diagram_name}">
+      #{ot.diagramName}
+    </p:column>
+    <p:column style="width:34%" header="#{ummrb.diagram_operation_type_name}">
+      #{ot.operationTypeName}
+    </p:column>
+  </p:pickList>
+  <p:commandButton value="#{ummrb.ok}" type="submit" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      partialSubmit="true" process="dlgasdorl" actionListener="#{ummManager.assignDiagramOperationTypesToRole}"
+      update=":form:tabview,:form:growl" onclick="PF('dlgasdorl').hide();"/>
+  <p:commandButton value="#{ummrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgasdorl').hide();"/>
+</p:dialog>
+
+<ui:insert name="roleedit" >
+  <ui:include src="#{request.contextPath}/../jsf/umm/role.xhtml" >
+    <ui:param name="rolename" value="#{ummManager.selectedRole.name}" />
+  </ui:include>
+</ui:insert>
+
+<p:confirmDialog id="dlgdeltm" widgetVar="dlgdeltm" header="#{ummrb.delete_team_op}" showEffect="fade" hideEffect="fade">
+  <f:facet name="message">
+    <h:outputFormat id="dlgdeltmttl" value="#{ummrb.delete_team_confirm}">
+      <f:param value="#{ummManager.selectedTeam.name}" />
+    </h:outputFormat>
+  </f:facet>
+  <p:commandButton value="#{ummrb.ok}" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      update=":form:tabview,:form:growl" actionListener="#{ummManager.deleteTeam}" onclick="PF('dlgdeltm').hide();"/>
+  <p:commandButton value="#{ummrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgdeltm').hide();"/>
+</p:confirmDialog>
+
+<p:dialog id="dlgastm" widgetVar="dlgastm" showEffect="fade" hideEffect="fade" modal="true" width="500" draggable="false" resizable="false" >
+  <f:facet name="header">
+    <h:outputFormat id="dlgastmttl" value="#{ummrb.assign_roles_to_team_header}">
+      <f:param value="#{ummManager.selectedTeam.name}" />
+    </h:outputFormat>
+  </f:facet>
+  <p:pickList id="dlgastmbody" value="#{ummManager.teamDMM}" var="team" itemLabel="#{team}" itemValue="#{team}" />
+  <p:commandButton value="#{ummrb.ok}" type="submit" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      partialSubmit="true" process="dlgastm" actionListener="#{ummManager.assignRolesToTeam}"
+      update=":form:tabview,:form:growl" onclick="PF('dlgastm').hide();"/>
+  <p:commandButton value="#{ummrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgastm').hide();"/>
+</p:dialog>
+
+<ui:insert name="teamedit" >
+  <ui:include src="#{request.contextPath}/../jsf/umm/team.xhtml" >
+    <ui:param name="teamname" value="#{ummManager.selectedTeam.name}" />
+  </ui:include>
+</ui:insert>
+
+<p:dialog id="dlgasuf" widgetVar="dlgasuf" showEffect="fade" hideEffect="fade" modal="true" width="500" draggable="false" resizable="false">
+  <f:facet name="header">
+    <h:outputFormat id="dlgasufttl" value="#{ummrb.assign_users_to_filter_header}">
+      <f:param value="#{ummManager.selectedFilter.filterName}" />
+    </h:outputFormat>
+  </f:facet>
+  <p:outputPanel id="dlgasufbody">
+  <p:pickList value="#{ummManager.filterDMM}" var="user" itemLabel="#{user}" itemValue="#{user}" >
+    <f:facet name="sourceCaption">#{ummrb.available}</f:facet>
+    <f:facet name="targetCaption">#{ummrb.assigned}</f:facet>
+    <p:ajax event="transfer" listener="#{ummManager.onTransferFilterUser}" update=":form:musers" />
+  </p:pickList>
+  <p:pickList id="musers" value="#{ummManager.mandatoryFilterDMM}" var="user" itemLabel="#{user}" itemValue="#{user}" >
+    <f:facet name="sourceCaption">#{ummrb.assigned}</f:facet>
+    <f:facet name="targetCaption">#{ummrb.mandatory}</f:facet>
+    <p:ajax event="transfer" listener="#{ummManager.onTransferFilterMandatoryUser}" update=":form:musers" />
+  </p:pickList>
+  </p:outputPanel>
+  <p:commandButton value="#{ummrb.ok}" type="submit" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      partialSubmit="true" process="dlgasuf" actionListener="#{ummManager.assignUsersToFilter}"
+      update=":form:tabview,:form:growl" onclick="PF('dlgasuf').hide();"/>
+  <p:commandButton value="#{ummrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgasuf').hide();"/>
+</p:dialog>
+
+<p:confirmDialog id="dlgdelf" widgetVar="dlgdelf" header="#{ummrb.delete_filter_op}" showEffect="fade" hideEffect="fade">
+  <f:facet name="message">
+    <h:outputFormat id="dlgdelfttl" value="#{ummrb.delete_filter_confirm}">
+      <f:param value="#{ummManager.selectedFilter.filterName}" />
+    </h:outputFormat>
+  </f:facet>
+  <p:commandButton value="#{ummrb.ok}" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      update=":form:tabview,:form:growl" actionListener="#{ummManager.deleteFilter}" onclick="PF('dlgdelf').hide();"/>
+  <p:commandButton value="#{ummrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgdelf').hide();"/>
+</p:confirmDialog>
+
+<p:dialog id="dlgasus" widgetVar="dlgasus" showEffect="fade" hideEffect="fade" modal="true" width="500" draggable="false" resizable="false">
+  <f:facet name="header">
+    <h:outputFormat id="dlgasusttl" value="#{ummrb.assign_users_to_search_header}">
+      <f:param value="#{ummManager.selectedSearch.searchName}" />
+    </h:outputFormat>
+  </f:facet>
+  <p:pickList id="dlgasusbody" value="#{ummManager.searchDMM}" var="user" itemLabel="#{user}" itemValue="#{user}" />
+  <p:commandButton value="#{ummrb.ok}" type="submit" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      partialSubmit="true" process="dlgasus" actionListener="#{ummManager.assignUsersToSearch}"
+      update=":form:tabview,:form:growl" onclick="PF('dlgasus').hide();"/>
+  <p:commandButton value="#{ummrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgasus').hide();"/>
+</p:dialog>
+
+<p:confirmDialog id="dlgdels" widgetVar="dlgdels" header="#{ummrb.delete_search_op}" showEffect="fade" hideEffect="fade">
+  <f:facet name="message">
+    <h:outputFormat id="dlgdelsttl" value="#{ummrb.delete_search_confirm}">
+      <f:param value="#{ummManager.selectedSearch.searchName}" />
+    </h:outputFormat>
+  </f:facet>
+  <p:commandButton value="#{ummrb.ok}" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      update=":form:tabview,:form:growl" actionListener="#{ummManager.deleteSearch}" onclick="PF('dlgdels').hide();"/>
+  <p:commandButton value="#{ummrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgdels').hide();"/>
+</p:confirmDialog>
+
+<p:remoteCommand name="resume" actionListener="#{ummManager.resume}" update=":form:growl,:form:tabview" />
+
+<p:ajaxStatus id="ajaxStatusPanel" style="position:fixed; right:5px; bottom:5px; width:32px; height:32px;">
+  <f:facet name="start">
+    <h:graphicImage value="#{request.contextPath}/../../activator/images/primefaces/throbber.gif" />
+  </f:facet>
+  <f:facet name="complete">
+    <h:outputText value="" />
+  </f:facet>
+</p:ajaxStatus>
+
+</h:form>
+
+</body>
+
+</html>

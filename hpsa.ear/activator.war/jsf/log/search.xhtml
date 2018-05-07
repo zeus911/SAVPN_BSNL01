@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+  xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+  <title>Log Search</title>
+  <script type="text/javascript" src="/activator/javascript/saUtilities.js" ></script>
+  <link rel="stylesheet" type="text/css" href="/activator/css/primefaces/hpsa.css" />
+  <meta http-equiv="X-UA-Compatible" content="IE=9" />
+  <script>
+  function onload()
+  {
+    PF('logSearchTabs').select(0);
+    PF('logSearchTabs').disable(2);
+  }
+  </script>
+</h:head>
+<body onmousemove="logoutTimerReset();" onkeydown="logoutTimerReset();">
+
+  <h:outputText value="#{log_search.page_header}" class="frame-header" />
+
+  <c:if test="#{!LOG_SearchInformationBean.logSearchEnabled}">
+    <p:panel>
+      <h:panelGrid columns="1">
+        <h:outputText class="fgError" value="#{log_search.warning_not_configured_1}" />
+        <h:outputText class="fgError" value="#{log_search.warning_not_configured_2}" />
+      </h:panelGrid>
+    </p:panel>
+  </c:if>
+
+  <c:if test="#{LOG_SearchInformationBean.logSearchEnabled}">
+  
+    <script>
+    document.body.onload=onload;
+    </script>
+
+    <h:form id="log_search">
+
+      <p:tabView id="log_search_tabs" widgetVar="logSearchTabs" cache="true" dynamic="true">
+        <p:ajax event="tabChange" listener="#{LOG_SearchInformationBean.onTabChange}" />
+
+        <p:tab title="#{log_search.tab_simple}" id="simple">
+
+          <h:panelGrid id="simple_tab" cellpadding="0" cellspacing="0">
+            <h:panelGrid columns="2" cellpadding="0" style="width:100%">
+
+              <p:panel style="align:top;border:0px;">
+                <h:panelGrid columns="2" cellpadding="2">
+                  <h:outputText value="#{log_search.label_message}" />
+                  <p:inputText id="message" size="64" value="#{LOG_SearchInformationBean.message}" />
+
+                  <h:outputText value="#{log_search.label_log_level}" />
+                  <p:selectManyButton id="log_levels" value="#{LOG_SearchInformationBean.logLevels}">
+                    <f:selectItems value="#{LOG_SearchInformationBean.availableLevels}" var="level" itemValue="#{level}"
+                      itemLabel="#{level}" />
+                  </p:selectManyButton>
+
+                  <h:outputText value="#{log_search.label_module}" />
+                  <p:selectManyButton value="#{LOG_SearchInformationBean.modules}">
+                    <f:selectItem itemLabel="mwfm" itemValue="mwfm" />
+                    <f:selectItem itemLabel="resmgr" itemValue="resmgr" />
+                  </p:selectManyButton>
+
+                  <h:outputText value="#{log_search.label_service_id}" />
+                  <p:inputText id="serv" value="#{LOG_SearchInformationBean.serviceId}" />
+
+                  <h:outputText value="#{log_search.label_id}" />
+                  <p:inputText id="ididid" value="#{LOG_SearchInformationBean.id}" />
+                </h:panelGrid>
+              </p:panel>
+
+              <p:panel id="date_time_panel">
+                <h:panelGrid columns="3" cellpadding="0">
+                  <h:outputText style="valign:top;" value="#{log_search.label_precision}" />
+                  <p:spacer height="1" width="6" />
+                  <p:selectOneMenu id="options" value="#{LOG_SearchInformationBean.precision}">
+                    <p:ajax event="change" update="date_time_panel"
+                      listener="#{LOG_SearchInformationBean.onPrecisionChanged}" />
+                    <f:selectItem itemLabel="#{log_search.label_precision_min}" itemValue="MIN" />
+                    <f:selectItem itemLabel="#{log_search.label_precision_sec}" itemValue="SEC" />
+                    <f:selectItem itemLabel="#{log_search.label_precision_millis}" itemValue="MIL" />
+                  </p:selectOneMenu>
+
+                  <h:outputText style="valign:top;" value="#{log_search.label_date_time}" />
+                  <p:spacer height="1" width="6" />
+                  <h:panelGroup>
+                    <h:panelGrid id="date_group" columns="3" cellpadding="0">
+                      <h:outputText value="#{log_search.label_from}" />
+                      <p:spacer height="1" width="4" />
+                      <h:panelGroup>
+                        <p:calendar size="10" pattern="#{LOG_SearchInformationBean.datePattern}"
+                          value="#{LOG_SearchInformationBean.fromDate}" />
+                        <h:outputText value=":" />
+                        <p:inputMask size="14" mask="#{LOG_SearchInformationBean.timeMask}"
+                          value="#{LOG_SearchInformationBean.fromDateTime}" />
+                      </h:panelGroup>
+
+                      <h:outputText value="#{log_search.label_to}" />
+                      <p:spacer height="1" width="4" />
+                      <h:panelGroup>
+                        <p:calendar size="10" pattern="#{LOG_SearchInformationBean.datePattern}"
+                          value="#{LOG_SearchInformationBean.toDate}" />
+                        <h:outputText value=":" />
+                        <p:inputMask size="14" mask="#{LOG_SearchInformationBean.timeMask}"
+                          value="#{LOG_SearchInformationBean.toDateTime}" />
+                      </h:panelGroup>
+                    </h:panelGrid>
+                  </h:panelGroup>
+
+                  <h:outputText value="#{log_search.label_time}" />
+                  <p:spacer height="1" width="6" />
+                  <h:panelGrid columns="3" cellpadding="0">
+                    <h:outputText value="#{log_search.label_from}" />
+                    <p:spacer height="1" width="4" />
+                    <p:inputMask size="14" mask="#{LOG_SearchInformationBean.timeMask}"
+                      value="#{LOG_SearchInformationBean.fromTime}" />
+
+                    <h:outputText value="#{log_search.label_to}" />
+                    <p:spacer height="1" width="4" />
+                    <h:panelGroup>
+                      <p:inputMask size="14" mask="#{LOG_SearchInformationBean.timeMask}"
+                        value="#{LOG_SearchInformationBean.toTime}" />
+                    </h:panelGroup>
+                  </h:panelGrid>
+
+                  <h:outputText value="#{log_search.label_day_of_week}" />
+                  <p:spacer height="1" width="6" />
+                  <p:selectManyButton value="#{LOG_SearchInformationBean.daysOfWeek}">
+                    <f:selectItems value="#{LOG_SearchInformationBean.availableDaysOfWeek}" var="day"
+                      itemValue="#{day.number}" itemLabel="#{day.name}" />
+                  </p:selectManyButton>
+                </h:panelGrid>
+              </p:panel>
+            </h:panelGrid>
+
+            <h:panelGrid columns="2" cellpadding="0" style="width:100%">
+              <p:panel style="border:0px;">
+                <h:panelGrid columns="3" cellpadding="2">
+                  <h:outputText value="#{log_search.label_newest_first}" />
+                  <p:spacer height="1" width="6" />
+                  <p:selectBooleanCheckbox label="Reverse" value="#{LOG_SearchInformationBean.reverseSimple}" />
+
+                  <h:outputText value="#{log_search.label_max_results}" />
+                  <p:spacer height="1" width="6" />
+                  <p:selectOneMenu value="#{LOG_SearchInformationBean.maxResultsSimple}">
+                    <f:selectItems value="#{LOG_SearchInformationBean.possibleMaxResults}" />
+                  </p:selectOneMenu>
+                </h:panelGrid>
+              </p:panel>
+            </h:panelGrid>
+
+            <p:accordionPanel multiple="true" activeIndex="-1">
+              <p:tab title="#{log_search.tab_extra_options}">
+                <h:panelGrid columns="2" cellpadding="1">
+                  <h:outputText value="#{log_search.label_hostname}" />
+                  <p:selectManyButton value="#{LOG_SearchInformationBean.hostnames}">
+                    <f:selectItems value="#{LOG_SearchInformationBean.clusterNodeList}" var="clusterNode"
+                      itemValue="#{clusterNode.hostName}" itemLabel="#{clusterNode.hostName}" />
+                  </p:selectManyButton>
+
+                  <h:outputText value="#{log_search.label_component}" />
+                  <p:selectOneMenu id="comp" value="#{LOG_SearchInformationBean.component}" editable="true"
+                    style="width:350px">
+                    <f:selectItems value="#{LOG_SearchInformationBean.availableComponents}" />
+                  </p:selectOneMenu>
+
+                  <h:outputText value="#{log_search.label_thread}" />
+                  <p:inputText id="thr" value="#{LOG_SearchInformationBean.thread}" />
+
+                  <h:outputText value="#{log_search.label_part}" />
+                  <p:selectManyButton value="#{LOG_SearchInformationBean.parts}">
+                    <f:selectItems value="#{LOG_SearchInformationBean.availableParts}" var="part" itemValue="#{part}"
+                      itemLabel="#{part}" />
+                  </p:selectManyButton>
+
+                  <h:outputText value="#{log_search.label_topic}" />
+                  <p:selectManyButton value="#{LOG_SearchInformationBean.topics}">
+                    <f:selectItems value="#{LOG_SearchInformationBean.availableTopics}" var="topic" itemValue="#{topic}"
+                      itemLabel="#{topic}" />
+                  </p:selectManyButton>
+                </h:panelGrid>
+              </p:tab>
+            </p:accordionPanel>
+          </h:panelGrid>
+
+          <p:spacer height="16" />
+
+          <h:panelGrid cellspacing="2" cellpadding="4" columns="3">
+            <p:commandButton value="#{log_search.button_search}"
+              onsuccess="PF('logSearchTabs').enable(2);PF('logSearchTabs').select(2);"
+              actionListener="#{LOG_SearchInformationBean.simpleSearch}"
+              update=":log_search:log_search_tabs:advanced_tab :log_search:log_search_tabs:result_tab" />
+            <p:commandButton value="#{log_search.button_reset}"
+              onsuccess="PF('logSearchTabs').disable(2);PF('logSearchTabs').select(0);"
+              action="#{LOG_SearchInformationBean.clearSimple}" update=":log_search:log_search_tabs:simple_tab" />
+          </h:panelGrid>
+
+        </p:tab>
+        <p:tab title="#{log_search.tab_advanced}" id="advanced">
+          <h:panelGrid id="advanced_tab" cellpadding="0" cellspacing="0">
+            <h:panelGrid columns="3" cellpadding="2">
+              <h:outputText id="query_string" value="#{log_search.label_advanced_query}" />
+              <p:spacer height="1" width="6" />
+              <p:inputTextarea id="advanced_query" value="#{LOG_SearchInformationBean.advancedQueryString}" rows="5"
+                cols="80" />
+            </h:panelGrid>
+          </h:panelGrid>
+
+          <p:spacer height="8" />
+
+          <h:panelGrid columns="2" cellpadding="0" style="width:100%">
+            <p:panel style="border:0px;">
+              <h:panelGrid columns="3" cellpadding="2">
+                <h:outputText value="#{log_search.label_newest_first}" />
+                <p:spacer height="1" width="6" />
+                <p:selectBooleanCheckbox label="Reverse" value="#{LOG_SearchInformationBean.reverseAdvanced}" />
+
+                <h:outputText value="#{log_search.label_max_results}" />
+                <p:spacer height="1" width="6" />
+                <p:selectOneMenu value="#{LOG_SearchInformationBean.maxResultsAdvanced}">
+                  <f:selectItems value="#{LOG_SearchInformationBean.possibleMaxResults}" />
+                </p:selectOneMenu>
+              </h:panelGrid>
+            </p:panel>
+          </h:panelGrid>
+
+          <p:spacer height="16" />
+
+          <h:panelGrid cellspacing="2" cellpadding="4" columns="3">
+            <p:commandButton value="#{log_search.button_advanced_search}"
+              onsuccess="PF('logSearchTabs').enable(2);PF('logSearchTabs').select(2);"
+              actionListener="#{LOG_SearchInformationBean.advancedSearch}"
+              update=":log_search:log_search_tabs:advanced_tab :log_search:log_search_tabs:result_tab" />
+            <p:commandButton value="#{log_search.button_reset}"
+              onsuccess="PF('logSearchTabs').disable(2);PF('logSearchTabs').select(1);"
+              action="#{LOG_SearchInformationBean.clearAdvanced}" update=":log_search:log_search_tabs:advanced_tab" />
+          </h:panelGrid>
+
+        </p:tab>
+
+        <p:tab title="#{log_search.tab_results}" id="results">
+          <h:panelGrid id="result_tab" cellpadding="0" cellspacing="0">
+
+            <c:if test="#{LOG_SearchInformationBean.totalResultsCount lt 0}">
+              <p:panel>
+                <h:outputText style="color:red;" value="#{log_search.error_no_search_criteria}" />
+              </p:panel>
+              <br />
+              <br />
+            </c:if>
+
+            <c:if
+              test="#{LOG_SearchInformationBean.totalResultsCount gt LOG_SearchInformationBean.displayedResultsCount}">
+              <p:panel styleClass="bgWarning">
+                <h:outputText value="#{LOG_SearchInformationBean.truncateWarning}" />
+              </p:panel>
+            </c:if>
+
+            <p:contextMenu for="query_result_table">
+              <p:menuitem value="#{log_search.menu_open_log_file}" icon="ui-icon-search"
+                onsuccess="document.location='/activator/jsf/log/tmp.jsf?key=' + PF('logSearchResults.selection');" />
+            </p:contextMenu>
+
+            <p:dataTable id="query_result_table" emptyMessage="#{log_search.message_no_records}"
+              value="#{LOG_SearchResultBean.logSearchEntries}" var="entry"
+              rowStyleClass="#{entry.logLevel == 'ERROR' ? 'bgError' : entry.logLevel == 'WARNING' ? 'bgWarning' : entry.logLevel == 'DEBUG' ? 'bgDebug' : entry.logLevel == 'DEBUG2' ? 'bgDebug2' : null }"
+              selectionMode="single" selection="#{LOG_SearchInformationBean.selectedEntry}" rowKey="#{entry.key}"
+              widgetVar="logSearchResults">
+              <p:column headerText="Key" style="display:none;width:0px;font-size:0px;padding:0px;">
+                <h:outputText value="#{entry.key}" />
+              </p:column>
+              <p:column headerText="#{log_search.column_hostname}">
+                <h:outputText value="#{entry.hostname}" />
+              </p:column>
+              <p:column headerText="#{log_search.column_time}">
+                <h:outputText value="#{entry.date}" />
+              </p:column>
+              <p:column headerText="#{log_search.column_module}">
+                <h:outputText value="#{entry.module}" />
+              </p:column>
+              <p:column headerText="#{log_search.column_component}">
+                <h:outputText value="#{entry.component}" />
+              </p:column>
+              <p:column headerText="#{log_search.column_message}">
+                <h:outputText value="#{entry.message}" />
+              </p:column>
+              <p:column headerText="#{log_search.column_id}">
+                <h:outputText value="#{entry.id}" />
+              </p:column>
+              <p:column headerText="#{log_search.column_service_id}">
+                <h:outputText value="#{entry.serviceId}" />
+              </p:column>
+              <p:column headerText="#{log_search.column_part}">
+                <h:outputText value="#{entry.part}" />
+              </p:column>
+              <p:column headerText="#{log_search.column_topic}">
+                <h:outputText value="#{entry.topic}" />
+              </p:column>
+              <p:column headerText="#{log_search.column_thread}">
+                <h:outputText value="#{entry.thread}" />
+              </p:column>
+            </p:dataTable>
+
+            <c:if test="#{LOG_SearchInformationBean.totalResultsCount ge 0}">
+              <p:panel
+                styleClass="#{LOG_SearchInformationBean.totalResultsCount gt LOG_SearchInformationBean.displayedResultsCount ? 'bgWarning' : ''}">
+                <h:outputText value="#{log_search.info_results_count}" />
+                <p:spacer height="1" width="6" />
+                <h:outputText value="#{LOG_SearchInformationBean.totalResultsCount}" />
+              </p:panel>
+            </c:if>
+
+          </h:panelGrid>
+        </p:tab>
+      </p:tabView>
+      
+      <p:ajaxStatus id="ajaxStatusPanel" style="position:fixed; right:5px; bottom:5px; width:32px; height:32px;">
+        <f:facet name="start">
+          <h:graphicImage value="#{request.contextPath}/../../activator/images/primefaces/throbber.gif" />
+        </f:facet>
+        <f:facet name="complete">
+          <h:outputText value="" />
+        </f:facet>
+      </p:ajaxStatus>
+
+    </h:form>
+
+  </c:if>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+  <link rel="stylesheet" type="text/css" href="/activator/css/primefaces/hpsa.css" />
+  <script type="text/javascript" src="/activator/javascript/saUtilities.js" ></script>
+</h:head>
+<body onmousemove="logoutTimerReset();" onkeydown="logoutTimerReset();">
+  <f:view>
+    <h:form>
+
+      <p:panel header="#{lic_msg.license_info}">
+
+        <p:spacer height="12" />
+
+        <p:dataTable value="#{HPSALicenseInfoBean.pafuBeanList}" var="dataItem">
+
+          <f:facet name="header">
+            #{lic_msg.pafu_text}
+          </f:facet>
+
+          <p:column sortBy="#{dataItem.solutionName}">
+            <f:facet name="header">#{lic_msg.solution_name}</f:facet>
+            <h:outputText value="#{dataItem.solutionName}" />
+          </p:column>
+
+          <p:column sortBy="#{dataItem.unit}">
+            <f:facet name="header">#{lic_msg.unit}</f:facet>
+            <h:outputText value="#{dataItem.unit}" />
+          </p:column>
+
+          <p:column sortBy="#{dataItem.unitCount}">
+            <f:facet name="header">#{lic_msg.used}</f:facet>
+            <h:outputText value="#{dataItem.unitCount}" />
+          </p:column>
+
+          <p:column sortBy="#{dataItem.createDate}">
+            <f:facet name="header">#{lic_msg.create_date}</f:facet>
+            <h:outputText value="#{dataItem.createDate}" />
+          </p:column>
+
+          <p:column sortBy="#{dataItem.updateDate}">
+            <f:facet name="header">#{lic_msg.last_update}</f:facet>
+            <h:outputText value="#{dataItem.updateDate}" />
+          </p:column>
+
+        </p:dataTable>
+
+        <p:spacer height="16" />
+
+        <p:dataTable value="#{HPSALicenseInfoBean.paygBeanList}" var="dataItem">
+
+          <f:facet name="header">
+            #{lic_msg.payg_text}
+          </f:facet>
+
+          <p:column sortBy="#{dataItem.solutionName}">
+            <f:facet name="header">#{lic_msg.solution_name}</f:facet>
+            <h:outputText value="#{dataItem.solutionName}" />
+          </p:column>
+
+          <p:column sortBy="#{dataItem.unit}">
+            <f:facet name="header">#{lic_msg.unit}</f:facet>
+            <h:outputText value="#{dataItem.unit}" />
+          </p:column>
+
+          <p:column sortBy="#{dataItem.unitCount}">
+            <f:facet name="header">#{lic_msg.used}</f:facet>
+            <h:outputText value="#{dataItem.unitCount}" />
+          </p:column>
+
+          <p:column sortBy="#{dataItem.createDate}">
+            <f:facet name="header">#{lic_msg.create_date}</f:facet>
+            <h:outputText value="#{dataItem.createDate}" />
+          </p:column>
+
+          <p:column sortBy="#{dataItem.updateDate}">
+            <f:facet name="header">#{lic_msg.last_update}</f:facet>
+            <h:outputText value="#{dataItem.updateDate}" />
+          </p:column>
+
+        </p:dataTable>
+
+        <p:spacer height="8" />
+
+      </p:panel>
+    </h:form>
+  </f:view>
+</body>
+</html>

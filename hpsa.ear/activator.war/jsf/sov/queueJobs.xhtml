@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+  <p:contextMenu for="queueJobsTable#{queueName}">
+    <p:menuitem value="Interact with Job" icon="ui-icon ui-icon-person"
+      actionListener="#{SOV_SpecificQueueBean.interact}" update="queueJobsInteractDialog#{queueName}"
+      oncomplete="PF('interactDialog#{queueName}').show();" />
+    <p:menuitem value="Stop Job" actionListener="#{SOV_SpecificQueueBean.stopJob}"
+      onclick="if (!confirm('#{SOV_SpecificQueueBean.msgStopJob}' + sovQueueJobsTableVar.selection)) return false;"
+      rendered="#{SOV_JobAction.admin}" icon="ui-icon ui-icon-stop"
+      update="queueJobsTable#{queueName}, :servicesQueryForm:sovGrowl" />
+    <p:menuitem value="Stop Job (Forced)" actionListener="#{SOV_SpecificQueueBean.stopJobForced}"
+      onclick="if (!confirm('#{SOV_SpecificQueueBean.msgStopJobForced}' + sovQueueJobsTableVar.selection)) return false;"
+      rendered="#{SOV_JobAction.admin}" icon="ui-icon ui-icon-stop"
+      update="queueJobsTable#{queueName}, :servicesQueryForm:sovGrowl" />
+    <p:menuitem value="Change Roles" rendered="#{SOV_JobAction.roleChangeEnabled}"
+      onclick="return changeRoles(sovQueueJobsTableVar.selection, 'RunningJobs');" icon="ui-icon ui-icon-refresh" />
+    <p:menuitem value="Change Priority" rendered="#{SOV_JobAction.admin}"
+      onclick="return changePriority(sovQueueJobsTableVar.selection);" icon="ui-icon ui-icon-refresh" />
+  </p:contextMenu>
+
+  <p:dataTable id="queueJobsTable#{queueName}" selectionMode="single" var="row" rowKey="#{row.id}"
+    value="#{SOV_SpecificQueueBean.values}" resizableColumns="false" selection="#{SOV_SpecificQueueBean.selectedRow}"
+    widgetVar="sovQueueJobsTableVar">
+    <p:columns columnIndexVar="colIndex" id="#{row.data[colIndex]}_#{colIndex}" value="#{SOV_SpecificQueueBean.columns}"
+      var="col">
+      <f:facet name="header">
+        <h:outputText value="#{col.name}" />
+      </f:facet>
+      <h:outputText value="#{row.data[colIndex]}" />
+    </p:columns>
+  </p:dataTable>
+
+  <p:remoteCommand id="jobsRemoteCmdId#{queueName}" name="jobsRemoteCmd#{queueName}"
+    onstart="return interactWithJob('#{SOV_InteractBean.queue}', '#{SOV_InteractBean.jobId}', '#{SOV_InteractBean.interactionType}', '');"></p:remoteCommand>
+
+  <p:dialog header="Interact with Job" widgetVar="interactDialog#{queueName}" width="330" modal="false">
+    <h:panelGrid id="queueJobsInteractDialog#{queueName}" columns="3" padding="8">
+      <h:outputText value="Interact with job ID #{SOV_InteractBean.jobId}" />
+      <p:button value="#{sov_msg.sov_ok}"
+        onclick="PF('interactDialog#{queueName}').hide(); return interactWithJob('#{SOV_InteractBean.queue}', '#{SOV_InteractBean.jobId}', '#{SOV_InteractBean.interactionType}', '');" />
+      <p:button value="#{sov_msg.sov_cancel}"
+        onclick="PF('interactDialog#{queueName}').hide();" />
+    </h:panelGrid>
+  </p:dialog>
+
+</ui:composition>

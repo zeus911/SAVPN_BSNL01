@@ -1,0 +1,144 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:util="http://java.sun.com/jsf/composite/components/util">
+
+<p:growl id="usrgrowl" showDetail="true"/>
+
+<p:dialog id="dlgmodusr" widgetVar="dlgmodusr" showEffect="fade" hideEffect="fade" modal="true" width="500" draggable="false" resizable="false" >
+  <f:facet name="header">
+    <h:outputText id="dlgmodusrhdr" value="#{userManager.title}" />
+  </f:facet>
+  <p:panelGrid id="usrdg" cellpadding="0" style="width:100%; text-align:left;" styleClass="datagrid">
+    <p:row>
+    <p:column>
+    <h:outputText value="#{userrb.user_name}:" />
+    </p:column>
+    <p:column colspan="2">
+    <h:outputText value="#{userManager.username}" rendered="#{userManager.isUserNameReadOnly}" />
+    <h:inputText value="#{userManager.username}" label="#{userrb.username}" style="width:100%" rendered="#{!userManager.isUserNameReadOnly}" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{userrb.password}:" />
+    </p:column>
+    <p:column colspan="2">
+    <h:inputSecret value="#{userManager.password}" label="#{userrb.password}" style="width:100%" maxlength="24" redisplay="true" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{userrb.password_confirm}:" />
+    </p:column>
+    <p:column colspan="2">
+    <h:inputSecret value="#{userManager.passwordConfirm}" label="#{userrb.password_confirm}" style="width:100%" maxlength="24" redisplay="true" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{userrb.description}:" />
+    </p:column>
+    <p:column colspan="2">
+    <h:inputText value="#{userManager.description}" label="#{userrb.description}" style="width:100%" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{userrb.real_name}:" />
+    </p:column>
+    <p:column colspan="2">
+    <h:inputText value="#{userManager.realName}" label="#{userrb.real_name}" style="width:100%" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{userrb.company}:" />
+    </p:column>
+    <p:column colspan="2">
+    <h:inputText value="#{userManager.company}" label="#{userrb.company}" style="width:100%" />
+    </p:column>
+    </p:row>
+    <p:row rendered="#{userManager.isTeamAllowed}">
+    <p:column>
+    <h:outputText value="#{userrb.team}:" />
+    </p:column>
+    <p:column colspan="2">
+    <h:selectOneMenu value="#{userManager.team}" label="#{userrb.team}" style="width:100%" >
+      <f:selectItems value="#{userManager.teams}" />
+    </h:selectOneMenu>
+    </p:column>
+    </p:row>
+    <p:row rendered="#{userManager.isTeamAllowed}">
+    <p:column>
+    <h:outputText value="#{userrb.team_administrator}:" />
+    </p:column>
+    <p:column colspan="2">
+    <h:selectOneRadio styleClass="datagrid" value="#{userManager.teamAdministrator}" label="#{userrb.team_administrator}">
+      <f:selectItem itemLabel="#{userrb.no}" itemValue="false" />
+      <f:selectItem itemLabel="#{userrb.yes}" itemValue="true" />
+    </h:selectOneRadio>
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{userrb.first_time_login}:" />
+    </p:column>
+    <p:column colspan="2">
+    <h:selectOneRadio styleClass="datagrid" value="#{userManager.firstTimeLogin}" label="#{userrb.first_time_login}" title="#{userrb.first_time_login_dsc}">
+      <f:selectItem itemLabel="#{userrb.no}" itemValue="false" />
+      <f:selectItem itemLabel="#{userrb.yes}" itemValue="true" />
+    </h:selectOneRadio>
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{userrb.never_expire}:" />
+    </p:column>
+    <p:column colspan="2">
+    <h:selectOneRadio styleClass="datagrid" value="#{userManager.passwordNeverExpire}" label="#{userrb.never_expire}" title="#{userrb.never_expire_dsc}">
+      <f:selectItem itemLabel="#{userrb.no}" itemValue="false" />
+      <f:selectItem itemLabel="#{userrb.yes}" itemValue="true" />
+    </h:selectOneRadio>
+    </p:column>
+    </p:row>
+  </p:panelGrid>
+  <p:commandButton value="#{userrb.ok}" type="submit" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      update="usrgrowl,user_op_result" actionListener="#{userManager.save}"
+      partialSubmit="true" process="dlgmodusr" oncomplete="onsaveduser();"/>
+  <p:commandButton value="#{userrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgmodusr').hide();"/>
+  <h:inputHidden id="user_op_result" value="#{userManager.userOperationResult}" />
+  <script>
+  function onsaveduser() {
+    var inputs = document.getElementsByTagName("input");
+    var h = null;
+    if (inputs != null) {
+      for (var i = 0; i &lt; inputs.length &amp;&amp; h == null; i++) {
+        h = inputs[i];
+        if (h.id == null || h.id.indexOf("user_op_result") &lt; 0) {
+          h = null;
+        }
+      }
+    }
+    if (h != null &amp;&amp; (h.value == null || h.value == "")) {
+      PF('dlgmodusr').hide();
+      resume(); // remote command defined in umm.xhtml
+    }
+  }
+  </script>
+  <p:remoteCommand name="createUser" update="dlgmodusrhdr,usrdg" oncomplete="PF('dlgmodusr').show();">
+    <f:setPropertyActionListener value="#{username}" target="#{userManager.createUser}" />
+  </p:remoteCommand>
+  <p:remoteCommand name="modifyUser" update="dlgmodusrhdr,usrdg" oncomplete="PF('dlgmodusr').show();">
+    <f:setPropertyActionListener value="#{username}" target="#{userManager.modifyUser}" />
+  </p:remoteCommand>
+  <p:remoteCommand name="copyUser" update="dlgmodusrhdr,usrdg" oncomplete="PF('dlgmodusr').show();">
+    <f:setPropertyActionListener value="#{username}" target="#{userManager.copyUser}" />
+  </p:remoteCommand>
+</p:dialog>
+
+</ui:composition>

@@ -1,0 +1,14 @@
+-- Deployment and table moved to SA
+--insert into CRM_RL (Name, Description, ValueOrder, ISPARENT__) values ('100K', '100 Kb/sec.', 0, 0);
+--insert into CRM_RL (Name, Description, ValueOrder, ISPARENT__) values ('200K', '200 Kb/sec.', 1, 0);
+--insert into CRM_RL (Name, Description, ValueOrder, ISPARENT__) values ('500K', '500 Kb/sec.', 2, 0);
+--insert into CRM_RL (Name, Description, ValueOrder, ISPARENT__) values ('1M',   '1 Mb/sec.',   3, 0);
+--insert into CRM_RL (Name, Description, ValueOrder, ISPARENT__) values ('2M',   '2 Mb/sec.',   4, 0);
+--insert into CRM_RL (Name, Description, ValueOrder, ISPARENT__) values ('3M',   '3 Mb/sec.',   5, 0);
+--insert into CRM_RL (Name, Description, ValueOrder, ISPARENT__) values ('5M',   '5 Mb/sec.',   6, 0);
+--insert into CRM_RL (Name, Description, ValueOrder, ISPARENT__) values ('10M',  '10 Mb/sec.',  7, 0);
+--insert into CRM_RL (Name, Description, ValueOrder, ISPARENT__) values ('15M',  '15 Mb/sec.',  8, 0);
+--insert into CRM_RL (Name, Description, ValueOrder, ISPARENT__) values ('20M',  '20 Mb/sec.',  9, 0);
+--insert into CRM_RL (Name, Description, ValueOrder, ISPARENT__) values ('50M',  '50 Mb/sec.',  10, 0);
+--insert into CRM_RL (Name, Description, ValueOrder, ISPARENT__) values ('100M', '100 Mb/sec.', 11, 0);
+

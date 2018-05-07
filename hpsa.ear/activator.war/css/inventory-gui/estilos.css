@@ -1,0 +1,408 @@
+html {
+  font-family: Verdana, Helvetica, Arial, Sans-serif;
+}
+
+.menu {
+	position : absolute;
+	top : 0px;
+	left : 0px;
+	width : 1024px;
+}
+.menuBar {
+	position: absolute;
+	top : 0px;
+	left : 0px;
+	height : 24px;
+	background-color : /*c:sabl*/#0096d6;
+	width : auto ;
+	border-top-style : solid;
+	border-top-width : medium;
+	border-top-color : /*c:sabl*/#0096d6;
+}
+.menuBarInfo {
+	position: absolute;
+	top : 101px;
+	left : 0px;
+	height : 24px;
+	width : 1024px;
+}
+.menuButtons {
+	position: absolute;
+	top : 4px;
+	left : 0px;
+}
+.menuButtonA {
+	position : relative;
+	top : 0px;
+	left : 0px;
+	background-color : /*c:sabl*/#0096d6;
+	height : 20px;
+	border-right-color : /*c:sabl*/#0096d6;
+	border-right-style : solid;
+	border-right-width : 1px;
+	padding-top: 2px;
+	padding-right : 10px;
+	padding-left : 5px;
+	font-size : 13px;
+	color : /*c:whit*/#ffffff;
+	cursor : default;
+}
+.menuButtonB {
+	position : relative;
+	top : 0px;
+	left : 0px;
+	background-color : /*c:ltgy*/#e5e8e8;
+	height : 20px;
+	border-right-color : /*c:sabl*/#0096d6;
+	border-right-style : solid;
+	border-right-width : 1px;
+	padding-top: 2px;
+	padding-right : 10px;
+	padding-left : 5px;
+	font-size : 13px;
+	color : /*c:blck*/#000000;
+	cursor : default;
+}
+.popupMenu {
+	position : absolute;
+	top : 20px;
+	left : -1px;
+	width : 200px;
+	background-color : /*c:whit*/#ffffff;
+	padding-top: 0px;
+	padding-right : 10px;
+	padding-left : 5px;
+	padding-bottom : 0px;
+	visibility : hidden;
+	border-bottom-style : groove;
+	border-bottom-color : /*c:mdgy*/#b9b8bb;
+	border-bottom-width : 3px;
+	border-right-color : /*c:mdgy*/#b9b8bb;
+	border-right-style : groove;
+	border-right-width : 3px;
+	border-left-color : /*c:mdgy*/#b9b8bb;
+	border-left-style : solid;
+	border-left-width : 1px;
+ }
+.popupMenu2 {
+	position : absolute;
+	top : 1px;
+	left : 200px;
+	width : 200px;
+	background-color : /*c:whit*/#ffffff;
+	padding-top: 0px;
+	padding-right : 10px;
+	padding-left : 5px;
+	padding-bottom : 0px;
+	visibility : hidden;
+	border-bottom-style : groove;
+	border-bottom-color : /*c:mdgy*/#b9b8bb;
+	border-bottom-width : 3px;
+	border-right-color : /*c:mdgy*/#b9b8bb;
+	border-right-style : groove;
+	border-right-width : 3px;
+	border-left-color : /*c:mdgy*/#b9b8bb;
+	border-left-style : solid;
+	border-left-width : 1px;
+	border-top-color : /*c:mdgy*/#b9b8bb;
+	border-top-style : solid;
+	border-top-width : 1px;
+}
+.menuInfo {
+	position: absolute;
+	top : 24px;
+	left : 0px;
+	background-color : /*c:ltgy*/#e5e8e8;
+	width : 1024px;
+	height : 112px;
+	text-align : left;
+	overflow : hidden;
+}
+.menuInfoExt {
+	position: absolute;
+	top : 35px;
+	left : 0px;
+	background-color : /*c:ltgy*/#e5e8e8;
+	width : 1024px;
+	text-align : left;
+}
+.infoExt {
+	position: absolute;
+	top : 24px;
+	left : 0px;
+	background-color : /*c:ltgy*/#e5e8e8;
+	width : 1024px;
+	height : 80px;
+	overflow : hidden;
+	text-align : left;
+}
+.sCentrado {
+	position : relative;
+	text-align : center;
+	width: auto;
+}
+.bloque {
+	position : relative;
+	text-align : left;
+	/**width:200; 
+	height:80; */
+}
+.bloqueCentrado {
+	position : absolute;
+	text-align : center;
+	width: 1024px;
+	left : 0px;
+	top : 0px;
+	border : 2px;
+}
+.blockdeg {
+	position : relative;
+	top : 0;
+	left : 0;
+	/** width:200;
+	height:50; */
+}
+
+.separador {
+	position : relative;
+	height : 3px;
+	background-color : /*c:sabl*/#0096d6;
+}
+
+.sjsp {
+	position : absolute;
+	top : 135px;
+	left : 0px;
+}
+
+#flyingMenu {
+	position : absolute;
+	top : 0px;
+	left : 0px;
+	background-color : /*c:whit*/#ffffff;
+	padding-top: 2px;
+	padding-right : 10px;
+	padding-left : 5px;
+	visibility : hidden;
+	border-bottom-style : groove;
+	border-bottom-color : /*c:mdgy*/#b9b8bb;
+	border-bottom-width : 3px;
+	border-right-color : /*c:mdgy*/#b9b8bb;
+	border-right-style : groove;
+	border-right-width : 3px;
+	border-left-color : /*c:mdgy*/#b9b8bb;
+	border-left-style : solid;
+	border-left-width : 1px;
+	border-top-color : /*c:mdgy*/#b9b8bb;
+	border-top-style : solid;
+	border-top-width : 1px;
+}
+
+.confirmationMenu {
+	position : absolute;
+	top : 100px;
+	left : auto;
+	width : 300px;
+	height: 100px;
+	background-color : /*c:whit*/#ffffff;
+	padding-top: 2px;
+	padding-right : 10px;
+	padding-left : 5px;
+	visibility : hidden;
+	text-align : center;
+	text-align: -moz-center !important;
+	border-bottom-style : groove;
+	border-bottom-color : /*c:mdgy*/#b9b8bb;
+	border-bottom-width : 3px;
+	border-right-color : /*c:mdgy*/#b9b8bb;
+	border-right-style : groove;
+	border-right-width : 3px;
+	border-left-color : /*c:mdgy*/#b9b8bb;
+	border-left-style : solid;
+	border-left-width : 1px;
+	border-top-color : /*c:mdgy*/#b9b8bb;
+	border-top-style : solid;
+	border-top-width : 1px;
+}
+
+.buttonA {
+	position : relative;
+	top : -1px;
+	background-color : /*c:sabl*/#0096d6;
+	border : double /*c:ltgy*/#e5e8e8;
+	font-size : 13px;
+	text-align : center;
+	padding-left : 2px;
+	padding-right : 2px;
+	color : /*c:whit*/#ffffff;
+	cursor : pointer ;
+}
+.button {
+	position : relative;
+	top : 1px;
+	width : 12px;
+	height : 13px;
+	overflow : hidden;
+	cursor : pointer;
+	margin-left : 5px;
+}
+.button2 {
+	position : absolute;
+	top : 1px;
+	left : 0px;
+	width : 12px;
+	height : 13px;
+	overflow : hidden;
+	cursor : pointer;
+	margin-left : 55px;
+}
+.searchButton {
+	position : absolute;
+	top : 75px;
+	left : auto;
+	width : 150px;
+	height : 30px;
+	text-align : center;
+}
+
+.popupMenuTextA {
+	font-size : 13px;
+	color : /*c:blck*/#000000;
+	cursor : pointer;
+	margin-top : 2px;
+	margin-bottom : 0px;
+}
+.popupMenuTextB {
+	font-size : 13px;
+	color : /*c:sabl*/#0096d6;
+	text-decoration : underline;
+	cursor : pointer;
+	margin-top : 2px;
+	margin-bottom : 0px;
+	background-color : transparent;
+}
+
+.p1 {
+	font-size : 13px;
+	margin-top : 2px;
+	margin-bottom : 2px;
+}
+.p2 {
+	font-size : 12px;
+	margin-top : 1px;
+	margin-bottom : 0px;
+	font-weight : bold;
+}
+.p3 {
+	font-size : 10px;
+	color : /*c:sabl*/#0096d6;
+	margin-top : 0px;
+	margin-bottom : 0px;
+	font-weight : bold;
+}
+.p4 {
+	font-size : 10px;
+	color : /*c:sabl*/#0096d6;
+	margin-top : 0px;
+	margin-bottom : 0px;
+	position : absolute;
+	top : 0px;
+	vertical-align : middle;
+}
+.p5 {
+	font-size : 13px;
+	color : /*c:sabl*/#0096d6;
+	margin-top : 2px;
+	margin-bottom : 0px;
+}
+
+#logohp {
+	position : absolute;
+	top : 0px;
+	left : auto;
+	width : 50px;
+	height : 24px;
+}
+
+input {
+	border : 1px solid /*c:sabl*/#0096d6;
+	height : 22px;
+}
+button {
+	position : relative;
+	top : 0;
+	left:0;
+	background-color : /*c:sabl*/#0096d6;
+	border : double /*c:sabl*/#0096d6;
+	font-size : 12px;
+	text-align : center;
+	padding-left : 2px;
+	padding-right : 2px;
+	color : /*c:whit*/#ffffff;
+	cursor : pointer;
+	overflow-y:auto; 
+	text-align:center;
+}
+
+.tabSelected{
+  background: /*c:sabl*/#0096d6;    
+  font-size: 10pt;
+  padding: 2px 2px 2px 2px;
+  color: /*c:whit*/#ffffff;
+  cursor: pointer;
+  border-top: 1px solid /*c:sabl*/#0096d6;
+  border-right: 3px solid /*c:sabl*/#0096d6;
+  border-left: 1px solid /*c:sabl*/#0096d6;
+}
+
+.tabUnSelected{
+  background: /*c:mdgy*/#b9b8bb;
+  font-size: 10pt;
+  color: /*c:whit*/#ffffff;
+  padding: 1px 2px;
+  cursor: pointer;
+  border-top: 1px solid /*c:mdgy*/#b9b8bb;
+  border-right: 3px solid /*c:mdgy*/#b9b8bb;
+  border-left: 1px solid /*c:mdgy*/#b9b8bb;
+}
+
+.tabMouseOver  {
+  background:  /*c:ltgy*/#e5e8e8;
+  font-size: 8pt;
+  color: /*c:sabl*/#0096d6;
+  padding: 1px 2px;
+  cursor: pointer;         
+  border-top: 3px solid /*c:dkgy*/#767676
+  border-right: 3px solid /*c:dkgy*/#767676
+  border-left: 3px solid /*c:dkgy*/#767676
+}
+
+.hpsa_alert {
+  font-size:12pt;
+}
+.hpsa_alert .overglass
+{
+  background:/*c:mdgy*/#b9b8bb;
+  opacity:0.1;
+}
+.hpsa_alert .box
+{
+  background:/*c:whit*/#ffffff;
+  border:1px solid #006699; /* Hover blue */
+  box-shadow:5px 5px 5px /*c:dkgy*/#767676
+}
+.hpsa_alert .header
+{
+  background:/*c:sabl*/#0096d6;
+  color:/*c:whit*/#ffffff;
+}
+.hpsa_alert .message
+{
+  font-size:11pt;
+  text-align:center;
+}
+.hpsa_alert .btn
+{
+  background:/*c:sabl*/#0096d6;
+  color:/*c:whit*/#ffffff;
+}

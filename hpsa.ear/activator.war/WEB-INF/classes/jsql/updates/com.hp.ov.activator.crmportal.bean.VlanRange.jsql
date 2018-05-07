@@ -1,0 +1,9 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+UPDATE
+  V_VlanRange
+SET
+  EndValue = ?, Description = ?
+WHERE
+  Usage = ? AND Allocation = ? AND StartValue = ? AND Region = ?
+

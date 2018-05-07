@@ -1,0 +1,22 @@
+<facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://java.sun.com/xml/ns/javaee"
+                version="2.0">
+
+  <namespace>http://www.hp.com/xmaps/facelets</namespace>
+
+  <tag>
+    <tag-name>draw</tag-name>
+    <component>
+      <component-type>draw</component-type>
+    </component>
+  </tag>
+
+  <tag>
+    <tag-name>update</tag-name>
+    <component>
+      <component-type>update</component-type>
+    </component>
+  </tag>
+
+</facelet-taglib>

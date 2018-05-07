@@ -1,0 +1,69 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+  <title>HP Service Activator Job Counters</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" href="../../css/saNavigation.css" />
+  <script type="text/javascript" src="/activator/javascript/saUtilities.js" />
+  <script type="text/javascript">
+  if (window.A4J) {
+    A4J.AJAX.onExpired = function(loc, expiredMsg) {
+      window.alert("Session timed out... Redirecting to the login page");
+      if (self != top) {
+        if (top != null) {
+          top.location.href = "/activator/jsp/login.jsp";
+        }
+      }
+    }
+  }
+  </script>
+</h:head>
+<body onmousemove="logoutTimerReset();" onkeydown="logoutTimerReset();" style="margin:0px; padding:0px; overflow:hidden;">
+  <f:view>
+    <h:form>
+      <div style="text-align:center;">
+        <div class="separator" />
+        <table class="counterTable" style="width:95%; position:relative; top:0px; left:2px;">
+          <tr>
+            <td class="counterTable" style="width:130px;"><h:outputText value="#{misc_msg.jc_total}" />:</td>
+            <td class="counterTableNumber"><h:outputText value="#{Misc_NodesInformationBean.totalJobsCount}"
+                id="jobCountTotal" /></td>
+          </tr>
+          <tr>
+            <td class="counterTable" style="width:130px;"><h:outputText value="#{misc_msg.jc_activating}" />:</td>
+            <td class="counterTableNumber"><h:outputText value="#{Misc_NodesInformationBean.activationJobsCount}"
+                id="jobCountAct" /></td>
+          </tr>
+          <tr>
+            <td class="counterTable" style="width:130px;"><h:outputText value="#{misc_msg.jc_waiting}" />:</td>
+            <td class="counterTableNumber"><h:outputText value="#{Misc_NodesInformationBean.waitingJobsCount}"
+                id="jobCountWait" /></td>
+          </tr>
+          <tr>
+            <td class="counterTable" style="width:130px;"><h:outputText value="#{misc_msg.jc_scheduled}" />:</td>
+            <td class="counterTableNumber"><h:outputText value="#{Misc_NodesInformationBean.scheduledJobsCount}"
+                id="jobCountSched" /></td>
+          </tr>
+        </table>
+        <div class="separator"></div>
+        <table class="counterTable" style="width:95%; position:relative; top:0px; left:2px;">
+          <tr>
+            <td class="counterTable"><h:outputText value="#{misc_msg.jc_status}" />:</td>
+            <td class="counterTableNumber"><h:graphicImage alt=""
+                title="#{Misc_MessagesInformationBean.messageDescription}"
+                value="#{Misc_MessagesInformationBean.messageImageUrl}" id="messagesImage" /> <h:graphicImage alt=""
+                value="/images/1x1.gif" width="6" /> <h:graphicImage alt=""
+                title="#{Misc_NodesInformationBean.statusDescription}"
+                value="#{Misc_NodesInformationBean.statusImageUrl}" id="nodeStatusImage" /></td>
+          </tr>
+        </table>
+      </div>
+      <p:poll id="poll" interval="#{Misc_NodesInformationBean.refreshInterval}"
+        update="poll,jobCountTotal,jobCountAct,jobCountWait,jobCountSched,nodeStatusImage,messagesImage" />
+    </h:form>
+  </f:view>
+</body>
+
+</html>

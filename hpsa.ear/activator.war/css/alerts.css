@@ -1,0 +1,28 @@
+html {
+  font-family: Verdana, Helvetica, Arial, Sans-serif;
+}
+
+.hpsa_alert {
+  font-size: 12pt;
+}
+
+.hpsa_alert .overglass {
+  background: /*c:gy20*/ #cccccc;
+  opacity: 0.1;
+}
+
+.hpsa_alert .box {
+  background: /*c:whit*/ #ffffff;
+  border: 1px solid /*c:sahb*/ #006699;
+  box-shadow: 5px 5px 5px /*c:dkgy*/ #767676;
+}
+
+.hpsa_alert .header,.hpsa_alert .btn {
+  background: /*c:sabl*/ #0096d6;
+  color: /*c:whit*/ #ffffff;
+}
+
+.hpsa_alert .message {
+  font-size: 11pt;
+  text-align: center;
+}

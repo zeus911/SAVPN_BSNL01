@@ -1,0 +1,42 @@
+# **************************************************************
+# Variables specifying locations for CRM Portal
+# **************************************************************
+# 
+# 
+AWK=awk
+
+ACTIVATOR_OPT=/opt/OV/ServiceActivator
+
+ACTIVATOR_VAR_LOG=/var/opt/OV/ServiceActivator/log/PSAW001.bsnl.co.in
+ACTIVATOR_VAR_TMP=/var/opt/OV/ServiceActivator/tmp
+
+ACTIVATOR_WEB_XML_DIR=/activator.war/WEB-INF/
+ACTIVATOR_WEB_XML=/activator.war/WEB-INF/web.xml
+
+JBOSS_HOME=/opt/HP/jboss
+
+CRM_HOME=/opt/HP/jboss/standalone/deployments/crm.ear/crm.war
+PORTAL_WEB_XML_TEMPLATE=/opt/HP/jboss/standalone/deployments/crm.ear/crm.war/WEB-INF/config/web.xml.template
+PORTAL_WEB_XML=/opt/HP/jboss/standalone/deployments/crm.ear/crm.war/WEB-INF/web.xml
+
+DB_CONFIG_FILE=/opt/HP/jboss/standalone/configuration/standalone.xml
+PORTAL_BIN=/opt/HP/jboss/standalone/deployments/crm.ear/crm.war/WEB-INF/bin
+PORTAL_CONFIG=/opt/HP/jboss/standalone/deployments/crm.ear/crm.war/WEB-INF/config
+
+#20040311 GKA&RTA : Added new variable to load DB connection parameters 
+#from SA dbConnect.cfg file by the default
+
+MWFM_XML=/etc/opt/OV/ServiceActivator/config/mwfm.xml
+
+JAVA_HOME=/usr/java/jdk1.7.0_80/
+SOLUTION=/opt/OV/ServiceActivator/solutions/SAVPN
+
+ACTIVATOR_DB_VENDOR=Oracle
+
+JBOSS_EAR_LIB=/opt/HP/jboss/standalone/deployments/hpsa.ear/lib
+JBOSS_STANDALONE_CONF=/opt/HP/jboss/bin/standalone.conf
+JBOSS_DEPLOY=/opt/HP/jboss/standalone/deployments
+
+JBOSS_LOGIN_CONFIG_FILE=/opt/HP/jboss/standalone/configuration/standalone.xml
+export ACTIVATOR_VAR_LOG ACTIVATOR_WEB_XML_DIR ACTIVATOR_DB_VENDOR ACTIVATOR_WEB_XML PORTAL_WEB_XML_TEMPLATE PORTAL_WEB_XML JBOSS_HOME DB_CONFIG_FILE JAVA_HOME PORTAL_BIN PORTAL_CONFIG SOLUTION JBOSS_LOGIN_CONFIG_FILE JBOSS_EAR_LIB JBOSS_STANDALONE_CONF JBOSS_DEPLOY
+

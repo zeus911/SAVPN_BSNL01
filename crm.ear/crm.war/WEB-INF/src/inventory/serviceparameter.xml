@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE Bean SYSTEM "bean.dtd">
+<!--
+###############################################################################
+#
+#    (c) Copyright 2003-2010 Hewlett-Packard Development Company, L.P.
+#
+###############################################################################
+
+###############################################################################
+#
+# $Source: /tmp/vpn/SA_VPN_SP/jboss/server/default/deploy/crmportal.sar/crm.war/WEB-INF/src/inventory/serviceparameter.xml,v $
+# $Revision: 1.9 $
+# $Date: 2010-10-05 14:19:04 $
+# $Author: shiva $
+#
+###############################################################################
+#
+# <Description> 
+#
+###############################################################################
+-->
+
+
+<Bean>
+  <Name>ServiceParameter</Name>
+  <Solution>CRM</Solution>
+  <ConstraintName>crm_serviceparam</ConstraintName>
+  <Package>com.hp.ov.activator.crmportal.bean</Package>
+  <DBTable>crm_serviceparam</DBTable>
+  <DBAlias>crm_serviceparam</DBAlias>
+  <Fields>
+     <Field update ="false">
+        <Name>ServiceId</Name>
+        <Type>String</Type>
+        <Description>Unique service identifier for the parent service</Description>
+     </Field>
+     <Field update ="false">
+        <Name>Attribute</Name>
+        <Type>String</Type>
+        <Description>The name of the attribute or parameter</Description>
+     </Field>
+     <Field mandatory="false">
+        <Name>Value</Name>
+        <Type>String(4000)</Type>
+        <Description>The value of the attribute or parameter</Description>
+     </Field>
+  </Fields>
+
+  <Keys>
+    <Key pk="true">
+      <KeyField>ServiceId</KeyField>
+      <KeyField>Attribute</KeyField>
+    </Key>
+    <Key foreignBean="Service">
+      <KeyField foreignField="ServiceId">ServiceId</KeyField>
+    </Key>
+  </Keys>
+
+  <!-- These are the operations to generate for this bean -->
+  <Operations>
+    <Store/>
+    <Update/>
+    <Remove/>
+
+    <!-- findAll method -->
+    <FindBy>
+      <OrderField>ServiceId</OrderField>
+    </FindBy>
+  </Operations>
+</Bean>
+

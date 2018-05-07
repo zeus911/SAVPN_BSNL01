@@ -1,0 +1,9 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+UPDATE
+  CR_Location
+SET
+  Description = ?, Region = ?
+WHERE
+  Name = ?
+

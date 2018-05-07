@@ -1,0 +1,124 @@
+// Automatically generated code
+// HP Service Activator InventoryBuilder V51-1A.
+//
+// (c) Copyright 2010 Hewlett-Packard Development Company, L.P.
+package com.hp.ov.activator.vpn.inventory;
+
+import com.hp.ov.activator.inventorybuilder.data.*;
+
+import java.io.Serializable;
+
+import java.sql.*;
+
+import java.util.*;
+
+import com.hp.ov.activator.vpn.IPAddressHelper.IPAddressHelper;
+
+// imported for giving preference against java.sql.Date
+import java.util.Date;
+
+
+public class IPNetExt extends IPNet_ {
+   
+	
+	private static final String IP_ADDRESS_TYPE = "IPNET";
+	private String ipNetAddr;
+	
+	 // ****************************** Constructors *********************************** //
+	
+    /**
+     * Default constructor.
+     */
+    public IPNetExt() {
+        super();
+    }
+
+    /**
+     * Constructor
+     * TODO generate the params.
+     */
+    public IPNetExt(String _iPNetAddr, String _pE1_IPAddr, String _cE1_IPAddr,
+        String _pE2_IPAddr, String _cE2_IPAddr, String _netmask,
+        String _hostmask, String _poolName, String _iPNetAddrStr,
+        String _parentIPNetAddr, String _startAddress, String _numberOfEntries,
+        String _addressFamily) {
+        super(_iPNetAddr, _pE1_IPAddr, _cE1_IPAddr, _pE2_IPAddr, _cE2_IPAddr,
+            _netmask, _hostmask, _poolName, _iPNetAddrStr, _parentIPNetAddr,
+            _startAddress, _numberOfEntries, _addressFamily);
+    }
+
+    /**
+    * Constructor with only store fields (there are non store fields) .
+    **/
+    public IPNetExt(String _iPNetAddr, String _pE1_IPAddr, String _cE1_IPAddr,
+        String _pE2_IPAddr, String _cE2_IPAddr, String _netmask,
+        String _hostmask, String _poolName, String _iPNetAddrStr) {
+        super(_iPNetAddr, _pE1_IPAddr, _cE1_IPAddr, _pE2_IPAddr, _cE2_IPAddr,
+            _netmask, _hostmask, _poolName, _iPNetAddrStr);
+    }
+
+    // **************************** inner classes *********************************** //
+
+    /**
+     * Bean used to search.
+     */
+    public class SearchBean extends IPNet_.SearchBean implements Serializable {
+        // ******************* Constructors *********************** //
+
+        /**
+         * Protected constructor, not for the user.
+         * @param size number of fields of the bean
+         */
+        protected SearchBean(int size) {
+            super(size);
+        }
+
+        public SearchBean() {
+            super();
+        }
+    }
+    
+    /**
+	 * Stores the IPNet bean entries in the MAP to the V_IPNet table
+	 * @param con Connection
+	 */
+	public void generateAndStore(Connection con) throws Exception {
+
+		IPAddressHelper ipAddressHelperObj= new IPAddressHelper(AddressFamily, StartAddress, ParentIPNetAddr, NumberOfEntries, PoolName, IP_ADDRESS_TYPE);
+
+		List<Map<String, String>> ipBeanList = ipAddressHelperObj.generateIPAddresses();
+		for(int i =0; i < ipBeanList.size();i++){
+			IPNetExt ipNetBean = new IPNetExt();
+			Map<String, String> ipNetMap = ipBeanList.get(i);
+		
+			ipNetBean.setIpnetaddr(ipNetMap.get("IPNetAddr"));
+			ipNetBean.setPe1_ipaddr(ipNetMap.get("Ce1_ipaddr"));
+			ipNetBean.setCe1_ipaddr(ipNetMap.get("Pe1_ipaddr"));
+			ipNetBean.setPe2_ipaddr(ipNetMap.get("Pe2_ipaddr"));
+			ipNetBean.setCe2_ipaddr(ipNetMap.get("Ce2_ipaddr"));
+			ipNetBean.setNetmask(ipNetMap.get("Netmask"));
+			ipNetBean.setHostmask(ipNetMap.get("Hostmask"));
+			ipNetBean.setIpnetaddrstr(ipNetMap.get("Ipnetaddrstr"));
+			ipNetBean.setPoolname(ipNetMap.get("Poolname"));
+			
+			if(ipNetAddr == null){
+				ipNetAddr = ipNetBean.getIpnetaddr();
+			}
+			ipNetBean.store(con);
+			con.commit();
+
+		}
+	}
+
+
+	/**
+	 * Stores the bean in the DB
+	 * @param con Connection
+	 */
+	public String generateAndStoreIPNet(Connection con) throws Exception {
+
+		generateAndStore(con);
+		return ipNetAddr;
+
+	}
+}

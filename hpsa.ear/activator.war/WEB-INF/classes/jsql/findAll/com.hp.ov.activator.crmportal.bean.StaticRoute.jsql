@@ -1,0 +1,11 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+SELECT
+  crm_staticRoute.StaticRouteAddress		crm_staticRoute_Stat27,
+  crm_staticRoute.AttachmentId		crm_staticRoute_AttachmentId
+FROM
+  crm_staticRoute   crm_staticRoute
+WHERE
+ORDER BY crm_staticRoute.AttachmentId ASC 
+
+

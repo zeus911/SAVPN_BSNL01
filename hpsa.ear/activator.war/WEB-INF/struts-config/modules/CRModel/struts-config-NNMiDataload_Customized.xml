@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="DL_ConfigurationFormExt" 
+			type="com.hp.ov.activator.inventory.NNMiDataload.DL_ConfigurationFormExt"/>
+	</form-beans>
+
+	<action-mappings>
+    <action path="/ValidationCommitDL_NetworkElementAction"
+			type="com.hp.ov.activator.inventory.NNMiDataload.ValidationCommitDL_NetworkElementAction"
+			name="DL_NetworkElementForm" scope="request" validate="false">
+			<forward name="success" path="/../../jsp/inventory/RefreshTree.jsp" />
+			<forward name="failure" path="/../../jsp/inventory/UpdateInstanceFailure.jsp" />
+      <forward name="error" path="/../../jsp/inventory/UpdateInstanceFailure.jsp" />
+	</action>
+    <action path="/RejectionCommitDL_NetworkElementAction"
+      type="com.hp.ov.activator.inventory.NNMiDataload.RejectionCommitDL_NetworkElementAction"
+      name="DL_NetworkElementForm" scope="request" validate="false">
+      <forward name="success" path="/../../jsp/inventory/RefreshTree.jsp" />
+      <forward name="failure" path="/../../jsp/inventory/UpdateInstanceFailure.jsp" />
+      <forward name="error" path="/../../jsp/inventory/CRModel/error.jsp" />
+    </action>
+	<action path="/CompareFormDL_NetworkElementAction"
+      type="com.hp.ov.activator.inventory.NNMiDataload.CompareFormDL_NetworkElementAction"
+      name="DL_NetworkElementForm" scope="request" validate="false">
+      <forward name="success" path="/../../jsp/inventory/CRModel/CompareDL_NetworkElement.jsp" />
+      <forward name="failure" path="/../../jsp/inventory/CRModel/error.jsp" />
+      <forward name="error" path="/../../jsp/inventory/CRModel/error.jsp" />
+      <forward name="not-found" path="/../../jsp/inventory/CRModel/error.jsp" />
+    </action>
+    
+    <action path="/ValidationCommitDL_InterfaceAction"
+      type="com.hp.ov.activator.inventory.NNMiDataload.ValidationCommitDL_InterfaceAction"
+      name="DL_InterfaceForm" scope="request" validate="false">
+      <forward name="success" path="/../../jsp/inventory/RefreshTree.jsp" />
+      <forward name="failure" path="/../../jsp/inventory/UpdateInstanceFailure.jsp" />
+      <forward name="error" path="/../../jsp/inventory/UpdateInstanceFailure.jsp" />
+    </action>
+    <action path="/RejectionCommitDL_InterfaceAction"
+      type="com.hp.ov.activator.inventory.NNMiDataload.RejectionCommitDL_InterfaceAction"
+      name="DL_InterfaceForm" scope="request" validate="false">
+      <forward name="success" path="/../../jsp/inventory/RefreshTree.jsp" />
+      <forward name="failure" path="/../../jsp/inventory/UpdateInstanceFailure.jsp" />
+      <forward name="error" path="/../../jsp/inventory/UpdateInstanceFailure.jsp" />
+    </action>
+	<action path="/CompareFormDL_InterfaceAction"
+      type="com.hp.ov.activator.inventory.NNMiDataload.CompareFormDL_InterfaceAction"
+      name="DL_InterfaceForm" scope="request" validate="false">
+      <forward name="success" path="/../../jsp/inventory/CRModel/CompareDL_Interface.jsp" />
+      <forward name="failure" path="/../../jsp/inventory/CRModel/error.jsp" />
+      <forward name="error" path="/../../jsp/inventory/CRModel/error.jsp" />
+      <forward name="not-found" path="/../../jsp/inventory/CRModel/error.jsp" />
+    </action>
+    
+    <action path="/ValidationCommitDL_LinkAction"
+      type="com.hp.ov.activator.inventory.NNMiDataload.ValidationCommitDL_LinkAction"
+      name="DL_LinkForm" scope="request" validate="false">
+      <forward name="success" path="/../../jsp/inventory/RefreshTree.jsp" />
+      <forward name="failure" path="/../../jsp/inventory/UpdateInstanceFailure.jsp" />
+      <forward name="error" path="/../../jsp/inventory/UpdateInstanceFailure.jsp" />
+    </action>
+    <action path="/RejectionCommitDL_LinkAction"
+      type="com.hp.ov.activator.inventory.NNMiDataload.RejectionCommitDL_LinkAction"
+      name="DL_LinkForm" scope="request" validate="false">
+      <forward name="success" path="/../../jsp/inventory/RefreshTree.jsp" />
+      <forward name="failure" path="/../../jsp/inventory/UpdateInstanceFailure.jsp" />
+      <forward name="error" path="/../../jsp/inventory/UpdateInstanceFailure.jsp" />
+    </action>
+	<action path="/CompareFormDL_LinkAction"
+      type="com.hp.ov.activator.inventory.NNMiDataload.CompareFormDL_LinkAction"
+      name="DL_LinkForm" scope="request" validate="false">
+      <forward name="success" path="/../../jsp/inventory/CRModel/CompareDL_Link.jsp" />
+	  <forward name="compare_3_links" path="/../../jsp/inventory/CRModel/Compare3DL_Link.jsp" />
+      <forward name="failure" path="/../../jsp/inventory/CRModel/error.jsp" />
+      <forward name="error" path="/../../jsp/inventory/CRModel/error.jsp" />
+      <forward name="not-found" path="/../../jsp/inventory/CRModel/error.jsp" />
+    </action>
+	
+	<action path="/UpdateFormDL_ConfigurationActionExt"
+      type="com.hp.ov.activator.inventory.NNMiDataload.UpdateFormDL_ConfigurationActionExt"
+      name="DL_ConfigurationFormExt" scope="request" validate="false">
+      <forward name="success" path="/../../jsp/inventory/CRModel/UpdateDL_ConfigurationExt.jsp" />
+	  <forward name="failure" path="/../../jsp/inventory/UpdateInstanceFailure.jsp" />
+      <forward name="error" path="/../../jsp/inventory/UpdateInstanceFailure.jsp" />
+    </action>
+	<action path="/UpdateCommitDL_ConfigurationActionExt"
+      type="com.hp.ov.activator.inventory.NNMiDataload.UpdateCommitDL_ConfigurationActionExt"
+      name="DL_ConfigurationFormExt" scope="request" validate="true" input="error">
+      <forward name="success" path="/UpdateCommitDL_ConfigurationAction.do" />
+	  <forward name="error" path="/../../jsp/inventory/CRModel/UpdateDL_ConfigurationExt.jsp" />
+	  <forward name="failure" path="/../../jsp/inventory/CRModel/UpdateDL_ConfigurationExt.jsp" />
+    </action>
+	<action path="/ViewFormDL_ConfigurationActionExt"
+	  forward="/UpdateFormDL_ConfigurationActionExt.do?readonly=true"
+	  name="DL_ConfigurationFormExt" validate="false"/>
+	</action-mappings>
+	
+	<controller inputForward="true"/>
+
+	<message-resources null="false" key="InventoryResources"
+		parameter="InventoryResources" />
+	<message-resources null="false"
+		key="DL_StateApplicationResources" parameter="resources.CRModel.DL_StateApplicationResources" />
+	<message-resources null="false"
+		key="DL_NetworkElementApplicationResources" parameter="resources.CRModel.DL_NetworkElementApplicationResources" />
+	<message-resources null="false"
+		key="DL_ElementComponentApplicationResources" parameter="resources.CRModel.DL_ElementComponentApplicationResources" />
+	<message-resources null="false"
+		key="DL_TerminationPointApplicationResources" parameter="resources.CRModel.DL_TerminationPointApplicationResources" />
+	<message-resources null="false"
+		key="DL_InterfaceApplicationResources" parameter="resources.CRModel.DL_InterfaceApplicationResources" />
+	<message-resources null="false" key="DL_LinkApplicationResources"
+		parameter="resources.CRModel.DL_LinkApplicationResources" />
+	<message-resources null="false"
+		key="CompareDL_CRApplicationResources" parameter="resources.CRModel.CompareDL_CRApplicationResources" />
+</struts-config>

@@ -1,0 +1,16 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+SELECT
+  igw_trunk.NAME		igw_trunk_NAME,
+  igw_trunk.TRUNKTYPE_ID		igw_trunk_TRUNKTYPE_ID,
+  igw_trunk.TRUNK_ID		igw_trunk_TRUNK_ID,
+  igw_trunk.SUBMIT_DATA		igw_trunk_SUBMIT_DATA,
+  igw_trunk.STATUS		igw_trunk_STATUS,
+  igw_trunk.LINK_TYPE		igw_trunk_LINK_TYPE
+FROM
+  igw_trunk   igw_trunk
+WHERE
+ORDER BY 
+igw_trunk.TRUNK_ID
+
+

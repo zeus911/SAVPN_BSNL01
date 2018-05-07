@@ -1,0 +1,7 @@
+## Generated using InventoryBuilder v. V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+INSERT INTO CR_Location
+  (Name, Description, Region, isparent__)
+VALUES
+  (?, ?, ?, ?)
+

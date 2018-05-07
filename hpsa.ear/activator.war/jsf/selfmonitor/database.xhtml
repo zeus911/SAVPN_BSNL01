@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+  <link rel="stylesheet" type="text/css" href="/activator/css/primefaces/hpsa.css"/>
+  <script type="text/javascript" src="/activator/javascript/saUtilities.js"></script>
+</h:head>
+
+<body onmousemove="logoutTimerReset();" onkeydown="logoutTimerReset();">
+
+<h:form id="form">
+
+<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
+<p:panel id="srchpnl" style="text-align:right;">
+  <h:outputText value="#{smrb.cluster_node_name}:" />
+  <h:selectOneMenu value="#{databaseMonitorManager.selectedClusterNodeName}" style="margin-left:5px;">
+    <f:selectItems value="#{databaseMonitorManager.clusterNodeNames}" />
+  </h:selectOneMenu>
+  <h:outputText value="#{smrb.granularity}:" style="margin-left:10px;" />
+  <h:selectOneMenu value="#{databaseMonitorManager.granularity}" style="margin-left:5px;">
+    <f:selectItems value="#{databaseMonitorManager.granularities}" var="gr" itemLabel="#{gr.label}" itemValue="#{gr.granularity}"/>
+  </h:selectOneMenu>
+  <p:commandButton value="#{smrb.ok}" styleClass="ui-confirmdialog-yes" icon="ui-icon-search" style="margin-left:10px;"
+      partialSubmit="true" process=":form:srchpnl" actionListener="#{databaseMonitorManager.search}"
+      update=":form:messages,:form:dbbody" />
+</p:panel>
+
+<p:outputPanel id="dbbody">
+  <p:panelGrid styleClass="datagrid">
+  <p:row>
+    <p:column colspan="2" style="text-align:center;">
+      <p:graphicImage value="#{databaseMonitorManager.dbPoolCartesianModel}" cache="false" rendered="#{databaseMonitorManager.smmConfigured}"/>
+      <h:outputText value="#{smrb.smm_not_configured}" rendered="#{!databaseMonitorManager.smmConfigured}"/>
+    </p:column>
+  </p:row>
+  <p:row>
+    <p:column style="text-align:center;">
+      <p:dataTable var="dbp" value="#{databaseMonitorManager.databasePools}" rendered="#{databaseMonitorManager.cliAvailable}" tableStyle="table-layout:auto;">
+        <p:column headerText="#{smrb.dbpool_jndi_name}">
+          <h:outputText value="#{dbp.jndiname}" />
+        </p:column>
+        <p:column headerText="#{smrb.dbpool_available}">
+          <h:outputText value="#{dbp.availablecount}" />
+        </p:column>
+        <p:column headerText="#{smrb.dbpool_active_count}">
+          <h:outputText value="#{dbp.activecount}" />
+        </p:column>
+        <p:column headerText="#{smrb.dbpool_max_pool_size}">
+          <h:outputText value="#{dbp.maxpoolsize}" />
+        </p:column>
+        <p:column headerText="#{smrb.dbpool_min_pool_size}">
+          <h:outputText value="#{dbp.minpoolsize}" />
+        </p:column>
+        <p:column headerText="#{smrb.dbpool_max_used_count}">
+          <h:outputText value="#{dbp.maxusedcount}" />
+        </p:column>
+        <p:column headerText="#{smrb.dbpool_max_wait_time}">
+          <h:outputText value="#{dbp.maxwaittime}" />
+        </p:column>
+        <p:column headerText="#{smrb.dbpool_timed_out}">
+          <h:outputText value="#{dbp.timedout}" />
+        </p:column>
+      </p:dataTable>
+      <h:outputText value="#{smrb.jboss_not_available}" rendered="#{!databaseMonitorManager.cliAvailable}" />
+    </p:column>
+  </p:row>
+  </p:panelGrid>
+</p:outputPanel>
+
+<p:ajaxStatus id="ajaxStatusPanel" style="position:fixed; right:5px; bottom:5px; width:32px; height:32px;">
+  <f:facet name="start">
+    <h:graphicImage value="#{request.contextPath}/../../activator/images/primefaces/throbber.gif" />
+  </f:facet>
+  <f:facet name="complete">
+    <h:outputText value="" />
+  </f:facet>
+</p:ajaxStatus>
+
+</h:form>
+
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+SELECT
+  crm_vpn_membership.siteAttachmentId		crm_vpn_membership_s41,
+  crm_vpn_membership.vpnId		crm_vpn_membership_vpnId,
+  crm_vpn_membership.ConnectivityType		crm_vpn_membership_C42
+FROM
+  crm_vpn_membership   crm_vpn_membership
+WHERE
+ORDER BY crm_vpn_membership.vpnId ASC , crm_vpn_membership.siteAttachmentId ASC 
+
+

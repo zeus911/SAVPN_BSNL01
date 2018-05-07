@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<!--
+The Service Order View User Interface (SOV UI) provides a way to see relevant inforamtion related to an order under processing in Service Activator.
+By entering a combination of job identifier, service identifier, order identifier, workflow type and/or workflow state it is possible to retrieve
+the running jobs, queued jobs, messages, audit messages and active transactions related to those values in a single view.
+In order to maintain as less source code as possible, SOV UI uses as much source code as possible from the Jobs UI, Queued Jobs UI, Messages UI,
+Audit UI and Activation Tracking UI.
+
+******** IMPORTANT: This means that any changes made in this UI must be also made in the other ones, and vice versa. *********
+
+It should have been nice to use composition for each UI included here (Jobs UI, Queued Jobs UI, etc.) but this has not been possible. JSF technology
+generates the components identifiers based on their main components ancestors. E.g.:
+
+  <form id="myform">
+    <dataTable id="mydatatable">
+    ...
+    </datatable>
+  </form>
+  
+The resulting identifier for the datatable in the example above will be "myform:mydatatable". Unfortunatelly this is a problem when the component
+is placed in a different main container as the resulting identifier will be different, so references to it (e.g. to update the table as a result of
+an Ajax operation) must be modified. As a conclusion, usage of components is not possible here and this is the reason why all the source code from
+the different JSFs in the other UIs has been copied here.
+-->
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:util="http://java.sun.com/jsf/composite/components/util">
+
+<h:head>
+  <title>Service Order View</title>
+  <link rel="stylesheet" type="text/css" href="/activator/css/primefaces/hpsa.css" />
+  <script type="text/javascript" src="/activator/javascript/saUtilities.js" ></script>
+  <script>
+  var wdws = new Array();
+  function invokeUrl() {
+    var url = document.getElementById("form:url").value;
+    var urlwn = document.getElementById("form:urlwn").value;
+    var urlatts = document.getElementById("form:urlatts").value;
+    if (url != null &amp;&amp; url != "") {
+      wdws.push(window.open(url, urlwn == null || urlwn == "" ? "nw" : urlwn, urlatts == null || urlatts == "" ? "resizable=yes,width=750,height=300,scrollbars=yes" : urlatts));
+    }
+  }
+  function checkClosed()
+  {
+    var closed = false;
+    var wdw;
+    for (var i = 0; i &lt; wdws.length; i++) {
+      wdw = wdws[i];
+      if (wdw.closed) {
+        wdws.splice(i--, 1); // remove i-th element from the array
+        closed = true;
+      }
+    }
+    if (closed) {
+      refresh();
+    }
+  }
+  setInterval("checkClosed()", 1000);
+  </script>
+</h:head>
+
+<body onmousemove="logoutTimerReset();" onkeydown="logoutTimerReset();">
+
+<table style="width:100%; border:0px !important; border-collapse:collapse; padding:0px !important; cellspacing:0px; background-color:/*c:sabl*/#0096d6">
+  <tr>
+    <td style="padding:0px; align:left;">
+      <img src="/activator/images/HPLogo-small.png" style="display:block;" />
+    </td>
+    <td style="padding:0px; align:left; width:100%;">
+      <img src="/activator/images/sa_name.png" style="display:block;" />
+    </td>
+    <td style="padding:0px; align:right;">
+      <img src="/activator/images/wires_pad_left.jpg" style="display:block;" />
+    </td>
+  </tr>
+</table>
+
+<h:form id="form">
+
+<p:panel id="srchpnl" style="text-align:center; margin-top:5px;">
+  <p:panelGrid cellpadding="5" styleClass="datagrid">
+    <p:column rendered="#{sovManager.qfs.jobIdQueryAllowed}">
+      <h:outputLabel value="#{sovrb.sov_job_id}: " for="jobId" />
+      <h:inputText value="#{sovManager.qfs.jobId}" id="jobId" />
+    </p:column>
+    <p:column rendered="#{sovManager.qfs.serviceIdQueryAllowed}">
+      <h:outputLabel value="#{sovrb.sov_service_id}: " for="serviceId" />
+      <h:inputText value="#{sovManager.qfs.serviceId}" id="serviceId" />
+    </p:column>
+    <p:column rendered="#{sovManager.qfs.orderIdQueryAllowed}">
+      <h:outputLabel value="#{sovrb.sov_order_id}: " for="orderId" />
+      <h:inputText value="#{sovManager.qfs.orderId}" id="orderId" />
+    </p:column>
+    <p:column rendered="#{sovManager.qfs.typeQueryAllowed}">
+      <h:outputLabel value="#{sovrb.sov_type}: " for="type" />
+      <h:inputText value="#{sovManager.qfs.type}" id="type" />
+    </p:column>
+    <p:column rendered="#{sovManager.qfs.stateQueryAllowed}">
+      <h:outputLabel value="#{sovrb.sov_state}: " for="state" />
+      <h:inputText value="#{sovManager.qfs.state}" id="state" />
+    </p:column>
+    <p:column>
+      <p:commandButton value="#{sovrb.sov_query_button}" action="#{sovManager.submit}" partialSubmit="true" process="@this,:form:srchpnl"
+          update=":form:maintabview,:form:messages" />
+    </p:column>
+    <p:column>
+      <p:commandButton value="#{sovrb.sov_reset_button}" action="#{sovManager.reset}" partialSubmit="true" process="@this,:form:srchpnl"
+          update=":form:maintabview,:form:srchpnl" />
+    </p:column>
+  </p:panelGrid>
+</p:panel>
+
+<p:messages id="messages" showDetail="true"/>
+
+<p:growl id="growl" showDetail="true"/>
+
+<p:tabView id="maintabview" dynamic="true" cache="false" activeIndex="#{sovManager.mtm.activeTabIndex}">
+  <p:ajax event="tabChange" listener="#{sovManager.onMainTabChange}" update=":form:maintabview" />
+  <p:tab title="#{sovrb.sov_jobs_tab}" id="#{sovManager.mtm.jobsTabId}">
+    <p:tabView id="tabview" activeIndex="#{sovManager.jobManager.activeTabIndex}">
+      <p:ajax event="tabChange" listener="#{sovManager.jobManager.onTabChange}" update=":form:maintabview:tabview" />
+      <p:tab id="rjtab">
+        <f:facet name="title">
+          <h:outputFormat value="#{jobsrb.running_jobs}">
+            <f:param value="#{sovManager.jobManager.runningJobsNumber}" />
+          </h:outputFormat>
+        </f:facet>
+        <p:contextMenu for="rjobs">
+          <p:menuitem value="#{jobsrb.stop_job_op}" icon="ui-icon-stop" onclick="PF('dlgstopjob').show();" update=":form:growl"
+              rendered="#{sovManager.jobManager.isStopJobOperationAllowed}" />
+          <p:menuitem value="#{jobsrb.change_roles_op}" update=":form:rroles,:form:growl" icon="ui-icon-key " oncomplete="PF('dlgchroles').show();"
+              actionListener="#{sovManager.jobManager.onChangeRoles}" rendered="#{sovManager.jobManager.isChangeRolesOperationAllowed}" />
+          <p:menuitem value="#{jobsrb.force_stop_job_op}" icon="ui-icon-squaresmall-close" onclick="PF('dlgforcestopjob').show();" update=":form:growl"
+              rendered="#{sovManager.jobManager.isForceStopJobOperationAllowed}" />
+          <p:menuitem value="#{jobsrb.change_priority_op}" update=":form:prtpnl,:form:growl" icon="ui-icon-wrench" oncomplete="PF('dlgpriority').show();"
+              actionListener="#{sovManager.jobManager.onChangePriority}" rendered="#{sovManager.jobManager.isChangePriorityOperationAllowed}" />
+          <p:menuitem value="#{jobsrb.annotate_op}" update=":form:dlgannotate,:form:growl" icon="ui-icon-pencil" oncomplete="PF('dlgannotate').show();"
+              actionListener="#{sovManager.jobManager.onChangeAnnotation}" />
+        </p:contextMenu>
+        <p:dataTable id="rjobs" var="job" value="#{sovManager.jobManager.runningJobs}" selection="#{sovManager.jobManager.selectedRunningJob}" selectionMode="single"
+            emptyMessage="#{jobsrb.empty_running_jobs}" resizableColumns="true" tableStyle="table-layout:auto;">
+          <p:ajax event="contextMenu" listener="#{sovManager.jobManager.onRunningJobRowSelect}" update=":form:growl,:form:dlgstopjob,:form:dlgforcestopjob,:form:dlgchroles,:form:dlgpriority"/>
+          <p:ajax event="sort" listener="#{sovManager.jobManager.onSortJobs}" />
+          <p:columns value="#{sovManager.jobManager.runningJobFields}" var="column" sortBy="#{job[column.property]}" columnIndexVar="colIndex" style="white-space:normal" >
+            <f:facet name="header">
+              #{column.header}
+            </f:facet>
+            #{job[column.property]}
+          </p:columns>
+        </p:dataTable>
+      </p:tab>
+      <p:tab id="sjtab">
+        <f:facet name="title">
+          <h:outputFormat value="#{jobsrb.scheduled_jobs}">
+            <f:param value="#{sovManager.jobManager.scheduledJobsNumber}" />
+          </h:outputFormat>
+        </f:facet>
+        <p:contextMenu for="sjobs">
+          <p:menuitem value="#{jobsrb.start_job_op}" update=":form:maintabview,:form:growl" icon="ui-icon-play" actionListener="#{sovManager.jobManager.startJob}"
+              rendered="#{sovManager.jobManager.isStartJobOperationAllowed}" />
+          <p:menuitem value="#{jobsrb.modify_schedule_op}" update=":form:dlgmodsch" icon="ui-icon-gear" oncomplete="modifySchedule();PF('dlgmodsch').show();"
+              actionListener="#{sovManager.jobManager.onModifySchedule}" rendered="#{sovManager.jobManager.isModifyScheduleOperationAllowed}" />
+          <p:menuitem value="#{jobsrb.delete_job_op}" icon="ui-icon-close" onclick="PF('dlgdeletejob').show();" update=":form:growl"
+              rendered="#{sovManager.jobManager.isDeleteJobOperationAllowed}" />
+        </p:contextMenu>
+        <p:dataTable id="sjobs" var="job" value="#{sovManager.jobManager.scheduledJobs}" selection="#{sovManager.jobManager.selectedScheduledJob}" selectionMode="single"
+            emptyMessage="#{jobsrb.empty_scheduled_jobs}" tableStyle="table-layout:auto;">
+          <p:ajax event="contextMenu" listener="#{sovManager.jobManager.onScheduledJobRowSelect}" update=":form:growl,:form:dlgdeletejob"/>
+          <p:columns value="#{sovManager.jobManager.scheduledJobFields}" var="column" sortBy="#{job[column.property]}" columnIndexVar="colIndex" >
+            <f:facet name="header">
+              #{column.header}
+            </f:facet>
+            #{job[column.property]}
+          </p:columns>
+        </p:dataTable>
+      </p:tab>
+    </p:tabView>
+    <p:poll interval="#{sovManager.jobManager.refreshRate}" partialSubmit="true" process="@this" update=":form:growl,:form:maintabview"
+        listener="#{sovManager.jobManager.onPoll}" rendered="#{sovManager.jobManager.isRefreshAllowed}" />
+  </p:tab>
+  <p:tab title="#{sovrb.sov_queues_tab}" id="#{sovManager.mtm.queuesTabId}">
+    <p:tabView id="tabviewqj" var="tab" value="#{sovManager.queueManager.tabs}" dynamic="true" cache="false" activeIndex="#{sovManager.queueManager.activeTabIndex}" rendered="#{sovManager.queueManager.isQueueFound}">
+      <p:ajax event="tabChange" listener="#{sovManager.queueManager.onTabChange}" update=":form:maintabview:tabviewqj:ops" />
+      <p:tab title="#{tab.title}">
+        <p:contextMenu for="jobs" id="ops">
+          <p:menuitem value="#{jobsrb.interact_op}" update=":form:urlpnl" icon="ui-icon-person" oncomplete="invokeUrl();"
+              actionListener="#{sovManager.queueManager.interactWithJob}" rendered="#{tab.isInteractOperationAllowed}" />
+          <p:menuitem value="#{jobsrb.stop_job_op}" icon="ui-icon-stop" onclick="PF('dlgstopjob').show();"
+              rendered="#{tab.isStopJobOperationAllowed}" />
+          <p:menuitem value="#{jobsrb.change_roles_op}" update=":form:qroles,:form:growl" icon="ui-icon-key" oncomplete="PF('dlgchroles').show();"
+              actionListener="#{sovManager.queueManager.onChangeRoles}" rendered="#{tab.isChangeRolesOperationAllowed}" />
+          <p:menuitem value="#{jobsrb.force_stop_job_op}" icon="ui-icon-squaresmall-close" onclick="PF('dlgforcestopjob').show();"
+              rendered="#{tab.isForceStopJobOperationAllowed}" />
+          <p:menuitem value="#{jobsrb.change_priority_op}" update=":form:prtpnl,:form:growl" icon="ui-icon-flag" oncomplete="PF('dlgpriority').show();"
+              actionListener="#{sovManager.queueManager.onChangePriority}" rendered="#{tab.isChangePriorityOperationAllowed}" />
+          <p:menuitem value="#{jobsrb.annotate_op}" update=":form:annopnl,:form:growl" icon="ui-icon-pencil" oncomplete="PF('dlgannotate').show();"
+              actionListener="#{sovManager.queueManager.onChangeAnnotation}" rendered="#{tab.isAnnotateOperationAllowed}" />
+          <p:menuitem value="#{jobsrb.view_activations_op}" update=":form:urlpnl" icon="ui-icon-image" oncomplete="invokeUrl();"
+              actionListener="#{sovManager.queueManager.viewActivations}" rendered="#{tab.isViewActivationsOperationAllowed}" disabled="#{tab.isViewActivationsOperationDisabled}" />
+          <p:menuitem value="#{jobsrb.debug_op}" update=":form:urlpnl" icon="ui-icon-wrench" oncomplete="invokeUrl();"
+              actionListener="#{sovManager.queueManager.debug}" rendered="#{tab.isDebugOperationAllowed}" />
+        </p:contextMenu>
+        <p:dataTable id="jobs" var="job" value="#{tab.jobDataModel}" selection="#{sovManager.queueManager.selectedJob}" selectionMode="single"
+            emptyMessage="#{jobsrb.empty_queue}" resizableColumns="true" tableStyle="table-layout:auto;">
+          <p:ajax event="contextMenu" listener="#{sovManager.queueManager.onRowSelect}" update=":form:growl,:form:dlgstopjob,:form:dlgforcestopjob,:form:dlgpriority,:form:dlgchroles,:form:dlgannotate"/>
+          <p:ajax event="sort" listener="#{sovManager.queueManager.onSortJobs}" />
+          <p:columns value="#{tab.columns}" var="column" sortBy="#{job[column.property]}" columnIndexVar="colIndex" style="white-space:normal" >
+            <f:facet name="header">
+              <h:outputText value="#{column.header}" />
+            </f:facet>
+            <h:outputText value="#{job[column.property]}" />
+            <p:graphicImage value="#{request.contextPath}/../images/interact.png" width="10" height="10" rendered="#{(column.property == 'jobId') and job.manualUserInteraction == true}" style="margin-left:5px; position:relative; top:2px;" />
+          </p:columns>
+        </p:dataTable>
+      </p:tab>
+    </p:tabView>
+    <p:panel rendered="#{!sovManager.queueManager.isQueueFound}">
+      <h:outputText value="#{jobsrb.empty_queued_jobs}" />
+    </p:panel>
+    <p:poll interval="#{sovManager.queueManager.refreshRate}" update=":form:growl,:form:maintabview" listener="#{sovManager.queueManager.onPoll}" rendered="#{sovManager.queueManager.isRefreshAllowed}" />
+  </p:tab>
+  <p:tab title="#{sovrb.sov_messages_tab}" id="#{sovManager.mtm.messagesTabId}">
+    <p:tabView id="tabviewmsg" var="tab" value="#{sovManager.messageManager.tabs}" dynamic="true" cache="false" rendered="#{sovManager.messageManager.hasTabs}" style="border:0px solid;">
+      <p:ajax event="tabChange" listener="#{sovManager.messageManager.onTabChange}" />
+      <p:tab title="#{tab.title}">
+        <p:contextMenu for="messages" id="ops" style="width:210px;">
+          <p:menuitem value="#{msgsrb.delete_op}" icon="ui-icon-stop" onclick="PF('dlgdeljob').show();"
+              rendered="#{tab.isDeleteOperationAllowed}" />
+          <p:menuitem value="#{msgsrb.delete_all_op}" icon="ui-icon-stop" onclick="PF('dlgdelalljob').show();"
+              rendered="#{tab.isDeleteAllOperationAllowed}" />
+        </p:contextMenu>
+        <p:dataTable id="messages" var="message" value="#{tab.messages}" selection="#{sovManager.messageManager.selectedMessage}" selectionMode="single"
+            lazy="true" paginator="true" rows="#{sovManager.messageManager.pageSize}"
+            paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+            emptyMessage="#{msgsrb.empty_queue}" resizableColumns="true" tableStyle="table-layout:auto;">
+          <p:ajax event="contextMenu" listener="#{sovManager.messageManager.onRowSelect}" update=":form:growl,:form:dlgdelalljob"/>
+          <p:columns value="#{tab.columns}" var="column" sortBy="#{column.property}" columnIndexVar="colIndex" resizable="true" style="white-space:normal">
+            <f:facet name="header">
+              #{column.header}
+            </f:facet>
+            #{message[column.property]}
+          </p:columns>
+        </p:dataTable>
+      </p:tab>
+    </p:tabView>
+    <p:panel id="emptyp" visible="#{!sovManager.messageManager.hasTabs}">
+      <h:outputText value="#{msgsrb.no_queues}" />
+    </p:panel>
+    <p:poll interval="#{sovManager.messageManager.refreshRate}" update=":form:growl,:form:maintabview"
+        listener="#{sovManager.messageManager.onPoll}" rendered="#{sovManager.messageManager.isRefreshAllowed}" />
+  </p:tab>
+  <p:tab title="#{sovrb.sov_audit_tab}" id="#{sovManager.mtm.auditTabId}">
+    <p:contextMenu for="messages" id="ops" style="width:210px;">
+      <p:menuitem value="#{auditrb.open_instance}" icon="ui-icon-stop" onclick="openInstance();" />
+      <p:menuitem value="#{auditrb.open_new_instance}" icon="ui-icon-stop" onclick="openNewInstance();" />
+    </p:contextMenu>
+    <p:dataTable id="messages" var="message" value="#{sovManager.auditManager.messages}" selection="#{sovManager.auditManager.selectedMessage}" selectionMode="single"
+        lazy="true" paginator="true" rows="#{sovManager.auditManager.pageSize}" sortOrder="descending"
+        paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+        emptyMessage="#{auditrb.empty_messages}" resizableColumns="true" style="margin-top:10px;" tableStyle="table-layout:auto;">
+      <p:ajax event="contextMenu" listener="#{sovManager.auditManager.onRowSelect}" update=":form:growl,:form:oi,:form:oni"/>
+      <p:columns value="#{sovManager.auditManager.columns}" var="column" sortBy="#{column.property}" columnIndexVar="colIndex" style="white-space:normal" >
+        <f:facet name="header">
+          #{column.header}
+        </f:facet>
+        #{message[column.property]}
+      </p:columns>
+    </p:dataTable>
+  </p:tab>
+  <p:tab title="#{sovrb.sov_transactions_tab}" id="#{sovManager.mtm.activeTransactionsTabId}">
+    <p:contextMenu for="activeTxTable" style="width:200px;">
+      <p:menuitem value="#{activationrb.view_activation_detail}" onclick="showActiveTransactionDetails();" icon="ui-icon ui-icon-search" />
+    </p:contextMenu>
+    <p:dataTable id="activeTxTable" value="#{sovManager.activeTransactionManager.activeTransactions}" var="row" rowKey="#{row.id}" tableStyle="table-layout:auto;"
+        selection="#{sovManager.activeTransactionManager.selectedActiveTransactionData}" selectionMode="single" emptyMessage="#{activationrb.no_track_activations}">
+      <p:ajax event="contextMenu" listener="#{sovManager.activeTransactionManager.onRowSelect}" update=":form:growl,:form:dlgdetails" />
+      <p:columns columnIndexVar="colIndex" value="#{sovManager.activeTransactionManager.activeTransactionFields}" var="col" style="white-space:normal">
+        <f:facet name="header">
+          <h:outputText value="#{col.header}" />
+        </f:facet>
+        <h:outputText value="#{row[col.property]}" />
+      </p:columns>
+    </p:dataTable>
+    <p:poll interval="#{sovManager.activeTransactionManager.refreshRate}" update=":form:growl,:form:maintabview" listener="#{sovManager.activeTransactionManager.onPoll}" />
+  </p:tab>
+</p:tabView>
+
+<p:remoteCommand name="onScheduleModified" partialSubmit="true" process="@this" action="#{sovManager.jobManager.onPoll}" update=":form:growl,:form:maintabview:tabview" />
+
+<p:confirmDialog id="dlgstopjob" widgetVar="dlgstopjob" header="#{jobsrb.stop_job_op}" showEffect="fade" hideEffect="fade">
+  <f:facet name="message">
+    <h:outputFormat value="#{jobsrb.stop_job_confirm}">
+      <f:param value="#{sovManager.selectedRunningJobId}" />
+    </h:outputFormat>
+  </f:facet>
+  <p:commandButton value="#{jobsrb.ok}" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      update=":form:maintabview,:form:growl" actionListener="#{sovManager.stopJob}" onclick="PF('dlgstopjob').hide();"/>
+  <p:commandButton value="#{jobsrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgstopjob').hide();"/>
+</p:confirmDialog>
+
+<p:confirmDialog id="dlgforcestopjob" widgetVar="dlgforcestopjob" header="#{jobsrb.force_stop_job_op}" showEffect="fade" hideEffect="fade">
+  <f:facet name="message">
+    <h:outputFormat value="#{jobsrb.stop_job_confirm}">
+      <f:param value="#{sovManager.selectedRunningJobId}" />
+    </h:outputFormat>
+  </f:facet>
+  <p:commandButton value="#{jobsrb.ok}" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      update=":form:maintabview,:form:growl" actionListener="#{sovManager.forceStopJob}" onclick="PF('dlgforcestopjob').hide();"/>
+  <p:commandButton value="#{jobsrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgforcestopjob').hide();"/>
+</p:confirmDialog>
+
+<p:dialog id="dlgchroles" widgetVar="dlgchroles" showEffect="fade" hideEffect="fade" modal="true" width="500" draggable="false" >
+  <f:facet name="header">
+    <h:outputFormat value="#{jobsrb.change_roles_title}">
+      <f:param value="#{sovManager.selectedRunningJobId}" />
+    </h:outputFormat>
+  </f:facet>
+  <p:panelGrid id="rroles" columns="2" cellpadding="5" style="width:100%; text-align:left;" styleClass="datagrid" rendered="#{sovManager.mtm.jobsTabActive}">
+    <h:outputText value="#{jobsrb.trace_role}:" />
+    <h:selectOneMenu value="#{sovManager.jobManager.traceRole}" label="#{jobsrb.trace_role}" style="width:100%" >
+      <f:selectItem itemValue="" itemLabel="#{jobsrb.no_role}" />
+      <f:selectItems value="#{sovManager.jobManager.validRoles}" />
+    </h:selectOneMenu>
+    <h:outputText value="#{jobsrb.kill_role}:" />
+    <h:selectOneMenu value="#{sovManager.jobManager.killRole}" label="#{jobsrb.kill_role}" style="width:100%" >
+      <f:selectItem itemValue="" itemLabel="#{jobsrb.no_role}" />
+      <f:selectItems value="#{sovManager.jobManager.validRoles}" />
+    </h:selectOneMenu>
+    <h:outputText value="#{jobsrb.default_role}:" />
+    <h:selectOneMenu value="#{sovManager.jobManager.defaultRole}" label="#{jobsrb.default_role}" style="width:100%" >
+      <f:selectItem itemValue="" itemLabel="#{jobsrb.no_role}" />
+      <f:selectItems value="#{sovManager.jobManager.validRoles}" />
+    </h:selectOneMenu>
+  </p:panelGrid>
+  <p:panelGrid id="qroles" columns="2" cellpadding="5" style="width:100%; text-align:left;" styleClass="datagrid" rendered="#{sovManager.mtm.queuesTabActive}">
+    <h:outputText value="#{jobsrb.request_role}:" title="#{jobsrb.request_role_warning}" />
+    <h:selectOneMenu value="#{sovManager.queueManager.requestRole}" label="#{jobsrb.trace_role}" style="width:100%" >
+      <f:selectItem itemValue="" itemLabel="#{jobsrb.no_role}" />
+      <f:selectItems value="#{sovManager.queueManager.validRoles}" />
+    </h:selectOneMenu>
+    <h:outputText value="#{jobsrb.is_default_role}:" title="#{jobsrb.default_role_warning}" />
+    <h:selectOneRadio styleClass="datagrid" value="#{sovManager.queueManager.isDefaultRole}" label="#{jobsrb.is_default_role}">
+      <f:selectItem itemLabel="#{jobsrb.no}" itemValue="false" />
+      <f:selectItem itemLabel="#{jobsrb.yes}" itemValue="true" />
+    </h:selectOneRadio>
+  </p:panelGrid>
+  <p:commandButton value="#{jobsrb.ok}" type="submit" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      update=":form:maintabview,:form:growl" actionListener="#{sovManager.changeRoles}"
+      partialSubmit="true" process="@this,:form:dlgchroles" oncomplete="PF('dlgchroles').hide();"/>
+  <p:commandButton value="#{jobsrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgchroles').hide();"/>
+</p:dialog>
+
+<p:dialog id="dlgpriority" widgetVar="dlgpriority" showEffect="fade" hideEffect="fade" modal="true" width="500" draggable="false" >
+  <f:facet name="header">
+    <h:outputFormat value="#{jobsrb.change_priority_title}">
+      <f:param value="#{sovManager.selectedRunningJobId}" />
+    </h:outputFormat>
+  </f:facet>
+  <p:panelGrid id="prtpnl" columns="2" cellpadding="5" style="width:100%; text-align:left;" styleClass="datagrid">
+    <h:outputText value="#{jobsrb.new_priority}:" />
+    <h:selectOneMenu value="#{sovManager.jobManager.priority}" label="#{jobsrb.new_priority}" style="width:100%" rendered="#{sovManager.jobManager.isPriorityListConfigured}" >
+      <f:selectItems value="#{sovManager.jobManager.priorities}" var="p" itemLabel="#{p.name}" itemValue="#{p.value}" />
+    </h:selectOneMenu>
+    <h:inputText value="#{sovManager.jobManager.priority}" label="#{jobsrb.new_priority}" style="width:100%" rendered="#{!sovManager.jobManager.isPriorityListConfigured}" />
+  </p:panelGrid>
+  <p:commandButton value="#{jobsrb.ok}" type="submit" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      update=":form:maintabview,:form:growl" actionListener="#{sovManager.changePriority}"
+      partialSubmit="true" process=":form:dlgpriority" oncomplete="PF('dlgpriority').hide();"/>
+  <p:commandButton value="#{jobsrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgpriority').hide();"/>
+</p:dialog>
+
+<p:dialog id="dlgannotate" widgetVar="dlgannotate" showEffect="fade" hideEffect="fade" modal="true" width="500" draggable="false" >
+  <f:facet name="header">
+    <h:outputFormat value="#{jobsrb.change_annotation_title}">
+      <f:param value="#{sovManager.selectedRunningJobId}" />
+    </h:outputFormat>
+  </f:facet>
+  <p:panelGrid id="annopnl" columns="2" cellpadding="5" style="width:100%; text-align:left;" styleClass="datagrid">
+    <h:outputText value="#{jobsrb.annotation}:" />
+    <h:inputTextarea value="#{sovManager.jobManager.annotation}" label="#{jobsrb.annotation}" style="width:100%; height:100px;" />
+  </p:panelGrid>
+  <p:commandButton value="#{jobsrb.ok}" type="submit" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      update=":form:maintabview,:form:growl" actionListener="#{sovManager.changeAnnotation}"
+      partialSubmit="true" process=":form:dlgannotate" oncomplete="PF('dlgannotate').hide();"/>
+  <p:commandButton value="#{jobsrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgannotate').hide();"/>
+</p:dialog>
+
+<p:confirmDialog id="dlgdeletejob" widgetVar="dlgdeletejob" header="#{jobsrb.start_job_op}" showEffect="fade" hideEffect="fade">
+  <f:facet name="message">
+    <h:outputFormat value="#{jobsrb.delete_job_confirm}">
+      <f:param value="#{sovManager.jobManager.selectedScheduledJob.jobId}" />
+    </h:outputFormat>
+  </f:facet>
+  <p:commandButton value="#{jobsrb.ok}" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      update=":form:maintabview,:form:growl" actionListener="#{sovManager.jobManager.deleteJob}" onclick="PF('dlgdeletejob').hide();"/>
+  <p:commandButton value="#{jobsrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgdeletejob').hide();"/>
+</p:confirmDialog>
+
+<ui:insert name="scheduler" >
+  <ui:include src="#{request.contextPath}/../jsf/scheduler/scheduler.xhtml" >
+    <ui:param name="jobId" value="#{sovManager.jobManager.selectedScheduledJob.jobId}" />
+  </ui:include>
+</ui:insert>
+
+<p:outputPanel id="urlpnl">
+<h:inputHidden id="url" value="#{sovManager.queueManager.url}" />
+<h:inputHidden id="urlwn" value="#{sovManager.queueManager.urlwn}" />
+<h:inputHidden id="urlatts" value="#{sovManager.queueManager.urlatts}" />
+</p:outputPanel>
+
+<p:confirmDialog id="dlgdeljob" widgetVar="dlgdeljob" header="#{msgsrb.delete_op}" showEffect="fade" hideEffect="fade">
+  <f:facet name="message">
+    <h:outputLabel value="#{msgsrb.delete_confirm}" />
+  </f:facet>
+  <p:commandButton value="#{msgsrb.ok}" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      update=":form:maintabview,:form:growl" actionListener="#{sovManager.messageManager.deleteMessage}" onclick="PF('dlgdeljob').hide();"/>
+  <p:commandButton value="#{msgsrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgdeljob').hide();"/>
+</p:confirmDialog>
+
+<p:confirmDialog id="dlgdelalljob" widgetVar="dlgdelalljob" header="#{msgsrb.delete_all_op}" showEffect="fade" hideEffect="fade">
+  <f:facet name="message">
+    <h:outputFormat value="#{msgsrb.delete_all_confirm}">
+      <f:param value="#{sovManager.messageManager.selectedTab.name}" />
+    </h:outputFormat>
+  </f:facet>
+  <p:commandButton value="#{msgsrb.ok}" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      update=":form:maintabview,:form:growl" actionListener="#{sovManager.messageManager.deleteAllMessages}" onclick="PF('dlgdelalljob').hide();"/>
+  <p:commandButton value="#{msgsrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgdelalljob').hide();"/>
+</p:confirmDialog>
+
+<p:remoteCommand id="oi" name="openInstance" update=":form:dlgdetails,:form:growl" oncomplete="openInstanceDetails();">
+  <f:setPropertyActionListener value="#{sovManager.auditManager.selectedMessage.auditId}" target="#{requestScope.audit_id}" />
+</p:remoteCommand>
+
+<p:remoteCommand id="oni" name="openNewInstance" update=":form:dlgdetails" oncomplete="openNewInstanceDetails();">
+  <f:setPropertyActionListener value="#{sovManager.auditManager.selectedMessage.auditId}" target="#{requestScope.audit_id}" />
+</p:remoteCommand>
+
+<ui:insert name="atdet" >
+  <ui:include src="#{request.contextPath}/../jsf/activation/details.xhtml" >
+    <ui:param name="id" value="#{sovManager.activeTransactionManager.selectedActiveTransactionData.transactionSequence}" />
+  </ui:include>
+</ui:insert>
+
+<p:dialog id="dlgdetails" widgetVar="dlgdetails" header="#{auditrb.detail_header}">
+  <script>
+  function getInstanceDetailsUrl()
+  {
+    // right now this method is only called to open the detailed view of an audit record; maybe in the future another popup will be open as well
+    return "../audit/detail.jsf?#{sovManager.auditManager.auditIdParameterName}=#{requestScope.audit_id}";
+  }
+  function openNewInstanceDetails()
+  {
+    setTimeout("_openNewInstanceDetails()", 1000);
+  }
+  function _openNewInstanceDetails()
+  {
+    var win = window.open(getInstanceDetailsUrl(), '_blank', 'resizable=yes,status=no,width=500,height=424,scrollbars=yes');
+    win.focus();
+    if (window.opener.top.auditWindowsArray == null) {
+      window.opener.top.auditWindowsArray = new Array();
+    }
+    window.opener.top.auditWindowsArray.push(win);
+  }
+  function openInstanceDetails() {
+    setTimeout("_openInstanceDetails()", 1000);
+  }
+  function _openInstanceDetails() {
+    var win = null;
+    if (window.opener.top.auditWindowsArray == null) {
+      window.opener.top.auditWindowsArray = new Array();
+    }
+    for (var i = 0; i &lt; window.opener.top.auditWindowsArray.length &amp;&amp; win == null; i++) {
+      if (window.opener.top.auditWindowsArray[i] != null &amp;&amp; !window.opener.top.auditWindowsArray[i].closed) {
+        win = window.opener.top.auditWindowsArray[i];
+      }
+    }
+    if (win == null) {
+      win = window.open(getInstanceDetailsUrl(), '_blank', 'resizable=yes,status=no,width=500,height=424,scrollbars=yes');
+      window.opener.top.auditWindowsArray.push(win);
+    } else {
+      win.document.location = getInstanceDetailsUrl();
+    }
+    win.focus();
+  }
+  </script>
+</p:dialog>
+
+<p:ajaxStatus id="ajaxStatusPanel" style="position:fixed; right:5px; bottom:5px; width:32px; height:32px;">
+  <f:facet name="start">
+    <h:graphicImage value="#{request.contextPath}/../../activator/images/primefaces/throbber.gif" />
+  </f:facet>
+  <f:facet name="complete">
+    <h:outputText value="" />
+  </f:facet>
+</p:ajaxStatus>
+
+</h:form>
+
+</body>
+
+</html>

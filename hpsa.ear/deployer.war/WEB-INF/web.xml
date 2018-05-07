@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- (c) 2000-2011 Copyright Hewlett-Packard Development Company, L.P. -->
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+     <servlet>
+        <servlet-name>
+		deployer
+        </servlet-name>
+
+        <servlet-class>
+            com.hp.ov.activator.deployment.servlet.DeployerServlet
+        </servlet-class>
+
+	<!-- Connection to the workflow manager -->
+        <init-param>
+            <param-name>mwfm_url</param-name>
+            <param-value>//localhost:2000/wfm</param-value>
+        </init-param>
+
+	<!-- Directories -->
+        <init-param>
+            <param-name>hpia_var</param-name>
+            <param-value>/var/opt/OV/ServiceActivator</param-value>
+        </init-param>
+
+	<!-- Authentication -->
+        <init-param>
+            <param-name>authenticate</param-name>
+            <param-value>false</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>deploy_role</param-name>
+            <param-value>deployer</param-value>
+        </init-param>
+
+	<!-- Allow deployment -->
+        <init-param>
+            <param-name>allow_deployment</param-name>
+            <param-value>true</param-value>
+        </init-param>
+
+	<!-- Logger configuration -->
+        <init-param>
+            <param-name>class_name</param-name>
+            <param-value>com.hp.ov.activator.log.HPIALogger</param-value> 
+        </init-param>
+
+        <!-- Please do not change the value of this parameter. 
+	    If the log path is changed, then the UI will not be able to display the logs 
+	    present in other directory.
+	    -->
+        <init-param>
+            <param-name>log_directory</param-name>
+            <param-value>/var/opt/OV/ServiceActivator/log</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>log_level</param-name>
+            <param-value>INFORMATIVE</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>log_max_entries</param-name>
+            <param-value>50</param-value>
+        </init-param>
+
+	<!-- Actions and subactions -->
+	<init-param>
+            <param-name>action0</param-name>
+            <param-value>install</param-value>
+        </init-param>
+
+	<init-param>
+            <param-name>classname0</param-name>
+            <param-value>com.hp.ov.activator.deployment.servlet.component.InstallAction</param-value>
+        </init-param>
+
+	<init-param>
+            <param-name>action1</param-name>
+            <param-value>activate</param-value>
+        </init-param>
+
+	<init-param>
+            <param-name>classname1</param-name>
+            <param-value>com.hp.ov.activator.deployment.servlet.component.ActivateAction</param-value>
+        </init-param>
+
+	<init-param>
+            <param-name>action2</param-name>
+            <param-value>manage_pars</param-value>
+        </init-param>
+
+	<init-param>
+            <param-name>classname2</param-name>
+            <param-value>com.hp.ov.activator.deployment.servlet.component.ManagePARAction</param-value>
+        </init-param>
+
+	<init-param>
+            <param-name>action3</param-name>
+            <param-value>download_par</param-value>
+        </init-param>
+
+	<init-param>
+            <param-name>classname3</param-name>
+            <param-value>com.hp.ov.activator.deployment.servlet.component.DownloadAction</param-value>
+        </init-param>
+
+	<init-param>
+	    <param-name>action4</param-name>
+	    <param-value>manage_services</param-value>
+	</init-param>
+
+	<init-param>
+	    <param-name>classname4</param-name>
+	    <param-value>com.hp.ov.activator.deployment.servlet.component.ManageServicesAction</param-value>
+        </init-param>
+
+	<init-param>
+	    <param-name>action5</param-name>
+	    <param-value>track</param-value>
+	</init-param>
+
+	<init-param>
+	    <param-name>classname5</param-name>
+	    <param-value>com.hp.ov.activator.deployment.servlet.component.TrackAction</param-value>
+        </init-param>
+     </servlet>
+
+     <servlet-mapping>
+        <servlet-name>deployer</servlet-name>
+	<url-pattern>/deployer</url-pattern>
+     </servlet-mapping>
+
+</web-app>

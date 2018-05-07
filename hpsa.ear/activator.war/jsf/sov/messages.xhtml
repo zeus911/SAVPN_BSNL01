@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+  <p:contextMenu for="sovMessagesTable">
+    <p:menuitem value="Delete Message" actionListener="#{SOV_MessagesBean.deleteMessage}"
+      onclick="if (!confirm('#{SOV_MessagesBean.singleMessage}' + sovMsgTableWidgetVar.selection)) return false;"
+      rendered="#{SOV_JobAction.admin}" icon="ui-icon ui-icon-close" update="sovMessagesTable, :servicesQueryForm:sovGrowl">
+    </p:menuitem>
+    <p:menuitem value="Delete All Messages" actionListener="#{SOV_MessagesBean.deleteAllMessages}"
+      onclick="if (!confirm('#{SOV_MessagesBean.allMessage}')) return false;" rendered="#{SOV_JobAction.admin}"
+      icon="ui-icon ui-icon-close" update="sovMessagesTable, :servicesQueryForm:sovGrowl">
+    </p:menuitem>
+  </p:contextMenu>
+
+  <p:dataTable id="sovMessagesTable" value="#{SOV_MessagesBean.values}" var="row" resizableColumns="false"
+    rowKey="#{row.id}" selection="#{SOV_MessagesBean.selectedRow}" selectionMode="single"
+    widgetVar="sovMsgTableWidgetVar">
+    <p:columns columnIndexVar="index" id="#{row.data[index]}_#{index}" value="#{SOV_MessagesBean.columns}" var="col">
+      <f:facet name="header">
+        <h:outputText value="#{col.name}" />
+      </f:facet>
+      <h:outputText value="#{row.data[index]}" />
+    </p:columns>
+  </p:dataTable>
+
+</ui:composition>

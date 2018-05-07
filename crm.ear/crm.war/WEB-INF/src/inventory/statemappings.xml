@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE Bean SYSTEM "bean.dtd">
+<!--
+###############################################################################
+#
+#    (c) Copyright 2003-2010 Hewlett-Packard Development Company, L.P.
+#
+###############################################################################
+
+###############################################################################
+#
+# $Source: /tmp/vpn/SA_VPN_SP/jboss/server/default/deploy/crmportal.sar/crm.war/WEB-INF/src/inventory/statemappings.xml,v $
+# $Revision: 1.9 $
+# $Date: 2010-10-05 14:19:04 $
+# $Author: shiva $
+#
+###############################################################################
+#
+# <Description> 
+#
+###############################################################################
+-->
+
+
+<Bean>
+  <Name>StateMapping</Name>
+  <Solution>CRM</Solution>
+  <ConstraintName>crm_statemapping</ConstraintName>
+  <Package>com.hp.ov.activator.crmportal.bean</Package>
+  <DBTable>crm_statemapping</DBTable>
+ <DBAlias>crm_statemapping</DBAlias>
+  <Fields>
+     <Field update ="false">
+        <Name>CurrentState</Name>
+        <Type>String</Type>
+        <Description>The current state of the service</Description>
+     </Field>
+     <Field update ="false">
+        <Name>SaResponse</Name>
+        <Type>String</Type>
+        <Description>The response from SA for synchronisation</Description>
+     </Field>
+     <Field>
+        <Name>NextState</Name>
+        <Type>String</Type>
+        <Description>The next state for the service</Description>
+     </Field>
+  </Fields>
+
+  <Keys>
+    <Key pk="true">
+      <KeyField>CurrentState</KeyField>
+      <KeyField>SaResponse</KeyField>
+    </Key>
+    <Key foreignBean="State">
+      <KeyField foreignField="Name">CurrentState</KeyField>
+    </Key>
+    <Key foreignBean="State">
+      <KeyField foreignField="Name">NextState</KeyField>
+    </Key>
+  </Keys>
+
+  <!-- These are the operations to generate for this bean -->
+  <Operations>
+    <Store/>
+    <Update/>
+    <Remove/>
+
+    <!-- findAll method -->
+    <FindBy>
+      <OrderField>CurrentState</OrderField>
+    </FindBy>
+  </Operations>
+</Bean>
+

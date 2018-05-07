@@ -1,0 +1,6 @@
+--SQLFILES--START--
+# Inside the SQLFILES tag comments can be stated with a #
+DeleteRL.sql
+DeleteCoS.sql
+DeleteCAR.sql
+--SQLFILES--END--

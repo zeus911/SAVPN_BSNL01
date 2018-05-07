@@ -1,0 +1,1 @@
+INSERT INTO hist_instance_attributes VALUES (?, ?, ?, ?, ?)

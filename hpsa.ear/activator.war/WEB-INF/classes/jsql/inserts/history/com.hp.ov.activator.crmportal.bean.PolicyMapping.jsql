@@ -1,0 +1,7 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+INSERT INTO V_PolicyMappingHist
+  (TClassName, ProfileName, Exp, Percentage, Position, PLP, queueName, CoSName)
+VALUES
+  (?, ?, ?, ?, ?, ?, ?, ?)
+

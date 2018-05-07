@@ -1,0 +1,9 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+UPDATE
+  V_IPNet
+SET
+  PE1_IPAddr = ?, CE1_IPAddr = ?, PE2_IPAddr = ?, CE2_IPAddr = ?, Netmask = ?, Hostmask = ?, PoolName = ?, IPNetAddrStr = ?
+WHERE
+  IPNetAddr = ?
+

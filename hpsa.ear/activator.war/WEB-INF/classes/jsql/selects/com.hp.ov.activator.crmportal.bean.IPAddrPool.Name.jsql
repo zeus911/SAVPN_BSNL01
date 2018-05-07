@@ -1,0 +1,18 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+SELECT
+  V_IPAddrPool.Name		V_IPAddrPool_Name,
+  V_IPAddrPool.IPNet		V_IPAddrPool_IPNet,
+  V_IPAddrPool.Type		V_IPAddrPool_Type,
+  V_IPAddrPool.AddressFamily		V_IPAddrPool_AddressFamily,
+  V_IPAddrPool.Mask		V_IPAddrPool_Mask
+FROM
+  V_IPAddrPool   V_IPAddrPool
+WHERE
+  V_IPAddrPool.Name = ?
+ORDER BY 
+V_IPAddrPool.Name
+
+
+@ order:1;IPAddrPool.Name
+@ alias:own_table_alias;V_IPAddrPool

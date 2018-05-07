@@ -1,0 +1,86 @@
+/**************************************************************************/
+/*    hp OpenView service activator                                       */
+/*    (c) Copyright 2003-2010 Hewlett-Packard Development Company, L.P.  */
+/**************************************************************************/
+
+
+/**************************************************/
+/*    Spain Tables styles                             */
+/**************************************************/
+
+table {            border: 0px;
+                   border-collapse: collapse;
+                   padding: 0px;
+                   border-spacing: 0px;
+      }
+
+.tableRowSelectSp  { background-color: #8cbdde; 
+                   font-family: Verdana, Helvetica, Arial, Sans-serif;
+                   font-size: 8pt;
+                   line-height: 1.5;
+                   color: black;
+ 	            align: left;
+                   valign: top;
+                   padding: 1px, 3px;
+		    }
+.tableRowKey  { background-color: #8cbdde; 
+                   font-family: Verdana, Helvetica, Arial, Sans-serif;
+                   font-size: 8pt;
+                   line-height: 1.5;
+                   font-weight: bold;
+                   color: black;
+ 	            align: left;
+                   valign: top;
+                   padding: 1px, 3px;
+		    }
+.tableRowEmpty  { background-color: white; 
+                   font-family: Verdana, Helvetica, Arial, Sans-serif;
+                   font-size: 8pt;
+                   line-height: 1.5;
+                   color: black;
+ 	            align: left;
+                   valign: top;
+                   padding: 1px, 3px;
+		    }
+.diffChange  { background-color:  #8cbdde;
+                   font-family: Verdana, Helvetica, Arial, Sans-serif;
+                   font-size: 8pt;
+                   line-height: 1.5;
+                   font-weight: bold;
+                   color: black;
+                   border: 2px solid white;
+                   padding: 1px, 3px;
+ 	               align: left;
+                   valign: top;
+		    }
+.diffDelete { background-color: #FFCC98; 
+                   font-family: Verdana, Helvetica, Arial, Sans-serif;
+                   font-size: 8pt;
+                   line-height: 1.5;
+                   font-weight: bold;
+                   color: black;
+                   border: 2px solid white;
+                   padding: 1px, 3px;
+     	           align: left;
+                   valign: top;
+		    }
+.diffInsert { background-color: #99CCCC; 
+                   font-family: Verdana, Helvetica, Arial, Sans-serif;
+                   font-size: 8pt;
+                   font-weight: bold;
+                   line-height: 1.5;
+                   color: black;
+                   border: 2px solid white;
+                   padding: 1px, 3px;
+     	           align: left;
+                   valign: top;
+		    }
+.searchHeading     { background: white;
+                   font-family: Verdana, Helvetica, Arial, Sans-serif;
+                   font-size: 8pt;
+                   line-height: 1.5;
+                   color: black;
+ 	           align: left;
+                   valign: middle;
+                   padding: 1px, 3px;
+                 }

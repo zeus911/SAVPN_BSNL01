@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+  <link rel="stylesheet" type="text/css" href="/activator/css/primefaces/hpsa.css"/>
+  <script type="text/javascript" src="/activator/javascript/saUtilities.js" ></script>
+  <script>
+  function handleTabChange(index) {
+    var iframe;
+    if (document.all) {
+      iframe = document.getElementsByName(document.frames[index].name)[0];
+      window.open(iframe.src + (iframe.src.indexOf("?") > 0 ? "&amp;" : "?") + "tabindex=" + index + "&amp;nocache=" + Math.random(), document.frames[index].name);
+    } else {
+      iframe = document.getElementsByTagName("iframe")[index];
+      window.open(iframe.src + (iframe.src.indexOf("?") > 0 ? "&amp;" : "?") + "tabindex=" + index + "&amp;nocache=" + Math.random(), iframe.name);
+    }
+    return true;
+  }
+  </script>
+</h:head>
+
+<body onmousemove="logoutTimerReset();" onkeydown="logoutTimerReset();">
+
+<h:outputText value="#{smrb.maintitle}" class="frame-header" />
+
+<p:tabView id="tabview" var="tab" value="#{tabManager.tabs}" cache="false" onTabChange="handleTabChange(index);">
+   <p:tab title="#{tab.label}">
+   <iframe src="#{tab.url}" name="ifr#{tab.id}" style="width:100%; height:750px; border:0px solid;"></iframe>
+   </p:tab>
+</p:tabView>
+
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+    <p:contextMenu for="sovAuditTable">
+      <p:menuitem value="Open Instance" onclick="displayAuditInstances(sovAuditTableWidget.selection);"
+        icon="ui-icon ui-icon-search" />
+      <p:menuitem value="Open New Instance" onclick="openNewAuditInstance(sovAuditTableWidget.selection);"
+        icon="ui-icon ui-icon-search" />
+    </p:contextMenu>
+
+    <p:dataTable id="sovAuditTable" var="row" value="#{SOV_AuditBean.values}" rowKey="#{row.id}"
+      selection="#{SOV_AuditBean.selectedRow}" selectionMode="single" resizableColumns="false"
+      widgetVar="sovAuditTableWidget">
+      <p:columns columnIndexVar="index" id="#{row.data[index]}_#{index}" value="#{SOV_AuditBean.columns}" var="col">
+        <f:facet name="header">
+          <h:outputText value="#{col.name}" />
+        </f:facet>
+        <h:outputText value="#{row.data[index]}" />
+      </p:columns>
+    </p:dataTable>
+
+</ui:composition>

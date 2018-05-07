@@ -1,0 +1,71 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+  <script language="JavaScript" src="/activator/javascript/saSov.js"></script>
+  <script type="text/javascript">
+      function clearFields() {
+        document.getElementById('resultsTabForm:selectedResultsTab').value = "";
+        document.getElementById('resultsTabForm:selectedJobsTab').value = "";
+        document.getElementById('resultsTabForm:jobIdHidden').value = "";
+        document.getElementById('resultsTabForm:serviceIdHidden').value = "";
+        document.getElementById('resultsTabForm:orderIdHidden').value = "";
+        document.getElementById('resultsTabForm:typeHidden').value = "";
+        document.getElementById('resultsTabForm:stateHidden').value = "";
+        document.getElementById('servicesQueryForm:jobId').value = "";
+        document.getElementById('servicesQueryForm:serviceId').value = "";
+        document.getElementById('servicesQueryForm:orderId').value = "";
+        document.getElementById('servicesQueryForm:type').value = "";
+        document.getElementById('servicesQueryForm:state').value = "";
+        document.getElementById('servicesQueryForm:resultsTab').value = "";
+        document.getElementById('servicesQueryForm:jobsTab').value = "";
+        return true;
+      }
+    </script>
+  <div align="center">
+
+    <h:inputHidden value="#{SOV_InteractBean.dummy}" />
+    <h:inputHidden value="#{SOV_ServicesQueryBean.dummy}" />
+    <h:inputHidden id="crossLaunchParams" value="#{SOV_ServicesQueryBean.urlParams}" />
+
+    <h:form id="servicesQueryForm">
+      <p:growl id="sovGrowl" showDetail="true" sticky="false" />
+
+      <p:panel>
+        <br />
+        <h:panelGrid cellspacing="3" cellpadding="3" columns="10" width="100%">
+          <h:column rendered="#{SOV_ServicesQueryBean.jobIdRendered}">
+            <h:outputLabel value="#{sov_msg.sov_job_id} " for="jobId" />
+            <h:inputText value="#{SOV_ServicesQueryBean.jobId}" id="jobId" />
+          </h:column>
+          <h:column rendered="#{SOV_ServicesQueryBean.serviceIdRendered}">
+            <h:outputLabel value="#{sov_msg.sov_service_id} " for="serviceId" />
+            <h:inputText value="#{SOV_ServicesQueryBean.serviceId}" id="serviceId" />
+          </h:column>
+          <h:column rendered="#{SOV_ServicesQueryBean.orderIdRendered}">
+            <h:outputLabel value="#{sov_msg.sov_order_id} " for="orderId" />
+            <h:inputText value="#{SOV_ServicesQueryBean.orderId}" id="orderId" />
+          </h:column>
+          <h:column rendered="#{SOV_ServicesQueryBean.typeRendered}">
+            <h:outputLabel value="#{sov_msg.sov_type} " for="type" />
+            <h:inputText value="#{SOV_ServicesQueryBean.type}" id="type" />
+          </h:column>
+          <h:column rendered="#{SOV_ServicesQueryBean.stateRendered}">
+            <h:outputLabel value="#{sov_msg.sov_state} " for="state" />
+            <h:inputText value="#{SOV_ServicesQueryBean.state}" id="state" />
+          </h:column>
+        </h:panelGrid>
+        <h:panelGrid cellspacing="5" cellpadding="5" columns="2">
+          <h:column>
+            <p:commandButton id="submit" action="#{SOV_ServicesQueryBean.submit}" value="#{sov_msg.sov_query_button}" />
+          </h:column>
+          <h:column>
+            <p:commandButton id="reset" action="#{SOV_ServicesQueryBean.reset}" value="#{sov_msg.sov_reset_button}"
+              onclick="if (!clearFields()) return false;" />
+          </h:column>
+        </h:panelGrid>
+      </p:panel>
+      <p:spacer height="8" />
+
+    </h:form>
+  </div>
+
+</ui:composition>

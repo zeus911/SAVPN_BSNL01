@@ -1,0 +1,6 @@
+--SQLFILES--START--
+# Inside the SQLFILES tag comments can be stated with a #
+CreateState.sql
+CreateServiceTypeME.sql
+CreateStateMapping.sql
+--SQLFILES--END--

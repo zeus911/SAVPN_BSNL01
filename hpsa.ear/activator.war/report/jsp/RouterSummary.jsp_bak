@@ -1,0 +1,387 @@
+<%--##############################################################################--%>
+<%--                                                                              --%>
+<%--   ****  COPYRIGHT NOTICE ****                                                --%>
+<%--                                                                              --%>
+<%--   (c) Copyright 2003-2010 Hewlett-Packard Development Company, L.P.          --%>
+<%--                                                                              --%>
+<%--   All Rights Reserved.                                                       --%>
+<%--                                                                              --%>
+<%--##############################################################################--%>
+<%--                                                                              --%>
+<%--##############################################################################--%>
+<%--                                                                              --%>
+<%-- $Source: /tmp/vpn/SA_VPN_SP/OpenView/ServiceActivator/solutions/SAVPN/UI/report/jsp/bandwidthAccountingReportParams.jsp,v $--%>
+<%-- $Revision: 1.11 $                                                                 --%>
+<%-- $Date: 2011-02-18 05:35:50 $                                                     --%>
+<%-- $Author: Anu D $                                                                   --%>
+<%--                                                                              --%>
+<%--##############################################################################--%>
+<%--#                                                                             --%>
+<%--#  Description                                                                --%>
+<%--#                                                                             --%>
+<%--##############################################################################--%>
+
+<%@page import="com.hp.ov.activator.vpn.report.RouterSummaryReport"%>
+<%@page contentType="text/html;charset=UTF-8"
+	import="com.hp.ov.activator.mwfm.*,
+                com.hp.ov.activator.mwfm.servlet.*,
+                com.hp.ov.activator.vpn.inventory.*,
+				com.hp.ov.activator.cr.inventory.NetworkElement,
+				com.hp.ov.activator.cr.inventory.Region,com.hp.ov.activator.cr.inventory.Location,
+                java.sql.*, com.hp.ov.activator.inventory.SAVPN.SwitchConstants,
+                javax.sql.DataSource,
+                java.util.*"%>
+<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
+<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
+<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
+<%@ taglib uri="/WEB-INF/struts-nested.tld" prefix="nested"%>
+<%@ taglib uri="/WEB-INF/table-taglib.tld" prefix="table"%>
+<%@ taglib uri="/WEB-INF/button-taglib.tld" prefix="btn"%>
+<%
+    if (session == null || session.getAttribute(Constants.USER) == null) {
+        response.sendRedirect(".../../jsp/sessionError.jsp");
+        return;
+    }
+
+    response.setDateHeader("Expires",0);
+    response.setHeader("Pragma","no-cache");
+    request.setCharacterEncoding("UTF-8");
+
+%>
+
+<%! int numPages = 0; %>
+
+
+
+<html>
+<head>
+<title>HP Service Activator</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+
+<link rel="stylesheet" type="text/css" href="/activator/css/saAudit.css">
+<link rel="stylesheet" type="text/css"
+	href="/activator/css/inventory.css">
+<link rel="stylesheet" type="text/css"
+	href="/activator/css/activator.css">
+<link rel="stylesheet" type="text/css"
+	href="/activator/css/saContextMenu.css">
+
+<style test>
+A:hover {font-weight;
+	TEXT-DECORATION: underline;
+}
+
+.trigger {
+	CURSOR: pointer;
+	font-family: Verdana, Helvetica, Arial, Sans-serif;
+	font-size: 8pt;
+	color: black;
+	padding: 1px, 3px;
+}
+
+.fcwidth {
+	width: 150px;
+	height: 20px;
+}
+
+.formCell {
+	font-family: Verdana, Helvetica, Arial;
+	font-size: 15px;
+	font-weight: bold;
+	color: blue;
+	padding: 5px, 5px;
+	width: 58%;
+	height: 25;
+}
+
+.triggerB {
+	CURSOR: pointer;
+	font-family: Verdana, Helvetica, Arial, Sans-serif;
+	font-size: 8pt;
+	color: #336699;
+	font-weight: bold;
+	padding: 1px, 3px;
+}
+
+A:hover {
+	color: blue;
+}
+.mainHeading1     { background: #336699;
+                   font-family: Verdana, Helvetica, Arial, Sans-serif;
+                   font-size: 9pt;
+                   line-height: 1.5;
+                   color: white;
+ 	               align: center;
+                   valign: middle;
+                   padding: 1px, 3px;
+                 }
+</style>
+</head>
+<body>
+	<center>
+		<br />
+		<br />
+		<h2 class="mainSubHeading">
+			<center>Provisioning Management System</center>
+		</h2>
+	</center>
+	<%
+	int count=0;
+	int startIndex=0;
+	int increment=0;
+	
+	
+	String row_class="tableEvenRow";
+	Connection      con = null;
+	DataSource      dataSource = (DataSource) session.getAttribute (Constants.DATASOURCE);
+	 try {con = (Connection) dataSource.getConnection();
+	 
+	 RouterSummaryReport rs_intance= new RouterSummaryReport(con);
+	 
+	  LinkedHashMap<String,HashMap<String,String>>  nE_intdetails = rs_intance.getRouter_interfacedetails();
+	  ArrayList<String> router_ids= new ArrayList<String>();
+	  for(String routerid: nE_intdetails.keySet())
+	  {
+		  router_ids.add(routerid);
+		  
+	  }
+	  
+	 // System.out.println("router_ids"+router_ids);
+	//for pagination
+	int numRows = nE_intdetails.size();
+	String startIndexString = request.getParameter("startIndex");
+	if((startIndexString == null)||(startIndexString.length()==0)) 
+	 { //for pagination if page is loaded first time
+	startIndexString = "0";
+	 }else{
+		 startIndex= Integer.parseInt(startIndexString);
+	 }
+	
+	//System.out.println("Router Summary startindex>>>>"+startIndexString);
+	//System.out.println("Router Summary no of records>>>>"+request.getParameter("txtnumrec"));
+	
+	int numRecordsPerPage =24;
+	if (request.getParameter("txtnumrec")==null)
+		numRecordsPerPage = 24;
+		else
+		numRecordsPerPage = Integer.parseInt(request.getParameter("txtnumrec"));
+	
+	numPages = numRows /numRecordsPerPage ; 
+	int remain = numRows % numRecordsPerPage ;
+	if(remain != 0) numPages = numPages +1 ;
+  //  int NextIndexString =numRecordsPerPage+1;
+    int startpoint =0;
+    // 
+    String temp="";
+    for(int inum=1;inum<=numPages;inum++)
+{
+ 
+temp=temp+"<a href=\"RouterSummary.jsp?startIndex="+startpoint+"&txtnumrec="+numRecordsPerPage+"\" >"+inum+"</a> ";																																							
+startpoint = startpoint + numRecordsPerPage;
+}
+ 
+    
+    if((startIndex + numRecordsPerPage) <= numRows) 
+    {
+      
+    increment = startIndex + numRecordsPerPage ;
+   
+    }
+    else
+    {
+     
+    if (remain == 0)
+    {
+    	
+    	//System.out.println("Router Summary increment 2>>>>"+increment);
+    increment = startIndex + numRecordsPerPage ;
+    }else{
+    	
+    	
+    increment = startIndex + remain;
+    }//end of inner if
+    }
+	
+%>
+	 
+
+	<table align="center" width="85%" cellpadding='0' border='1' style="overflow-y:scroll" 
+		cellspacing='0'>
+		<tr align="center">
+			<td colspan="16" class="mainHeading1"  align="center"><b>Equipment
+					level interface summary report for PE routers</b></td>
+		</tr>
+		<tr>
+			<td align="center" rowspan="2" class="mainHeading1">PERouter Name</td>
+			<td align="center" rowspan="2" class="mainHeading1">Location</td>
+			<td align="center" rowspan="2" class="mainHeading1">Vendor</td>
+			<td align="center" rowspan="2" class="mainHeading1">Model</td>
+			
+			<td align="center" colspan="2" class="mainHeading1">Serial</td>
+			<td align="center" colspan="2" class="mainHeading1">GigabitEthernet</td>
+			<td align="center" colspan="2" class="mainHeading1">FastEthernet</td>
+			<td align="center" colspan="2" class="mainHeading1">Pos</td>
+			<td align="center" colspan="2" class="mainHeading1">Others</td>
+			<!-- <td align="center" rowspan="1" colspan="6" class="mainHeading1">Available(Maximum)</td> -->
+			<td align="center" rowspan="2" class="mainHeading1">Total Used</td>
+			<td align="center" rowspan="2" class="mainHeading1">Total Available</td>
+		</tr>
+		<tr>
+		
+			<td align="center" class="mainHeading1">Used</td>
+			<td align="center" class="mainHeading1">Free</td>
+			<td align="center" class="mainHeading1">Used</td>
+			<td align="center" class="mainHeading1">Free</td>
+			<td align="center" class="mainHeading1">Used</td>
+			<td align="center" class="mainHeading1">Free</td>
+			<td align="center" class="mainHeading1">Used</td>
+			<td align="center" class="mainHeading1">Free</td>
+			<td align="center" class="mainHeading1">Used</td>
+			<td align="center" class="mainHeading1">Free</td>
+ 		</tr>
+
+		<%
+		 Iterator it = nE_intdetails.entrySet().iterator();
+							
+							
+							
+		
+	   for(count = startIndex; count < increment; count++) 
+	  {
+	     //  while (it.hasNext()) {	    	 
+	        Map.Entry entry_set = (Map.Entry)it.next();	  
+	        
+	      //  System.out.print("Count.."+count);
+	       
+	        HashMap<String,String> Pe_inter_detail= nE_intdetails.get(router_ids.get(count));
+	      //  HashMap<String,String> Pe_inter_detail= (HashMap)entry_set.
+	        String router_name= Pe_inter_detail.get("Router_name");
+	        String location=Pe_inter_detail.get("Location");
+	        String vendor=Pe_inter_detail.get("Vendor");
+	        String model=Pe_inter_detail.get("Model");
+	        
+	        String total_Used_Inter_count=Pe_inter_detail.get("total_Used_Inter_count");
+	        String total_Free_Inter_count=Pe_inter_detail.get("total_Free_Inter_count");
+	        
+	        String free_Serial_Inter_count=Pe_inter_detail.get("free_Serial_Inter_count");
+	        String free_Fast_Inter_count=Pe_inter_detail.get("free_Fast_Inter_count");	        
+	        String free_Giga_inter_count=Pe_inter_detail.get("free_Giga_inter_count");
+	        String free_Pos_Inter_count=Pe_inter_detail.get("free_Pos_Inter_count");
+	        
+	        String Used_Giga_inter_count=Pe_inter_detail.get("Used_Giga_inter_count");
+	        String Used_Fast_Inter_count=Pe_inter_detail.get("Used_Fast_Inter_count");
+	        String Used_Serial_Inter_count=Pe_inter_detail.get("Used_Serial_Inter_count");
+	        String Used_Pos_Inter_count=Pe_inter_detail.get("Used_Pos_Inter_count");
+	        int Other_free_interfaces=0;
+	        int Other_USed_interfaces=0;
+	        
+	        if(total_Used_Inter_count==null){
+	        	total_Used_Inter_count="NA";
+	        	
+	        }
+	        if(total_Free_Inter_count==null){
+	        	total_Free_Inter_count="NA";	        	
+	        }
+	        if(free_Serial_Inter_count==null){
+	        	free_Serial_Inter_count="NA";	        	
+	        }
+	        if(free_Fast_Inter_count==null ){
+	        	free_Fast_Inter_count="NA";	        	
+	        }
+	        if(free_Pos_Inter_count==null ){
+	        	free_Pos_Inter_count="NA";	        	
+	        }
+	        if(free_Giga_inter_count==null ){
+	        	free_Giga_inter_count="NA";	        	
+	        }
+	        if(Used_Serial_Inter_count==null){
+	        	Used_Serial_Inter_count="NA";	        	
+	        }
+	        if(Used_Fast_Inter_count==null ){
+	        	Used_Fast_Inter_count="NA";	        	
+	        }
+	        if(Used_Pos_Inter_count==null ){
+	        	Used_Pos_Inter_count="NA";	        	
+	        }
+	        if(Used_Giga_inter_count==null ){
+	        	Used_Giga_inter_count="NA";	        	
+	        }
+	        
+	        try {
+	         Other_free_interfaces=Integer.parseInt(total_Free_Inter_count) -(Integer.parseInt(free_Serial_Inter_count)+Integer.parseInt(free_Giga_inter_count)+Integer.parseInt(free_Fast_Inter_count)+Integer.parseInt(free_Pos_Inter_count));
+	         Other_USed_interfaces=Integer.parseInt(total_Used_Inter_count) -(Integer.parseInt(Used_Giga_inter_count)+Integer.parseInt(Used_Fast_Inter_count)+Integer.parseInt(Used_Serial_Inter_count)+Integer.parseInt(Used_Pos_Inter_count));
+	        }catch(Exception e){
+	        	
+	        	//System.out.println("Exception in Router summary"+e);
+	        	
+	        }
+	        
+	        %>
+		<tr class="<%=row_class%>">
+			<td align="center"  class="tablecell"><%=router_name%></td>
+			<td align="center"  class="tablecell"><%=location%></td>
+			<td align="center"  class="tablecell"><%=vendor %></td>
+			<td align="center"  class="tablecell"><%=model%></td>	
+			<td align="center"  class="tablecell"><%=Used_Serial_Inter_count %></td>
+			<td align="center"  class="tablecell"><%=free_Serial_Inter_count %></td>		
+			<td align="center"  class="tablecell"><%= Used_Giga_inter_count%></td>
+			<td align="center"  class="tablecell"><%= free_Giga_inter_count%></td>
+			<td align="center"  class="tablecell"><%=Used_Fast_Inter_count %></td>
+			<td align="center"  class="tablecell"><%=free_Fast_Inter_count %></td>
+			 <td align="center"  class="tablecell"><%=Used_Pos_Inter_count %></td> 
+			<td align="center"  class="tablecell"><%=free_Pos_Inter_count%></td>		
+			 <td align="center"  class="tablecell"><%=Other_USed_interfaces %></td> 
+			 <td align="center"  class="tablecell"><%=Other_free_interfaces %></td>  
+			 <td align="center"  class="tablecell"><%=total_Used_Inter_count%></td>	
+			<td align="center"  class="tablecell"><%= total_Free_Inter_count%></td>
+				
+		</tr>
+		<%} %> 
+	</table>
+	</br>
+	<table width="16%" align ="right" border="0">
+     
+   <tr>
+      <td align="left" width="50%"  style=" font-family: Verdana, Helvetica, Arial, Sans-serif;
+                   font-size: 9pt;">
+        <%if(startIndex != 0) {%> 
+      <a href="RouterSummary.jsp?startIndex=<%=startIndex-numRecordsPerPage%>&txtnumrec=<%=numRecordsPerPage%>"><b>Previous</b></a> 
+      
+       <%}%></td>
+  <%--   <td width="40%" scope="col" >Page:<%=temp%></td> --%>
+    <td align="left" width="50%" style=" font-family: Verdana, Helvetica, Arial, Sans-serif;
+                   font-size: 9pt;">  
+        <%if(startIndex + numRecordsPerPage < numRows){%> 
+        <a href="RouterSummary.jsp?startIndex=<%=startIndex+numRecordsPerPage %>&txtnumrec=<%=numRecordsPerPage%>"><b>Next</b></a> 
+      
+        <%}%>
+       
+      </td>
+      </tr>
+    </table>
+	<br/><br/>
+	<br/>
+	 <table align="right"  cellpadding='1' cellspacing='10' border='0' >
+                    <tr>
+                        <td style=" font-family: Verdana, Helvetica, Arial, Sans-serif;
+                   font-size: 9pt;color:white;background: #336699;">
+						  <a  href="#" onclick="javascript:window.print();" style="text-decoration:none;color:white" >Print</a>
+					  </td>
+                      <!--   <td width="50%"  class="mainHeading" align = "left">
+						  <a  href="saveReport.jsp?reportType=BandwidthAccountingReport">
+						  <center>Save</center></a>
+					  </td> -->
+                    </tr>
+    </table>
+	
+	<%}catch (Exception e) {
+     //   e.printStackTrace();
+    } finally {
+        con.close();
+    } %>
+</body>
+</html>

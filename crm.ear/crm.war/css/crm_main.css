@@ -1,0 +1,44 @@
+/*
+ * Some defaults of the main body
+ */
+body    {
+            font-family: Verdana, Helvetica, Arial, Sans-serif;
+            font-size: 8pt;
+            color: white;
+        }
+
+/*
+ * To position the heading centrally
+ */
+h1      {    
+            font-size: 16pt;
+            font-weight: bold;
+            color: #26558e; 
+            position: absolute;
+            top: 20%;
+            left: 15%
+        }
+
+/*
+ * To position the logo img relative to h1
+ */
+h1 img    {
+            position: absolute;
+            top: 100px;
+            left: 35%;
+    }
+
+h2      {    
+            font-size: 12pt;
+            font-weight: bold;
+            color: #26558e; 
+        }
+
+p       {
+            font-size: 10pt;
+            font-weight: bold;
+            color: #26558e; 
+        }
+/*
+   vim:softtabstop=4:shiftwidth=4:expandtab
+ */

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f="http:/jsf.exadel.com/template" xmlns:u="http:/jsf.exadel.com/template/util"
+    xmlns="http://www.w3.org/1999/xhtml">
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/context-menu.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/combobox.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/progress-bar.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/tree.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/ordering-list.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/pick-list.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/inplace-input.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/editor.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/tool-bar.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/panelmenu.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/list-shuttle.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/layout.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/inplace-select.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/calendar.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/simple-toggle-panel.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/core.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/spacer.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/tab-panel.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/panel.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/file-upload.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/inputnumber-spinner.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/toggle-panel.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/datascroller.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/separator.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/message.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/panelbar.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/scrollable-data-table.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/data-table.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/paint2d.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/data-filter-slider.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/modal-panel.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/virtual-earth.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/extended-data-table.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/color-picker.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/menu-components.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/tooltip.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/gmap.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/dropdown-menu.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/drag-drop.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/suggestionbox.xcss" />
+  <f:importResource src="com/hp/ov/activator/jsfSkins/hpsa/css/inputnumber-slider.xcss" />
+</f:template>

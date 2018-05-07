@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+	version="2.0">
+<!--
+No ManagedBean declarations here as we are using @ManagedBean Annotations.
+-->
+
+  <application>
+    <resource-bundle>
+      <base-name>jsf_resources.businessCalendarGUIRB</base-name>
+      <var>bc_msg</var>
+    </resource-bundle>
+  </application>
+
+  <application>
+    <resource-bundle>
+      <base-name>jsf_resources.debugGUIRB</base-name>
+      <var>debug_msg</var>
+    </resource-bundle>
+  </application>
+
+  <application>
+    <resource-bundle>
+      <base-name>jsf_resources.viewLicenseGUIRB</base-name>
+      <var>lic_msg</var>
+    </resource-bundle>
+  </application>
+
+  <application>
+    <resource-bundle>
+      <base-name>jsf_resources.logSearchRB</base-name>
+      <var>log_search</var>
+    </resource-bundle>
+  </application>
+
+  <application>
+    <resource-bundle>
+      <base-name>jsf_resources.miscRB</base-name>
+      <var>misc_msg</var>
+    </resource-bundle>
+  </application>
+
+  <application>
+    <resource-bundle>
+      <base-name>jsf_resources.poolmngRB</base-name>
+      <var>rmmsg</var>
+    </resource-bundle>
+  </application>
+
+  <application>
+    <resource-bundle>
+      <base-name>jsf_resources.schedulerRB</base-name>
+      <var>schrb</var>
+    </resource-bundle>
+  </application>
+
+  <application>
+    <resource-bundle>
+      <base-name>jsf_resources.selfmonitorRB</base-name>
+      <var>smrb</var>
+    </resource-bundle>
+  </application>
+
+  <application>
+    <resource-bundle>
+      <base-name>jsf_resources.somRB</base-name>
+      <var>somrb</var>
+    </resource-bundle>
+  </application>
+
+  <application>
+    <resource-bundle>
+      <base-name>jsf_resources.jobsRB</base-name>
+      <var>jobsrb</var>
+    </resource-bundle>
+  </application>
+
+  <application>
+    <resource-bundle>
+      <base-name>jsf_resources.msgsRB</base-name>
+      <var>msgsrb</var>
+    </resource-bundle>
+  </application>
+
+  <application>
+    <resource-bundle>
+      <base-name>jsf_resources.auditRB</base-name>
+      <var>auditrb</var>
+    </resource-bundle>
+  </application>
+
+  <application>
+    <resource-bundle>
+      <base-name>jsf_resources.wfRB</base-name>
+      <var>wfrb</var>
+    </resource-bundle>
+  </application>
+
+  <application>
+    <resource-bundle>
+      <base-name>jsf_resources.wfmqueuesRB</base-name>
+      <var>wfmqrb</var>
+    </resource-bundle>
+  </application>
+
+  <application>
+    <resource-bundle>
+      <base-name>jsf_resources.ummRB</base-name>
+      <var>ummrb</var>
+    </resource-bundle>
+  </application>
+
+  <application>
+    <resource-bundle>
+      <base-name>jsf_resources.userRB</base-name>
+      <var>userrb</var>
+    </resource-bundle>
+  </application>
+
+  <application>
+    <resource-bundle>
+      <base-name>jsf_resources.roleRB</base-name>
+      <var>rolerb</var>
+    </resource-bundle>
+  </application>
+
+  <application>
+    <resource-bundle>
+      <base-name>jsf_resources.teamRB</base-name>
+      <var>teamrb</var>
+    </resource-bundle>
+  </application>
+
+  <application>
+    <resource-bundle>
+      <base-name>jsf_resources.upwdRB</base-name>
+      <var>upwdrb</var>
+    </resource-bundle>
+  </application>
+
+  <application>
+    <resource-bundle>
+      <base-name>jsf_resources.pwdRB</base-name>
+      <var>pwdrb</var>
+    </resource-bundle>
+  </application>
+
+  <application>
+    <resource-bundle>
+      <base-name>jsf_resources.sovRB</base-name>
+      <var>sovrb</var>
+    </resource-bundle>
+  </application>
+
+  <application>
+    <resource-bundle>
+      <base-name>jsf_resources.activationRB</base-name>
+      <var>activationrb</var>
+    </resource-bundle>
+  </application>
+
+</faces-config>

@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+  <p:contextMenu for="sovScheduledJobsTable">
+    <p:menuitem value="Start Job" icon="ui-icon ui-icon-play" actionListener="#{SOV_ScheduledJobBean.startJob}"
+      update="sovScheduledJobsTable, :servicesQueryForm:sovGrowl" />
+    <p:menuitem value="Modify Job" onclick="modifyScheduledJob(sovScheduledJobsTableVar.selection, '');"
+      icon="ui-icon ui-icon-refresh" update="sovScheduledJobsTable, :servicesQueryForm:sovGrowl" />
+    <p:menuitem value="Delete Job" actionListener="#{SOV_ScheduledJobBean.deleteJob}" icon="ui-icon ui-icon-close"
+      update="sovScheduledJobsTable, :servicesQueryForm:sovGrowl" />
+  </p:contextMenu>
+
+  <p:dataTable id="sovScheduledJobsTable" value="#{SOV_ScheduledJobBean.values}" var="row" selectionMode="single"
+    rowKey="#{row.id}" selection="#{SOV_ScheduledJobBean.selectedRow}" resizableColumns="false"
+    widgetVar="sovScheduledJobsTableVar">
+    <p:columns columnIndexVar="colIndex" id="#{row.data[colIndex]}_#{colIndex}" value="#{SOV_ScheduledJobBean.columns}"
+      var="col">
+      <f:facet name="header">
+        <h:outputText value="#{col.name}" />
+      </f:facet>
+      <h:outputText value="#{row.data[colIndex]}" />
+    </p:columns>
+  </p:dataTable>
+
+</ui:composition>

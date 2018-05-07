@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE ROOT SYSTEM "portal.dtd">
+<!--
+###############################################################################
+#
+#  (c) Copyright 2003-2010 Hewlett-Packard Development Company, L.P. 
+#
+#   
+###############################################################################
+
+###############################################################################
+#
+# $Source: /tmp/vpn/SA_VPN_SP/jboss/server/default/deploy/crmportal.sar/crm.war/WEB-INF/bin/XMLConverter/export.start,v $
+# $Revision: 1.8 $
+# $Date: 2010-12-14 06:32:30 $
+# $Author: shiva $
+#
+###############################################################################
+#
+# <Description> 
+#
+###############################################################################
+-->
+<ROOT>
+  <Tables>
+    <Table>crm_customer</Table>
+    <Table>crm_service</Table>
+    <Table>crm_serviceparam</Table>
+    <Table>crm_vpn_membership</Table>
+  </Tables>
+
+  <Sequences>
+    <Sequence>CRM_CUSTOMER_ID_SEQ</Sequence>
+    <Sequence>CRM_MESSAGE_ID_SEQ</Sequence>
+    <Sequence>CRM_SERVICE_ID_SEQ</Sequence>
+  </Sequences>

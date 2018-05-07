@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Services Order View</title>
+  <script type="text/javascript" src="/activator/javascript/saUtilities.js" />
+  <!--   <link rel="stylesheet" type="text/css" href="/activator/css/saNavigation.css" />  -->
+  <script type="text/javascript">
+  function submitOnUrlParams() {
+	/* alert('Params from URL:' + document.getElementById('crossLaunchParams').value); */
+    if (document.getElementById('crossLaunchParams').value == 'true') {
+      document.getElementById('servicesQueryForm:submit').click();
+    }
+  }
+  </script>
+  <link rel="stylesheet" type="text/css" href="/activator/css/primefaces/hpsa.css" />
+  <style>
+.sablbg {
+    background-color: /*c:sabl*/#0096d6;
+}
+  </style>
+</h:head>
+<h:body onmousemove="logoutTimerReset();" onkeydown="logoutTimerReset();" onload="submitOnUrlParams('123');">
+  <ui:insert name="top_head">
+    <ui:include src="/jsf/sov/header.xhtml" />
+  </ui:insert>
+
+  <ui:insert name="top_blank">
+    <ui:include src="/jsf/sov/space_holder.xhtml" />
+  </ui:insert>
+
+  <ui:insert name="query_section">
+    <ui:include src="/jsf/sov/query.xhtml" />
+  </ui:insert>
+
+  <ui:insert name="tab_section">
+    <ui:include src="/jsf/sov/blank.xhtml" />
+  </ui:insert>
+
+  <ui:insert name="top_blank">
+    <ui:include src="/jsf/sov/space_holder.xhtml" />
+  </ui:insert>
+
+  <ui:insert name="footer">
+    <ui:include src="/jsf/sov/footer.xhtml" />
+  </ui:insert>
+</h:body>
+</html>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE Bean SYSTEM "bean.dtd">
+<!--
+######################################################################
+#
+# (c) Copyright 2003-2010 Hewlett-Packard Development Company, L.P. 
+#
+######################################################################
+
+
+###############################################################################
+#
+# $Source: /tmp/vpn/SA_VPN_SP/jboss/server/default/deploy/crmportal.sar/crm.war/WEB-INF/src/inventory/IPNet.xml,v $
+# $Revision: 1.19 $
+# $Date: 2011-04-19 06:53:29 $
+# $Author: shiva $
+#
+###############################################################################
+#
+# <Description> 
+#
+###############################################################################
+-->
+<Bean>
+	<Name>IPNet</Name>
+	<Solution>CRM</Solution>
+	<Package>com.hp.ov.activator.crmportal.bean</Package>
+	<DBTable>V_IPNet</DBTable>
+	<DBAlias>V_IPNet</DBAlias>
+	<Fields>
+		<Field update ="false">
+			<Name>IPNetAddr</Name>
+			<Type>String</Type>
+			<Description>IP network address</Description>
+		</Field>
+		<Field>
+			<Name>PE1_IPAddr</Name>
+			<Type>String</Type>
+			<Description>IP address of the first PE router interface</Description>
+		</Field>
+		<Field>
+			<Name>CE1_IPAddr</Name>
+			<Type>String</Type>
+			<Description>IP address of the first CE router interface</Description>
+		</Field>
+		<Field mandatory="false">
+			<Name>PE2_IPAddr</Name>
+			<Type>String</Type>
+			<Description>IP address of the second PE router interface</Description>
+			<ShowConditions>
+				<ShowCondition>
+					<FieldName>Netmask</FieldName>
+					<Pattern>^((?!255.255.255.25[2|5]).)*$</Pattern>
+				</ShowCondition>
+			</ShowConditions>
+		</Field>
+		<Field mandatory="false">
+			<Name>CE2_IPAddr</Name>
+			<Type>String</Type>
+			<Description>IP address of the second CE router interface</Description>
+			<ShowConditions>
+				<ShowCondition>
+					<FieldName>Netmask</FieldName>
+					<Pattern>^((?!255.255.255.25[2|5]).)*$</Pattern>
+				</ShowCondition>
+			</ShowConditions>
+		</Field>
+		<Field>
+			<Name>Netmask</Name>
+			<Type>String</Type>
+			<Description>Mask for the network (e.g. 255.255.255.252)</Description>
+		</Field>
+		<Field>
+			<Name>Hostmask</Name>
+			<Type>String</Type>
+			<Description>Mask for the host part (e.g. 0.0.0.3)</Description>
+		</Field>
+		<Field>
+			<Name>PoolName</Name>
+			<Type>String</Type>
+			<Description>The name for IP address pool</Description>
+		</Field>
+		<Field mandatory="false" hiddenUpdate="true" hiddenView="true" hiddenCreate="true">
+			<Name>IPNetAddrStr</Name>
+			<Type>String</Type>
+			<Default>field:IPNetAddr</Default>
+			<Description>IP address of the net link (IPNetAddr) padded with zeroes (e.g. 172.000.000.008). Used for sorting of IPNets.</Description>
+		</Field>
+	</Fields>
+	<Keys>
+		<Key pk="true">
+			<KeyField>IPNetAddr</KeyField>
+		</Key>
+		<Key foreignBean="IPAddrPool">
+			<KeyField foreignField="Name">PoolName</KeyField>
+		</Key>
+		<Key>
+			<!--  <Name>PoolNameNetmask</Name> -->
+			<KeyField>PoolName</KeyField>
+			<KeyField>Netmask</KeyField>
+		</Key>
+	</Keys>
+	<!-- These Are The Operations To Generate For This Bean -->
+	<Operations>
+		<Store/>
+		<Update/>
+		<Remove/>
+		<FindBy key="PoolName">
+			<OrderField>IPNetAddrStr</OrderField>
+		</FindBy>
+	</Operations>
+</Bean>

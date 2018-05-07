@@ -1,0 +1,17 @@
+--SQLFILES--START--
+# Inside the SQLFILES tag comments can be stated with a #
+createCRM.sql
+# RL.sql
+# CAR.sql
+# CoS.sql
+#Mask.sql
+# Location.sql
+#State.sql
+#Customer.sql
+#Message.sql
+#ServiceType.sql
+#Service.sql
+#ServiceParameter.sql
+#StateMapping.sql
+#VPNMembership.sql
+--SQLFILES--END--

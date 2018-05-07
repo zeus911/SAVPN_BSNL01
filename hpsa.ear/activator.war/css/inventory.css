@@ -1,0 +1,81 @@
+/**************************************************************************/
+/*  HP Service Activator                                                  */
+/* (c) Copyright 2014 Hewlett-Packard Development Company, L.P.		      */
+/**************************************************************************/
+html {
+  font-family: Verdana, Helvetica, Arial, Sans-serif;
+}
+
+.invField {
+  font-size: 10pt;
+  color: /*c:blck*/ #000000;
+}
+
+.invBField {
+  font-size: 10pt;
+  font-weight: bold;
+  color: /*c:blck*/ #000000;
+}
+
+.invCell {
+  font-size: 8pt;
+  color: /*c:blck*/ #000000;
+}
+
+.invHeading {
+  font-size: 10pt;
+  font-weight: bold;
+  color: /*c:blck*/ #000000;
+  text-align: left;
+}
+
+.invTitle {
+  background: /*c:sabl*/ #0096d6;
+  font-size: 8pt;
+  color: /*c:whit*/ #ffffff;
+  text-align: left;
+  vertical-align: middle;
+}
+
+/**************************************************/
+/*    Link Styles                                 */
+/**************************************************/
+a,a:link,a:visited,a:active {
+  text-decoration: none;
+}
+
+a:link,a:visited,a:active {
+  color: /*c:blck*/ #000000;
+}
+
+a {
+  color: /*c:sabl*/ #0096d6;
+}
+
+/**************************************************/
+/*    Header styles                               */
+/**************************************************/
+h1,h2,h3 {
+  color: /*c:sabl*/ #0096d6;
+}
+
+h1 {
+  font-size: 16pt;
+}
+
+h2 {
+  font-size: 12pt;
+}
+
+h3 {
+  font-size: 10pt;
+}
+
+h4.white {
+  font-size: 8pt;
+  color: /*c:whit*/ #ffffff;
+}
+
+body {
+  font-size: 8pt
+}

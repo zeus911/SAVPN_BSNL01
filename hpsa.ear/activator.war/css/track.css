@@ -1,0 +1,23 @@
+/**************************************************/
+/*    Track page styles                           */
+/**************************************************/
+td.ACTIVE
+{
+  background: transparent;
+}
+td.UNDO, td.INTERRUPTED, td.JOBID
+{
+  background-color: /*c:ltrd*/ #f7d7d7;
+}
+td.DOING
+{
+  background-color: /*c:sapl*/ #822980;
+}
+td.DONE
+{
+  background-color: /*c:sabl*/ #0096d6;
+}
+td.STATE, td.HOSTNAME, td.TRANSACTIONSEQID, td.WORKFLOW, td.STARTTIME
+{
+  background-color: /*c:ltgy*/ #e5e8e8;
+}

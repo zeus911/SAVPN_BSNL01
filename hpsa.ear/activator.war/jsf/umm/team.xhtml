@@ -1,0 +1,66 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:util="http://java.sun.com/jsf/composite/components/util">
+
+<p:growl id="tmgrowl" showDetail="true"/>
+
+<p:dialog id="dlgmodtm" widgetVar="dlgmodtm" showEffect="fade" hideEffect="fade" modal="true" width="500" draggable="false" resizable="false" >
+  <f:facet name="header">
+    <h:outputText id="dlgmodtmhdr" value="#{teamManager.title}" />
+  </f:facet>
+  <p:panelGrid id="tmdg" cellpadding="0" style="width:100%; text-align:left;" styleClass="datagrid">
+    <p:row>
+    <p:column>
+    <h:outputText value="#{teamrb.team_name}:" />
+    </p:column>
+    <p:column>
+    <h:outputText value="#{teamManager.teamname}" rendered="#{teamManager.isTeamNameReadOnly}" />
+    <h:inputText value="#{teamManager.teamname}" label="#{teamrb.teamname}" style="width:100%" rendered="#{!teamManager.isTeamNameReadOnly}" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{teamrb.description}:" />
+    </p:column>
+    <p:column>
+    <h:inputText value="#{teamManager.description}" label="#{teamrb.description}" style="width:100%" />
+    </p:column>
+    </p:row>
+  </p:panelGrid>
+  <p:commandButton value="#{teamrb.ok}" type="submit" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      update="tmgrowl,team_op_result" actionListener="#{teamManager.save}"
+      partialSubmit="true" process="dlgmodtm" oncomplete="onsavedteam();"/>
+  <p:commandButton value="#{teamrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgmodtm').hide();"/>
+  <h:inputHidden id="team_op_result" value="#{teamManager.teamOperationResult}" />
+  <script>
+  function onsavedteam() {
+    var inputs = document.getElementsByTagName("input");
+    var h = null;
+    if (inputs != null) {
+      for (var i = 0; i &lt; inputs.length &amp;&amp; h == null; i++) {
+        h = inputs[i];
+        if (h.id == null || h.id.indexOf("team_op_result") &lt; 0) {
+          h = null;
+        }
+      }
+    }
+    if (h != null &amp;&amp; (h.value == null || h.value == "")) {
+      PF('dlgmodtm').hide();
+      resume(); // remote command defined in umm.xhtml
+    }
+  }
+  </script>
+  <p:remoteCommand name="createTeam" update="dlgmodtmhdr,tmdg" oncomplete="PF('dlgmodtm').show();">
+    <f:setPropertyActionListener value="#{teamname}" target="#{teamManager.createTeam}" />
+  </p:remoteCommand>
+  <p:remoteCommand name="modifyTeam" update="dlgmodtmhdr,tmdg" oncomplete="PF('dlgmodtm').show();">
+    <f:setPropertyActionListener value="#{teamname}" target="#{teamManager.modifyTeam}" />
+  </p:remoteCommand>
+</p:dialog>
+
+</ui:composition>

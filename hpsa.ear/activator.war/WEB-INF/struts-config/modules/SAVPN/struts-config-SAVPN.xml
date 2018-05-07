@@ -1,0 +1,897 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+<form-beans>
+  <form-bean name="L3VRRPForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.L3VRRPForm"/>
+      <form-bean name="L3VRRPFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.L3VRRPFormSearch"/>
+  <form-bean name="BackupRefForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.BackupRefForm"/>
+      <form-bean name="BackupRefFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.BackupRefFormSearch"/>
+  <form-bean name="L2VCForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.L2VCForm"/>
+      <form-bean name="L2VCFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.L2VCFormSearch"/>
+  <form-bean name="NetworkForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.NetworkForm"/>
+      <form-bean name="NetworkFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.NetworkFormSearch"/>
+  <form-bean name="LSPParametersForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.LSPParametersForm"/>
+      <form-bean name="LSPParametersFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.LSPParametersFormSearch"/>
+  <form-bean name="QueueForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.QueueForm"/>
+      <form-bean name="QueueFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.QueueFormSearch"/>
+  <form-bean name="EquipmentConfigurationForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.EquipmentConfigurationForm"/>
+      <form-bean name="EquipmentConfigurationFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.EquipmentConfigurationFormSearch"/>
+  <form-bean name="SchSettingsForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.SchSettingsForm"/>
+      <form-bean name="SchSettingsFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.SchSettingsFormSearch"/>
+  <form-bean name="L3VPNMembershipForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.L3VPNMembershipForm"/>
+      <form-bean name="L3VPNMembershipFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.L3VPNMembershipFormSearch"/>
+  <form-bean name="L3ParametersForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.L3ParametersForm"/>
+      <form-bean name="L3ParametersFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.L3ParametersFormSearch"/>
+  <form-bean name="InterfaceForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.InterfaceForm"/>
+      <form-bean name="InterfaceFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.InterfaceFormSearch"/>
+  <form-bean name="Wo_DistForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Wo_DistForm"/>
+      <form-bean name="Wo_DistFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Wo_DistFormSearch"/>
+  <form-bean name="Sh_NetworkElementForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_NetworkElementForm"/>
+      <form-bean name="Sh_NetworkElementFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_NetworkElementFormSearch"/>
+  <form-bean name="IPNetForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.IPNetForm"/>
+      <form-bean name="IPNetFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.IPNetFormSearch"/>
+  <form-bean name="L3FlowPointForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.L3FlowPointForm"/>
+      <form-bean name="L3FlowPointFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.L3FlowPointFormSearch"/>
+  <form-bean name="Sh_VPNForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_VPNForm"/>
+      <form-bean name="Sh_VPNFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_VPNFormSearch"/>
+  <form-bean name="Sh_RCForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_RCForm"/>
+      <form-bean name="Sh_RCFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_RCFormSearch"/>
+  <form-bean name="L2VPNForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.L2VPNForm"/>
+      <form-bean name="L2VPNFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.L2VPNFormSearch"/>
+  <form-bean name="NextTierForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.NextTierForm"/>
+      <form-bean name="NextTierFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.NextTierFormSearch"/>
+  <form-bean name="ServiceMappingForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.ServiceMappingForm"/>
+      <form-bean name="ServiceMappingFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.ServiceMappingFormSearch"/>
+  <form-bean name="SchedulingPolicyForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.SchedulingPolicyForm"/>
+      <form-bean name="SchedulingPolicyFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.SchedulingPolicyFormSearch"/>
+  <form-bean name="SwitchForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.SwitchForm"/>
+      <form-bean name="SwitchFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.SwitchFormSearch"/>
+  <form-bean name="Sh_VPNFPMembershipForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_VPNFPMembershipForm"/>
+      <form-bean name="Sh_VPNFPMembershipFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_VPNFPMembershipFormSearch"/>
+  <form-bean name="Sh_IPNetForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_IPNetForm"/>
+      <form-bean name="Sh_IPNetFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_IPNetFormSearch"/>
+  <form-bean name="Sh_CEFlowPointForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_CEFlowPointForm"/>
+      <form-bean name="Sh_CEFlowPointFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_CEFlowPointFormSearch"/>
+  <form-bean name="AccessFlowForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.AccessFlowForm"/>
+      <form-bean name="AccessFlowFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.AccessFlowFormSearch"/>
+  <form-bean name="DelayedActivationForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.DelayedActivationForm"/>
+      <form-bean name="DelayedActivationFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.DelayedActivationFormSearch"/>
+  <form-bean name="RegionForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.RegionForm"/>
+      <form-bean name="RegionFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.RegionFormSearch"/>
+  <form-bean name="Sh_CustomerMappingForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_CustomerMappingForm"/>
+      <form-bean name="Sh_CustomerMappingFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_CustomerMappingFormSearch"/>
+  <form-bean name="RateLimitForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.RateLimitForm"/>
+      <form-bean name="RateLimitFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.RateLimitFormSearch"/>
+  <form-bean name="RCForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.RCForm"/>
+      <form-bean name="RCFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.RCFormSearch"/>
+  <form-bean name="Sh_CustomerForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_CustomerForm"/>
+      <form-bean name="Sh_CustomerFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_CustomerFormSearch"/>
+  <form-bean name="VlanRangeForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.VlanRangeForm"/>
+      <form-bean name="VlanRangeFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.VlanRangeFormSearch"/>
+  <form-bean name="IPAddrPoolForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.IPAddrPoolForm"/>
+      <form-bean name="IPAddrPoolFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.IPAddrPoolFormSearch"/>
+  <form-bean name="PathForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.PathForm"/>
+      <form-bean name="PathFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.PathFormSearch"/>
+  <form-bean name="WorkorderURLForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.WorkorderURLForm"/>
+      <form-bean name="WorkorderURLFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.WorkorderURLFormSearch"/>
+  <form-bean name="ProtocolTypesForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.ProtocolTypesForm"/>
+      <form-bean name="ProtocolTypesFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.ProtocolTypesFormSearch"/>
+  <form-bean name="Sh_QoSProfileForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_QoSProfileForm"/>
+      <form-bean name="Sh_QoSProfileFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_QoSProfileFormSearch"/>
+  <form-bean name="L3VPNForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.L3VPNForm"/>
+      <form-bean name="L3VPNFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.L3VPNFormSearch"/>
+  <form-bean name="MulticastParametersForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.MulticastParametersForm"/>
+      <form-bean name="MulticastParametersFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.MulticastParametersFormSearch"/>
+  <form-bean name="DLCIRangeForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.DLCIRangeForm"/>
+      <form-bean name="DLCIRangeFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.DLCIRangeFormSearch"/>
+  <form-bean name="Sh_LSPForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_LSPForm"/>
+      <form-bean name="Sh_LSPFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_LSPFormSearch"/>
+  <form-bean name="Sh_TerminationPointForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_TerminationPointForm"/>
+      <form-bean name="Sh_TerminationPointFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_TerminationPointFormSearch"/>
+  <form-bean name="AdaptiveModeForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.AdaptiveModeForm"/>
+      <form-bean name="AdaptiveModeFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.AdaptiveModeFormSearch"/>
+  <form-bean name="Sh_L2VPNForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_L2VPNForm"/>
+      <form-bean name="Sh_L2VPNFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_L2VPNFormSearch"/>
+  <form-bean name="TrafficClassifierForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.TrafficClassifierForm"/>
+      <form-bean name="TrafficClassifierFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.TrafficClassifierFormSearch"/>
+  <form-bean name="DeactivationMappingForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.DeactivationMappingForm"/>
+      <form-bean name="DeactivationMappingFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.DeactivationMappingFormSearch"/>
+  <form-bean name="Sh_RCMembershipForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_RCMembershipForm"/>
+      <form-bean name="Sh_RCMembershipFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_RCMembershipFormSearch"/>
+  <form-bean name="Sh_VRFForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_VRFForm"/>
+      <form-bean name="Sh_VRFFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_VRFFormSearch"/>
+  <form-bean name="CRMPortalParametersForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.CRMPortalParametersForm"/>
+      <form-bean name="CRMPortalParametersFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.CRMPortalParametersFormSearch"/>
+  <form-bean name="MCASTProfileMembershipForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.MCASTProfileMembershipForm"/>
+      <form-bean name="MCASTProfileMembershipFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.MCASTProfileMembershipFormSearch"/>
+  <form-bean name="RCMembershipForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.RCMembershipForm"/>
+      <form-bean name="RCMembershipFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.RCMembershipFormSearch"/>
+  <form-bean name="PERouterForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.PERouterForm"/>
+      <form-bean name="PERouterFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.PERouterFormSearch"/>
+  <form-bean name="ActivePoliciesForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.ActivePoliciesForm"/>
+      <form-bean name="ActivePoliciesFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.ActivePoliciesFormSearch"/>
+  <form-bean name="ServiceForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.ServiceForm"/>
+      <form-bean name="ServiceFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.ServiceFormSearch"/>
+  <form-bean name="Sh_VPNMembershipForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_VPNMembershipForm"/>
+      <form-bean name="Sh_VPNMembershipFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_VPNMembershipFormSearch"/>
+  <form-bean name="ServiceParameterForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.ServiceParameterForm"/>
+      <form-bean name="ServiceParameterFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.ServiceParameterFormSearch"/>
+  <form-bean name="Queue_MessageForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Queue_MessageForm"/>
+      <form-bean name="Queue_MessageFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Queue_MessageFormSearch"/>
+  <form-bean name="Sh_PolicyMappingForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_PolicyMappingForm"/>
+      <form-bean name="Sh_PolicyMappingFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_PolicyMappingFormSearch"/>
+  <form-bean name="IPHostForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.IPHostForm"/>
+      <form-bean name="IPHostFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.IPHostFormSearch"/>
+  <form-bean name="LSPForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.LSPForm"/>
+      <form-bean name="LSPFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.LSPFormSearch"/>
+  <form-bean name="L2InterfaceTypesForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.L2InterfaceTypesForm"/>
+      <form-bean name="L2InterfaceTypesFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.L2InterfaceTypesFormSearch"/>
+  <form-bean name="CERouterForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.CERouterForm"/>
+      <form-bean name="CERouterFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.CERouterFormSearch"/>
+  <form-bean name="L3AccessFlowForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.L3AccessFlowForm"/>
+      <form-bean name="L3AccessFlowFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.L3AccessFlowFormSearch"/>
+  <form-bean name="QoSProfileForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.QoSProfileForm"/>
+      <form-bean name="QoSProfileFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.QoSProfileFormSearch"/>
+  <form-bean name="SchJobForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.SchJobForm"/>
+      <form-bean name="SchJobFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.SchJobFormSearch"/>
+  <form-bean name="Sh_ServiceForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_ServiceForm"/>
+      <form-bean name="Sh_ServiceFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_ServiceFormSearch"/>
+  <form-bean name="L2FlowPointForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.L2FlowPointForm"/>
+      <form-bean name="L2FlowPointFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.L2FlowPointFormSearch"/>
+  <form-bean name="Sh_L2AccessFlowForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_L2AccessFlowForm"/>
+      <form-bean name="Sh_L2AccessFlowFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_L2AccessFlowFormSearch"/>
+  <form-bean name="Sh_L3VPNForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_L3VPNForm"/>
+      <form-bean name="Sh_L3VPNFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_L3VPNFormSearch"/>
+  <form-bean name="ActionTemplatesForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.ActionTemplatesForm"/>
+      <form-bean name="ActionTemplatesFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.ActionTemplatesFormSearch"/>
+  <form-bean name="VRFForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.VRFForm"/>
+      <form-bean name="VRFFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.VRFFormSearch"/>
+  <form-bean name="VPNFPMembershipForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.VPNFPMembershipForm"/>
+      <form-bean name="VPNFPMembershipFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.VPNFPMembershipFormSearch"/>
+  <form-bean name="Sh_IdentifiersForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_IdentifiersForm"/>
+      <form-bean name="Sh_IdentifiersFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_IdentifiersFormSearch"/>
+  <form-bean name="MemoryTypesForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.MemoryTypesForm"/>
+      <form-bean name="MemoryTypesFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.MemoryTypesFormSearch"/>
+  <form-bean name="PathConnectionForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.PathConnectionForm"/>
+      <form-bean name="PathConnectionFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.PathConnectionFormSearch"/>
+  <form-bean name="SiteForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.SiteForm"/>
+      <form-bean name="SiteFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.SiteFormSearch"/>
+  <form-bean name="Sh_TMNConnectionForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_TMNConnectionForm"/>
+      <form-bean name="Sh_TMNConnectionFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_TMNConnectionFormSearch"/>
+  <form-bean name="RetrievalPolicyForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.RetrievalPolicyForm"/>
+      <form-bean name="RetrievalPolicyFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.RetrievalPolicyFormSearch"/>
+  <form-bean name="Sh_TrafficClassifierForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_TrafficClassifierForm"/>
+      <form-bean name="Sh_TrafficClassifierFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_TrafficClassifierFormSearch"/>
+  <form-bean name="MulticastSiteForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.MulticastSiteForm"/>
+      <form-bean name="MulticastSiteFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.MulticastSiteFormSearch"/>
+  <form-bean name="PolicyMappingForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.PolicyMappingForm"/>
+      <form-bean name="PolicyMappingFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.PolicyMappingFormSearch"/>
+  <form-bean name="StaticRouteForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.StaticRouteForm"/>
+      <form-bean name="StaticRouteFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.StaticRouteFormSearch"/>
+  <form-bean name="Sh_SiteForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_SiteForm"/>
+      <form-bean name="Sh_SiteFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_SiteFormSearch"/>
+  <form-bean name="LSPProfileForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.LSPProfileForm"/>
+      <form-bean name="LSPProfileFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.LSPProfileFormSearch"/>
+  <form-bean name="FlowPointForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.FlowPointForm"/>
+      <form-bean name="FlowPointFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.FlowPointFormSearch"/>
+  <form-bean name="LSPVPNMembershipForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.LSPVPNMembershipForm"/>
+      <form-bean name="LSPVPNMembershipFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.LSPVPNMembershipFormSearch"/>
+  <form-bean name="Sh_L2FlowPointForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_L2FlowPointForm"/>
+      <form-bean name="Sh_L2FlowPointFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_L2FlowPointFormSearch"/>
+  <form-bean name="AdminVPNForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.AdminVPNForm"/>
+      <form-bean name="AdminVPNFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.AdminVPNFormSearch"/>
+  <form-bean name="LSPConnectionForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.LSPConnectionForm"/>
+      <form-bean name="LSPConnectionFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.LSPConnectionFormSearch"/>
+  <form-bean name="Sh_L3VPNMembershipForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_L3VPNMembershipForm"/>
+      <form-bean name="Sh_L3VPNMembershipFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_L3VPNMembershipFormSearch"/>
+  <form-bean name="ServiceMultiplexForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.ServiceMultiplexForm"/>
+      <form-bean name="ServiceMultiplexFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.ServiceMultiplexFormSearch"/>
+  <form-bean name="L2AccessFlowForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.L2AccessFlowForm"/>
+      <form-bean name="L2AccessFlowFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.L2AccessFlowFormSearch"/>
+  <form-bean name="Sh_FlowPointForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_FlowPointForm"/>
+      <form-bean name="Sh_FlowPointFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_FlowPointFormSearch"/>
+  <form-bean name="SetupCE_WorkorderForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.SetupCE_WorkorderForm"/>
+      <form-bean name="SetupCE_WorkorderFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.SetupCE_WorkorderFormSearch"/>
+  <form-bean name="Sh_AccessFlowForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_AccessFlowForm"/>
+      <form-bean name="Sh_AccessFlowFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_AccessFlowFormSearch"/>
+  <form-bean name="InterfaceRecoveredForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.InterfaceRecoveredForm"/>
+      <form-bean name="InterfaceRecoveredFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.InterfaceRecoveredFormSearch"/>
+  <form-bean name="AccessLinkForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.AccessLinkForm"/>
+      <form-bean name="AccessLinkFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.AccessLinkFormSearch"/>
+  <form-bean name="Sh_InterfaceForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_InterfaceForm"/>
+      <form-bean name="Sh_InterfaceFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_InterfaceFormSearch"/>
+  <form-bean name="MulticastProfileForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.MulticastProfileForm"/>
+      <form-bean name="MulticastProfileFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.MulticastProfileFormSearch"/>
+  <form-bean name="ISPForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.ISPForm"/>
+      <form-bean name="ISPFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.ISPFormSearch"/>
+  <form-bean name="EXPMappingForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.EXPMappingForm"/>
+      <form-bean name="EXPMappingFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.EXPMappingFormSearch"/>
+  <form-bean name="RetrievalMethodForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.RetrievalMethodForm"/>
+      <form-bean name="RetrievalMethodFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.RetrievalMethodFormSearch"/>
+  <form-bean name="CustomerForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.CustomerForm"/>
+      <form-bean name="CustomerFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.CustomerFormSearch"/>
+  <form-bean name="VPNMembershipForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.VPNMembershipForm"/>
+      <form-bean name="VPNMembershipFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.VPNMembershipFormSearch"/>
+  <form-bean name="ASBRFlowPointForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.ASBRFlowPointForm"/>
+      <form-bean name="ASBRFlowPointFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.ASBRFlowPointFormSearch"/>
+  <form-bean name="Sh_L3FlowPointForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_L3FlowPointForm"/>
+      <form-bean name="Sh_L3FlowPointFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_L3FlowPointFormSearch"/>
+  <form-bean name="Sh_L3AccessFlowForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_L3AccessFlowForm"/>
+      <form-bean name="Sh_L3AccessFlowFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_L3AccessFlowFormSearch"/>
+  <form-bean name="NetworkElementForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.NetworkElementForm"/>
+      <form-bean name="NetworkElementFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.NetworkElementFormSearch"/>
+  <form-bean name="MCASTMigrationParamForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.MCASTMigrationParamForm"/>
+      <form-bean name="MCASTMigrationParamFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.MCASTMigrationParamFormSearch"/>
+  <form-bean name="Sh_CERouterForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_CERouterForm"/>
+      <form-bean name="Sh_CERouterFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.Sh_CERouterFormSearch"/>
+  <form-bean name="AccessNetworkForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.AccessNetworkForm"/>
+      <form-bean name="AccessNetworkFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.AccessNetworkFormSearch"/>
+  <form-bean name="VPNForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.VPNForm"/>
+      <form-bean name="VPNFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.VPNFormSearch"/>
+  <form-bean name="ASBRAccessFlowForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.ASBRAccessFlowForm"/>
+      <form-bean name="ASBRAccessFlowFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.ASBRAccessFlowFormSearch"/>
+  <form-bean name="PriorityMapForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.PriorityMapForm"/>
+      <form-bean name="PriorityMapFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.PriorityMapFormSearch"/>
+  <form-bean name="igw_qosForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.igw_qosForm"/>
+      <form-bean name="igw_qosFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.igw_qosFormSearch"/>
+  <form-bean name="igw_trunktypeForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.igw_trunktypeForm"/>
+      <form-bean name="igw_trunktypeFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.igw_trunktypeFormSearch"/>
+  <form-bean name="igw_trunkForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.igw_trunkForm"/>
+      <form-bean name="igw_trunkFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.igw_trunkFormSearch"/>
+  <form-bean name="igw_trunkdataForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.igw_trunkdataForm"/>
+      <form-bean name="igw_trunkdataFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.igw_trunkdataFormSearch"/>
+  <form-bean name="igw_trunksForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.igw_trunksForm"/>
+      <form-bean name="igw_trunksFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.igw_trunksFormSearch"/>	  
+ <form-bean name="GISVPNForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.GISVPNForm"/>
+ <form-bean name="GISVPNFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.GISVPNFormSearch"/>
+   <form-bean name="GISFlowPointForm" 
+      type="com.hp.ov.activator.inventory.SAVPN.GISFlowPointForm"/>
+   <form-bean name="GISFlowPointFormSearch" 
+      type="com.hp.ov.activator.inventory.SAVPN.GISFlowPointFormSearch"/> 	
+</form-beans>
+
+   <global-forwards>
+        <forward name="nullSession" path="/jsp/inventory-gui/hpac.jsp"/>
+    </global-forwards>
+
+  <action-mappings>
+    <action path="/login" forward="/jsp/inventory-gui/hpac.jsp"/>
+    <action path="/CreationForm**Action"
+      type="com.hp.ov.activator.inventory.SAVPN.CreationForm{1}Action"
+      name="{1}Form"
+      scope="request"
+      validate="false"
+      input="CreationFormInput">
+      <forward name="success" path="/jsp/inventory/SAVPN/Creation{1}.jsp" contextRelative="true"/>
+      <forward name="failure" path="/jsp/inventory/CreationInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="CreationFormInput" path="/jsp/inventory/SAVPN/Creation{1}.jsp" contextRelative="true"/>
+    </action>
+    <action path="/CreationCommit**Action"
+      type="com.hp.ov.activator.inventory.SAVPN.CreationCommit{1}Action"
+      name="{1}Form"
+      scope="request"
+      input="CreationCommitInput">
+      <forward name="success" path="/ViewForm{1}Action.do"/>
+      <forward name="error" path="/CreationForm{1}Action.do"/>
+      <forward name="failure" path="/jsp/inventory/CreationInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="CreationCommitInput" path="/CreationForm{1}Action.do"/>
+    </action>
+    <action path="/UpdateForm**Action"
+      type="com.hp.ov.activator.inventory.SAVPN.UpdateForm{1}Action"
+      name="{1}Form"
+      scope="request"
+      validate="false"
+      input="UpdateFormInput">
+      <forward name="not-found" path="/jsp/inventory/UpdateInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="success" path="/jsp/inventory/SAVPN/Update{1}.jsp" contextRelative="true"/>
+      <forward name="failure" path="/jsp/inventory/UpdateInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="UpdateFormInput" path="/jsp/inventory/SAVPN/Update{1}.jsp" contextRelative="true"/>
+    </action>
+    <action path="/UpdateCommit**Action"
+      type="com.hp.ov.activator.inventory.SAVPN.UpdateCommit{1}Action"
+      name="{1}Form"
+      scope="request"
+      input="UpdateCommitInput">
+      <forward name="not-found" path="/jsp/inventory/UpdateInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="success" path="/ViewForm{1}Action.do"/>
+      <forward name="error" path="/UpdateForm{1}Action.do"/>
+      <forward name="failure" path="/jsp/inventory/UpdateInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="UpdateCommitInput" path="/UpdateForm{1}Action.do"/>
+    </action>
+    <action path="/ViewForm**Action"
+      type="com.hp.ov.activator.inventory.SAVPN.ViewForm{1}Action"
+      name="{1}Form"
+      scope="request"
+      validate="false"
+      input="ViewFormInput">
+      <forward name="not-found" path="/jsp/inventory/ViewInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="success" path="/jsp/inventory/SAVPN/View{1}.jsp" contextRelative="true"/>
+      <forward name="failure" path="/jsp/inventory/ViewInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="ViewFormInput" path="/jsp/inventory/SAVPN/View{1}.jsp" contextRelative="true"/>
+    </action>
+    <action path="/DeleteForm**Action"
+      type="com.hp.ov.activator.inventory.SAVPN.ViewForm{1}Action"
+      name="{1}Form"
+      scope="request"
+      validate="false"
+      input="DeleteFormInput">
+      <forward name="not-found" path="/jsp/inventory/DeleteInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="success" path="/jsp/inventory/SAVPN/Delete{1}.jsp" contextRelative="true"/>
+      <forward name="failure" path="/jsp/inventory/DeleteInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="DeleteFormInput" path="/jsp/inventory/SAVPN/View{1}.jsp" contextRelative="true"/>
+    </action>
+    <action path="/DeleteCommit**Action"
+      type="com.hp.ov.activator.inventory.SAVPN.DeleteCommit{1}Action"
+      name="{1}Form"
+      scope="request"
+      validate="false"
+      input="DeleteCommitInput">
+      <forward name="not-found" path="/jsp/inventory/DeleteInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="success" path="/jsp/inventory/RefreshTree.jsp" contextRelative="true"/>
+      <forward name="error" path="/jsp/inventory/DeleteInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="failure" path="/jsp/inventory/DeleteInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="DeleteCommitInput" path="/jsp/inventory/SAVPN/View{1}.jsp" contextRelative="true"/>
+    </action>
+    <action path="/SearchForm**Action"
+      type="com.hp.ov.activator.inventory.SAVPN.SearchForm{1}Action"
+      name="{1}Form"
+      scope="request"
+      validate="false">
+      <forward name="not-found" path="$/jsp/inventory/SearchInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="success" path="/jsp/inventory/SAVPN/Search{1}.jsp" contextRelative="true"/>
+      <forward name="failure" path="/jsp/inventory/SearchInstanceFailure.jsp" contextRelative="true"/>
+    </action>
+    <action path="/SearchCommit**Action"
+      type="com.hp.ov.activator.inventory.SAVPN.SearchCommit{1}Action"
+      name="{1}FormSearch"
+      scope="request"
+      validate="true"
+      input="SearchCommitInput"
+      >
+      <forward name="not-found" path="/jsp/inventory/NotFound.jsp" contextRelative="true"/>
+      <forward name="success" path="/jsp/inventory/SAVPN/SearchList{1}.jsp" contextRelative="true"/>
+      <forward name="failure" path="/jsp/inventory/SearchInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="SearchCommitInput" path="/jsp/inventory/SAVPN/Search{1}.jsp" contextRelative="true"/>
+    </action>
+    <action path="/CreationPartialForm**Action"
+      type="com.hp.ov.activator.inventory.SAVPN.CreationPartialForm{1}Action"
+      name="{1}Form"
+      scope="request"
+      validate="false"
+      input="CreationPartialFormInput">
+      <forward name="success" path="/jsp/inventory/SAVPN/CreationPartial{1}.jsp" contextRelative="true"/>
+      <forward name="failure" path="/jsp/inventory/CreationPartialInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="CreationPartialFormInput" path="/jsp/inventory/SAVPN/CreationPartial{1}.jsp" contextRelative="true"/>
+    </action>
+    <action path="/CreationPartialCommit**Action"
+      type="com.hp.ov.activator.inventory.SAVPN.CreationPartialCommit{1}Action"
+      name="{1}Form"
+      scope="request"
+      input="CreationPartialCommitInput">
+      <forward name="success" path="/jsp/inventory/RefreshTree.jsp" contextRelative="true"/>
+      <forward name="error" path="/CreationPartialForm{1}Action.do"/>
+      <forward name="failure" path="/jsp/inventory/CreationPartialInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="CreationPartialCommitInput" path="/CreationPartialForm{1}Action.do"/>
+    </action>
+    <action path="/DeletePartialForm**Action"
+      type="com.hp.ov.activator.inventory.SAVPN.DeletePartialForm{1}Action"
+      name="{1}Form"
+      scope="request"
+      validate="false"
+      input="DeletePartialFormInput">
+      <forward name="not-found" path="/jsp/inventory/DeletePartialInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="success" path="/jsp/inventory/SAVPN/DeletePartial{1}.jsp" contextRelative="true"/>
+      <forward name="failure" path="/jsp/inventory/DeletePartialInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="DeletePartialFormInput" path="/jsp/inventory/SAVPN/DeletePartial{1}.jsp" contextRelative="true"/>
+    </action>
+    <action path="/DeletePartialCommit**Action"
+      type="com.hp.ov.activator.inventory.SAVPN.DeletePartialCommit{1}Action"
+      name="{1}Form"
+      scope="request"
+      validate="false"
+      input="DeletePartialCommitInput">
+      <forward name="not-found" path="/jsp/inventory/DeletePartialInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="success" path="/jsp/inventory/RefreshTree.jsp" contextRelative="true"/>
+      <forward name="error" path="/jsp/inventory/DeletePartialInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="failure" path="/jsp/inventory/DeletePartialInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="DeletePartialCommitInput" path="/DeletePartialForm{1}Action.do"/>
+    </action>
+  </action-mappings>
+  
+  <controller inputForward="true"/>
+    
+  <message-resources null="false" key="InventoryResources"
+    parameter="InventoryResources"/>
+    
+    
+  <message-resources null="false" key="L3VRRPApplicationResources"
+    parameter="resources.SAVPN.L3VRRPApplicationResources"/>
+  <message-resources null="false" key="BackupRefApplicationResources"
+    parameter="resources.SAVPN.BackupRefApplicationResources"/>
+  <message-resources null="false" key="L2VCApplicationResources"
+    parameter="resources.SAVPN.L2VCApplicationResources"/>
+  <message-resources null="false" key="NetworkApplicationResources"
+    parameter="resources.SAVPN.NetworkApplicationResources"/>
+  <message-resources null="false" key="LSPParametersApplicationResources"
+    parameter="resources.SAVPN.LSPParametersApplicationResources"/>
+  <message-resources null="false" key="QueueApplicationResources"
+    parameter="resources.SAVPN.QueueApplicationResources"/>
+  <message-resources null="false" key="EquipmentConfigurationApplicationResources"
+    parameter="resources.SAVPN.EquipmentConfigurationApplicationResources"/>
+  <message-resources null="false" key="SchSettingsApplicationResources"
+    parameter="resources.SAVPN.SchSettingsApplicationResources"/>
+  <message-resources null="false" key="L3VPNMembershipApplicationResources"
+    parameter="resources.SAVPN.L3VPNMembershipApplicationResources"/>
+  <message-resources null="false" key="L3ParametersApplicationResources"
+    parameter="resources.SAVPN.L3ParametersApplicationResources"/>
+  <message-resources null="false" key="InterfaceApplicationResources"
+    parameter="resources.SAVPN.InterfaceApplicationResources"/>
+  <message-resources null="false" key="Wo_DistApplicationResources"
+    parameter="resources.SAVPN.Wo_DistApplicationResources"/>
+  <message-resources null="false" key="Sh_NetworkElementApplicationResources"
+    parameter="resources.SAVPN.Sh_NetworkElementApplicationResources"/>
+  <message-resources null="false" key="IPNetApplicationResources"
+    parameter="resources.SAVPN.IPNetApplicationResources"/>
+  <message-resources null="false" key="L3FlowPointApplicationResources"
+    parameter="resources.SAVPN.L3FlowPointApplicationResources"/>
+  <message-resources null="false" key="Sh_VPNApplicationResources"
+    parameter="resources.SAVPN.Sh_VPNApplicationResources"/>
+  <message-resources null="false" key="Sh_RCApplicationResources"
+    parameter="resources.SAVPN.Sh_RCApplicationResources"/>
+  <message-resources null="false" key="L2VPNApplicationResources"
+    parameter="resources.SAVPN.L2VPNApplicationResources"/>
+  <message-resources null="false" key="NextTierApplicationResources"
+    parameter="resources.SAVPN.NextTierApplicationResources"/>
+  <message-resources null="false" key="ServiceMappingApplicationResources"
+    parameter="resources.SAVPN.ServiceMappingApplicationResources"/>
+  <message-resources null="false" key="SchedulingPolicyApplicationResources"
+    parameter="resources.SAVPN.SchedulingPolicyApplicationResources"/>
+  <message-resources null="false" key="SwitchApplicationResources"
+    parameter="resources.SAVPN.SwitchApplicationResources"/>
+  <message-resources null="false" key="Sh_VPNFPMembershipApplicationResources"
+    parameter="resources.SAVPN.Sh_VPNFPMembershipApplicationResources"/>
+  <message-resources null="false" key="Sh_IPNetApplicationResources"
+    parameter="resources.SAVPN.Sh_IPNetApplicationResources"/>
+  <message-resources null="false" key="Sh_CEFlowPointApplicationResources"
+    parameter="resources.SAVPN.Sh_CEFlowPointApplicationResources"/>
+  <message-resources null="false" key="AccessFlowApplicationResources"
+    parameter="resources.SAVPN.AccessFlowApplicationResources"/>
+  <message-resources null="false" key="DelayedActivationApplicationResources"
+    parameter="resources.SAVPN.DelayedActivationApplicationResources"/>
+  <message-resources null="false" key="RegionApplicationResources"
+    parameter="resources.SAVPN.RegionApplicationResources"/>
+  <message-resources null="false" key="Sh_CustomerMappingApplicationResources"
+    parameter="resources.SAVPN.Sh_CustomerMappingApplicationResources"/>
+  <message-resources null="false" key="RateLimitApplicationResources"
+    parameter="resources.SAVPN.RateLimitApplicationResources"/>
+  <message-resources null="false" key="RCApplicationResources"
+    parameter="resources.SAVPN.RCApplicationResources"/>
+  <message-resources null="false" key="Sh_CustomerApplicationResources"
+    parameter="resources.SAVPN.Sh_CustomerApplicationResources"/>
+  <message-resources null="false" key="VlanRangeApplicationResources"
+    parameter="resources.SAVPN.VlanRangeApplicationResources"/>
+  <message-resources null="false" key="IPAddrPoolApplicationResources"
+    parameter="resources.SAVPN.IPAddrPoolApplicationResources"/>
+  <message-resources null="false" key="PathApplicationResources"
+    parameter="resources.SAVPN.PathApplicationResources"/>
+  <message-resources null="false" key="WorkorderURLApplicationResources"
+    parameter="resources.SAVPN.WorkorderURLApplicationResources"/>
+  <message-resources null="false" key="ProtocolTypesApplicationResources"
+    parameter="resources.SAVPN.ProtocolTypesApplicationResources"/>
+  <message-resources null="false" key="Sh_QoSProfileApplicationResources"
+    parameter="resources.SAVPN.Sh_QoSProfileApplicationResources"/>
+  <message-resources null="false" key="L3VPNApplicationResources"
+    parameter="resources.SAVPN.L3VPNApplicationResources"/>
+  <message-resources null="false" key="MulticastParametersApplicationResources"
+    parameter="resources.SAVPN.MulticastParametersApplicationResources"/>
+  <message-resources null="false" key="DLCIRangeApplicationResources"
+    parameter="resources.SAVPN.DLCIRangeApplicationResources"/>
+  <message-resources null="false" key="Sh_LSPApplicationResources"
+    parameter="resources.SAVPN.Sh_LSPApplicationResources"/>
+  <message-resources null="false" key="Sh_TerminationPointApplicationResources"
+    parameter="resources.SAVPN.Sh_TerminationPointApplicationResources"/>
+  <message-resources null="false" key="AdaptiveModeApplicationResources"
+    parameter="resources.SAVPN.AdaptiveModeApplicationResources"/>
+  <message-resources null="false" key="Sh_L2VPNApplicationResources"
+    parameter="resources.SAVPN.Sh_L2VPNApplicationResources"/>
+  <message-resources null="false" key="TrafficClassifierApplicationResources"
+    parameter="resources.SAVPN.TrafficClassifierApplicationResources"/>
+  <message-resources null="false" key="DeactivationMappingApplicationResources"
+    parameter="resources.SAVPN.DeactivationMappingApplicationResources"/>
+  <message-resources null="false" key="Sh_RCMembershipApplicationResources"
+    parameter="resources.SAVPN.Sh_RCMembershipApplicationResources"/>
+  <message-resources null="false" key="Sh_VRFApplicationResources"
+    parameter="resources.SAVPN.Sh_VRFApplicationResources"/>
+  <message-resources null="false" key="CRMPortalParametersApplicationResources"
+    parameter="resources.SAVPN.CRMPortalParametersApplicationResources"/>
+  <message-resources null="false" key="MCASTProfileMembershipApplicationResources"
+    parameter="resources.SAVPN.MCASTProfileMembershipApplicationResources"/>
+  <message-resources null="false" key="RCMembershipApplicationResources"
+    parameter="resources.SAVPN.RCMembershipApplicationResources"/>
+  <message-resources null="false" key="PERouterApplicationResources"
+    parameter="resources.SAVPN.PERouterApplicationResources"/>
+  <message-resources null="false" key="ActivePoliciesApplicationResources"
+    parameter="resources.SAVPN.ActivePoliciesApplicationResources"/>
+  <message-resources null="false" key="ServiceApplicationResources"
+    parameter="resources.SAVPN.ServiceApplicationResources"/>
+  <message-resources null="false" key="Sh_VPNMembershipApplicationResources"
+    parameter="resources.SAVPN.Sh_VPNMembershipApplicationResources"/>
+  <message-resources null="false" key="ServiceParameterApplicationResources"
+    parameter="resources.SAVPN.ServiceParameterApplicationResources"/>
+  <message-resources null="false" key="Queue_MessageApplicationResources"
+    parameter="resources.SAVPN.Queue_MessageApplicationResources"/>
+  <message-resources null="false" key="Sh_PolicyMappingApplicationResources"
+    parameter="resources.SAVPN.Sh_PolicyMappingApplicationResources"/>
+  <message-resources null="false" key="IPHostApplicationResources"
+    parameter="resources.SAVPN.IPHostApplicationResources"/>
+  <message-resources null="false" key="LSPApplicationResources"
+    parameter="resources.SAVPN.LSPApplicationResources"/>
+  <message-resources null="false" key="L2InterfaceTypesApplicationResources"
+    parameter="resources.SAVPN.L2InterfaceTypesApplicationResources"/>
+  <message-resources null="false" key="CERouterApplicationResources"
+    parameter="resources.SAVPN.CERouterApplicationResources"/>
+  <message-resources null="false" key="L3AccessFlowApplicationResources"
+    parameter="resources.SAVPN.L3AccessFlowApplicationResources"/>
+  <message-resources null="false" key="QoSProfileApplicationResources"
+    parameter="resources.SAVPN.QoSProfileApplicationResources"/>
+  <message-resources null="false" key="SchJobApplicationResources"
+    parameter="resources.SAVPN.SchJobApplicationResources"/>
+  <message-resources null="false" key="Sh_ServiceApplicationResources"
+    parameter="resources.SAVPN.Sh_ServiceApplicationResources"/>
+  <message-resources null="false" key="L2FlowPointApplicationResources"
+    parameter="resources.SAVPN.L2FlowPointApplicationResources"/>
+  <message-resources null="false" key="Sh_L2AccessFlowApplicationResources"
+    parameter="resources.SAVPN.Sh_L2AccessFlowApplicationResources"/>
+  <message-resources null="false" key="Sh_L3VPNApplicationResources"
+    parameter="resources.SAVPN.Sh_L3VPNApplicationResources"/>
+  <message-resources null="false" key="ActionTemplatesApplicationResources"
+    parameter="resources.SAVPN.ActionTemplatesApplicationResources"/>
+  <message-resources null="false" key="VRFApplicationResources"
+    parameter="resources.SAVPN.VRFApplicationResources"/>
+  <message-resources null="false" key="VPNFPMembershipApplicationResources"
+    parameter="resources.SAVPN.VPNFPMembershipApplicationResources"/>
+  <message-resources null="false" key="Sh_IdentifiersApplicationResources"
+    parameter="resources.SAVPN.Sh_IdentifiersApplicationResources"/>
+  <message-resources null="false" key="MemoryTypesApplicationResources"
+    parameter="resources.SAVPN.MemoryTypesApplicationResources"/>
+  <message-resources null="false" key="PathConnectionApplicationResources"
+    parameter="resources.SAVPN.PathConnectionApplicationResources"/>
+  <message-resources null="false" key="SiteApplicationResources"
+    parameter="resources.SAVPN.SiteApplicationResources"/>
+  <message-resources null="false" key="Sh_TMNConnectionApplicationResources"
+    parameter="resources.SAVPN.Sh_TMNConnectionApplicationResources"/>
+  <message-resources null="false" key="RetrievalPolicyApplicationResources"
+    parameter="resources.SAVPN.RetrievalPolicyApplicationResources"/>
+  <message-resources null="false" key="Sh_TrafficClassifierApplicationResources"
+    parameter="resources.SAVPN.Sh_TrafficClassifierApplicationResources"/>
+  <message-resources null="false" key="MulticastSiteApplicationResources"
+    parameter="resources.SAVPN.MulticastSiteApplicationResources"/>
+  <message-resources null="false" key="PolicyMappingApplicationResources"
+    parameter="resources.SAVPN.PolicyMappingApplicationResources"/>
+  <message-resources null="false" key="StaticRouteApplicationResources"
+    parameter="resources.SAVPN.StaticRouteApplicationResources"/>
+  <message-resources null="false" key="Sh_SiteApplicationResources"
+    parameter="resources.SAVPN.Sh_SiteApplicationResources"/>
+  <message-resources null="false" key="LSPProfileApplicationResources"
+    parameter="resources.SAVPN.LSPProfileApplicationResources"/>
+  <message-resources null="false" key="FlowPointApplicationResources"
+    parameter="resources.SAVPN.FlowPointApplicationResources"/>
+  <message-resources null="false" key="LSPVPNMembershipApplicationResources"
+    parameter="resources.SAVPN.LSPVPNMembershipApplicationResources"/>
+  <message-resources null="false" key="Sh_L2FlowPointApplicationResources"
+    parameter="resources.SAVPN.Sh_L2FlowPointApplicationResources"/>
+  <message-resources null="false" key="AdminVPNApplicationResources"
+    parameter="resources.SAVPN.AdminVPNApplicationResources"/>
+  <message-resources null="false" key="LSPConnectionApplicationResources"
+    parameter="resources.SAVPN.LSPConnectionApplicationResources"/>
+  <message-resources null="false" key="Sh_L3VPNMembershipApplicationResources"
+    parameter="resources.SAVPN.Sh_L3VPNMembershipApplicationResources"/>
+  <message-resources null="false" key="ServiceMultiplexApplicationResources"
+    parameter="resources.SAVPN.ServiceMultiplexApplicationResources"/>
+  <message-resources null="false" key="L2AccessFlowApplicationResources"
+    parameter="resources.SAVPN.L2AccessFlowApplicationResources"/>
+  <message-resources null="false" key="Sh_FlowPointApplicationResources"
+    parameter="resources.SAVPN.Sh_FlowPointApplicationResources"/>
+  <message-resources null="false" key="SetupCE_WorkorderApplicationResources"
+    parameter="resources.SAVPN.SetupCE_WorkorderApplicationResources"/>
+  <message-resources null="false" key="Sh_AccessFlowApplicationResources"
+    parameter="resources.SAVPN.Sh_AccessFlowApplicationResources"/>
+  <message-resources null="false" key="InterfaceRecoveredApplicationResources"
+    parameter="resources.SAVPN.InterfaceRecoveredApplicationResources"/>
+  <message-resources null="false" key="AccessLinkApplicationResources"
+    parameter="resources.SAVPN.AccessLinkApplicationResources"/>
+  <message-resources null="false" key="Sh_InterfaceApplicationResources"
+    parameter="resources.SAVPN.Sh_InterfaceApplicationResources"/>
+  <message-resources null="false" key="MulticastProfileApplicationResources"
+    parameter="resources.SAVPN.MulticastProfileApplicationResources"/>
+  <message-resources null="false" key="ISPApplicationResources"
+    parameter="resources.SAVPN.ISPApplicationResources"/>
+  <message-resources null="false" key="EXPMappingApplicationResources"
+    parameter="resources.SAVPN.EXPMappingApplicationResources"/>
+  <message-resources null="false" key="RetrievalMethodApplicationResources"
+    parameter="resources.SAVPN.RetrievalMethodApplicationResources"/>
+  <message-resources null="false" key="CustomerApplicationResources"
+    parameter="resources.SAVPN.CustomerApplicationResources"/>
+  <message-resources null="false" key="VPNMembershipApplicationResources"
+    parameter="resources.SAVPN.VPNMembershipApplicationResources"/>
+  <message-resources null="false" key="ASBRFlowPointApplicationResources"
+    parameter="resources.SAVPN.ASBRFlowPointApplicationResources"/>
+  <message-resources null="false" key="Sh_L3FlowPointApplicationResources"
+    parameter="resources.SAVPN.Sh_L3FlowPointApplicationResources"/>
+  <message-resources null="false" key="Sh_L3AccessFlowApplicationResources"
+    parameter="resources.SAVPN.Sh_L3AccessFlowApplicationResources"/>
+  <message-resources null="false" key="NetworkElementApplicationResources"
+    parameter="resources.SAVPN.NetworkElementApplicationResources"/>
+  <message-resources null="false" key="MCASTMigrationParamApplicationResources"
+    parameter="resources.SAVPN.MCASTMigrationParamApplicationResources"/>
+  <message-resources null="false" key="Sh_CERouterApplicationResources"
+    parameter="resources.SAVPN.Sh_CERouterApplicationResources"/>
+  <message-resources null="false" key="AccessNetworkApplicationResources"
+    parameter="resources.SAVPN.AccessNetworkApplicationResources"/>
+  <message-resources null="false" key="VPNApplicationResources"
+    parameter="resources.SAVPN.VPNApplicationResources"/>
+  <message-resources null="false" key="ASBRAccessFlowApplicationResources"
+    parameter="resources.SAVPN.ASBRAccessFlowApplicationResources"/>
+  <message-resources null="false" key="PriorityMapApplicationResources"
+    parameter="resources.SAVPN.PriorityMapApplicationResources"/>
+    <message-resources null="false" key="igw_qosApplicationResources"
+    parameter="resources.SAVPN.igw_qosApplicationResources"/>
+  <message-resources null="false" key="igw_trunktypeApplicationResources"
+    parameter="resources.SAVPN.igw_trunktypeApplicationResources"/>
+  <message-resources null="false" key="igw_trunkApplicationResources"
+    parameter="resources.SAVPN.igw_trunkApplicationResources"/>
+  <message-resources null="false" key="igw_trunkdataApplicationResources"
+    parameter="resources.SAVPN.igw_trunkdataApplicationResources"/>
+  <message-resources null="false" key="igw_trunksApplicationResources"
+    parameter="resources.SAVPN.igw_trunksApplicationResources"/>
+  
+   <message-resources null="false" key="GISVPNApplicationResources"
+    parameter="resources.SAVPN.GISVPNApplicationResources"/>
+  <message-resources null="false" key="GISFlowPointApplicationResources"
+    parameter="resources.SAVPN.GISFlowPointApplicationResources"/>
+    
+</struts-config>

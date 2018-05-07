@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE Bean SYSTEM "bean.dtd">
+<!--
+###############################################################################
+#
+#    (c) Copyright 2003-2010 Hewlett-Packard Development Company, L.P.
+#
+###############################################################################
+
+###############################################################################
+#
+# $Source: /tmp/vpn/SA_VPN_SP/jboss/server/default/deploy/crmportal.sar/crm.war/WEB-INF/src/inventory/message.xml,v $
+# $Revision: 1.10 $
+# $Date: 2010-10-05 14:19:04 $
+# $Author: shiva $
+#
+###############################################################################
+#
+# <Description> 
+#
+###############################################################################
+-->
+
+
+<Bean>
+  <Name>Message</Name>
+  <Solution>CRM</Solution>
+  <ConstraintName>CRM_MESSAGE</ConstraintName>
+  <Package>com.hp.ov.activator.crmportal.bean</Package>
+  <DBTable>CRM_MESSAGE</DBTable>
+	  <DBAlias>CRM_MESSAGE</DBAlias>
+  <Fields>
+  <Field update ="false">
+        <Name>sequenceId</Name>
+        <Type>long</Type>
+        <Description>Id </Description>
+     </Field>
+     <Field>
+        <Name>messageId</Name>
+        <Type>long</Type>
+        <Description>Id of message</Description>
+     </Field>
+     <Field>
+        <Name>serviceId</Name>
+        <Type>String</Type>
+        <Description>Id of service that the message belongs to</Description>
+     </Field>
+     <Field>
+      <Name>state</Name>
+      <Type>String</Type>
+      <Description>State code recieved in message</Description>
+    </Field>
+    <Field mandatory="false">
+      <Name>data</Name>
+      <Type>String(2000)</Type>
+      <Description>Additional data recieved in message</Description>
+    </Field>
+	<Field mandatory="false">
+      <Name>responseData</Name>
+      <Type>String</Type>
+      <Description>Additional operator comments received in message</Description>
+    </Field>
+  </Fields>
+
+  <Keys>
+    <Key pk="true">
+      <KeyField>sequenceId</KeyField>
+    </Key>
+  </Keys>
+
+  <!-- These are the operations to generate for this bean -->
+  <Operations>
+    <Store/>
+    <Update/>
+    <Remove/>
+
+    <!-- findAll method -->
+    <FindBy>
+      <OrderField>messageId</OrderField>
+    </FindBy>
+  </Operations>
+</Bean>
+

@@ -1,0 +1,24 @@
+## Generated using InventoryBuilder v.V61
+## Object class com.hp.ov.activator.inventorybuilder.sql.routes.FindByArraySQLRoute
+SELECT
+  igw_trunk.NAME		igw_trunk_NAME,
+  igw_trunk.TRUNKTYPE_ID		igw_trunk_TRUNKTYPE_ID,
+  igw_trunk.TRUNK_ID		igw_trunk_TRUNK_ID,
+  igw_trunk.SUBMIT_DATA		igw_trunk_SUBMIT_DATA,
+  igw_trunk.STATUS		igw_trunk_STATUS,
+  igw_trunk.LINK_TYPE		igw_trunk_LINK_TYPE
+FROM
+  igw_trunk   igw_trunk
+WHERE
+  igw_trunk.TRUNKTYPE_ID IN [selectIN_?]
+
+
+
+@ order:1;select_IN_substitution
+@ opt:TRUNK_ID;igw_trunk;igw_trunk;TRUNK_ID
+@ opt:TRUNKTYPE_ID;igw_trunk;igw_trunk;TRUNKTYPE_ID
+@ opt:NAME;igw_trunk;igw_trunk;NAME
+@ opt:LINK_TYPE;igw_trunk;igw_trunk;LINK_TYPE
+@ opt:STATUS;igw_trunk;igw_trunk;STATUS
+@ opt:SUBMIT_DATA;igw_trunk;igw_trunk;SUBMIT_DATA
+@ alias:primary_key;igw_trunk.TRUNK_ID

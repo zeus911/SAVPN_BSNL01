@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+    <p:contextMenu for="activeTxTable">
+      <p:menuitem value="View Activation Details" onclick="viewActivationDetails(sovActiveTxTableWidget.selection);"
+        icon="ui-icon ui-icon-search" />
+    </p:contextMenu>
+
+    <p:dataTable id="activeTxTable" value="#{SOV_ActiveTransactionsBean.values}" var="row" rowKey="#{row.id}"
+      selection="#{SOV_ActiveTransactionsBean.selectedRow}" selectionMode="single" widgetVar="sovActiveTxTableWidget">
+      <p:columns columnIndexVar="colIndex" id="#{row.data[colIndex]}_#{colIndex}"
+        value="#{SOV_ActiveTransactionsBean.columns}" var="col">
+        <f:facet name="header">
+          <h:outputText value="#{col.name}" />
+        </f:facet>
+        <h:outputText value="#{row.data[colIndex]}" />
+      </p:columns>
+    </p:dataTable>
+
+</ui:composition>
+

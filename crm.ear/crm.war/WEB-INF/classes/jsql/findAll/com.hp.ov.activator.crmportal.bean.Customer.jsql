@@ -1,0 +1,21 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+SELECT
+  crm_customer.ContactpersonEmail		crm_customer_Contact16,
+  crm_customer.CompanyCity		crm_customer_CompanyCity,
+  crm_customer.ContactpersonPhonenumber		crm_customer_Contact17,
+  crm_customer.CompanyAddress		crm_customer_CompanyAddress,
+  crm_customer.CompanyName		crm_customer_CompanyName,
+  crm_customer.LastUpdateTime		crm_customer_LastUpdateTime,
+  crm_customer.CreationTime		crm_customer_CreationTime,
+  crm_customer.Status		crm_customer_Status,
+  crm_customer.ContactpersonSurname		crm_customer_Contact18,
+  crm_customer.ContactpersonName		crm_customer_ContactpersonName,
+  crm_customer.CustomerId		crm_customer_CustomerId,
+  crm_customer.CompanyZipCode		crm_customer_CompanyZipCode
+FROM
+  crm_customer   crm_customer
+WHERE
+ORDER BY crm_customer.CompanyName ASC 
+
+

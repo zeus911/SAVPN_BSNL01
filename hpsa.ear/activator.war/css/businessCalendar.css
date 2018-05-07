@@ -1,0 +1,23 @@
+/**************************************************************************/
+/*  HP Service Activator                                                  */
+/*  (c) Copyright 2014 Hewlett-Packard Development Company, L.P.		  */
+/**************************************************************************/
+
+/**************************************************/
+/*  Styles used by the business calendar page     */
+/**************************************************/
+.hpsa-calendar-weekend {
+  background-color: /*c:sabl*/ #0096d6
+}
+
+.hpsa-calendar-working {
+  background-color: /*c:whit*/ #ffffff;
+}
+
+.hpsa-calendar-holiday {
+  background-color: /*c:sapl*/ #822980;
+}
+
+.hpsa-calendar-recholiday {
+  background-color: /*c:sagr*/ #008424;
+}

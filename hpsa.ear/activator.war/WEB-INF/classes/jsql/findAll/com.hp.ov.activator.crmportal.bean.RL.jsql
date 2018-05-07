@@ -1,0 +1,12 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+SELECT
+  V_RateLimit.RateLimit		V_RateLimit_RateLimit,
+  V_RateLimit.Value		V_RateLimit_Value,
+  V_RateLimit.Description		V_RateLimit_Description
+FROM
+  V_RateLimit   V_RateLimit
+WHERE
+ORDER BY V_RateLimit.Value ASC 
+
+

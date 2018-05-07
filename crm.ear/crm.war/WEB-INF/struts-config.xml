@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!--
+   (c) Copyright 2003-2010 Hewlett-Packard Development Company, L.P. 
+ -->
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+<!-- ================================================ Form Bean Definitions -->
+    <form-beans>   
+        <form-bean name="LoginSubmit"               type="com.hp.ov.activator.crmportal.action.LoginForm"/>
+        <form-bean name="LoginForm"                 type="com.hp.ov.activator.crmportal.action.LoginForm"/>
+        <form-bean name="emptyForm"                 type="com.hp.ov.activator.crmportal.action.emptyForm"/>
+        <form-bean name="CreateCustomerForm"        type="com.hp.ov.activator.crmportal.action.CustomerForm"/>
+        <form-bean name="SearchCustomerSubmit"      type="com.hp.ov.activator.crmportal.action.CustomerForm"/>
+        <form-bean name="EditCustomerSubmit"        type="com.hp.ov.activator.crmportal.action.CustomerForm"/>
+        <form-bean name="UpdateCustomerSubmit"      type="com.hp.ov.activator.crmportal.action.CustomerForm"/>
+		<form-bean name="SearchSiteSubmit"      	type="com.hp.ov.activator.crmportal.action.ServiceForm"/>
+        <form-bean name="ListServiceForm"           type="com.hp.ov.activator.crmportal.action.ServiceForm"/>
+        <form-bean name="CreateServiceForm"         type="com.hp.ov.activator.crmportal.action.ServiceForm"/>
+        <form-bean name="CommitAddServiceForm"      type="com.hp.ov.activator.crmportal.action.ServiceForm"/>
+        <form-bean name="ModifyServiceForm"         type="com.hp.ov.activator.crmportal.action.ServiceForm"/>
+        <form-bean name="CommitModifyServiceForm"   type="com.hp.ov.activator.crmportal.action.ServiceForm"/>
+        <form-bean name="ShowServiceParams"         type="com.hp.ov.activator.crmportal.action.ServiceForm"/>
+        <form-bean name="ServiceForm"               type="com.hp.ov.activator.crmportal.action.ServiceForm"/>
+    </form-beans>
+
+<!-- =========================================== Global Forward Definitions -->
+    <global-forwards>
+        <forward name="login"                   path="/Login.do"/>
+        <forward name="redirect"                path="/Login.do" redirect="true"/>
+        <forward name="createCustomer"          path="/CreateCustomer.do"/>
+        <forward name="listCustomer"            path="/ListCustomer.do"/>
+        <forward name="searchCustomer"          path="/SearchCustomer.do"/>
+		<forward name="searchSite"          	path="/SearchSite.do"/>
+        <forward name="editCustomer"            path="/EditCustomerfromSearch.do"/>
+        <forward name="CreateService"           path="/CreateService.do"/>
+        <forward name="ModifyService"           path="/ModifyService.do"/>
+        <forward name="showServiceUpdateTime"   path="/ShowServiceUpdateTime.do"/>
+    </global-forwards>
+
+<!-- =========================================== Action Mapping Definitions -->
+    <action-mappings>
+        <!--Login Action Mappings -->
+        <action path="/Login"
+            type="org.apache.struts.actions.ForwardAction"
+            forward="/layout/login.jsp">
+        </action> 
+
+        <action path="/LoginSubmit"
+            name="LoginSubmit"    
+            type="com.hp.ov.activator.crmportal.action.AuthenticatedLoginAction"
+            scope="request"
+            validate="true" 
+            input="/layout/login.jsp">
+            <forward name="success" path="/MainView.do" redirect="true"/>
+            <forward name="failure" path="/Login.do"/>
+        </action> 
+
+        <action path="/Logout"
+            name="LoginForm"    
+            type="com.hp.ov.activator.crmportal.action.LogoutAction"
+            scope="request"
+            validate="false" 
+            input="/layout/login.jsp">
+            <forward name="success" path="/Login.do" redirect="true"/>
+            <forward name="failure" path="/Login.do"/>
+        </action> 
+
+        <!--Layout Action Mappings -->
+        <action path="/Welcome"
+            type="org.apache.struts.actions.ForwardAction"
+            forward="/layout/welcome.jsp">
+        </action> 
+
+        <action path="/Reload"
+            type="org.apache.struts.actions.ForwardAction"
+            forward="/layout/reloadFrame.jsp">
+        </action> 
+
+        <action path="/Menu"
+            type="org.apache.struts.actions.ForwardAction"
+            forward="/layout/menu.jsp">
+        </action> 
+
+        <action path="/MainView"
+            type="org.apache.struts.actions.ForwardAction"
+            forward="/layout/layout.jsp">
+        </action> 
+
+        <action path="/Footer"
+            type="org.apache.struts.actions.ForwardAction"
+            forward="/layout/bottom.jsp">
+        </action> 
+
+        <action path="/Help"
+            name="emptyForm"
+            type="org.apache.struts.actions.ForwardAction"
+            forward="/help/index.jsp">
+        </action> 
+
+        <!--Customer  Action Mappings-->
+        <action path="/CreateCustomer"
+            name="CreateCustomerForm"
+            type="com.hp.ov.activator.crmportal.action.CustomerIDGenerateAction"
+            scope="request"
+            validate="false"
+            input="/layout/layout.jsp">
+            <forward name="success" path="/jsp/CreateCustomerForm.jsp"/>
+            <forward name="failure" path="/layout/layout.jsp"/>
+        </action> 
+
+        <action path="/AddCustomerSubmit"
+            name="CreateCustomerForm"
+            type="com.hp.ov.activator.crmportal.action.CustomerAction"
+            scope="request"
+            validate="true" 
+            input="/jsp/CreateCustomerForm.jsp">
+            <forward name="success" path="/jsp/FindCustomer.jsp?customerid=SHOWALL"/>
+            <forward name="failure" path="/jsp/CreateCustomerForm.jsp"/>
+        </action> 
+           
+        <action path="/ListCustomer"
+            name="CreateCustomerForm"
+            type="com.hp.ov.activator.crmportal.action.CustomerListAction"
+            scope="request"
+            validate="false"
+            input="/layout/layout.jsp">
+            <forward name="success" path="/jsp/FindCustomer.jsp"/>
+            <forward name="failure" path="/layout/layout.jsp"/>
+        </action> 
+
+        <action path="/EditCustomerfromList"
+            name="CreateCustomerForm"
+            type="com.hp.ov.activator.crmportal.action.CustomerEditAction"
+            scope="request"
+            validate="false"
+            input="/jsp/FindCustomer.jsp">
+            <forward name="success" path="/jsp/CreateCustomerForm.jsp"/>
+            <forward name="failure" path="/jsp/FindCustomer.jsp"/>
+        </action> 
+   
+        <action path="/SearchCustomer"
+            type="org.apache.struts.actions.ForwardAction"
+            forward="/jsp/SearchCustomer.jsp">
+        </action> 
+		<action path="/SearchSite"
+            type="org.apache.struts.actions.ForwardAction"
+            forward="/jsp/SearchSite.jsp">
+        </action> 
+
+        <action path="/SearchCustomerSubmit"
+            name="SearchCustomerSubmit"
+            type="com.hp.ov.activator.crmportal.action.CustomerSearchAction"
+            scope="request"
+            validate="false" 
+            input="/jsp/SearchCustomer.jsp">
+     <!--        <forward name="success" path="/jsp/ShowCustomerSearchResult.jsp"/>-->
+            <forward name="success" path="/jsp/FindCustomer.jsp"/>
+            <forward name="failure" path="/jsp/SearchCustomer.jsp"/>
+        </action> 
+		
+		<action path="/SearchSiteSubmit"
+            name="SearchSiteSubmit"
+            type="com.hp.ov.activator.crmportal.action.SiteSearchAction"
+            scope="request"
+            validate="false" 
+            input="/jsp/SearchSite.jsp">     
+            <forward name="success" path="/jsp/FindSearchServices.jsp"/>
+            <forward name="failure" path="/jsp/SearchSite.jsp"/>
+        </action> 
+
+        <action path="/EditCustomerfromSearch"
+            name="SearchCustomerSubmit"
+            type="com.hp.ov.activator.crmportal.action.CustomerEditAction"
+            scope="request"
+            validate="false"
+            input="/jsp/FindCustomer.jsp">
+            <forward name="success" path="/jsp/CreateCustomerForm.jsp"/>
+            <forward name="failure" path="/jsp/FindCustomer.jsp"/>
+        </action> 
+
+        <action path="/UpdateCustomerSubmit"
+            name="CreateCustomerForm"
+            type="com.hp.ov.activator.crmportal.action.CustomerAction"
+            scope="request"
+            validate="true" 
+            input="/jsp/CreateCustomerForm.jsp">
+            <forward name="success" path="/jsp/FindCustomer.jsp?customerid=SHOWALL"/>
+            <forward name="failure" path="/jsp/CreateCustomerForm.jsp"/>
+        </action> 
+
+        <action path="/DeleteCustomerfromSearch"
+            name="SearchCustomerSubmit"
+            type="com.hp.ov.activator.crmportal.action.CustomerDeleteAction"
+            scope="request"
+            validate="false"
+            input="/jsp/FindCustomer.jsp">
+            <forward name="success" path="/jsp/DeleteCustomer.jsp"/>
+            <forward name="failure" path="/jsp/FindCustomer.jsp"/>
+        </action> 
+
+        <action path="/DeleteCustomer"
+            name="CreateCustomerForm"
+            type="com.hp.ov.activator.crmportal.action.CustomerDeleteAction"
+            scope="request"
+            validate="false"
+            input="/jsp/FindCustomer.jsp">
+            <forward name="success" path="/jsp/DeleteCustomer.jsp"/>
+            <forward name="failure" path="/jsp/FindCustomer.jsp"/>
+        </action> 
+        <!-- End of Customer  Action Mappings -->
+
+        <!--Service  Action Mappings-->
+        <action path="/ListAllServices"
+            name="ServiceForm"
+            type="com.hp.ov.activator.crmportal.action.ListServicesAction"
+            scope="request"
+            validate="false"
+            input="/jsp/FindCustomer.jsp">
+            <forward name="success" path="/jsp/FindAllServices.jsp"/>
+            <forward name="failure" path="/jsp/FindCustomer.jsp"/>
+        </action> 
+
+        <action path="/CreateService"
+            name="ServiceForm"
+            type="com.hp.ov.activator.crmportal.action.PreAddServiceAction"
+            scope="request"
+            validate="false"
+            input="/jsp/FindAllServices.jsp">
+            <forward name="success" path="/jsp/CreateServiceForm.jsp"/>
+            <forward name="failure" path="/jsp/FindAllServices.jsp"/>
+        </action> 
+
+        <action path="/CommitAddService"
+            name="ServiceForm"
+            type="com.hp.ov.activator.crmportal.action.AddServiceAction"
+            scope="request"
+            validate="false"
+            input="/jsp/CreateServiceForm.jsp">
+            <forward name="success" path="/jsp/FindAllServices.jsp"/>
+            <forward name="failure" path="/jsp/CreateServiceForm.jsp"/>
+        </action>
+		
+	<action path="/CommitTrunkService"
+            name="ServiceForm"
+            type="com.hp.ov.activator.crmportal.action.AddServiceAction"
+            scope="request"
+            validate="false"
+            input="/jsp/CreateServiceForm.jsp">
+            <forward name="success" path="/jsp/CreateServiceForm.jsp"/>
+            <forward name="failure" path="/jsp/CreateServiceForm.jsp"/>
+        </action>		
+		
+		<action path="/CommitAddServiceSearch"
+            name="ServiceForm"
+            type="com.hp.ov.activator.crmportal.action.AddServiceAction"
+            scope="request"
+            validate="false"
+            input="/jsp/CreateServiceForm.jsp">
+            <forward name="success" path="/jsp/FindSearchServices.jsp"/>	
+            <forward name="failure" path="/jsp/CreateServiceForm.jsp"/>
+        </action> 
+
+        <action path="/ModifyService"
+            name="ServiceForm"
+            type="com.hp.ov.activator.crmportal.action.PreEditServiceAction"
+            scope="request"
+            validate="false"
+            input="/jsp/FindAllServices.jsp">
+            <forward name="success" path="/jsp/ModifyServiceForm.jsp"/>
+            <forward name="failure" path="/jsp/FindAllServices.jsp"/>
+        </action> 
+
+        <action path="/CommitModifyService"
+            name="ServiceForm"
+            type="com.hp.ov.activator.crmportal.action.ModifyServiceAction"
+            scope="request"
+            validate="false"
+            input="/jsp/ModifyServiceForm.jsp">
+            <forward name="success" path="/jsp/FindAllServices.jsp"/>
+            <forward name="failure" path="/jsp/ModifyServiceForm.jsp"/>
+        </action>
+
+		<action path="/CommitModifyServiceSearch"
+            name="SearchSiteSubmit"
+            type="com.hp.ov.activator.crmportal.action.ModifyServiceAction"
+            scope="request"
+            validate="false"
+            input="/jsp/ModifyServiceForm.jsp">
+            <forward name="success" path="/jsp/FindSearchServices.jsp"/>			
+            <forward name="failure" path="/jsp/ModifyServiceForm.jsp"/>
+        </action>
+
+
+        <action path="/DeleteService"
+            name="ServiceForm"
+            type="com.hp.ov.activator.crmportal.action.DeleteServiceAction"
+            scope="request"
+            validate="false"
+            input="/jsp/FindAllServices.jsp">
+            <forward name="success" path="/jsp/DeleteService.jsp"/>
+            <forward name="failure" path="/jsp/FindAllServices.jsp"/>
+        </action>		
+
+        <action path="/DeleteServicefromServiceParams"
+            name="ServiceForm"
+            type="com.hp.ov.activator.crmportal.action.DeleteServiceAction"
+            scope="request"
+            validate="false"
+            input="/jsp/ShowServiceParameters.jsp">
+            <forward name="success" path="/jsp/DeleteService.jsp"/>
+            <forward name="failure" path="/jsp/FindAllServices.jsp"/>
+        </action> 
+
+
+        <action path="/UndoModifyService"
+            name="ServiceForm"
+            type="com.hp.ov.activator.crmportal.action.UndoModifyService"
+            scope="request"
+            validate="false"
+            input="/jsp/FindAllServices.jsp">
+            <forward name="success" path="/jsp/FindAllServices.jsp"/>
+            <forward name="failure" path="/jsp/FindAllServices.jsp"/>
+        </action> 
+		
+		
+
+        <action path="/CommitDisableService"
+            name="ServiceForm"
+            type="com.hp.ov.activator.crmportal.action.DisableServiceAction"
+            scope="request"
+            validate="false"
+            input="/jsp/FindAllServices.jsp">
+            <forward name="success" path="/jsp/FindAllServices.jsp"/>			
+            <forward name="failure" path="/jsp/FindAllServices.jsp"/>
+        </action> 
+		
+		<action path="/CommitDisableServiceSearch"
+            name="SearchSiteSubmit"
+            type="com.hp.ov.activator.crmportal.action.DisableServiceAction"
+            scope="request"
+            validate="false"
+            input="/jsp/FindSearchServices.jsp">
+            <forward name="success" path="/jsp/FindSearchServices.jsp"/>			
+            <forward name="failure" path="/jsp/FindSearchServices.jsp"/>
+        </action>
+		
+		
+
+        <action path="/StopPeriodicService"
+            name="ServiceForm"
+            type="com.hp.ov.activator.crmportal.action.StopPeriodicService"
+            scope="request"
+            validate="false"
+            input="/jsp/FindAllServices.jsp">
+            <forward name="success" path="/jsp/FindAllServices.jsp"/>
+            <forward name="failure" path="/jsp/FindCustomer.jsp"/>
+        </action> 
+
+        <action path="/ShowServiceUpdateTime"
+            name="ServiceForm"
+            type="com.hp.ov.activator.crmportal.action.ShowServiceUpdateTimeAction"
+            scope="request"
+            validate="false"
+            input="/layout/reloadFrame.jsp">
+            <forward name="success" path="/jsp/ShowServiceUpdateTime.jsp"/>
+            <forward name="failure" path="/layout/reloadFrame.jsp"/>
+        </action> 
+
+        <action path="/ShowServiceParameters"
+            name="ServiceForm"
+            type="com.hp.ov.activator.crmportal.action.ShowServiceParametersAction"
+            scope="request"
+            validate="false"
+            input="/jsp/FindAllServices.jsp">
+            <forward name="success" path="/jsp/ShowServiceParameters.jsp"/>
+            <forward name="failure" path="/jsp/FindAllServices.jsp"/>
+        </action> 
+
+    <!-- End Of Service Action Mappings -->
+    </action-mappings>
+
+    <!-- ======================================== Controller Definitions -->
+    <controller>
+        <set-property  property="processorClass"
+            value="com.hp.ov.activator.crmportal.action.SessionRequestProcessor"/>
+    </controller>
+
+    <!-- ======================================== Message Resources Definitions -->
+    <message-resources parameter="resources.MessageResources" />
+
+    <!-- ======================================== Plug In Definitions -->
+    <plug-in className="com.hp.ov.activator.crmportal.plugin.StartPortalListenerPlugin"/>
+</struts-config>
+
+<!-- vim:softtabstop=4:shiftwidth=4:expandtab
+-->

@@ -1,0 +1,15 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+SELECT
+  V_DLCIRange.StartValue		V_DLCIRange_StartValue,
+  V_DLCIRange.Description		V_DLCIRange_Description,
+  V_DLCIRange.Region		V_DLCIRange_Region,
+  V_DLCIRange.EndValue		V_DLCIRange_EndValue,
+  V_DLCIRange.Allocation		V_DLCIRange_Allocation,
+  V_DLCIRange.Usage		V_DLCIRange_Usage
+FROM
+  V_DLCIRange   V_DLCIRange
+WHERE
+ORDER BY V_DLCIRange.StartValue ASC 
+
+

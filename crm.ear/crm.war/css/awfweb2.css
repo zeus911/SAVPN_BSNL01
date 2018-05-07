@@ -1,0 +1,247 @@
+
+/**************************************************************************/
+/*                                                                      */
+/*   ©(c) Copyright 2003-2010 Hewlett-Packard Development Company, L.P.   */
+/**************************************************************************/
+
+
+/*
+h1 {    font-family: Verdana, Helvetica, Arial, Sans-serif; font-size: 16pt; color: #2A3FAA;}
+h2 {    font-family: Tahoma,Arial,Helvetica,sans-serif; font-size: 14pt;        color: #2A3FAA;}
+h3{     font-family: Tahoma,Arial,Helvetica,sans-serif; font-size: 12pt;        color: #2A3FAA;}
+h4{     font-family: Tahoma,Arial,Helvetica,sans-serif; font-size: 10pt;        color: #2A3FAA;}
+*/
+/**************************************************/
+/*    Link Styles                                 */
+/**************************************************/
+A     {
+        text-decoration: none;
+        color: blue;
+      }
+
+A:link{
+        TEXT-DECORATION: none;
+        color: blue;
+      }
+
+A:visited {
+        TEXT-DECORATION: none;
+        color: blue;
+      }
+
+A:active {
+        TEXT-DECORATION: none;
+        color: blue;
+      }
+
+A:hover {
+	TEXT-DECORATION: underline;
+}      
+
+body {        font-family: "Futura Lt";        
+			  font-size: 9pt;
+			  color: black;		  
+	}
+
+td.title {  font-family: Verdana, Helvetica, Arial, Sans-serif;
+            font-size: 10pt;
+ 		    font-weight: bold;      			
+            line-height: 1.5;
+            color: white;
+            align: left;
+            valign: middle;
+            padding: 1px, 3px;
+			text-align:left;						
+		    background-color: #6699CC;
+		 }
+
+td {
+	font-family: "Futura Lt", Verdana, Helvetica, Arial, Sans-serif;
+	font-size: 10pt;
+ 	align: left;
+
+	}
+
+td.frame {       background: #FFCC98;}
+th { background: #336699;      
+     font-family: "Futura Lt", Verdana, Helvetica, Arial, Sans-serif;     
+     font-size: 11pt;     
+     font-weight: bold;     
+     color: white;     
+     align:left;      
+     valign:top; 
+     text-align:left }
+     
+th.center { background: #336699;
+            font-family: Verdana, Helvetica, Arial, Sans-serif;
+            font-size: 8pt;
+            line-height: 1.5;
+            color: white;
+            align: center;
+            valign: middle;
+            padding: 1px, 3px;
+			text-align:center;						
+          }
+	    
+th.left { background: #336699;
+            font-family: Verdana, Helvetica, Arial, Sans-serif;
+            font-size: 8pt;
+            line-height: 1.5;
+            color: white;
+            align: center;
+            valign: middle;
+            padding: 1px, 3px;
+			text-align:left;			
+          }
+	    
+th.right { background: #336699;
+            font-family: Verdana, Helvetica, Arial, Sans-serif;
+            font-size: 8pt;
+            line-height: 1.5;
+            color: white;
+            align: center;
+            valign: middle;
+            padding: 1px, 3px;
+			text-align:right;
+          }
+
+th.frame {     background: #986430;}.field {        font-family: Verdana, Helvetica, Arial, Sans-serif;   font-size: 8pt; color: black;}.option {       font-family: Verdana, Helvetica, Arial, Sans-serif;       font-size: 8pt; color: white;       background-color: cyan;}.white {       background-color: white;}
+
+.list1 { background-color: #CCCCCC; 
+         font-family: Verdana, Helvetica, Arial, Sans-serif;
+         font-size: 8pt;
+         color: black; 
+         padding: 1px, 3px;
+ 		 cursor:  pointer;
+		 cursor:  hand;
+       }
+	   
+.list1disabled { background-color: #CCCCCC; 
+         font-family: Verdana, Helvetica, Arial, Sans-serif;
+         font-size: 8pt;
+		 font-style: italic;
+         color: black; 
+         padding: 1px, 3px;
+ 		 cursor:  pointer;
+		 cursor:  hand;
+       }
+
+.list0 { background-color: #E6E6E6;
+         font-family: Verdana, Helvetica, Arial, Sans-serif;
+         font-size: 8pt;
+         color: black; 
+         padding: 1px, 3px;
+ 	     cursor:  pointer;
+		 cursor:  hand;
+       }
+	   
+.list0disabled { background-color: #E6E6E6;
+         font-family: Verdana, Helvetica, Arial, Sans-serif;
+		 font-style: italic;
+         font-size: 8pt;
+         color: black; 
+         padding: 1px, 3px;
+ 	     cursor:  pointer;
+		 cursor:  hand;
+       }
+
+td.red {
+	background-color: red;
+ 	align: left;
+}
+
+td.cyan {
+	background-color: cyan;
+ 	align: left;
+}
+
+td.lightgreen {
+	background-color: lightgreen;
+ 	align: left;
+}
+
+td.khaki {
+	background-color: khaki;
+ 	align: left;
+}
+
+
+td.white {
+	background-color: white;
+}
+
+td.cyan {
+	background-color: #99ccff;
+}
+td.white {       background-color: white;}
+
+
+.gold {
+	background-color: #B5A642;
+ 	align: left;
+}
+
+.soft_gold {
+	background-color: #FFFF69;
+ 	align: left;
+}
+
+.red {
+	background-color: #B87333;
+ 	align: left;
+}
+
+.soft_red {
+	background-color: #FFCC88;
+ 	align: left;
+}
+
+.green {
+	background-color: #009933;
+ 	align: left;
+}
+
+.soft_green {
+	background-color: #99FF99;
+ 	align: left;
+}
+
+.field {
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+	font-size: 8pt;
+
+}
+
+#req {
+	color: Red;
+	font-weight: bold;
+}
+
+#opc {
+	color: Blue;
+}
+
+.subheadNoLink {
+    font-family: Verdana, Helvetica, Arial, Sans-serif;
+    font-size: 10pt;
+    font-weight: bold;
+}
+
+
+.subheadNoLinkWhite {
+    font-family: Verdana, Helvetica, Arial, Sans-serif;
+    font-size: 10pt;
+    font-weight: bold;
+    color: white;
+}
+
+.formButton {
+font-family : Arial; background-color : #FFFFFF; color : #000000; font-size : 11px; BORDER-BOTTOM : rgb(0,0,0) 1px outset; BORDER-LEFT : rgb(0,0,0) 1px outset; BORDER-RIGHT : rgb(0,0,0) 1px outset; BORDER-TOP : rgb(0,0,0) 1px outset; width: 100 
+}
+
+.inputField{
+    font-family: "Times New Roman", Times, serif;
+    font-size: 10pt;
+}
+
+

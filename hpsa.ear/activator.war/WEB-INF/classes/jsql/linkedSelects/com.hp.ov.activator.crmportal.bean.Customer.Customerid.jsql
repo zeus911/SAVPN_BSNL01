@@ -1,0 +1,36 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+SELECT
+  crm_customer.ContactpersonEmail		crm_customer_Contact10,
+  crm_customer.CompanyCity		crm_customer_CompanyCity,
+  crm_customer.ContactpersonPhonenumber		crm_customer_Contact11,
+  crm_customer.CompanyAddress		crm_customer_CompanyAddress,
+  crm_customer.CompanyName		crm_customer_CompanyName,
+  crm_customer.LastUpdateTime		crm_customer_LastUpdateTime,
+  crm_customer.CreationTime		crm_customer_CreationTime,
+  crm_customer.Status		crm_customer_Status,
+  crm_customer.ContactpersonSurname		crm_customer_Contact12,
+  crm_customer.ContactpersonName		crm_customer_ContactpersonName,
+  crm_customer.CustomerId		crm_customer_CustomerId,
+  crm_customer.CompanyZipCode		crm_customer_CompanyZipCode
+FROM
+  crm_customer   crm_customer
+WHERE
+  crm_customer.CustomerId IN [selectIN_?]
+
+
+
+@ order:1;select_IN_substitution
+@ opt:CustomerId;crm_customer;crm_customer;CustomerId
+@ opt:CompanyName;crm_customer;crm_customer;CompanyName
+@ opt:CompanyAddress;crm_customer;crm_customer;CompanyAddress
+@ opt:CompanyCity;crm_customer;crm_customer;CompanyCity
+@ opt:CompanyZipCode;crm_customer;crm_customer;CompanyZipCode
+@ opt:ContactpersonName;crm_customer;crm_customer;ContactpersonName
+@ opt:ContactpersonSurname;crm_customer;crm_customer;ContactpersonSurname
+@ opt:ContactpersonPhonenumber;crm_customer;crm_customer;ContactpersonPhonenumber
+@ opt:ContactpersonEmail;crm_customer;crm_customer;ContactpersonEmail
+@ opt:Status;crm_customer;crm_customer;Status
+@ opt:LastUpdateTime;crm_customer;crm_customer;LastUpdateTime
+@ opt:CreationTime;crm_customer;crm_customer;CreationTime
+@ alias:primary_key;crm_customer.CustomerId

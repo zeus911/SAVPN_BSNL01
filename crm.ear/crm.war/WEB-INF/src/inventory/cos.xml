@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE Bean SYSTEM "bean.dtd">
+<!--
+###############################################################################
+#
+#    (c) Copyright 2003-2010 Hewlett-Packard Development Company, L.P.
+#
+###############################################################################
+
+###############################################################################
+#
+# $Source: /tmp/vpn/SA_VPN_SP/jboss/server/default/deploy/crmportal.sar/crm.war/WEB-INF/src/inventory/cos.xml,v $
+# $Revision: 1.8 $
+# $Date: 2010-10-05 14:19:04 $
+# $Author: shiva $
+#
+###############################################################################
+#
+# <Description> 
+#
+###############################################################################
+-->
+
+
+<Bean>
+  <Name>CoS</Name>
+  <Solution>CRM</Solution>
+  <Package>com.hp.ov.activator.crmportal.bean</Package>
+  <DBTable>CoS</DBTable>
+  <DBAlias>CoS</DBAlias>
+  <Fields>
+     <Field update ="false">
+        <Name>Name</Name>
+        <Type>String</Type>
+        <Description>Name of the CoS</Description>
+     </Field>
+     <Field mandatory="false">
+        <Name>Description</Name>
+        <Type>String</Type>
+        <Description>Further description of the CoS</Description>
+     </Field>
+     <Field>
+        <Name>conform_dscp</Name>
+        <Type>String</Type>
+        <Description>Conforming DSCP</Description>
+     </Field>
+  </Fields>
+
+  <Keys>
+    <Key pk="true">
+      <KeyField>Name</KeyField>
+    </Key>
+  </Keys>
+
+  <!-- These are the operations to generate for this bean -->
+  <Operations>
+    <Store/>
+    <Update/>
+    <Remove/>
+
+    <!-- findAll method -->
+    <FindBy>
+      <OrderField>conform_dscp</OrderField>
+    </FindBy>
+  </Operations>
+</Bean>
+

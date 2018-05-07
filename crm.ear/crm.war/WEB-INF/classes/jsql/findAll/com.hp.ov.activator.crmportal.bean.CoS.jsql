@@ -1,0 +1,12 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+SELECT
+  CoS.Name		CoS_Name,
+  CoS.Description		CoS_Description,
+  CoS.conform_dscp		CoS_conform_dscp
+FROM
+  CoS   CoS
+WHERE
+ORDER BY CoS.conform_dscp ASC 
+
+

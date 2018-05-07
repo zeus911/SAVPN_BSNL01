@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE CLI SYSTEM "CLIv4.dtd"><CLI> <Connect ssh.username="bsnlnms" ssh.password="FtdWoYLVm7T3TvmA1CkQig==" ssh.identity="-" ssh.known_hosts="/.ssh/known_hosts" ssh.isEncrypted="yes" protocol="telnet" identifier="SAVPN_message_2425" store_failure="true" task_description="Add L3 Site Attachment VPN PE" ssh.allow_host="true"> <Do description="Connecting to Cisco device." timeout="20"> <Confirm> <Pattern>Username: $</Pattern> <Command>bsnlnms</Command> </Confirm> <Confirm> <Pattern>Password: $</Pattern> <Command isEncrypted="yes" isPassword="yes">FtdWoYLVm7T3TvmA1CkQig==</Command> </Confirm> <Error>% Authentication failed.$</Error> <Prompt>#$</Prompt> </Do> <Do description="Privileged (enable) mode." timeout="20"> <Command newline_chars="\n">enable</Command> <Confirm> <Pattern>Password: $</Pattern> <Command isEncrypted="yes" isPassword="yes">FtdWoYLVm7T3TvmA1CkQig==</Command> </Confirm> <Error>% Access denied$</Error> <Prompt>#$</Prompt> </Do> <Do description="Turn prompting off"> <Command> terminal length 0 </Command> <Prompt>#$</Prompt> </Do> <Do description="Turn line scroll off"> <Command> terminal width 256 </Command> <Prompt>#$</Prompt> </Do> <Do description="Configure terminal"> <Command> configure terminal </Command> <Prompt>\(config\)#$</Prompt> </Do> </Connect> <Disconnect> <Do description="End configure terminal mode"> <Command> end </Command> <Prompt>#$</Prompt> </Do> <Do description="Not commited changes (possible error)"> <Confirm> <Pattern>Uncommitted changes found, commit them before exiting(yes/no/cancel)? [cancel]: $</Pattern> <Command> no </Command> </Confirm> <Prompt>#$</Prompt> </Do> <Do> <Command>exit </Command> <Prompt>.</Prompt> </Do> </Disconnect> <Activate> 
+
+
+<Action description="Create VRF">
+ <Do> 
+ <Command>policy-map GOLD_TEST_in_1M</Command> 
+ <Error message="Error creating VRF.">^% Invalid input.*$</Error>
+ <Prompt>\(config.*\)#$</Prompt> 
+ </Do> 
+</Action>
+ 
+ 
+<Action description="Create VRF">
+ <Do> 
+ <Command>class l3_any</Command> 
+ <Error message="Error creating VRF.">^% Invalid input.*$</Error>
+ <Prompt>\(config.*\)#$</Prompt> 
+ </Do> 
+</Action>
+ 
+ 
+<Action description="Create VRF">
+ <Do> 
+ <Command>police rate 1024000 bps burst 192000 bytes peak-burst 384000 bytes</Command> 
+ <Error message="Error creating VRF.">^% Invalid input.*$</Error>
+ <Prompt>\(config.*\)#$</Prompt> 
+ </Do> 
+</Action>
+ 
+ 
+<Action description="Create VRF">
+ <Do> 
+ <Command>conform-action set mpls experimental imposition 4</Command> 
+ <Error message="Error creating VRF.">^% Invalid input.*$</Error>
+ <Prompt>\(config.*\)#$</Prompt> 
+ </Do> 
+</Action>
+ 
+ 
+<Action description="Create VRF">
+ <Do> 
+ <Command>exceed-action drop</Command> 
+ <Error message="Error creating VRF.">^% Invalid input.*$</Error>
+ <Prompt>\(config.*\)#$</Prompt> 
+ </Do> 
+</Action>
+ 
+ 
+<Action description="Create VRF">
+ <Do> 
+ <Command>exit</Command> 
+ <Error message="Error creating VRF.">^% Invalid input.*$</Error>
+ <Prompt>\(config.*\)#$</Prompt> 
+ </Do> 
+</Action>
+ 
+ 
+<Action description="Create VRF">
+ <Do> 
+ <Command>exit</Command> 
+ <Error message="Error creating VRF.">^% Invalid input.*$</Error>
+ <Prompt>\(config.*\)#$</Prompt> 
+ </Do> 
+</Action>
+ 
+ 
+<Action description="Create VRF">
+ <Do> 
+ <Command>class class-default</Command> 
+ <Error message="Error creating VRF.">^% Invalid input.*$</Error>
+ <Prompt>\(config.*\)#$</Prompt> 
+ </Do> 
+</Action>
+ 
+ 
+<Action description="Create VRF">
+ <Do> 
+ <Command>exit</Command> 
+ <Error message="Error creating VRF.">^% Invalid input.*$</Error>
+ <Prompt>\(config.*\)#$</Prompt> 
+ </Do> 
+</Action>
+ 
+ 
+<Action description="Create VRF">
+ <Do> 
+ <Command>end-policy-map</Command> 
+ <Error message="Error creating VRF.">^% Invalid input.*$</Error>
+ <Prompt>\(config.*\)#$</Prompt> 
+ </Do> 
+</Action>
+ 
+ 
+ 
+<Action description="Clear configuration failed after commit error"> <Undo> <Command> clear</Command> <Prompt>\(config\)#$</Prompt> </Undo> </Action> <Action description="Show configuration failed after commit error"> <Undo> <Command> show configuration failed</Command> <Prompt>\(config\)#$</Prompt> </Undo> </Action>
+
+ <Action description="Save/apply all changes"> <Do> <Command> commit</Command> <Error message="Error1 commit.">^% Failed to commit.*$</Error> <Prompt>\(config\)#$</Prompt> </Do> </Action> 
+  
+   
+   
+   
+   
+  
+ 
+  
+ 
+
+</Activate> <Rollback> <Rewind/> </Rollback></CLI>
+

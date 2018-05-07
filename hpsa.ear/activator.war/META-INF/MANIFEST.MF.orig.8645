@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.6.5
+Created-By: 24.55-b03 (Oracle Corporation)
+Dependencies: org.apache.xerces services export, com.hp.ov.activator.o
+ racle services export, org.jboss.ironjacamar.jdbcadapters services ex
+ port, org.jboss.security.negotiation
+

@@ -1,0 +1,428 @@
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+	<link rel="stylesheet" type="text/css" href="/activator/css/primefaces/hpsa.css"/>
+  <script type="text/javascript" src="/activator/javascript/saUtilities.js" ></script>
+  <script>
+  function openUpdateWindow() {
+    var url = '/activator/jsf/resmgr/pools/poolupdate.jsf' +
+      "?updform:_rnd=" + document.getElementById("updform:_rnd").value +
+      "&amp;updform:_poolName=" + document.getElementById("updform:_poolName").value +
+      "&amp;updform:_plugInName=" + document.getElementById("updform:_plugInName").value;
+    if (window.showModalDialog) {
+      window.showModalDialog(url, window, "dialogWidth:950px;dialogHeight:500px;resizable=yes;location=no");
+    } else {
+      window.open(url, 'updwndw', 'height=950,width=500,toolbar=no,directories=no,status=no,location=no,menubar=no,scrollbars=no,resizable=yes,modal=yes');
+    }
+  }
+  function deletePool() {
+    var form = document.forms["searchform"];
+    var btn = form.elements["searchform:delbtn"];
+    PF('dlgDelete').hide();
+    btn.click();
+  }
+  function enablePool() {
+    var form = document.forms["searchform"];
+    var btn = form.elements["searchform:enablebtn"];
+    PF('dlgEnable').hide();
+    btn.click();
+  }
+  function disablePool() {
+    var form = document.forms["searchform"];
+    var btn = form.elements["searchform:disablebtn"];
+    PF('dlgDisable').hide();
+    btn.click();
+  }
+  function resumePool() {
+    var form = document.forms["searchform"];
+    var btn = form.elements["searchform:resbtn"];
+    PF('dlgResume').hide();
+    btn.click();
+  }
+  function suspendPool() {
+    var form = document.forms["searchform"];
+    var btn = form.elements["searchform:susbtn"];
+    PF('dlgSuspend').hide();
+    btn.click();
+  }
+  function stopPool() {
+    var form = document.forms["searchform"];
+    var btn = form.elements["searchform:stopbtn"];
+    PF('dlgStop').hide();
+    btn.click();
+  }
+  function killPool() {
+    var form = document.forms["searchform"];
+    var btn = form.elements["searchform:killbtn"];
+    PF('dlgKill').hide();
+    btn.click();
+  }
+  function registerPool() {
+    var form = document.forms["searchform"];
+    var btn = form.elements["searchform:regbtn"];
+    PF('dlgRegister').hide();
+    btn.click();
+  }
+  function unregisterPool() {
+    var form = document.forms["searchform"];
+    var btn = form.elements["searchform:unregbtn"];
+    PF('dlgUnregister').hide();
+    btn.click();
+  }
+  </script>
+  <script>
+  function resize() {
+    var sz = document.getElementById("updform:poolList").scrollWidth - 30;
+    document.getElementById("updform:stlist").style.width = sz;
+    document.getElementById("updform:provlist").style.width = sz;
+    document.body.onresize=resize;
+  }
+  function resizeOnRowSelect() {
+    var sz = document.getElementById("updform:poolList").scrollWidth - 200;
+    document.getElementById("updform:stlist").style.width = sz;
+    document.getElementById("updform:provlist").style.width = sz;
+    sz += 160;
+    document.getElementById("updform:stlist").style.width = sz;
+    document.getElementById("updform:provlist").style.width = sz;
+  }
+  function tableHeaders() {
+    if (document.all) {
+      var styleSheetList = document.styleSheets;
+      styleSheetList[0].addRule(".hlabel", "position:relative; left:20;");
+    }
+  }
+  </script>
+  <script>
+  // This javascript block is just needed to fix representation problems of PrimeFaces 3 in IE
+  // and exploiting it to select the first row every time the pool table is updated.
+  function fireEvent(element,event){
+    if (document.createEventObject){
+      // dispatch for IE
+      var evt = document.createEventObject();
+      return element.fireEvent('on'+event,evt)
+    } else{
+      // dispatch for firefox + others
+      var evt = document.createEvent("HTMLEvents");
+      evt.initEvent(event, true, true ); // event type,bubbling,cancelable
+      return !element.dispatchEvent(evt);
+    }
+  }
+  var lastPoolName;
+  var lastPlugInName;
+  function selectFirstRow () {
+    var elem = document.getElementById("updform:poolList");
+    if (elem != null) {
+      var table = elem.getElementsByTagName("table");
+      if (table != null) {
+        table = table[0];
+        var rows = table.getElementsByTagName("tr");
+        if (rows == null || rows.length == 1) { // the first row is the table's header
+          // do nothing
+        } else {
+          var cell1 = rows[1].getElementsByTagName("td")[0];
+          var cell2 = rows[1].getElementsByTagName("td")[1];
+          if (cell1 != null) {
+            if (cell2 != null) {
+              var text1 = document.all ? cell1.innerText : cell1.textContent;
+              var text2 = document.all ? cell2.innerText : cell2.textContent;
+              if (text1 != lastPoolName) {
+                if (text2 != lastPlugInName) {
+                  lastPoolName = text1;
+                  lastPlugInName = text2;
+                  fireEvent(cell1, "click");
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    setTimeout("selectFirstRow()", 100);
+  }
+  </script>
+</h:head>
+
+<body onmousemove="logoutTimerReset();" onkeydown="logoutTimerReset();" onload="tableHeaders();resize()">
+
+<h:outputText value="#{rmmsg.pool_management}" class="frame-header" />
+
+<h:form id="searchform" style="height:80;">
+  <p:growl id="messages" />
+  <p:panel header="#{rmmsg.pool_search}" style="height:80">
+    <h:panelGrid columns="3" cellpadding="2">
+      <h:outputLabel for="searchPoolName" value="#{rmmsg.pool_name}:"/>
+      <h:inputText id="searchPoolName" value="#{lazyPoolListManager.searchPool}" label="PoolName" />
+      <h:commandButton id="sbtn" value="#{rmmsg.search}" actionListener="#{lazyPoolListManager.searchPoolByName}" update="poolList" />
+      <!--<h:commandButton type="reset" value="#{rmmsg.reset}" style="position:relative; top:-27; left:280;"/>-->
+      <h:commandButton id="usbtn" value="#{rmmsg.update}" actionListener="#{lazyPoolListManager.updateLazyPoolList}" update="poolList" style="visibility:hidden; display:none;"/>
+      <h:commandButton id="delbtn" value="#{rmmsg.delete}" actionListener="#{lazyPoolListManager.deleteSelectedPool}" update="poolList" style="visibility:hidden; display:none;"/>
+      <h:commandButton id="enablebtn" value="#{rmmsg.enable}" actionListener="#{lazyPoolListManager.enableSelectedPool}" update="poolList" style="visibility:hidden; display:none;"/>
+      <h:commandButton id="disablebtn" value="#{rmmsg.disable}" actionListener="#{lazyPoolListManager.disableSelectedPool}" update="poolList" style="visibility:hidden; display:none;"/>
+      <h:commandButton id="resbtn" value="#{rmmsg.resume}" actionListener="#{lazyPoolListManager.resumeSelectedPool}" update="poolList" style="visibility:hidden; display:none;"/>
+      <h:commandButton id="stopbtn" value="#{rmmsg.stop}" actionListener="#{lazyPoolListManager.stopSelectedPool}" update="poolList" style="visibility:hidden; display:none;"/>
+      <h:commandButton id="killbtn" value="#{rmmsg.kill}" actionListener="#{lazyPoolListManager.killSelectedPool}" update="poolList" style="visibility:hidden; display:none;"/>
+      <h:commandButton id="susbtn" value="#{rmmsg.suspend}" actionListener="#{lazyPoolListManager.suspendSelectedPool}" update="poolList" style="visibility:hidden; display:none;"/>
+      <h:commandButton id="regbtn" value="#{rmmsg.register}" actionListener="#{lazyPoolListManager.registerSelectedPool}" update="messages" style="visibility:hidden; display:none;"/>
+      <h:commandButton id="unregbtn" value="#{rmmsg.unregister}" actionListener="#{lazyPoolListManager.unregisterSelectedPool}" update="messages" style="visibility:hidden; display:none;"/>
+<c:choose>
+  <c:when test="${lazyPoolListManager.multipleNodeNames}">
+      <h:inputHidden id="nodeName" value="#{lazyPoolListManager.nodeName}" />
+  </c:when>
+  <c:otherwise>
+      <h:inputHidden id="nodeName" value="#{lazyPoolListManager.singleNodeName}" />
+  </c:otherwise>
+</c:choose>
+    </h:panelGrid>
+	</p:panel>
+</h:form>
+
+<h:form id="updform">
+  <p:dataTable id="poolList" var="poolconf" value="#{lazyPoolListManager.lazyModel}" lazy="true"
+      selection="#{lazyPoolListManager.selectedPool}" selectionMode="single" rowKey="#{poolconf.uiId}"
+      dynamic="true" paginatorPosition="top" rowsPerPageTemplate="5,10,15" paginator="true" rows="5"
+      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+      emptyMessage="#{rmmsg.no_pools_found}" tableStyle="table-layout:auto;">
+
+    <p:ajax event="rowSelect" listener="#{lazyPoolListManager.onPoolSelect}" update=":updform:poolDetailsPanelId" oncomplete="resizeOnRowSelect()"/>
+    <p:ajax event="rowUnselect" listener="#{lazyPoolListManager.onPoolUnselect}" update=":updform:poolDetailsPanelId" oncomplete="resizeOnRowSelect()"/>
+  
+    <f:facet name="header">
+      <h:outputText value="#{rmmsg.pool_list}" />
+    </f:facet>
+    <p:column sortBy="#{poolconf.poolName}">
+      <f:facet name="header">
+        <h:outputText value="#{rmmsg.pool_name}" class="hlabel" />
+      </f:facet>
+      <h:outputText value="#{poolconf.poolName}" />
+    </p:column>
+		<p:column sortBy="#{poolconf.plugInName}">
+      <f:facet name="header">
+        <h:outputText value="#{rmmsg.pool_plugin}" class="hlabel" />
+			</f:facet>
+			<h:outputText value="#{poolconf.plugInName}" />
+    </p:column>
+    <p:column>
+      <f:facet name="header">
+        <h:outputText value="#{rmmsg.pool_node}" />
+      </f:facet>
+      <h:outputText value="#{poolconf.nodeName}" />
+    </p:column>
+    <p:column>
+      <f:facet name="header">
+        <h:outputText value="#{rmmsg.pool_state}" />
+      </f:facet>
+      <h:outputText value="#{poolconf.poolState}" />
+    </p:column>
+    <p:column styleClass="td-numbered">
+      <f:facet name="header">
+        <h:outputText value="#{rmmsg.pool_used_conn}" />
+      </f:facet>
+      <h:outputText value="#{poolconf.usedConnections}" />
+    </p:column>
+    <p:column styleClass="td-numbered">
+      <f:facet name="header">
+        <h:outputText value="#{rmmsg.pool_queued_reqs}" />
+      </f:facet>
+      <h:outputText value="#{poolconf.queuedRequests}" />
+    </p:column>
+
+  </p:dataTable>
+
+  <p:panel id="poolDetailsPanelId" widgetId="details" header="#{rmmsg.pool_details}" style="position:relative; top:5;">
+  
+    <h:panelGrid columns="8" cellpadding="2" border="0">
+      <h:outputLabel for="poolName" value="#{rmmsg.pool_name}:"/>
+      <h:outputText id="poolName" value="#{lazyPoolListManager.selectedPool.poolName}" />
+      <h:outputLabel for="pluginName" value="#{rmmsg.pool_plugin}:" style="margin-left:75;"/>
+      <h:outputText id="pluginName" value="#{lazyPoolListManager.selectedPool.plugInName}" />
+      <h:outputLabel for="poolTimeout" value="#{rmmsg.pool_timeout}:" style="margin-left:75;"/>
+      <h:outputText id="poolTimeout" value="#{lazyPoolListManager.selectedPool.poolTimeout}" />
+      <h:outputLabel for="borrowingTimeout" value="#{rmmsg.pool_borrowing_timeout}:" style="margin-left:75;"/>
+      <h:outputText id="borrowingTimeout" value="#{lazyPoolListManager.selectedPool.borrowingTimeout}" />
+    </h:panelGrid>
+    <h:panelGrid columns="2" cellpadding="2" border="0">
+      <h:outputLabel for="poolDescription" value="#{rmmsg.pool_description}:"/>
+      <h:outputText id="poolDescription" style="width:750;" value="#{lazyPoolListManager.selectedPool.description}" />
+    </h:panelGrid>
+
+    <p:dataTable id="stlist" var="_poolState" value="#{lazyPoolListManager.selectedPool.poolStates}"
+                 paginator="false" style="margin-top:10;" emptyMessage="#{rmmsg.no_states_found}" tableStyle="table-layout:auto;">
+      <f:facet name="header">
+        <h:outputText value="#{rmmsg.pool_states}" />
+      </f:facet>
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{rmmsg.pool_node}" />
+        </f:facet>
+        <h:outputText value="#{_poolState.nodeName}" />
+      </p:column>
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{rmmsg.pool_state}" />
+        </f:facet>
+        <h:outputText value="#{_poolState.poolState}" />
+      </p:column>
+      <p:column styleClass="td-numbered">
+        <f:facet name="header">
+          <h:outputText value="#{rmmsg.pool_used_conn}" />
+        </f:facet>
+        <h:outputText value="#{_poolState.usedConnections}" />
+      </p:column>
+      <p:column styleClass="td-numbered">
+        <f:facet name="header">
+          <h:outputText value="#{rmmsg.pool_queued_reqs}" />
+        </f:facet>
+        <h:outputText value="#{_poolState.queuedRequests}" />
+      </p:column>
+      <p:column styleClass="td-numbered">
+        <f:facet name="header">
+          <h:outputText value="#{rmmsg.pool_release_time}" />
+        </f:facet>
+        <h:outputText value="#{_poolState.lastReleaseTime}" >
+          <f:convertDateTime type="both" pattern="dd-MMM-yyyy HH:mm:ss" />
+        </h:outputText>
+      </p:column>
+    </p:dataTable>
+	
+    <h:inputHidden id="_rnd" name="_rnd" value="#{lazyPoolListManager.selectedPool.uiId}" />
+    <h:inputHidden id="_poolName" name="_poolName" value="#{lazyPoolListManager.selectedPool.poolName}" />
+    <h:inputHidden id="_plugInName" name="_plugInName" value="#{lazyPoolListManager.selectedPool.plugInName}" />
+  
+    <p:commandButton value="#{rmmsg.update}" style="margin-top:10;"
+              onclick="openUpdateWindow();" disabled="#{lazyPoolListManager.selectedPool==null}"/>
+    <p:commandButton type="button" value="#{rmmsg.delete}" style="margin-top:10; margin-left:5;"
+              onclick="PF('dlgDelete').show();" disabled="#{!lazyPoolListManager.selectedPool.opDeleteAvailable}"/>
+    <p:commandButton type="button" value="#{rmmsg.enable}" style="margin-top:10; margin-left:5;"
+              onclick="PF('dlgEnable').show();" disabled="#{!lazyPoolListManager.selectedPool.opEnableAvailable}"/>
+    <p:commandButton type="button" value="#{rmmsg.disable}" style="margin-top:10; margin-left:5;"
+              onclick="PF('dlgDisable').show();" disabled="#{!lazyPoolListManager.selectedPool.opDisableAvailable}"/>
+    <p:commandButton type="button" value="#{rmmsg.resume}" style="margin-top:10; margin-left:5;"
+              onclick="PF('dlgResume').show();" disabled="#{!lazyPoolListManager.selectedPool.opResumeAvailable}"/>
+    <p:commandButton type="button" value="#{rmmsg.kill}" style="margin-top:10; margin-left:5;"
+              onclick="PF('dlgKill').show();" disabled="#{!lazyPoolListManager.selectedPool.opKillAvailable}"/>
+    <p:commandButton type="button" value="#{rmmsg.stop}" style="margin-top:10; margin-left:5;"
+              onclick="PF('dlgStop').show();" disabled="#{!lazyPoolListManager.selectedPool.opStopAvailable}"/>
+    <p:commandButton type="button" value="#{rmmsg.suspend}" style="margin-top:10; margin-left:5;"
+              onclick="PF('dlgSuspend').show();" disabled="#{!lazyPoolListManager.selectedPool.opSuspendAvailable}"/>
+    <p:commandButton type="button" value="#{rmmsg.register}" style="margin-top:10; margin-left:5;"
+              onclick="PF('dlgRegister').show();" disabled="#{!lazyPoolListManager.selectedPool.opRegisterAvailable}"/>
+    <p:commandButton type="button" value="#{rmmsg.unregister}" style="margin-top:10; margin-left:5;"
+              onclick="PF('dlgUnregister').show();" disabled="#{!lazyPoolListManager.selectedPool.opUnregisterAvailable}"/>
+<c:choose>
+  <c:when test="${lazyPoolListManager.selectedPool.opRegisterAvailable}">
+    <h:outputLabel for="sNodes" value="#{rmmsg.node_name}:" style="margin-left:5; white-space:nowrap;"/>
+  </c:when>
+  <c:otherwise>
+    <h:outputLabel for="sNodes" value="#{rmmsg.node_name}:" style="margin-left:5; white-space:nowrap; color:#777777; text-shadow:#f3f3f3;"/>
+  </c:otherwise>
+</c:choose>
+<c:choose>
+  <c:when test="${lazyPoolListManager.multipleNodeNames}">
+    <h:selectOneMenu id="sNodes" value="#{lazyPoolListManager.nodeName}" style="width:120; margin-left:5;"
+              disabled="#{!lazyPoolListManager.selectedPool.opRegisterAvailable}" onchange="document.getElementById('searchform:nodeName').value=this.value;">
+      <f:selectItem itemLabel="#{rmmsg.node_name_empty}" itemValue="" />
+      <f:selectItems value="#{lazyPoolListManager.nodeNames}" />
+    </h:selectOneMenu>
+  </c:when>
+  <c:otherwise>
+    <h:outputText id="sNodes" value="#{lazyPoolListManager.singleNodeName}" style="margin-left:5;"/>
+  </c:otherwise>
+</c:choose>
+    
+    <p:dataTable id="provlist" var="providerconf" value="#{lazyPoolListManager.selectedPool.connectionProviderConfigurations}"
+              paginator="false" style="margin-top:10;" emptyMessage="#{rmmsg.no_providers_found}" tableStyle="table-layout:auto;">
+      <f:facet name="header">
+        <h:outputText value="#{rmmsg.provider_configurations}" />
+      </f:facet>
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{rmmsg.provider_name}" />
+        </f:facet>
+        <h:outputText value="#{providerconf.connProviderInstance}" />
+      </p:column>
+      <p:column styleClass="td-numbered">
+        <f:facet name="header">
+          <h:outputText value="#{rmmsg.provider_max_conn}" />
+        </f:facet>
+        <h:outputText value="#{providerconf.maxConnections}"/>
+      </p:column>
+      <p:column styleClass="td-numbered">
+        <f:facet name="header">
+          <h:outputText value="#{rmmsg.provider_idle_conn_to}" />
+        </f:facet>
+        <h:outputText value="#{providerconf.idleConnTimeout}" />
+      </p:column>
+      <p:column styleClass="td-numbered">
+        <f:facet name="header">
+          <h:outputText value="#{rmmsg.provider_in_use_conn_to}" />
+        </f:facet>
+        <h:outputText value="#{providerconf.inUseConnTimeout}" />
+      </p:column>
+    </p:dataTable>
+    
+    <script>resize();setTimeout("selectFirstRow()", 100);</script>
+	
+  </p:panel>
+  
+  <p:confirmDialog header="#{rmmsg.delete} #{rmmsg.pool}" message="#{rmmsg.pool_delete_confirm}" modal="true"
+             widgetVar="dlgDelete" draggable="false" resizable="false" height="60" width="350" showEffect="clip" hideEffect="clip">
+    <p:commandButton value="#{rmmsg.delete}" onclick="deletePool();"/>
+    <p:commandButton type="button" value="#{rmmsg.cancel}" style="margin-left:5;" onclick="PF('dlgDelete').hide();"/>
+  </p:confirmDialog>
+  
+  <p:confirmDialog header="#{rmmsg.enable} #{rmmsg.pool}" message="#{rmmsg.pool_enable_confirm}" modal="true"
+             widgetVar="dlgEnable" draggable="false" resizable="false" height="60" width="350" showEffect="clip" hideEffect="clip">
+    <p:commandButton value="#{rmmsg.enable}" onclick="enablePool();"/>
+    <p:commandButton type="button" value="#{rmmsg.cancel}" style="margin-left:5;" onclick="PF('dlgEnable').hide();"/>
+  </p:confirmDialog>
+  
+  <p:confirmDialog header="#{rmmsg.disable} #{rmmsg.pool}" message="#{rmmsg.pool_disable_confirm}" modal="true"
+             widgetVar="dlgDisable" draggable="false" resizable="false" height="60" width="350" showEffect="clip" hideEffect="clip">
+    <p:commandButton value="#{rmmsg.disable}" onclick="disablePool();"/>
+    <p:commandButton type="button" value="#{rmmsg.cancel}" style="margin-left:5;" onclick="PF('dlgDisable').hide();"/>
+  </p:confirmDialog>
+  
+  <p:confirmDialog header="#{rmmsg.resume} #{rmmsg.pool}" message="#{rmmsg.pool_resume_confirm}" modal="true"
+             widgetVar="dlgResume" draggable="false" resizable="false" height="60" width="350" showEffect="clip" hideEffect="clip">
+    <p:commandButton value="#{rmmsg.resume}" onclick="resumePool();"/>
+    <p:commandButton type="button" value="#{rmmsg.cancel}" style="margin-top:10; margin-left:5;" onclick="PF('dlgResume').hide();"/>
+  </p:confirmDialog>
+  
+  <p:confirmDialog header="#{rmmsg.kill} #{rmmsg.pool}" message="#{rmmsg.pool_kill_confirm}" modal="true"
+             widgetVar="dlgKill" draggable="false" resizable="false" height="60" width="350" showEffect="clip" hideEffect="clip">
+    <p:commandButton value="#{rmmsg.kill}" onclick="killPool();"/>
+    <p:commandButton type="button" value="#{rmmsg.cancel}" style="margin-top:10; margin-left:5;" onclick="PF('dlgKill').hide();"/>
+  </p:confirmDialog>
+  
+  <p:confirmDialog header="#{rmmsg.stop} #{rmmsg.pool}" message="#{rmmsg.pool_stop_confirm}" modal="true"
+             widgetVar="dlgStop" draggable="false" resizable="false" height="60" width="350" showEffect="clip" hideEffect="clip">
+    <p:commandButton value="#{rmmsg.stop}" onclick="stopPool();"/>
+    <p:commandButton type="button" value="#{rmmsg.cancel}" style="margin-top:10; margin-left:5;" onclick="PF('dlgStop').hide();"/>
+  </p:confirmDialog>
+  
+  <p:confirmDialog header="#{rmmsg.suspend} #{rmmsg.pool}" message="#{rmmsg.pool_suspend_confirm}" modal="true"
+             widgetVar="dlgSuspend" draggable="false" resizable="false" height="60" width="350" showEffect="clip" hideEffect="clip">
+    <p:commandButton value="#{rmmsg.suspend}" onclick="suspendPool();"/>
+    <p:commandButton type="button" value="#{rmmsg.cancel}" style="margin-top:10; margin-left:5;" onclick="PF('dlgSuspend').hide();"/>
+  </p:confirmDialog>
+  
+  <p:confirmDialog header="#{rmmsg.register} #{rmmsg.pool}" message="#{rmmsg.pool_register_confirm}" modal="true"
+             widgetVar="dlgRegister" draggable="false" resizable="false" height="60" width="350" showEffect="clip" hideEffect="clip">
+    <p:commandButton value="#{rmmsg.register}" onclick="registerPool();"/>
+    <p:commandButton type="button" value="#{rmmsg.cancel}" style="margin-top:10; margin-left:5;" onclick="PF('dlgRegister').hide();"/>
+  </p:confirmDialog>
+  
+  <p:confirmDialog header="#{rmmsg.unregister} #{rmmsg.pool}" message="#{rmmsg.pool_unregister_confirm}" modal="true"
+             widgetVar="dlgUnregister" draggable="false" resizable="false" height="60" width="350" showEffect="clip" hideEffect="clip">
+    <p:commandButton value="#{rmmsg.unregister}" onclick="unregisterPool();"/>
+    <p:commandButton type="button" value="#{rmmsg.cancel}" style="margin-top:10; margin-left:5;" onclick="PF('dlgUnregister').hide();"/>
+  </p:confirmDialog>
+
+</h:form>
+
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+SELECT
+  crm_state.Name		crm_state_Name,
+  crm_state.Description		crm_state_Description
+FROM
+  crm_state   crm_state
+WHERE
+  crm_state.Name IN [selectIN_?]
+
+
+
+@ order:1;select_IN_substitution
+@ opt:Name;crm_state;crm_state;Name
+@ opt:Description;crm_state;crm_state;Description
+@ alias:primary_key;crm_state.Name

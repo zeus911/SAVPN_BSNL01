@@ -1,0 +1,4 @@
+customer.xml;CustomerId
+service.xml;ServiceId
+serviceparameter.xml;__1__ServiceId,Attribute
+VPNMembership.xml;vpnId,siteattachmentId

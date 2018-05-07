@@ -1,0 +1,18 @@
+## Generated using InventoryBuilder v.V61
+## Object class com.hp.ov.activator.inventorybuilder.sql.routes.FindByArraySQLRoute
+SELECT
+  V_RateLimit.Description		V_RateLimit_Description,
+  V_RateLimit.RateLimitName		V_RateLimit_RateLimitName,
+  V_RateLimit.AverageBW		V_RateLimit_AverageBW
+FROM
+  V_RateLimit   V_RateLimit
+WHERE
+  V_RateLimit.RateLimitName IN [selectIN_?]
+
+
+
+@ order:1;select_IN_substitution
+@ opt:RateLimitName;V_RateLimit;V_RateLimit;RateLimitName
+@ opt:Description;V_RateLimit;V_RateLimit;Description
+@ opt:AverageBW;V_RateLimit;V_RateLimit;AverageBW
+@ alias:primary_key;V_RateLimit.RateLimitName

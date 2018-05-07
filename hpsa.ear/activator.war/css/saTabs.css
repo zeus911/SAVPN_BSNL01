@@ -1,0 +1,87 @@
+/**************************************************************************/
+/*  HP Service Activator                                                  */
+/*  (c) Copyright 2014 Hewlett-Packard Development Company, L.P.          */
+/**************************************************************************/
+
+html {
+  font-family: Verdana, Helvetica, Arial, Sans-serif;
+}
+
+div.bottom {
+  position: absolute;
+  bottom: 0;
+}
+
+.frameHead {
+  font-size: 12pt;
+  font-weight: bold;
+  color: /*c:sabl*/#0096d6;
+  vertical-align:top;
+  text-align: left;
+  padding: 5px 0px 10px 0px;
+}
+.subTopic  {
+  font-size: 10pt;
+  font-weight: bold;
+  color: /*c:sabl*/#0096d6;
+  vertical-align:top;
+  text-align: left;
+  padding: 5px 0px 10px 0px;
+}
+.bottomTab {
+  background: /*c:sabl*/#0096d6;  
+  color: white ;
+  font-size: 8pt;
+  font-weight: bold;
+}
+.bottomTabLink{
+  background: /*c:sabl*/#0096d6;
+  color: #ffffff;
+  font-size: 8pt;
+  font-weight: bold;
+  cursor: pointer;              
+}
+.bottomTabLinkDisabled{
+  background: /*c:sabl*/#0096d6;  
+  color: #5577bb;
+  font-size: 8pt;
+  font-weight: bold;
+}            
+.bottomTabTxtBox{
+  background: #efefef; 
+  font-size: 8pt;
+  font-weight: bold;
+}            
+.tabSelected{
+  background: /*c:sabl*/#0096d6;     
+  font-size: 8pt;
+  font-weight: bold;
+  padding: 2px 2px 2px 2px;
+  color: white;
+  cursor: pointer;
+  border-top: 1px solid #999999;
+  border-right: 3px solid #999999;
+  border-left: 1px solid #999999;
+}
+.tabUnSelected{
+  background: #efefef;
+  font-size: 8pt;
+  font-weight: bold;
+  color: #336699;
+  padding: 1px 2px;
+  cursor: pointer;
+  border-top: 1px solid #999999;
+  border-right: 3px solid #999999;
+  border-left: 1px solid #999999;
+}
+.tabMouseOver  {
+  background: #efefef; 
+  font-size: 8pt;
+  font-weight: bold;
+  color: /*c:sabl*/#0096d6;
+  padding: 1px 2px;
+  cursor: pointer; 
+  border-left: 3px solid #999999;
+  border-top: 3px solid #999999;
+  border-right: 1px solid #999999;
+}

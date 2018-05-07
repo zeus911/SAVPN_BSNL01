@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE Bean SYSTEM "bean.dtd">
+
+<!--
+###############################################################################
+#
+#    (c) Copyright 2003-2010 Hewlett-Packard Development Company, L.P.
+#
+###############################################################################
+
+###############################################################################
+#
+# $Source: /tmp/vpn/SA_VPN_SP/OpenView/ServiceActivator/solutions/SAVPN/inventory/IPAddrPool.xml,v $
+# $Revision: 1.11 $
+# $Date: 2011-04-19 06:52:35 $
+# $Author: shiva $
+#
+###############################################################################
+#
+# <Description> 
+#
+###############################################################################
+-->
+<Bean>
+   <Name>IPAddrPool</Name>
+   <Solution>CRM</Solution>
+   <Package>com.hp.ov.activator.crmportal.bean</Package>
+   <DBTable>V_IPAddrPool</DBTable>
+   <DBAlias>V_IPAddrPool</DBAlias>
+   <Fields>
+      <Field update ="false">
+         <Name>Name</Name>
+         <Type>String</Type>
+         <Description>The name for address pool</Description>
+      </Field>
+      <Field>
+         <Name>IPNet</Name>
+         <Type>String</Type>
+         <Description>The net address for the generated IPNet addresses</Description>
+      </Field>
+      <Field>
+         <Name>Mask</Name>
+         <Type>String</Type>
+         <Description>The net mask for the IPNet addresses</Description>
+      </Field>
+      <Field>
+         <Name>Type</Name>
+         <Type>String</Type>
+         <Description>The type of address pool(either IPNet or IPHost)</Description>
+         <ListOfValues>
+            <Value>IPNet</Value>
+            <Value>IPHost</Value>
+         </ListOfValues>
+      </Field>
+      <Field>
+         <Name>AddressFamily</Name>
+         <Type>String</Type>
+         <Description>The address family of the address pool</Description>
+         <ListOfValues>
+            <Value>IPv4</Value>
+            <Value>IPv6</Value>
+         </ListOfValues>
+      </Field>
+   </Fields>
+   <Keys>
+      <Key pk="true">
+         <KeyField>Name</KeyField>
+      </Key>
+      <Key unique="true">
+         <KeyField>IPNet</KeyField>
+         <KeyField>Mask</KeyField>
+      </Key>
+      <Key>
+         <KeyField>Type</KeyField>
+      </Key>
+   </Keys>
+   <!-- These are the operations to generate for this bean -->
+   <Operations>
+      <Store/>
+      <Update/>
+      <Remove/>
+      <FindBy>
+         <OrderField>Name</OrderField>
+      </FindBy>
+   </Operations>
+</Bean>
+

@@ -1,0 +1,8 @@
+-- Deployment and table moved to SA
+-- insert into CRM_CAR (Name, Description, ValueOrder, ISPARENT__) values ('128K', '128 Kb/sec.', 0, 0);
+-- insert into CRM_CAR (Name, Description, ValueOrder, ISPARENT__) values ('256K', '256 Kb/sec.', 1, 0);
+-- insert into CRM_CAR (Name, Description, ValueOrder, ISPARENT__) values ('512K', '512 Kb/sec.', 2, 0);
+-- insert into CRM_CAR (Name, Description, ValueOrder, ISPARENT__) values ('1M', '1 Mb/sec.', 3, 0);
+-- insert into CRM_CAR (Name, Description, ValueOrder, ISPARENT__) values ('2M', '2 Mb/sec.', 4, 0);
+-- insert into CRM_CAR (Name, Description, ValueOrder, ISPARENT__) values ('10M', '10 Mb/sec.', 5, 0);
+-- insert into CRM_CAR (Name, Description, ValueOrder, ISPARENT__) values ('144M', '144 Mb/sec.', 6, 0);

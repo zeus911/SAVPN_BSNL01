@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+<form-beans>
+  <form-bean name="IfaceUploadConfigurationForm" 
+      type="com.hp.ov.activator.inventory.CRModel.IfaceUploadConfigurationForm"/>
+      <form-bean name="IfaceUploadConfigurationFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.IfaceUploadConfigurationFormSearch"/>
+  <form-bean name="RouterTemplateForm" 
+      type="com.hp.ov.activator.inventory.CRModel.RouterTemplateForm"/>
+      <form-bean name="RouterTemplateFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.RouterTemplateFormSearch"/>
+  <form-bean name="DL_TerminationPointForm" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_TerminationPointForm"/>
+      <form-bean name="DL_TerminationPointFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_TerminationPointFormSearch"/>
+  <form-bean name="ElementComponentForm" 
+      type="com.hp.ov.activator.inventory.CRModel.ElementComponentForm"/>
+      <form-bean name="ElementComponentFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.ElementComponentFormSearch"/>
+  <form-bean name="NNMiConfigurationForm" 
+      type="com.hp.ov.activator.inventory.CRModel.NNMiConfigurationForm"/>
+      <form-bean name="NNMiConfigurationFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.NNMiConfigurationFormSearch"/>
+  <form-bean name="DL_ElementTypeMappingForm" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_ElementTypeMappingForm"/>
+      <form-bean name="DL_ElementTypeMappingFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_ElementTypeMappingFormSearch"/>
+  <form-bean name="NetworkAttachmentForm" 
+      type="com.hp.ov.activator.inventory.CRModel.NetworkAttachmentForm"/>
+      <form-bean name="NetworkAttachmentFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.NetworkAttachmentFormSearch"/>
+  <form-bean name="DL_NetworkAttachmentForm" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_NetworkAttachmentForm"/>
+      <form-bean name="DL_NetworkAttachmentFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_NetworkAttachmentFormSearch"/>
+  <form-bean name="DL_VendorMappingForm" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_VendorMappingForm"/>
+      <form-bean name="DL_VendorMappingFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_VendorMappingFormSearch"/>
+  <form-bean name="NAConfigurationForm" 
+      type="com.hp.ov.activator.inventory.CRModel.NAConfigurationForm"/>
+      <form-bean name="NAConfigurationFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.NAConfigurationFormSearch"/>
+  <form-bean name="LocationForm" 
+      type="com.hp.ov.activator.inventory.CRModel.LocationForm"/>
+      <form-bean name="LocationFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.LocationFormSearch"/>
+  <form-bean name="PWPolicyForm" 
+      type="com.hp.ov.activator.inventory.CRModel.PWPolicyForm"/>
+      <form-bean name="PWPolicyFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.PWPolicyFormSearch"/>
+  <form-bean name="OSVersionForm" 
+      type="com.hp.ov.activator.inventory.CRModel.OSVersionForm"/>
+      <form-bean name="OSVersionFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.OSVersionFormSearch"/>
+  <form-bean name="VendorForm" 
+      type="com.hp.ov.activator.inventory.CRModel.VendorForm"/>
+      <form-bean name="VendorFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.VendorFormSearch"/>
+  <form-bean name="DL_ConfigurationForm" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_ConfigurationForm"/>
+      <form-bean name="DL_ConfigurationFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_ConfigurationFormSearch"/>
+  <form-bean name="ElementTypeGroupForm" 
+      type="com.hp.ov.activator.inventory.CRModel.ElementTypeGroupForm"/>
+      <form-bean name="ElementTypeGroupFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.ElementTypeGroupFormSearch"/>
+  <form-bean name="InterfaceTypeForm" 
+      type="com.hp.ov.activator.inventory.CRModel.InterfaceTypeForm"/>
+      <form-bean name="InterfaceTypeFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.InterfaceTypeFormSearch"/>
+  <form-bean name="InterfaceForm" 
+      type="com.hp.ov.activator.inventory.CRModel.InterfaceForm"/>
+      <form-bean name="InterfaceFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.InterfaceFormSearch"/>
+  <form-bean name="NetworkElementDataloadDataForm" 
+      type="com.hp.ov.activator.inventory.CRModel.NetworkElementDataloadDataForm"/>
+      <form-bean name="NetworkElementDataloadDataFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.NetworkElementDataloadDataFormSearch"/>
+  <form-bean name="RegionForm" 
+      type="com.hp.ov.activator.inventory.CRModel.RegionForm"/>
+      <form-bean name="RegionFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.RegionFormSearch"/>
+  <form-bean name="NetworkElementForm" 
+      type="com.hp.ov.activator.inventory.CRModel.NetworkElementForm"/>
+      <form-bean name="NetworkElementFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.NetworkElementFormSearch"/>
+  <form-bean name="DL_NetworkElementForm" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_NetworkElementForm"/>
+      <form-bean name="DL_NetworkElementFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_NetworkElementFormSearch"/>
+  <form-bean name="DL_ExecutionStateForm" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_ExecutionStateForm"/>
+      <form-bean name="DL_ExecutionStateFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_ExecutionStateFormSearch"/>
+  <form-bean name="DL_EnrichmentForm" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_EnrichmentForm"/>
+      <form-bean name="DL_EnrichmentFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_EnrichmentFormSearch"/>
+  <form-bean name="DL_LinkForm" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_LinkForm"/>
+      <form-bean name="DL_LinkFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_LinkFormSearch"/>
+  <form-bean name="DL_StateForm" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_StateForm"/>
+      <form-bean name="DL_StateFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_StateFormSearch"/>
+  <form-bean name="TerminationPointForm" 
+      type="com.hp.ov.activator.inventory.CRModel.TerminationPointForm"/>
+      <form-bean name="TerminationPointFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.TerminationPointFormSearch"/>
+  <form-bean name="ElementCompTypeForm" 
+      type="com.hp.ov.activator.inventory.CRModel.ElementCompTypeForm"/>
+      <form-bean name="ElementCompTypeFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.ElementCompTypeFormSearch"/>
+  <form-bean name="DL_ElementCompTypeMappingForm" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_ElementCompTypeMappingForm"/>
+      <form-bean name="DL_ElementCompTypeMappingFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_ElementCompTypeMappingFormSearch"/>
+  <form-bean name="LinkTypeForm" 
+      type="com.hp.ov.activator.inventory.CRModel.LinkTypeForm"/>
+      <form-bean name="LinkTypeFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.LinkTypeFormSearch"/>
+  <form-bean name="NetworkForm" 
+      type="com.hp.ov.activator.inventory.CRModel.NetworkForm"/>
+      <form-bean name="NetworkFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.NetworkFormSearch"/>
+  <form-bean name="DL_ScopeForm" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_ScopeForm"/>
+      <form-bean name="DL_ScopeFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_ScopeFormSearch"/>
+  <form-bean name="DL_ElementComponentForm" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_ElementComponentForm"/>
+      <form-bean name="DL_ElementComponentFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_ElementComponentFormSearch"/>
+  <form-bean name="DL_InterfaceTypeMappingForm" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_InterfaceTypeMappingForm"/>
+      <form-bean name="DL_InterfaceTypeMappingFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_InterfaceTypeMappingFormSearch"/>
+  <form-bean name="ElementTypeForm" 
+      type="com.hp.ov.activator.inventory.CRModel.ElementTypeForm"/>
+      <form-bean name="ElementTypeFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.ElementTypeFormSearch"/>
+  <form-bean name="DL_InterfaceForm" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_InterfaceForm"/>
+      <form-bean name="DL_InterfaceFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_InterfaceFormSearch"/>
+  <form-bean name="OSVersionGroupForm" 
+      type="com.hp.ov.activator.inventory.CRModel.OSVersionGroupForm"/>
+      <form-bean name="OSVersionGroupFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.OSVersionGroupFormSearch"/>
+  <form-bean name="LinkForm" 
+      type="com.hp.ov.activator.inventory.CRModel.LinkForm"/>
+      <form-bean name="LinkFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.LinkFormSearch"/>
+  <form-bean name="DL_NetworkForm" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_NetworkForm"/>
+      <form-bean name="DL_NetworkFormSearch" 
+      type="com.hp.ov.activator.inventory.CRModel.DL_NetworkFormSearch"/>
+</form-beans>
+
+   <global-forwards>
+        <forward name="nullSession" path="/jsp/inventory-gui/hpac.jsp"/>
+    </global-forwards>
+
+  <action-mappings>
+    <action path="/login" forward="/jsp/inventory-gui/hpac.jsp"/>
+    <action path="/CreationForm**Action"
+      type="com.hp.ov.activator.inventory.CRModel.CreationForm{1}Action"
+      name="{1}Form"
+      scope="request"
+      validate="false"
+      input="CreationFormInput">
+      <forward name="success" path="/jsp/inventory/CRModel/Creation{1}.jsp" contextRelative="true"/>
+      <forward name="failure" path="/jsp/inventory/CreationInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="CreationFormInput" path="/jsp/inventory/CRModel/Creation{1}.jsp" contextRelative="true"/>
+    </action>
+    <action path="/CreationCommit**Action"
+      type="com.hp.ov.activator.inventory.CRModel.CreationCommit{1}Action"
+      name="{1}Form"
+      scope="request"
+      input="CreationCommitInput">
+      <forward name="success" path="/ViewForm{1}Action.do"/>
+      <forward name="error" path="/CreationForm{1}Action.do"/>
+      <forward name="failure" path="/jsp/inventory/CreationInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="CreationCommitInput" path="/CreationForm{1}Action.do"/>
+    </action>
+    <action path="/UpdateForm**Action"
+      type="com.hp.ov.activator.inventory.CRModel.UpdateForm{1}Action"
+      name="{1}Form"
+      scope="request"
+      validate="false"
+      input="UpdateFormInput">
+      <forward name="not-found" path="/jsp/inventory/UpdateInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="success" path="/jsp/inventory/CRModel/Update{1}.jsp" contextRelative="true"/>
+      <forward name="failure" path="/jsp/inventory/UpdateInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="UpdateFormInput" path="/jsp/inventory/CRModel/Update{1}.jsp" contextRelative="true"/>
+    </action>
+    <action path="/UpdateCommit**Action"
+      type="com.hp.ov.activator.inventory.CRModel.UpdateCommit{1}Action"
+      name="{1}Form"
+      scope="request"
+      input="UpdateCommitInput">
+      <forward name="not-found" path="/jsp/inventory/UpdateInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="success" path="/ViewForm{1}Action.do"/>
+      <forward name="error" path="/UpdateForm{1}Action.do"/>
+      <forward name="failure" path="/jsp/inventory/UpdateInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="UpdateCommitInput" path="/UpdateForm{1}Action.do"/>
+    </action>
+    <action path="/ViewForm**Action"
+      type="com.hp.ov.activator.inventory.CRModel.ViewForm{1}Action"
+      name="{1}Form"
+      scope="request"
+      validate="false"
+      input="ViewFormInput">
+      <forward name="not-found" path="/jsp/inventory/ViewInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="success" path="/jsp/inventory/CRModel/View{1}.jsp" contextRelative="true"/>
+      <forward name="failure" path="/jsp/inventory/ViewInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="ViewFormInput" path="/jsp/inventory/CRModel/View{1}.jsp" contextRelative="true"/>
+    </action>
+    <action path="/DeleteForm**Action"
+      type="com.hp.ov.activator.inventory.CRModel.ViewForm{1}Action"
+      name="{1}Form"
+      scope="request"
+      validate="false"
+      input="DeleteFormInput">
+      <forward name="not-found" path="/jsp/inventory/DeleteInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="success" path="/jsp/inventory/CRModel/Delete{1}.jsp" contextRelative="true"/>
+      <forward name="failure" path="/jsp/inventory/DeleteInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="DeleteFormInput" path="/jsp/inventory/CRModel/View{1}.jsp" contextRelative="true"/>
+    </action>
+    <action path="/DeleteCommit**Action"
+      type="com.hp.ov.activator.inventory.CRModel.DeleteCommit{1}Action"
+      name="{1}Form"
+      scope="request"
+      validate="false"
+      input="DeleteCommitInput">
+      <forward name="not-found" path="/jsp/inventory/DeleteInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="success" path="/jsp/inventory/RefreshTree.jsp" contextRelative="true"/>
+      <forward name="error" path="/jsp/inventory/DeleteInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="failure" path="/jsp/inventory/DeleteInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="DeleteCommitInput" path="/jsp/inventory/CRModel/View{1}.jsp" contextRelative="true"/>
+    </action>
+    <action path="/SearchForm**Action"
+      type="com.hp.ov.activator.inventory.CRModel.SearchForm{1}Action"
+      name="{1}Form"
+      scope="request"
+      validate="false">
+      <forward name="not-found" path="$/jsp/inventory/SearchInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="success" path="/jsp/inventory/CRModel/Search{1}.jsp" contextRelative="true"/>
+      <forward name="failure" path="/jsp/inventory/SearchInstanceFailure.jsp" contextRelative="true"/>
+    </action>
+    <action path="/SearchCommit**Action"
+      type="com.hp.ov.activator.inventory.CRModel.SearchCommit{1}Action"
+      name="{1}FormSearch"
+      scope="request"
+      validate="true"
+      input="SearchCommitInput"
+      >
+      <forward name="not-found" path="/jsp/inventory/NotFound.jsp" contextRelative="true"/>
+      <forward name="success" path="/jsp/inventory/CRModel/SearchList{1}.jsp" contextRelative="true"/>
+      <forward name="failure" path="/jsp/inventory/SearchInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="SearchCommitInput" path="/jsp/inventory/CRModel/Search{1}.jsp" contextRelative="true"/>
+    </action>
+    <action path="/CreationPartialForm**Action"
+      type="com.hp.ov.activator.inventory.CRModel.CreationPartialForm{1}Action"
+      name="{1}Form"
+      scope="request"
+      validate="false"
+      input="CreationPartialFormInput">
+      <forward name="success" path="/jsp/inventory/CRModel/CreationPartial{1}.jsp" contextRelative="true"/>
+      <forward name="failure" path="/jsp/inventory/CreationPartialInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="CreationPartialFormInput" path="/jsp/inventory/CRModel/CreationPartial{1}.jsp" contextRelative="true"/>
+    </action>
+    <action path="/CreationPartialCommit**Action"
+      type="com.hp.ov.activator.inventory.CRModel.CreationPartialCommit{1}Action"
+      name="{1}Form"
+      scope="request"
+      input="CreationPartialCommitInput">
+      <forward name="success" path="/jsp/inventory/RefreshTree.jsp" contextRelative="true"/>
+      <forward name="error" path="/CreationPartialForm{1}Action.do"/>
+      <forward name="failure" path="/jsp/inventory/CreationPartialInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="CreationPartialCommitInput" path="/CreationPartialForm{1}Action.do"/>
+    </action>
+    <action path="/DeletePartialForm**Action"
+      type="com.hp.ov.activator.inventory.CRModel.DeletePartialForm{1}Action"
+      name="{1}Form"
+      scope="request"
+      validate="false"
+      input="DeletePartialFormInput">
+      <forward name="not-found" path="/jsp/inventory/DeletePartialInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="success" path="/jsp/inventory/CRModel/DeletePartial{1}.jsp" contextRelative="true"/>
+      <forward name="failure" path="/jsp/inventory/DeletePartialInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="DeletePartialFormInput" path="/jsp/inventory/CRModel/DeletePartial{1}.jsp" contextRelative="true"/>
+    </action>
+    <action path="/DeletePartialCommit**Action"
+      type="com.hp.ov.activator.inventory.CRModel.DeletePartialCommit{1}Action"
+      name="{1}Form"
+      scope="request"
+      validate="false"
+      input="DeletePartialCommitInput">
+      <forward name="not-found" path="/jsp/inventory/DeletePartialInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="success" path="/jsp/inventory/RefreshTree.jsp" contextRelative="true"/>
+      <forward name="error" path="/jsp/inventory/DeletePartialInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="failure" path="/jsp/inventory/DeletePartialInstanceFailure.jsp" contextRelative="true"/>
+      <forward name="DeletePartialCommitInput" path="/DeletePartialForm{1}Action.do"/>
+    </action>
+  </action-mappings>
+  
+  <controller inputForward="true"/>
+    
+  <message-resources null="false" key="InventoryResources"
+    parameter="InventoryResources"/>
+    
+    
+  <message-resources null="false" key="IfaceUploadConfigurationApplicationResources"
+    parameter="resources.CRModel.IfaceUploadConfigurationApplicationResources"/>
+  <message-resources null="false" key="RouterTemplateApplicationResources"
+    parameter="resources.CRModel.RouterTemplateApplicationResources"/>
+  <message-resources null="false" key="DL_TerminationPointApplicationResources"
+    parameter="resources.CRModel.DL_TerminationPointApplicationResources"/>
+  <message-resources null="false" key="ElementComponentApplicationResources"
+    parameter="resources.CRModel.ElementComponentApplicationResources"/>
+  <message-resources null="false" key="NNMiConfigurationApplicationResources"
+    parameter="resources.CRModel.NNMiConfigurationApplicationResources"/>
+  <message-resources null="false" key="DL_ElementTypeMappingApplicationResources"
+    parameter="resources.CRModel.DL_ElementTypeMappingApplicationResources"/>
+  <message-resources null="false" key="NetworkAttachmentApplicationResources"
+    parameter="resources.CRModel.NetworkAttachmentApplicationResources"/>
+  <message-resources null="false" key="DL_NetworkAttachmentApplicationResources"
+    parameter="resources.CRModel.DL_NetworkAttachmentApplicationResources"/>
+  <message-resources null="false" key="DL_VendorMappingApplicationResources"
+    parameter="resources.CRModel.DL_VendorMappingApplicationResources"/>
+  <message-resources null="false" key="NAConfigurationApplicationResources"
+    parameter="resources.CRModel.NAConfigurationApplicationResources"/>
+  <message-resources null="false" key="LocationApplicationResources"
+    parameter="resources.CRModel.LocationApplicationResources"/>
+  <message-resources null="false" key="PWPolicyApplicationResources"
+    parameter="resources.CRModel.PWPolicyApplicationResources"/>
+  <message-resources null="false" key="OSVersionApplicationResources"
+    parameter="resources.CRModel.OSVersionApplicationResources"/>
+  <message-resources null="false" key="VendorApplicationResources"
+    parameter="resources.CRModel.VendorApplicationResources"/>
+  <message-resources null="false" key="DL_ConfigurationApplicationResources"
+    parameter="resources.CRModel.DL_ConfigurationApplicationResources"/>
+  <message-resources null="false" key="ElementTypeGroupApplicationResources"
+    parameter="resources.CRModel.ElementTypeGroupApplicationResources"/>
+  <message-resources null="false" key="InterfaceTypeApplicationResources"
+    parameter="resources.CRModel.InterfaceTypeApplicationResources"/>
+  <message-resources null="false" key="InterfaceApplicationResources"
+    parameter="resources.CRModel.InterfaceApplicationResources"/>
+  <message-resources null="false" key="NetworkElementDataloadDataApplicationResources"
+    parameter="resources.CRModel.NetworkElementDataloadDataApplicationResources"/>
+  <message-resources null="false" key="RegionApplicationResources"
+    parameter="resources.CRModel.RegionApplicationResources"/>
+  <message-resources null="false" key="NetworkElementApplicationResources"
+    parameter="resources.CRModel.NetworkElementApplicationResources"/>
+  <message-resources null="false" key="DL_NetworkElementApplicationResources"
+    parameter="resources.CRModel.DL_NetworkElementApplicationResources"/>
+  <message-resources null="false" key="DL_ExecutionStateApplicationResources"
+    parameter="resources.CRModel.DL_ExecutionStateApplicationResources"/>
+  <message-resources null="false" key="DL_EnrichmentApplicationResources"
+    parameter="resources.CRModel.DL_EnrichmentApplicationResources"/>
+  <message-resources null="false" key="DL_LinkApplicationResources"
+    parameter="resources.CRModel.DL_LinkApplicationResources"/>
+  <message-resources null="false" key="DL_StateApplicationResources"
+    parameter="resources.CRModel.DL_StateApplicationResources"/>
+  <message-resources null="false" key="TerminationPointApplicationResources"
+    parameter="resources.CRModel.TerminationPointApplicationResources"/>
+  <message-resources null="false" key="ElementCompTypeApplicationResources"
+    parameter="resources.CRModel.ElementCompTypeApplicationResources"/>
+  <message-resources null="false" key="DL_ElementCompTypeMappingApplicationResources"
+    parameter="resources.CRModel.DL_ElementCompTypeMappingApplicationResources"/>
+  <message-resources null="false" key="LinkTypeApplicationResources"
+    parameter="resources.CRModel.LinkTypeApplicationResources"/>
+  <message-resources null="false" key="NetworkApplicationResources"
+    parameter="resources.CRModel.NetworkApplicationResources"/>
+  <message-resources null="false" key="DL_ScopeApplicationResources"
+    parameter="resources.CRModel.DL_ScopeApplicationResources"/>
+  <message-resources null="false" key="DL_ElementComponentApplicationResources"
+    parameter="resources.CRModel.DL_ElementComponentApplicationResources"/>
+  <message-resources null="false" key="DL_InterfaceTypeMappingApplicationResources"
+    parameter="resources.CRModel.DL_InterfaceTypeMappingApplicationResources"/>
+  <message-resources null="false" key="ElementTypeApplicationResources"
+    parameter="resources.CRModel.ElementTypeApplicationResources"/>
+  <message-resources null="false" key="DL_InterfaceApplicationResources"
+    parameter="resources.CRModel.DL_InterfaceApplicationResources"/>
+  <message-resources null="false" key="OSVersionGroupApplicationResources"
+    parameter="resources.CRModel.OSVersionGroupApplicationResources"/>
+  <message-resources null="false" key="LinkApplicationResources"
+    parameter="resources.CRModel.LinkApplicationResources"/>
+  <message-resources null="false" key="DL_NetworkApplicationResources"
+    parameter="resources.CRModel.DL_NetworkApplicationResources"/>
+    
+    
+</struts-config>

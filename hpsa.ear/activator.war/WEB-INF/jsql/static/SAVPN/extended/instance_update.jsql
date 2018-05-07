@@ -1,0 +1,3 @@
+UPDATE hpia_instance_attributes 
+  SET classname = ?, pk = ?, name = ?, value = ?, type = ? 
+  WHERE classname = ? AND pk = ? AND name = ?

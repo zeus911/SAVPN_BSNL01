@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+
+	<global-forwards>
+		<forward name="success_NACL" path="/jsp/inventory/CRModel/NA-CL/ShowNADevice.jsp"
+			contextRelative="true" />
+		<forward name="error_NACL" path="/jsp/inventory/CRModel/NA-CL/error.jsp"
+			contextRelative="true" />
+	</global-forwards>
+
+
+	<action-mappings>
+
+		<action path="/NADeviceConfigurationAction"
+			type="com.hp.ov.activator.cr.struts.na.cl.NADeviceConfigurationAction"
+			validate="false">
+		</action>
+
+		<action path="/NADeviceConfigurationChangesAction"
+			type="com.hp.ov.activator.cr.struts.na.cl.NADeviceConfigurationChangesAction"
+			validate="false">
+		</action>
+
+		<action path="/NADeviceDiagnosisAction"
+			type="com.hp.ov.activator.cr.struts.na.cl.NADeviceDiagnosisAction"
+			validate="false">
+		</action>
+
+		<action path="/NAPolicyComplianceReportAction"
+			type="com.hp.ov.activator.cr.struts.na.cl.NAPolicyComplianceReportAction"
+			validate="false">
+		</action>
+
+	</action-mappings>
+
+
+</struts-config>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE Bean SYSTEM "bean.dtd">
+<!--
+######################################################################
+#
+# (c) Copyright 2003-2010 Hewlett-Packard Development Company, L.P. 
+#
+######################################################################
+
+
+###############################################################################
+#
+# $Source: /tmp/vpn/SA_VPN_SP/jboss/server/default/deploy/crmportal.sar/crm.war/WEB-INF/src/inventory/VlanRange.xml,v $
+# $Revision: 1.8 $
+# $Date: 2010-10-05 14:19:04 $
+# $Author: shiva $
+#
+#
+###############################################################################
+#
+# <Description> 
+#
+###############################################################################
+-->
+
+<Bean>
+    <Name>VlanRange</Name>
+		<Solution>CRM</Solution>
+    <Package>com.hp.ov.activator.crmportal.bean</Package>
+    <DBTable>V_VlanRange</DBTable>
+	 <DBAlias>V_VlanRange</DBAlias>
+    <Fields>		 
+         <Field update ="false">
+            <Name>Usage</Name>
+            <Type>String</Type>
+            <Description>Purpose of the vlanid  (Management/BridgeGroup/Access/Direct/Reserved etc)</Description>
+        </Field>
+		<Field update ="false">
+            <Name>Allocation</Name>
+            <Type>String</Type>
+            <Description>Internal for auto-selection, external for user selection</Description>
+            <ListOfValues>
+                <Value>Internal</Value>
+                <Value>External</Value>
+            </ListOfValues>
+        </Field>		
+        <Field update ="false">
+            <Name>StartValue</Name>
+            <Type>int</Type>
+            <Description>First Vlan vlaue in the range</Description>
+        </Field>
+		<Field >
+            <Name>EndValue</Name>
+            <Type>int</Type>
+            <Description>Last Vlan value in the range</Description>
+        </Field>
+		<Field mandatory="false">
+            <Name>Description</Name>
+            <Type>String</Type>
+            <Description>Information about the range</Description>
+        </Field>
+        <Field update ="false">
+            <Name>Region</Name>
+            <Type>String</Type>
+            <Description>To Specify the Vlan Range for that Region</Description>
+        </Field>
+    </Fields>
+
+    <Keys>
+
+	  <Key pk="true">            
+            <KeyField>Usage</KeyField>
+			<KeyField>Allocation</KeyField>
+			<KeyField>StartValue</KeyField>
+			<KeyField>Region</KeyField>
+        </Key>		
+      <Key foreignBean="Region" >
+      <KeyField foreignField="Name">Region</KeyField>
+
+    </Key>
+	<Key>
+    <KeyField>Usage</KeyField>
+	<KeyField>Allocation</KeyField>
+	<KeyField>Region</KeyField>
+        </Key>		              
+		
+    </Keys>
+
+    <!-- These are the operations to generate for this bean -->
+    <Operations>
+        <Store/>
+        <Update/>
+        <Remove/>  
+		<FindBy key="Region"/>
+		<FindBy>
+            <OrderField>StartValue</OrderField>
+        </FindBy>
+    </Operations>
+	<Validation>
+	   	if (StartValue &lt; 2 )
+   		throw new RuntimeException ("StartValue should be greater than 2 and less than 4094");
+
+		if (StartValue &gt; 4094)
+		throw new RuntimeException ("StartValue should be greater than 2 and less than 4094");
+
+		if (EndValue &lt; 2 )
+   		throw new RuntimeException ("EndValue should be greater than 2 and less than 4094");
+
+		if (EndValue &gt; 4094)
+   		throw new RuntimeException ("EndValue should be greater than 2 and less than 4094");
+
+		if(EndValue &lt; StartValue)
+		throw new RuntimeException ("EndValue should be greater than StartValue");	
+	</Validation>
+</Bean>
+

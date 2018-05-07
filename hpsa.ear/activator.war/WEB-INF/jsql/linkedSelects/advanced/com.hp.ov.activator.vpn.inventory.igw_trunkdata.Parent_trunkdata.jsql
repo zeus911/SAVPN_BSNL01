@@ -1,0 +1,76 @@
+## Generated using InventoryBuilder v.V61
+## Object class com.hp.ov.activator.inventorybuilder.sql.routes.FindByArraySQLRoute
+SELECT
+  igw_trunkdata.LINKPROTOCOL		igw_trunkdata_LINKPROTOCOL,
+  igw_trunkdata.ENCAPSULATION		igw_trunkdata_ENCAPSULATION,
+  igw_trunkdata.IPNET_ADDRESS		igw_trunkdata_IPNET_ADDRESS,
+  igw_trunkdata.SIDE_SORT_NAME		igw_trunkdata_SIDE_SORT_NAME,
+  igw_trunkdata.PARENT_TRUNKDATA		igw_trunkdata_PARENT_TRUNKDATA,
+  igw_trunkdata.IPBINDING_FLAG		igw_trunkdata_IPBINDING_FLAG,
+  igw_trunkdata.SIDE_NAME		igw_trunkdata_SIDE_NAME,
+  igw_trunkdata.IPV6_POOL		igw_trunkdata_IPV6_POOL,
+  igw_trunkdata.IPNET_POOL		igw_trunkdata_IPNET_POOL,
+  igw_trunkdata.INTERFACES_ID		igw_trunkdata_INTERFACES_ID,
+  igw_trunkdata.AREA		igw_trunkdata_AREA,
+  igw_trunkdata.NEGO_FLAG		igw_trunkdata_NEGO_FLAG,
+  igw_trunkdata.LDP_PASSWORD		igw_trunkdata_LDP_PASSWORD,
+  igw_trunkdata.TRUNK_ID		igw_trunkdata_TRUNK_ID,
+  igw_trunkdata.ROUTER_ID		igw_trunkdata_ROUTER_ID,
+  igw_trunkdata.OSPF_PROCESSID		igw_trunkdata_OSPF_PROCESSID,
+  igw_trunkdata.SIDE_DESCRIPTION		igw_trunkdata_SIDE_DESCRIPTION,
+  igw_trunkdata.POLICY_TYPE		igw_trunkdata_POLICY_TYPE,
+  igw_trunkdata.IPNET_SUBMASK		igw_trunkdata_IPNET_SUBMASK,
+  igw_trunkdata.OSPFNET_TYPE_FLAG		igw_trunkdata_OSPFNE25,
+  igw_trunkdata.MTU		igw_trunkdata_MTU,
+  igw_trunkdata.OSPF_PASSWORD		igw_trunkdata_OSPF_PASSWORD,
+  igw_trunkdata.OSPF_COST		igw_trunkdata_OSPF_COST,
+  igw_trunkdata.RSVP_BANDWIDTH		igw_trunkdata_RSVP_BANDWIDTH,
+  igw_trunkdata.IPV6_ADDRESS		igw_trunkdata_IPV6_ADDRESS,
+  igw_trunkdata.TRAFFIC_POLICYNAME		igw_trunkdata_TRAFFI26,
+  igw_trunkdata.INTERFACE_DESCRIPTION		igw_trunkdata_INTERF27,
+  igw_trunkdata.TRUNKDATA_ID		igw_trunkdata_TRUNKDATA_ID,
+  igw_trunkdata.SIDE_SERVICE_ID		igw_trunkdata_SIDE_SERVICE_ID,
+  igw_trunkdata.LDP_FLAG		igw_trunkdata_LDP_FLAG,
+  igw_trunkdata.BANDWIDTH		igw_trunkdata_BANDWIDTH,
+  igw_trunkdata.PIM_FLAG		igw_trunkdata_PIM_FLAG
+FROM
+  igw_trunkdata   igw_trunkdata
+WHERE
+  igw_trunkdata.PARENT_TRUNKDATA IN [selectIN_?]
+
+
+
+@ order:1;select_IN_substitution
+@ opt:TRUNKDATA_ID;igw_trunkdata;igw_trunkdata;TRUNKDATA_ID
+@ opt:PARENT_TRUNKDATA;igw_trunkdata;igw_trunkdata;PARENT_TRUNKDATA
+@ opt:TRUNK_ID;igw_trunkdata;igw_trunkdata;TRUNK_ID
+@ opt:SIDE_SERVICE_ID;igw_trunkdata;igw_trunkdata;SIDE_SERVICE_ID
+@ opt:SIDE_NAME;igw_trunkdata;igw_trunkdata;SIDE_NAME
+@ opt:SIDE_SORT_NAME;igw_trunkdata;igw_trunkdata;SIDE_SORT_NAME
+@ opt:ROUTER_ID;igw_trunkdata;igw_trunkdata;ROUTER_ID
+@ opt:INTERFACES_ID;igw_trunkdata;igw_trunkdata;INTERFACES_ID
+@ opt:IPNET_POOL;igw_trunkdata;igw_trunkdata;IPNET_POOL
+@ opt:IPNET_ADDRESS;igw_trunkdata;igw_trunkdata;IPNET_ADDRESS
+@ opt:IPNET_SUBMASK;igw_trunkdata;igw_trunkdata;IPNET_SUBMASK
+@ opt:SIDE_DESCRIPTION;igw_trunkdata;igw_trunkdata;SIDE_DESCRIPTION
+@ opt:NEGO_FLAG;igw_trunkdata;igw_trunkdata;NEGO_FLAG
+@ opt:LINKPROTOCOL;igw_trunkdata;igw_trunkdata;LINKPROTOCOL
+@ opt:MTU;igw_trunkdata;igw_trunkdata;MTU
+@ opt:PIM_FLAG;igw_trunkdata;igw_trunkdata;PIM_FLAG
+@ opt:OSPFNET_TYPE_FLAG;igw_trunkdata;igw_trunkdata;OSPFNET_TYPE_FLAG
+@ opt:OSPF_COST;igw_trunkdata;igw_trunkdata;OSPF_COST
+@ opt:OSPF_PASSWORD;igw_trunkdata;igw_trunkdata;OSPF_PASSWORD
+@ opt:LDP_FLAG;igw_trunkdata;igw_trunkdata;LDP_FLAG
+@ opt:LDP_PASSWORD;igw_trunkdata;igw_trunkdata;LDP_PASSWORD
+@ opt:INTERFACE_DESCRIPTION;igw_trunkdata;igw_trunkdata;INTERFACE_DESCRIPTION
+@ opt:TRAFFIC_POLICYNAME;igw_trunkdata;igw_trunkdata;TRAFFIC_POLICYNAME
+@ opt:POLICY_TYPE;igw_trunkdata;igw_trunkdata;POLICY_TYPE
+@ opt:IPV6_POOL;igw_trunkdata;igw_trunkdata;IPV6_POOL
+@ opt:IPV6_ADDRESS;igw_trunkdata;igw_trunkdata;IPV6_ADDRESS
+@ opt:ENCAPSULATION;igw_trunkdata;igw_trunkdata;ENCAPSULATION
+@ opt:IPBINDING_FLAG;igw_trunkdata;igw_trunkdata;IPBINDING_FLAG
+@ opt:OSPF_PROCESSID;igw_trunkdata;igw_trunkdata;OSPF_PROCESSID
+@ opt:AREA;igw_trunkdata;igw_trunkdata;AREA
+@ opt:BANDWIDTH;igw_trunkdata;igw_trunkdata;BANDWIDTH
+@ opt:RSVP_BANDWIDTH;igw_trunkdata;igw_trunkdata;RSVP_BANDWIDTH
+@ alias:primary_key;igw_trunkdata.TRUNKDATA_ID

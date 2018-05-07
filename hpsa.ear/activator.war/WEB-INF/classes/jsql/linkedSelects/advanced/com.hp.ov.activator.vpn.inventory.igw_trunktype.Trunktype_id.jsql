@@ -1,0 +1,16 @@
+## Generated using InventoryBuilder v.V61
+## Object class com.hp.ov.activator.inventorybuilder.sql.routes.FindByArraySQLRoute
+SELECT
+  IGW_TRUNKTYPE.TRUNKTYPE_ID		IGW_TRUNKTYPE_TRUNKTYPE_ID,
+  IGW_TRUNKTYPE.NAME		IGW_TRUNKTYPE_NAME
+FROM
+  IGW_TRUNKTYPE   IGW_TRUNKTYPE
+WHERE
+  IGW_TRUNKTYPE.TRUNKTYPE_ID IN [selectIN_?]
+
+
+
+@ order:1;select_IN_substitution
+@ opt:TRUNKTYPE_ID;IGW_TRUNKTYPE;IGW_TRUNKTYPE;TRUNKTYPE_ID
+@ opt:NAME;IGW_TRUNKTYPE;IGW_TRUNKTYPE;NAME
+@ alias:primary_key;IGW_TRUNKTYPE.TRUNKTYPE_ID

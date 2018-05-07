@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core"
+  xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+  <script type="text/javascript">
+      function setSelectedJobsTab(tabName) {
+        document.getElementById('resultsTabForm:selectedJobsTab').value = tabName;
+      }
+    </script>
+  <p:tabView id="sovJobsTabView" dynamic="true" cache="false"
+    activeIndex="#{SOV_ServicesQueryBean.selectedJobsTabIndex}">
+    <p:ajax event="tabChange" listener="#{SOV_ServicesQueryBean.onJobsTabChange}" />
+    <c:forEach items="#{SOV_QueueNamesBean.queueNames}" var="queue" varStatus="status">
+      <p:tab title="#{queue.name}" id="jobsTab_#{queue.encodedName}">
+        <c:if test="#{queue.encodedName==SOV_ServicesQueryBean.selectedEncodedQueue}">
+          <ui:include src="/jsf/sov/queueJobs.xhtml">
+            <ui:param name="queueName" value="#{queue.encodedName}" />
+          </ui:include>
+        </c:if>
+      </p:tab>
+    </c:forEach>
+    <p:tab title="#{sov_msg.sov_running_jobs_tab}" id="runningJobsTab">
+      <ui:include src="/jsf/sov/runningJobs.xhtml" />
+    </p:tab>
+    <p:tab title="#{sov_msg.sov_scheduled_jobs_tab}" id="scheduledJobsTab" rendered="#{SOV_Misc.schedConfigured}">
+      <ui:include src="/jsf/sov/scheduledJobs.xhtml" />
+    </p:tab>
+  </p:tabView>
+</ui:composition>

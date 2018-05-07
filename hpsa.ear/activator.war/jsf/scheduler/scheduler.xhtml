@@ -1,0 +1,148 @@
+<!--
+This component shows a popup dialog box with the information required for scheduling a workflow or modifying an already scheduled job.
+It requires one of the next parameters:
+  1. workflowName - this parameter must be specified when a workflow is going to be scheduled (i.e. added to the scheduled workflows
+                    for the first time). When this parameter is received this component will work in CREATE_SCHEDULE_MODE. If this
+                    parameter is specified then jobId cannot be specified.
+  2. jobId        - this parameter must be specified when a job that is already scheduled must be modified. When this parameter is
+                    received this component will work in MODIFY_SCHEDULE_MODE. If this parameter is specified then workflowName cannot
+                    be specified.
+When working in CREATE_SCHEDULE_MODE the javascript function createSchedule() (defined by a remote command in the component) must be
+called to initialize the component with the information related to the given workflow name.
+When working in MODIFY_SCHEDULE_MODE the javasctipt function modifySchedule() (defined by a remote command in the component) must be
+called to initialize the component with the information related to the given job identifier.
+This component is used e.g. in workflows.xhtml and jobs.xhtml.
+-->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:util="http://java.sun.com/jsf/composite/components/util">
+
+<p:growl id="schgrowl" showDetail="true"/>
+
+<p:dialog id="dlgmodsch" widgetVar="dlgmodsch" showEffect="fade" hideEffect="fade" modal="true" width="500" draggable="false" >
+  <f:facet name="header">
+    <h:outputFormat id="dlgmodchhdr" value="#{schrb.scheduler_title}">
+      <f:param value="#{schedulerManager.title}" />
+    </h:outputFormat>
+  </f:facet>
+  <p:panelGrid id="dg" cellpadding="0" style="width:100%; text-align:left;" styleClass="datagrid">
+    <p:row>
+    <p:column>
+    <h:outputText value="#{schrb.job_id}:" />
+    </p:column>
+    <p:column colspan="2">
+    <h:outputText value="#{schedulerManager.jobIdAS}" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{schrb.workflow_name}:" />
+    </p:column>
+    <p:column colspan="2">
+    <h:outputText value="#{schedulerManager.workflowName}" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{schrb.schedule_time}:" />
+    </p:column>
+    <p:column colspan="2">
+    <p:calendar value="#{schedulerManager.schScheduleTime}" locale="#{schedulerManager.locale}" pattern="#{schedulerManager.localeDateTimePattern}"
+        label="#{schrb.schedule_time}" style="width:100%" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{schrb.repeating_period}:" />
+    </p:column>
+    <p:column>
+    <h:inputText value="#{schedulerManager.schRepeatingPeriod}" label="#{schrb.repeating_period}" style="width:100%" />
+    </p:column>
+    <p:column>
+    <h:selectOneMenu value="#{schedulerManager.schRepeatingUnit}" label="#{schrb.repeating_period_unit}" style="width:100%" >
+      <f:selectItems value="#{schedulerManager.schPeriods}" var="p" itemLabel="#{p.name}" itemValue="#{p.value}" />
+    </h:selectOneMenu>
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{schrb.repeating_end}:" />
+    </p:column>
+    <p:column colspan="2">
+    <p:calendar value="#{schedulerManager.schEndRepeating}" locale="#{schedulerManager.locale}" pattern="#{schedulerManager.localeDateTimePattern}"
+        label="#{schrb.repeating_end}" style="width:100%" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{schrb.repeating_type}:" />
+    </p:column>
+    <p:column colspan="2">
+    <h:selectOneRadio styleClass="datagrid" value="#{schedulerManager.schRepeatingType}" label="#{schrb.repeating_type}">
+      <f:selectItem itemLabel="#{schedulerManager.schRepeatingTypeRelativeName}" itemValue="#{schedulerManager.schRepeatingTypeRelativeValue}" />
+      <f:selectItem itemLabel="#{schedulerManager.schRepeatingTypeAbsoluteName}" itemValue="#{schedulerManager.schRepeatingTypeAbsoluteValue}" />
+    </h:selectOneRadio>
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{schrb.start_missed_jobs}:" />
+    </p:column>
+    <p:column colspan="2">
+    <h:selectOneRadio styleClass="datagrid" value="#{schedulerManager.schStartMissedJobs}" label="#{schrb.start_missed_jobs}">
+      <f:selectItem itemLabel="#{schrb.no}" itemValue="false" />
+      <f:selectItem itemLabel="#{schrb.yes}" itemValue="true" />
+    </h:selectOneRadio>
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{schrb.group_id}:" />
+    </p:column>
+    <p:column colspan="2">
+    <h:inputText value="#{schedulerManager.schGroupId}" label="#{schrb.group_id}" style="width:100%" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{schrb.service_id}:" />
+    </p:column>
+    <p:column colspan="2">
+    <h:inputText value="#{schedulerManager.schServiceId}" label="#{schrb.service_id}" style="width:100%" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{schrb.description}:" />
+    </p:column>
+    <p:column colspan="2">
+    <h:inputText value="#{schedulerManager.schDescription}" label="#{schrb.description}" style="width:100%" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{schrb.status}:" />
+    </p:column>
+    <p:column colspan="2">
+    <h:inputText value="#{schedulerManager.schStatus}" label="#{schrb.status}" style="width:100%" />
+    </p:column>
+    </p:row>
+  </p:panelGrid>
+  <p:commandButton value="#{schrb.ok}" type="submit" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      update="schgrowl" actionListener="#{schedulerManager.save}"
+      partialSubmit="true" process="dlgmodsch" oncomplete="PF('dlgmodsch').hide();if(window.onScheduleModified){onScheduleModified();}"/>
+  <p:commandButton value="#{schrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgmodsch').hide();"/>
+  <p:remoteCommand name="createSchedule" update="dlgmodchhdr,dg">
+    <f:setPropertyActionListener value="#{workflowName}" target="#{schedulerManager.createSchedule}" />
+  </p:remoteCommand>
+  <p:remoteCommand name="modifySchedule" update="dlgmodchhdr,dg">
+    <f:setPropertyActionListener value="#{jobId}" target="#{schedulerManager.modifySchedule}" />
+  </p:remoteCommand>
+</p:dialog>
+
+</ui:composition>

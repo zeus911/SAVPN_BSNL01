@@ -1,0 +1,15 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+SELECT
+  crm_statemapping.SaResponse		crm_statemapping_SaResponse,
+  crm_statemapping.NextState		crm_statemapping_NextState,
+  crm_statemapping.CurrentState		crm_statemapping_CurrentState
+FROM
+  crm_statemapping   crm_statemapping
+WHERE
+  crm_statemapping.CurrentState = ?
+ORDER BY 
+crm_statemapping.CurrentState, crm_statemapping.SaResponse
+
+
+@ order:1;StateMapping.CurrentState

@@ -1,0 +1,7 @@
+--SQLFILES--START--
+# Inside the SQLFILES tag comments can be stated with a #
+DeleteMask.sql
+DeleteState.sql
+DeleteServiceType.sql
+DeleteStateMapping.sql
+--SQLFILES--END--

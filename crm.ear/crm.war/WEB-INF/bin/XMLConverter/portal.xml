@@ -1,0 +1,1814 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE ROOT SYSTEM "portal.dtd">
+
+<ROOT>
+  <Tables>
+    <Table>Customer</Table>
+    <Table>Service</Table>
+    <Table>ServiceParameter</Table>
+    <Table>VPNMembership</Table>
+  </Tables>
+
+  <Sequences>
+    <Sequence increment="1" start="3">CRM_CUSTOMER_ID_SEQ</Sequence>
+    <Sequence increment="1" start="22">CRM_MESSAGE_ID_SEQ</Sequence>
+    <Sequence increment="1" start="1019">CRM_SERVICE_ID_SEQ</Sequence>
+  </Sequences>
+
+  <Customer PK="CustomerId" RefName="CustomerId" TableName="crm_customer">
+    <CustomerId    Type="String">1</CustomerId>
+    <CompanyName    Type="String">Rogers Telecom</CompanyName>
+    <CompanyAddress    Type="String">westman drive</CompanyAddress>
+    <CompanyCity    Type="String">toronto</CompanyCity>
+    <CompanyZipCode    Type="String"></CompanyZipCode>
+    <ContactpersonName    Type="String">Eric</ContactpersonName>
+    <ContactpersonSurname    Type="String">Peter</ContactpersonSurname>
+    <ContactpersonPhonenumber    Type="String"></ContactpersonPhonenumber>
+    <ContactpersonEmail    Type="String">eric@rogers.com</ContactpersonEmail>
+    <Status    Type="String">Active</Status>
+    <LastUpdateTime    Type="long">1176728179481</LastUpdateTime>
+    <CreationTime    Type="String">2007.04.16 18:26:19</CreationTime>
+  </Customer>
+
+  <Customer PK="CustomerId" RefName="CustomerId" TableName="crm_customer">
+    <CustomerId    Type="String">2</CustomerId>
+    <CompanyName    Type="String">Emirates Telecom</CompanyName>
+    <CompanyAddress    Type="String"></CompanyAddress>
+    <CompanyCity    Type="String">Dubai</CompanyCity>
+    <CompanyZipCode    Type="String"></CompanyZipCode>
+    <ContactpersonName    Type="String">Syed</ContactpersonName>
+    <ContactpersonSurname    Type="String">Khan</ContactpersonSurname>
+    <ContactpersonPhonenumber    Type="String">9700010232</ContactpersonPhonenumber>
+    <ContactpersonEmail    Type="String">skhan@etisalat.com</ContactpersonEmail>
+    <Status    Type="String">Active</Status>
+    <LastUpdateTime    Type="long">1176728217791</LastUpdateTime>
+    <CreationTime    Type="String">2007.04.16 18:26:57</CreationTime>
+  </Customer>
+
+  <Service PK="ServiceId" RefName="ServiceId" TableName="crm_service">
+    <ServiceId    Type="String">1000</ServiceId>
+    <PresName    Type="String">L3VPN_1</PresName>
+    <State    Type="String">Ok</State>
+    <SubmitDate    Type="String">16/04/2007</SubmitDate>
+    <ModifyDate    Type="String">16/04/2007</ModifyDate>
+    <Type    Type="String">layer3-VPN</Type>
+    <__1__CustomerId    Type="String">1</__1__CustomerId>
+    <ParentServiceId    Type="String"></ParentServiceId>
+    <EndTime    Type="String"></EndTime>
+    <NextOperationTime    Type="long">0</NextOperationTime>
+    <LastUpdateTime    Type="long">1176728305265</LastUpdateTime>
+  </Service>
+
+  <Service PK="ServiceId" RefName="ServiceId" TableName="crm_service">
+    <ServiceId    Type="String">1001</ServiceId>
+    <PresName    Type="String">L3VPN_2</PresName>
+    <State    Type="String">Ok</State>
+    <SubmitDate    Type="String">16/04/2007</SubmitDate>
+    <ModifyDate    Type="String">16/04/2007</ModifyDate>
+    <Type    Type="String">layer3-VPN</Type>
+    <__1__CustomerId    Type="String">1</__1__CustomerId>
+    <ParentServiceId    Type="String"></ParentServiceId>
+    <EndTime    Type="String"></EndTime>
+    <NextOperationTime    Type="long">0</NextOperationTime>
+    <LastUpdateTime    Type="long">1176728313620</LastUpdateTime>
+  </Service>
+
+  <Service PK="ServiceId" RefName="ServiceId" TableName="crm_service">
+    <ServiceId    Type="String">1002</ServiceId>
+    <PresName    Type="String">Site_1</PresName>
+    <State    Type="String">Ok</State>
+    <SubmitDate    Type="String">16/04/2007</SubmitDate>
+    <ModifyDate    Type="String">16/04/2007</ModifyDate>
+    <Type    Type="String">layer3-Site</Type>
+    <__1__CustomerId    Type="String">1</__1__CustomerId>
+    <ParentServiceId    Type="String"></ParentServiceId>
+    <EndTime    Type="String"></EndTime>
+    <NextOperationTime    Type="long">0</NextOperationTime>
+    <LastUpdateTime    Type="long">1176728642290</LastUpdateTime>
+  </Service>
+
+  <Service PK="ServiceId" RefName="ServiceId" TableName="crm_service">
+    <ServiceId    Type="String">1003</ServiceId>
+    <PresName    Type="String">Site_1layer3-Attachment</PresName>
+    <State    Type="String">PE_Ok</State>
+    <SubmitDate    Type="String">16/04/2007</SubmitDate>
+    <ModifyDate    Type="String">16/04/2007</ModifyDate>
+    <Type    Type="String">layer3-Attachment</Type>
+    <__1__CustomerId    Type="String">1</__1__CustomerId>
+    <ParentServiceId    Type="String">1002</ParentServiceId>
+    <EndTime    Type="String"></EndTime>
+    <NextOperationTime    Type="long">0</NextOperationTime>
+    <LastUpdateTime    Type="long">1176728400735</LastUpdateTime>
+  </Service>
+
+  <Service PK="ServiceId" RefName="ServiceId" TableName="crm_service">
+    <ServiceId    Type="String">1004</ServiceId>
+    <PresName    Type="String">site_a</PresName>
+    <State    Type="String">Ok</State>
+    <SubmitDate    Type="String">16/04/2007</SubmitDate>
+    <ModifyDate    Type="String">16/04/2007</ModifyDate>
+    <Type    Type="String">layer3-Site</Type>
+    <__1__CustomerId    Type="String">1</__1__CustomerId>
+    <ParentServiceId    Type="String"></ParentServiceId>
+    <EndTime    Type="String"></EndTime>
+    <NextOperationTime    Type="long">0</NextOperationTime>
+    <LastUpdateTime    Type="long">1176728346323</LastUpdateTime>
+  </Service>
+
+  <Service PK="ServiceId" RefName="ServiceId" TableName="crm_service">
+    <ServiceId    Type="String">1005</ServiceId>
+    <PresName    Type="String">site_alayer3-Attachment</PresName>
+    <State    Type="String">PE_Ok</State>
+    <SubmitDate    Type="String">16/04/2007</SubmitDate>
+    <ModifyDate    Type="String">16/04/2007</ModifyDate>
+    <Type    Type="String">layer3-Attachment</Type>
+    <__1__CustomerId    Type="String">1</__1__CustomerId>
+    <ParentServiceId    Type="String">1004</ParentServiceId>
+    <EndTime    Type="String"></EndTime>
+    <NextOperationTime    Type="long">0</NextOperationTime>
+    <LastUpdateTime    Type="long">1176728387101</LastUpdateTime>
+  </Service>
+
+  <Service PK="ServiceId" RefName="ServiceId" TableName="crm_service">
+    <ServiceId    Type="String">1006</ServiceId>
+    <PresName    Type="String">L2VPN_1</PresName>
+    <State    Type="String">Ok</State>
+    <SubmitDate    Type="String">16/04/2007</SubmitDate>
+    <ModifyDate    Type="String">16/04/2007</ModifyDate>
+    <Type    Type="String">layer2-VPN</Type>
+    <__1__CustomerId    Type="String">2</__1__CustomerId>
+    <ParentServiceId    Type="String"></ParentServiceId>
+    <EndTime    Type="String"></EndTime>
+    <NextOperationTime    Type="long">0</NextOperationTime>
+    <LastUpdateTime    Type="long">1176728405014</LastUpdateTime>
+  </Service>
+
+  <Service PK="ServiceId" RefName="ServiceId" TableName="crm_service">
+    <ServiceId    Type="String">1007</ServiceId>
+    <PresName    Type="String">L2VPN_2</PresName>
+    <State    Type="String">Ok</State>
+    <SubmitDate    Type="String">16/04/2007</SubmitDate>
+    <ModifyDate    Type="String">16/04/2007</ModifyDate>
+    <Type    Type="String">layer2-VPN</Type>
+    <__1__CustomerId    Type="String">2</__1__CustomerId>
+    <ParentServiceId    Type="String"></ParentServiceId>
+    <EndTime    Type="String"></EndTime>
+    <NextOperationTime    Type="long">0</NextOperationTime>
+    <LastUpdateTime    Type="long">1176728418148</LastUpdateTime>
+  </Service>
+
+  <Service PK="ServiceId" RefName="ServiceId" TableName="crm_service">
+    <ServiceId    Type="String">1008</ServiceId>
+    <PresName    Type="String">SITE_1</PresName>
+    <State    Type="String">Ok</State>
+    <SubmitDate    Type="String">16/04/2007</SubmitDate>
+    <ModifyDate    Type="String">16/04/2007</ModifyDate>
+    <Type    Type="String">layer2-Site</Type>
+    <__1__CustomerId    Type="String">2</__1__CustomerId>
+    <ParentServiceId    Type="String">1006</ParentServiceId>
+    <EndTime    Type="String"></EndTime>
+    <NextOperationTime    Type="long">0</NextOperationTime>
+    <LastUpdateTime    Type="long">1176728496735</LastUpdateTime>
+  </Service>
+
+  <Service PK="ServiceId" RefName="ServiceId" TableName="crm_service">
+    <ServiceId    Type="String">1009</ServiceId>
+    <PresName    Type="String">site_1</PresName>
+    <State    Type="String">Ok</State>
+    <SubmitDate    Type="String">16/04/2007</SubmitDate>
+    <ModifyDate    Type="String">16/04/2007</ModifyDate>
+    <Type    Type="String">layer2-Site</Type>
+    <__1__CustomerId    Type="String">2</__1__CustomerId>
+    <ParentServiceId    Type="String">1007</ParentServiceId>
+    <EndTime    Type="String"></EndTime>
+    <NextOperationTime    Type="long">0</NextOperationTime>
+    <LastUpdateTime    Type="long">1176728493050</LastUpdateTime>
+  </Service>
+
+  <Service PK="ServiceId" RefName="ServiceId" TableName="crm_service">
+    <ServiceId    Type="String">1010</ServiceId>
+    <PresName    Type="String">ROGERS_VPWS_1</PresName>
+    <State    Type="String">Ok</State>
+    <SubmitDate    Type="String">16/04/2007</SubmitDate>
+    <ModifyDate    Type="String">16/04/2007</ModifyDate>
+    <Type    Type="String">layer2-VPWS</Type>
+    <__1__CustomerId    Type="String">1</__1__CustomerId>
+    <ParentServiceId    Type="String"></ParentServiceId>
+    <EndTime    Type="String"></EndTime>
+    <NextOperationTime    Type="long">0</NextOperationTime>
+    <LastUpdateTime    Type="long">1176728566093</LastUpdateTime>
+  </Service>
+
+  <Service PK="ServiceId" RefName="ServiceId" TableName="crm_service">
+    <ServiceId    Type="String">1017</ServiceId>
+    <PresName    Type="String">Site_2</PresName>
+    <State    Type="String">Ok</State>
+    <SubmitDate    Type="String">16/04/2007</SubmitDate>
+    <ModifyDate    Type="String">16/04/2007</ModifyDate>
+    <Type    Type="String">layer3-Site</Type>
+    <__1__CustomerId    Type="String">1</__1__CustomerId>
+    <ParentServiceId    Type="String"></ParentServiceId>
+    <EndTime    Type="String"></EndTime>
+    <NextOperationTime    Type="long">0</NextOperationTime>
+    <LastUpdateTime    Type="long">1176728605371</LastUpdateTime>
+  </Service>
+
+  <Service PK="ServiceId" RefName="ServiceId" TableName="crm_service">
+    <ServiceId    Type="String">1018</ServiceId>
+    <PresName    Type="String">Site_2layer3-Attachment</PresName>
+    <State    Type="String">PE_Ok</State>
+    <SubmitDate    Type="String">16/04/2007</SubmitDate>
+    <ModifyDate    Type="String">16/04/2007</ModifyDate>
+    <Type    Type="String">layer3-Attachment</Type>
+    <__1__CustomerId    Type="String">1</__1__CustomerId>
+    <ParentServiceId    Type="String">1017</ParentServiceId>
+    <EndTime    Type="String"></EndTime>
+    <NextOperationTime    Type="long">0</NextOperationTime>
+    <LastUpdateTime    Type="long">1176728622487</LastUpdateTime>
+  </Service>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1000</__1__ServiceId>
+    <Attribute    Type="String">MulticastStatus</Attribute>
+    <Value    Type="String">disabled</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1000</__1__ServiceId>
+    <Attribute    Type="String">request_synchronisation</Attribute>
+    <Value    Type="String">true</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1000</__1__ServiceId>
+    <Attribute    Type="String">Default_Activation_Scope</Attribute>
+    <Value    Type="String">PE_ONLY</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1000</__1__ServiceId>
+    <Attribute    Type="String">Contact_person</Attribute>
+    <Value    Type="String">Eric Peter</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1000</__1__ServiceId>
+    <Attribute    Type="String">Customer_name</Attribute>
+    <Value    Type="String">Rogers Telecom</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1000</__1__ServiceId>
+    <Attribute    Type="String">QOS_PROFILE</Attribute>
+    <Value    Type="String">l3_simple_0.0.0.0.100</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1000</__1__ServiceId>
+    <Attribute    Type="String">CE_Routers_managed_per_default</Attribute>
+    <Value    Type="String">false</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1000</__1__ServiceId>
+    <Attribute    Type="String">VPNTopology</Attribute>
+    <Value    Type="String">Full-Mesh</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1000</__1__ServiceId>
+    <Attribute    Type="String">Comment</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1001</__1__ServiceId>
+    <Attribute    Type="String">MulticastStatus</Attribute>
+    <Value    Type="String">disabled</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1001</__1__ServiceId>
+    <Attribute    Type="String">request_synchronisation</Attribute>
+    <Value    Type="String">true</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1001</__1__ServiceId>
+    <Attribute    Type="String">Default_Activation_Scope</Attribute>
+    <Value    Type="String">PE_ONLY</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1001</__1__ServiceId>
+    <Attribute    Type="String">Contact_person</Attribute>
+    <Value    Type="String">Eric Peter</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1001</__1__ServiceId>
+    <Attribute    Type="String">Customer_name</Attribute>
+    <Value    Type="String">Rogers Telecom</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1001</__1__ServiceId>
+    <Attribute    Type="String">QOS_PROFILE</Attribute>
+    <Value    Type="String">l3_simple_0.0.0.0.100</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1001</__1__ServiceId>
+    <Attribute    Type="String">CE_Routers_managed_per_default</Attribute>
+    <Value    Type="String">false</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1001</__1__ServiceId>
+    <Attribute    Type="String">VPNTopology</Attribute>
+    <Value    Type="String">Hub-and-Spoke</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1001</__1__ServiceId>
+    <Attribute    Type="String">Comment</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_0_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">vpnserviceid</Attribute>
+    <Value    Type="String">null</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_0_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">QOS_PROFILE</Attribute>
+    <Value    Type="String">l3_simple_0.0.0.0.100</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">ConnectivityType</Attribute>
+    <Value    Type="String">mesh</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">EndTime</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">Managed_CE_Router</Attribute>
+    <Value    Type="String">false</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">CAR</Attribute>
+    <Value    Type="String">128K</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">Location</Attribute>
+    <Value    Type="String">Copenhagen</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">AddressPool</Attribute>
+    <Value    Type="String">PE-CE Default</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">Activation_Scope</Attribute>
+    <Value    Type="String">PE_ONLY</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_3_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">QOS_PREFIX</Attribute>
+    <Value    Type="String">l3_simple</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">Region</Attribute>
+    <Value    Type="String">Denmark</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">Comment</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_1_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">Customer_name</Attribute>
+    <Value    Type="String">Rogers Telecom</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">request_synchronisation</Attribute>
+    <Value    Type="String">true</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">CE_based_QoS</Attribute>
+    <Value    Type="String">false</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">Attachmenttype</Attribute>
+    <Value    Type="String">initial</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_4_PERCENT</Attribute>
+    <Value    Type="String">100</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">RoutingProtocol</Attribute>
+    <Value    Type="String">RIP</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">QOS_BASE_PROFILE</Attribute>
+    <Value    Type="String">l3_simple_0.0.0.0.100</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">StartTime</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_2_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">Contact_person</Attribute>
+    <Value    Type="String">Eric Peter</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">vpnserviceid</Attribute>
+    <Value    Type="String">1000</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_0_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">QOS_PROFILE</Attribute>
+    <Value    Type="String">l3_simple_0.0.0.0.100</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">ConnectivityType</Attribute>
+    <Value    Type="String">mesh</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">EndTime</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">Managed_CE_Router</Attribute>
+    <Value    Type="String">false</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">CAR</Attribute>
+    <Value    Type="String">128K</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">Location</Attribute>
+    <Value    Type="String">Copenhagen</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">AddressPool</Attribute>
+    <Value    Type="String">PE-CE Default</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">Activation_Scope</Attribute>
+    <Value    Type="String">PE_ONLY</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_3_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">QOS_PREFIX</Attribute>
+    <Value    Type="String">l3_simple</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">Region</Attribute>
+    <Value    Type="String">Denmark</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">Comment</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_1_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">Customer_name</Attribute>
+    <Value    Type="String">Rogers Telecom</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">request_synchronisation</Attribute>
+    <Value    Type="String">true</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">CE_based_QoS</Attribute>
+    <Value    Type="String">false</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">Attachmenttype</Attribute>
+    <Value    Type="String">initial</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_4_PERCENT</Attribute>
+    <Value    Type="String">100</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">RoutingProtocol</Attribute>
+    <Value    Type="String">RIP</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">QOS_BASE_PROFILE</Attribute>
+    <Value    Type="String">l3_simple_0.0.0.0.100</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">StartTime</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_2_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">Contact_person</Attribute>
+    <Value    Type="String">Eric Peter</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1003</__1__ServiceId>
+    <Attribute    Type="String">Site_Service_id</Attribute>
+    <Value    Type="String">1002</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1006</__1__ServiceId>
+    <Attribute    Type="String">QOS_PROFILE</Attribute>
+    <Value    Type="String">L2_STD_20.20.20.20.20</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">vpnserviceid</Attribute>
+    <Value    Type="String">null</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">QOS_PROFILE</Attribute>
+    <Value    Type="String">l3_simple_0.0.0.0.100</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">EndTime</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">ConnectivityType</Attribute>
+    <Value    Type="String">hub</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">Managed_CE_Router</Attribute>
+    <Value    Type="String">false</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">CAR</Attribute>
+    <Value    Type="String">128K</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">Location</Attribute>
+    <Value    Type="String">Copenhagen</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">AddressPool</Attribute>
+    <Value    Type="String">PE-CE Default</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">Activation_Scope</Attribute>
+    <Value    Type="String">PE_ONLY</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_3_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">QOS_PREFIX</Attribute>
+    <Value    Type="String">l3_simple</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">Region</Attribute>
+    <Value    Type="String">Denmark</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">Comment</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_1_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">Customer_name</Attribute>
+    <Value    Type="String">Rogers Telecom</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">request_synchronisation</Attribute>
+    <Value    Type="String">true</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">CE_based_QoS</Attribute>
+    <Value    Type="String">false</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">Customer_ASN</Attribute>
+    <Value    Type="String">1</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">Attachmenttype</Attribute>
+    <Value    Type="String">initial</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_4_PERCENT</Attribute>
+    <Value    Type="String">100</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">RoutingProtocol</Attribute>
+    <Value    Type="String">BGP</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">QOS_BASE_PROFILE</Attribute>
+    <Value    Type="String">l3_simple_0.0.0.0.100</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">StartTime</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_2_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1004</__1__ServiceId>
+    <Attribute    Type="String">Contact_person</Attribute>
+    <Value    Type="String">Eric Peter</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_0_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">vpnserviceid</Attribute>
+    <Value    Type="String">1001</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">QOS_PROFILE</Attribute>
+    <Value    Type="String">l3_simple_0.0.0.0.100</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">EndTime</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">ConnectivityType</Attribute>
+    <Value    Type="String">hub</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">Managed_CE_Router</Attribute>
+    <Value    Type="String">false</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">CAR</Attribute>
+    <Value    Type="String">128K</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">Location</Attribute>
+    <Value    Type="String">Copenhagen</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">AddressPool</Attribute>
+    <Value    Type="String">PE-CE Default</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">Activation_Scope</Attribute>
+    <Value    Type="String">PE_ONLY</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_3_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">QOS_PREFIX</Attribute>
+    <Value    Type="String">l3_simple</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">Region</Attribute>
+    <Value    Type="String">Denmark</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">Comment</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_1_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">Customer_name</Attribute>
+    <Value    Type="String">Rogers Telecom</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">request_synchronisation</Attribute>
+    <Value    Type="String">true</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">CE_based_QoS</Attribute>
+    <Value    Type="String">false</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">Customer_ASN</Attribute>
+    <Value    Type="String">1</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">Attachmenttype</Attribute>
+    <Value    Type="String">initial</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_4_PERCENT</Attribute>
+    <Value    Type="String">100</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">RoutingProtocol</Attribute>
+    <Value    Type="String">BGP</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">QOS_BASE_PROFILE</Attribute>
+    <Value    Type="String">l3_simple_0.0.0.0.100</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">StartTime</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_2_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">Contact_person</Attribute>
+    <Value    Type="String">Eric Peter</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1005</__1__ServiceId>
+    <Attribute    Type="String">Site_Service_id</Attribute>
+    <Value    Type="String">1004</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1007</__1__ServiceId>
+    <Attribute    Type="String">QOS_PROFILE</Attribute>
+    <Value    Type="String">L2_STD_20.20.20.20.20</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1006</__1__ServiceId>
+    <Attribute    Type="String">ConnectivityType</Attribute>
+    <Value    Type="String">mesh</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1006</__1__ServiceId>
+    <Attribute    Type="String">VLANId</Attribute>
+    <Value    Type="String">2001</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1006</__1__ServiceId>
+    <Attribute    Type="String">Comment</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1006</__1__ServiceId>
+    <Attribute    Type="String">Customer_name</Attribute>
+    <Value    Type="String">Emirates Telecom</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1006</__1__ServiceId>
+    <Attribute    Type="String">request_synchronisation</Attribute>
+    <Value    Type="String">true</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1006</__1__ServiceId>
+    <Attribute    Type="String">EthServiceType</Attribute>
+    <Value    Type="String">Port</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1006</__1__ServiceId>
+    <Attribute    Type="String">Contact_person</Attribute>
+    <Value    Type="String">Syed Khan: 9700010232</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1008</__1__ServiceId>
+    <Attribute    Type="String">QOS_PROFILE</Attribute>
+    <Value    Type="String">L2_STD_20.20.20.20.20</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1007</__1__ServiceId>
+    <Attribute    Type="String">ConnectivityType</Attribute>
+    <Value    Type="String">mesh</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1007</__1__ServiceId>
+    <Attribute    Type="String">VLANId</Attribute>
+    <Value    Type="String">1</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1007</__1__ServiceId>
+    <Attribute    Type="String">Comment</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1007</__1__ServiceId>
+    <Attribute    Type="String">FixedVlan</Attribute>
+    <Value    Type="String">true</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1007</__1__ServiceId>
+    <Attribute    Type="String">Customer_name</Attribute>
+    <Value    Type="String">Emirates Telecom</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1007</__1__ServiceId>
+    <Attribute    Type="String">request_synchronisation</Attribute>
+    <Value    Type="String">true</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1007</__1__ServiceId>
+    <Attribute    Type="String">EthServiceType</Attribute>
+    <Value    Type="String">VPLS-PortVlan</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1007</__1__ServiceId>
+    <Attribute    Type="String">Contact_person</Attribute>
+    <Value    Type="String">Syed Khan: 9700010232</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">Region</Attribute>
+    <Value    Type="String">Denmark</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1008</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_0_PERCENT</Attribute>
+    <Value    Type="String">20</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1008</__1__ServiceId>
+    <Attribute    Type="String">EndTime</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1008</__1__ServiceId>
+    <Attribute    Type="String">ConnectivityType</Attribute>
+    <Value    Type="String">mesh</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1008</__1__ServiceId>
+    <Attribute    Type="String">LoopDetection</Attribute>
+    <Value    Type="String">true</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1008</__1__ServiceId>
+    <Attribute    Type="String">CAR</Attribute>
+    <Value    Type="String">2M</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1008</__1__ServiceId>
+    <Attribute    Type="String">Location</Attribute>
+    <Value    Type="String">Copenhagen</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1008</__1__ServiceId>
+    <Attribute    Type="String">VLANId</Attribute>
+    <Value    Type="String">2001</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1008</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_3_PERCENT</Attribute>
+    <Value    Type="String">20</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1008</__1__ServiceId>
+    <Attribute    Type="String">QOS_PREFIX</Attribute>
+    <Value    Type="String">L2_STD</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1008</__1__ServiceId>
+    <Attribute    Type="String">Region</Attribute>
+    <Value    Type="String">Denmark</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1008</__1__ServiceId>
+    <Attribute    Type="String">Comment</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1008</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_1_PERCENT</Attribute>
+    <Value    Type="String">20</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1008</__1__ServiceId>
+    <Attribute    Type="String">Customer_name</Attribute>
+    <Value    Type="String">Emirates Telecom</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1008</__1__ServiceId>
+    <Attribute    Type="String">request_synchronisation</Attribute>
+    <Value    Type="String">true</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1008</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_4_PERCENT</Attribute>
+    <Value    Type="String">20</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1008</__1__ServiceId>
+    <Attribute    Type="String">QOS_BASE_PROFILE</Attribute>
+    <Value    Type="String">L2_STD_20.20.20.20.20</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1008</__1__ServiceId>
+    <Attribute    Type="String">StartTime</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1008</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_2_PERCENT</Attribute>
+    <Value    Type="String">20</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1008</__1__ServiceId>
+    <Attribute    Type="String">Contact_person</Attribute>
+    <Value    Type="String">Syed Khan: 9700010232</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">vpnserviceid</Attribute>
+    <Value    Type="String">null</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1009</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_0_PERCENT</Attribute>
+    <Value    Type="String">20</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1009</__1__ServiceId>
+    <Attribute    Type="String">QOS_PROFILE</Attribute>
+    <Value    Type="String">L2_STD_20.20.20.20.20</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1009</__1__ServiceId>
+    <Attribute    Type="String">EndTime</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1009</__1__ServiceId>
+    <Attribute    Type="String">ConnectivityType</Attribute>
+    <Value    Type="String">mesh</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1009</__1__ServiceId>
+    <Attribute    Type="String">LoopDetection</Attribute>
+    <Value    Type="String">true</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1009</__1__ServiceId>
+    <Attribute    Type="String">CAR</Attribute>
+    <Value    Type="String">2M</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1009</__1__ServiceId>
+    <Attribute    Type="String">Mapping</Attribute>
+    <Value    Type="String">true</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1009</__1__ServiceId>
+    <Attribute    Type="String">Location</Attribute>
+    <Value    Type="String">Copenhagen</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1009</__1__ServiceId>
+    <Attribute    Type="String">VLANId</Attribute>
+    <Value    Type="String">1</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1009</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_3_PERCENT</Attribute>
+    <Value    Type="String">20</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1009</__1__ServiceId>
+    <Attribute    Type="String">QOS_PREFIX</Attribute>
+    <Value    Type="String">L2_STD</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1009</__1__ServiceId>
+    <Attribute    Type="String">Region</Attribute>
+    <Value    Type="String">Denmark</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1009</__1__ServiceId>
+    <Attribute    Type="String">Comment</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1009</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_1_PERCENT</Attribute>
+    <Value    Type="String">20</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1009</__1__ServiceId>
+    <Attribute    Type="String">Customer_name</Attribute>
+    <Value    Type="String">Emirates Telecom</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1009</__1__ServiceId>
+    <Attribute    Type="String">request_synchronisation</Attribute>
+    <Value    Type="String">true</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1009</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_4_PERCENT</Attribute>
+    <Value    Type="String">20</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1009</__1__ServiceId>
+    <Attribute    Type="String">QOS_BASE_PROFILE</Attribute>
+    <Value    Type="String">L2_STD_20.20.20.20.20</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1009</__1__ServiceId>
+    <Attribute    Type="String">StartTime</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1009</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_2_PERCENT</Attribute>
+    <Value    Type="String">20</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1009</__1__ServiceId>
+    <Attribute    Type="String">Contact_person</Attribute>
+    <Value    Type="String">Syed Khan: 9700010232</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">PW_aEnd_location</Attribute>
+    <Value    Type="String">Copenhagen</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">QOS_PROFILE</Attribute>
+    <Value    Type="String">vpws_0.0.0.0.100</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">EndTime</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">PW_Type_aEnd</Attribute>
+    <Value    Type="String">PPP</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">Site_Service_ID_aEnd</Attribute>
+    <Value    Type="String">1015</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">UNIType_aEnd</Attribute>
+    <Value    Type="String">PPP</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">Comment</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">PW_Type_zEnd</Attribute>
+    <Value    Type="String">PPP</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">PW_zEnd_region</Attribute>
+    <Value    Type="String">Denmark</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">Site_Service_ID_zEnd</Attribute>
+    <Value    Type="String">1016</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">PW_aEnd_region</Attribute>
+    <Value    Type="String">Denmark</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">Customer_name</Attribute>
+    <Value    Type="String">Rogers Telecom</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">request_synchronisation</Attribute>
+    <Value    Type="String">true</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">PW_zEnd_location</Attribute>
+    <Value    Type="String">Copenhagen</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">UNIType_zEnd</Attribute>
+    <Value    Type="String">PPP</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">RL</Attribute>
+    <Value    Type="String">512K</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">PW_aEnd</Attribute>
+    <Value    Type="String">SITE_A</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">StartTime</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">Contact_person</Attribute>
+    <Value    Type="String">Eric Peter</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">PW_zEnd</Attribute>
+    <Value    Type="String">SITE_Z</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">VLANIdaEnd</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">VLANIdzEnd</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">DLCIaEnd</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1010</__1__ServiceId>
+    <Attribute    Type="String">DLCIzEnd</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">STATIC_Routes</Attribute>
+    <Value    Type="String">121.0.0.1/0.0.0.0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_0_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">QOS_PROFILE</Attribute>
+    <Value    Type="String">l3_simple_0.0.0.0.100</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">ConnectivityType</Attribute>
+    <Value    Type="String">mesh</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">EndTime</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">Managed_CE_Router</Attribute>
+    <Value    Type="String">false</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">CAR</Attribute>
+    <Value    Type="String">256K</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">Location</Attribute>
+    <Value    Type="String">Copenhagen</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">AddressPool</Attribute>
+    <Value    Type="String">PE-CE Default</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">Activation_Scope</Attribute>
+    <Value    Type="String">PE_ONLY</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_3_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">QOS_PREFIX</Attribute>
+    <Value    Type="String">l3_simple</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">Region</Attribute>
+    <Value    Type="String">Denmark</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">Comment</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_1_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">Customer_name</Attribute>
+    <Value    Type="String">Rogers Telecom</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">request_synchronisation</Attribute>
+    <Value    Type="String">true</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">CE_based_QoS</Attribute>
+    <Value    Type="String">false</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">Attachmenttype</Attribute>
+    <Value    Type="String">initial</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_4_PERCENT</Attribute>
+    <Value    Type="String">100</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">RoutingProtocol</Attribute>
+    <Value    Type="String">STATIC</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">QOS_BASE_PROFILE</Attribute>
+    <Value    Type="String">l3_simple_0.0.0.0.100</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">StartTime</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_2_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1017</__1__ServiceId>
+    <Attribute    Type="String">Contact_person</Attribute>
+    <Value    Type="String">Eric Peter</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">vpnserviceid</Attribute>
+    <Value    Type="String">1000</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">STATIC_Routes</Attribute>
+    <Value    Type="String">121.0.0.1/0.0.0.0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_0_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">QOS_PROFILE</Attribute>
+    <Value    Type="String">l3_simple_0.0.0.0.100</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">ConnectivityType</Attribute>
+    <Value    Type="String">mesh</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">EndTime</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">Managed_CE_Router</Attribute>
+    <Value    Type="String">false</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">CAR</Attribute>
+    <Value    Type="String">256K</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">Location</Attribute>
+    <Value    Type="String">Copenhagen</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">AddressPool</Attribute>
+    <Value    Type="String">PE-CE Default</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">Activation_Scope</Attribute>
+    <Value    Type="String">PE_ONLY</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_3_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">QOS_PREFIX</Attribute>
+    <Value    Type="String">l3_simple</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">Region</Attribute>
+    <Value    Type="String">Denmark</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">Comment</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_1_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">Customer_name</Attribute>
+    <Value    Type="String">Rogers Telecom</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">request_synchronisation</Attribute>
+    <Value    Type="String">true</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">CE_based_QoS</Attribute>
+    <Value    Type="String">false</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">Attachmenttype</Attribute>
+    <Value    Type="String">initial</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_4_PERCENT</Attribute>
+    <Value    Type="String">100</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">RoutingProtocol</Attribute>
+    <Value    Type="String">STATIC</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">QOS_BASE_PROFILE</Attribute>
+    <Value    Type="String">l3_simple_0.0.0.0.100</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">StartTime</Attribute>
+    <Value    Type="String"></Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">QOS_CLASS_2_PERCENT</Attribute>
+    <Value    Type="String">0</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">Contact_person</Attribute>
+    <Value    Type="String">Eric Peter</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1018</__1__ServiceId>
+    <Attribute    Type="String">Site_Service_id</Attribute>
+    <Value    Type="String">1017</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">hidden_LastModifyAction</Attribute>
+    <Value    Type="String">JoinVPN</Value>
+  </ServiceParameter>
+
+  <ServiceParameter PK="__1__ServiceId,Attribute" RefName="__1__ServiceId,Attribute" TableName="crm_serviceparam">
+    <__1__ServiceId    Type="String">1002</__1__ServiceId>
+    <Attribute    Type="String">hidden_vpnId</Attribute>
+    <Value    Type="String">1001</Value>
+  </ServiceParameter>
+
+  <VPNMembership PK="vpnId,siteId" RefName="vpnId,siteId" TableName="crm_vpn_membership">
+    <vpnId    Type="String">1000</vpnId>
+    <siteId    Type="String">1002</siteId>
+    <ConnectivityType    Type="String">mesh</ConnectivityType>
+  </VPNMembership>
+
+  <VPNMembership PK="vpnId,siteId" RefName="vpnId,siteId" TableName="crm_vpn_membership">
+    <vpnId    Type="String">1001</vpnId>
+    <siteId    Type="String">1004</siteId>
+    <ConnectivityType    Type="String">hub</ConnectivityType>
+  </VPNMembership>
+
+  <VPNMembership PK="vpnId,siteId" RefName="vpnId,siteId" TableName="crm_vpn_membership">
+    <vpnId    Type="String">1000</vpnId>
+    <siteId    Type="String">1017</siteId>
+    <ConnectivityType    Type="String">mesh</ConnectivityType>
+  </VPNMembership>
+
+  <VPNMembership PK="vpnId,siteId" RefName="vpnId,siteId" TableName="crm_vpn_membership">
+    <vpnId    Type="String">1001</vpnId>
+    <siteId    Type="String">1002</siteId>
+    <ConnectivityType    Type="String">spoke</ConnectivityType>
+  </VPNMembership>
+
+</ROOT>

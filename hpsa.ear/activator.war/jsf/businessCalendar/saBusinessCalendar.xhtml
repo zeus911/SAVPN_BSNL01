@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+  <title>Business Calendar</title>
+  <script type="text/javascript" src="/activator/javascript/saUtilities.js" />
+  <link rel="stylesheet" type="text/css" href="/activator/css/primefaces/hpsa.css" />
+  <style type="text/css">
+  .hpsa_head {
+    border:0px !important;
+    border-collapse:collapse;
+    padding:0px !important;
+    cellspacing:0px;
+    width:100%;
+    background-color:/*c:sabl*/#0096d6;
+  }
+  .col1 {
+    border:0px !important;
+    border-collapse:collapse;
+    padding:0px;
+    align:left;
+  }
+  .col2 {
+    border:0px !important;
+    border-collapse:collapse;
+    padding:0px;
+    width:100%;
+    align:left;
+  }
+  .col3 {
+    border:0px !important;
+    border-collapse:collapse;
+    padding:0px;
+    align:right;
+  }
+  .dayhour
+  {
+    width:20%;
+  }
+  .ampm
+  {
+    width:40%;
+  }
+  </style>
+</h:head>
+<body onmousemove="logoutTimerReset();" onkeydown="logoutTimerReset();">
+  <h:form id="calForm">
+    <p:growl id="growl" showDetail="true" sticky="false" />
+
+    <h:panelGrid columns="4" columnClasses="col1,col2,col3" styleClass="hpsa_head">
+      <h:graphicImage value="/images/HPLogo-small.png" style="display:block;" />
+      <h:graphicImage value="/images/sa_name.png" style="display:block;" />
+      <h:graphicImage value="/images/wires_pad_left.jpg" style="display:block;" />
+    </h:panelGrid>
+
+    <p:spacer height="8" />
+
+    <p:panel header="#{bc_msg.calendar_operation}">
+      <h:panelGrid columns="1" cellpadding="4" class="ui-widget ui-corner-all">
+        <h:selectOneRadio id="createOption" value="#{bc_Bean.calendarOption}">
+          <p:ajax event="change" update=":calForm" listener="#{bc_Bean.optionSelected}" />
+          <f:selectItem itemValue="#{bc_Bean.calendarOptionCreate}" itemLabel="#{bc_msg.create_calendar}"
+            itemDisabled="#{!bc_Bean.adminUser}" />
+          <f:selectItem itemValue="#{bc_Bean.calendarOptionEdit}" itemLabel="#{bc_msg.edit_calendar}" />
+        </h:selectOneRadio>
+        <p:focus />
+        <p:autoComplete forceSelection="#{bc_Bean.editMode}" dropdown="#{bc_Bean.editMode}" id="calendarNameList"
+          value="#{bc_Bean.calendarName}" completeMethod="#{bc_Bean.completeCalendarName}">
+          <p:ajax event="itemSelect" listener="#{bc_Bean.calendarNameSelected}"
+            update="calForm:selCalendar,calForm:actionButtons" />
+          <p:ajax event="keyup" listener="#{bc_Bean.calendarNameChanged}" update="calForm:selCalendar,calForm:actionButtons" />
+        </p:autoComplete>
+      </h:panelGrid>
+    </p:panel>
+
+    <p:spacer height="8" />
+
+    <p:panel id="selCalendar" header="#{bc_msg.calendar_selection}" visible="#{bc_Bean.caldendarEditable}">
+
+      <p:spacer height="8" />
+      <h:panelGrid columns="2" cellpadding="4" class="ui-widget ui-corner-all">
+        <h:outputText value="#{bc_msg.select_timezone}" />
+        <h:selectOneMenu id="timeZone" value="#{bc_Bean.selectedTimeZone}" effect="fade" effectDuration="100">
+          <f:selectItems value="#{bc_Bean.listOfTimeZones}" />
+        </h:selectOneMenu>
+      </h:panelGrid>
+      <p:spacer height="8" />
+
+      <p:tabView dynamic="false" cache="false" id="bcTabView">
+
+        <!-- ======================================== Weekly Tab ======================================== -->
+        <p:tab title="#{bc_msg.weekdays_tablabel}" id="weeklyTab">
+          <h2 class="title">#{bc_msg.specify_hours}</h2>
+          <p:dataTable id="weeklyCalendarTable" value="#{bc_Bean.weeklyCalendars}" var="weeklyCalendar"
+            style="width:96%">
+
+            <p:column style="width:15%">
+              <p:panel id="dayOfWeek">
+                <h:outputText rendered="#{weeklyCalendar.dirty}" value="#{weeklyCalendar.weekName}" style="color:#ffcc55"
+                  class="ui-state-highlight" />
+                <h:outputText rendered="#{!weeklyCalendar.dirty}" value="#{weeklyCalendar.weekName}" />
+              </p:panel>
+            </p:column>
+
+            <p:column headerText="#{bc_msg.start_time}" style="width:35%">
+              <h:panelGrid columns="4" padding="0" cellspacing="0" styleClass="datagrid" columnClasses="dayhour,dayhour,dayhour,ampm">
+
+                <p:inputMask value="#{weeklyCalendar.startTimeString}" mask="99:99" size="5" id="startTimeText"
+                  disabled="#{weeklyCalendar.weeklyHoliday}" style="width:46px">
+                  <p:ajax event="keyup" update="startHourSpinner,startMinSpinner,dayOfWeek" process="@this" />
+                  <p:ajax event="blur" update="startTimeText,startHourSpinner,startMinSpinner,dayOfWeek" process="@this" />
+                </p:inputMask>
+
+                <p:spinner id="startHourSpinner" min="0" max="#{weeklyCalendar.maxHour}" size="2"
+                  value="#{weeklyCalendar.startHourUI}" disabled="#{weeklyCalendar.weeklyHoliday}">
+                  <p:ajax event="change" update="startTimeText,dayOfWeek" process="@this" />
+                  <p:ajax event="keyup" update="startTimeText,dayOfWeek" process="@this" />
+                  <p:ajax event="blur" update="startTimeText,startHourSpinner,dayOfWeek" process="@this" />
+                </p:spinner>
+
+                <p:spinner id="startMinSpinner" min="0" max="#{weeklyCalendar.maxMin}" size="2"
+                  value="#{weeklyCalendar.startMinUI}" disabled="#{weeklyCalendar.weeklyHoliday}">
+                  <p:ajax event="change" update="startTimeText,dayOfWeek" process="@this" />
+                  <p:ajax event="keyup" update="startTimeText,dayOfWeek" process="@this" />
+                  <p:ajax event="blur" update="startTimeText,startMinSpinner,dayOfWeek" process="@this" />
+                </p:spinner>
+
+                <h:selectOneRadio value="#{weeklyCalendar.ampmStartUI}" immediate="true" style="white-space:nowrap;"
+                  disabled="#{weeklyCalendar.weeklyHoliday}" rendered="#{bc_Bean.twelveHourFormat}">
+                  <p:ajax event="change" update="weeklyCalendarTable" />
+                  <f:selectItem itemValue="#{bc_Bean.amString}" itemLabel="#{bc_Bean.amString}" />
+                  <f:selectItem itemValue="#{bc_Bean.pmString}" itemLabel="#{bc_Bean.pmString}" />
+                </h:selectOneRadio>
+
+              </h:panelGrid>
+            </p:column>
+
+            <p:column headerText="#{bc_msg.end_time}" style="width:35%">
+              <h:panelGrid columns="4" styleClass="datagrid" columnClasses="dayhour,dayhour,dayhour,ampm">
+
+                <p:inputMask value="#{weeklyCalendar.endTimeString}" mask="99:99" size="5" id="endTimeText"
+                  disabled="#{weeklyCalendar.weeklyHoliday}" style="width:46px">
+                  <p:ajax event="keyup" update="endHourSpinner,endMinSpinner,dayOfWeek" process="@this" />
+                  <p:ajax event="blur" update="endTimeText,endHourSpinner,endMinSpinner,dayOfWeek" process="@this" />
+                </p:inputMask>
+
+                <p:spinner id="endHourSpinner" min="0" max="#{weeklyCalendar.maxHour}" size="2"
+                  value="#{weeklyCalendar.endHourUI}" disabled="#{weeklyCalendar.weeklyHoliday}">
+                  <p:ajax event="change" update="endTimeText,dayOfWeek" process="@this" />
+                  <p:ajax event="keyup" update="endTimeText,dayOfWeek" process="@this" />
+                  <p:ajax event="blur" update="endTimeText,endHourSpinner,dayOfWeek" process="@this" />
+                </p:spinner>
+
+                <p:spinner id="endMinSpinner" min="0" max="#{weeklyCalendar.maxMin}" size="2"
+                  value="#{weeklyCalendar.endMinUI}" disabled="#{weeklyCalendar.weeklyHoliday}">
+                  <p:ajax event="change" update="endTimeText,dayOfWeek" process="@this" />
+                  <p:ajax event="keyup" update="endTimeText,dayOfWeek" process="@this" />
+                  <p:ajax event="blur" update="endTimeText,endMinSpinner,dayOfWeek" process="@this" />
+                </p:spinner>
+
+                <h:selectOneRadio value="#{weeklyCalendar.ampmEndUI}" immediate="true" style="white-space:nowrap;"
+                  disabled="#{weeklyCalendar.weeklyHoliday}" rendered="#{bc_Bean.twelveHourFormat}">
+                  <p:ajax event="change" update="weeklyCalendarTable" />
+                  <f:selectItem itemValue="#{bc_Bean.amString}" itemLabel="#{bc_Bean.amString}" />
+                  <f:selectItem itemValue="#{bc_Bean.pmString}" itemLabel="#{bc_Bean.pmString}" />
+                </h:selectOneRadio>
+
+              </h:panelGrid>
+            </p:column>
+
+            <p:column style="width:15%">
+              <p:selectBooleanCheckbox value="#{weeklyCalendar.weeklyHolidayUI}">
+                <p:ajax event="change" update=":calForm:bcTabView:weeklyCalendarTable" />
+              </p:selectBooleanCheckbox>
+              <h:outputText value="#{bc_msg.weekly_holiday}" />
+            </p:column>
+
+          </p:dataTable>
+        </p:tab>
+
+        <!-- ======================================== Holiday Tab ======================================== -->
+        <p:tab title="#{bc_msg.holidays_tablabel}">
+
+          <h:panelGrid columns="2" cellpadding="4" class="ui-widget  ui-corner-all">
+            <h:outputText value="#{bc_msg.select_year}" />
+            <p:spinner id="holidaysYearSpinner" min="#{bc_Bean.firstSupportedYear}" max="#{bc_Bean.lastSupportedYear}"
+              size="4" value="#{bc_Bean.firstSupportedYear}" maxlength="4" >
+              <p:ajax event="change" update=":calForm:growl oneOffHolidayTable" listener="#{bc_Bean.yearChanged}" />
+              <p:ajax event="keyup" update=":calForm:growl oneOffHolidayTable" listener="#{bc_Bean.yearChanged}" />
+              <p:ajax event="blur" update=":calForm:growl oneOffHolidayTable" listener="#{bc_Bean.yearChanged}" />
+            </p:spinner>
+          </h:panelGrid>
+
+          <h:panelGrid columns="4" cellpadding="4" class="ui-widget  ui-corner-all">
+            <h:outputText value="#{bc_msg.select_holiday}" />
+            <p:calendar showOn="button" id="newOneOffHoliday" pattern="#{bc_Bean.datePattern}">
+              <p:ajax event="dateSelect" listener="#{bc_Bean.holidaySelect}" />
+              <p:ajax event="keyup" listener="#{bc_Bean.holidayChange}" />
+            </p:calendar>
+            <p:tooltip value="#{bc_msg.specify_date}: #{bc_Bean.datePattern}" for="newOneOffHoliday" />
+            <p:commandButton id="addOneOffHoliday" value="#{bc_msg.add_holiday}" action="#{bc_Bean.addHoliday}"
+              rendered="#{bc_Bean.adminUser}" update=":calForm:growl oneOffHolidayTable" process="@this" />
+          </h:panelGrid>
+
+          <p:dataTable id="oneOffHolidayTable" value="#{bc_Bean.oneOffHolidays}" var="oneOffHoliday"
+            selection="#{bc_Bean.selectedOneOffHoliday}" selectionMode="single" rowKey="#{oneOffHoliday.date}"
+            style="width:96%">
+            <p:column headerText="#{bc_msg.col_date} (#{bc_Bean.datePattern})">
+              <h:outputText value="#{oneOffHoliday.string}" />
+            </p:column>
+
+            <p:column headerText="#{bc_msg.col_day_of_week}">
+              <h:outputText value="#{oneOffHoliday.dayOfWeekString}" />
+            </p:column>
+
+            <p:column>
+              <h:outputText value="#{bc_msg.new_item}" rendered="#{oneOffHoliday.newItem}" style="color:#ffcc55"
+                class="ui-state-highlight" />
+            </p:column>
+
+          </p:dataTable>
+
+        </p:tab>
+
+        <!-- ====================================== Recurring Holiday Tab ====================================== -->
+        <p:tab title="#{bc_msg.recurring_holidays_tablabel}">
+          <h:panelGrid columns="4" cellpadding="4" class="ui-widget  ui-corner-all">
+            <h:outputText value="#{bc_msg.select_holiday}" />
+            <p:calendar showOn="button" id="newRecurringHoliday" pattern="#{bc_Bean.datePatternWithoutYear}">
+              <p:ajax event="dateSelect" listener="#{bc_Bean.recurringHolidaySelect}" />
+              <p:ajax event="keyup" listener="#{bc_Bean.recurringHolidayChange}" />
+            </p:calendar>
+            <p:tooltip value="#{bc_msg.specify_date}: #{bc_Bean.datePatternWithoutYear}" for="newRecurringHoliday" />
+            <p:commandButton id="addRecurringHoliday" value="#{bc_msg.add_recurring_holiday}"
+              action="#{bc_Bean.addRecurringHoliday}" rendered="#{bc_Bean.adminUser}" update=":calForm" />
+          </h:panelGrid>
+
+          <p:dataTable id="recurringHolidayTable" value="#{bc_Bean.recurringHolidays}" var="recurringHoliday"
+            selection="#{bc_Bean.selectedRecHoliday}" selectionMode="single" rowKey="#{recurringHoliday.date}"
+            style="width:96%">
+            <p:column headerText="#{bc_msg.col_date} (#{bc_Bean.datePatternWithoutYear})">
+              <h:outputText value="#{recurringHoliday.stringWithoutYear}" />
+            </p:column>
+
+            <p:column>
+              <h:outputText value="#{bc_msg.new_item}" rendered="#{recurringHoliday.newItem}" style="color:#ffcc55"
+                class="ui-state-highlight" />
+            </p:column>
+          </p:dataTable>  
+        </p:tab>
+      </p:tabView>
+
+    </p:panel>
+
+    <p:spacer height="8" />
+    <p:panel id="actionButtons" visible="#{bc_Bean.caldendarEditable}">
+      <div align="center">
+        <h:panelGrid cellspacing="6" columns="6">
+          <p:commandButton id="submit" value="#{bc_msg.submit}" action="#{bc_Bean.submit}"
+            rendered="#{bc_Bean.adminUser}" update=":calForm:growl" />
+          <p:commandButton id="deleteCalendar" value="#{bc_msg.delete}"
+            onclick="if (!confirm('#{bc_msg.confirm_delete_calendar}' + ' #{bc_Bean.calendarName} ?')) return false;"
+            action="#{bc_Bean.deleteCalendar}" update=":calForm" rendered="#{bc_Bean.deleteCalendarRendered}" />
+          <p:commandButton id="deleteOneOffHolidays" value="#{bc_msg.delete_holidays}"
+            onclick="if (!confirm('#{bc_msg.confirm_delete_holidays}' + ' #{bc_Bean.year} ?')) return false;"
+            action="#{bc_Bean.deleteOneOffHolidays}" update=":calForm" disabled="#{bc_Bean.deleteOneOffHolidaysDisabled}"
+            rendered="#{bc_Bean.adminUser}" />
+          <p:commandButton id="deleteRecurringHolidays" value="#{bc_msg.delete_recurring_holidays}"
+            onclick="if (!confirm('#{bc_msg.confirm_delete_recur_holidays}')) return false;"
+            action="#{bc_Bean.deleteRecurringHolidays}" update=":calForm"
+            disabled="#{bc_Bean.deleteRecurringHolidaysDisabled}" rendered="#{bc_Bean.adminUser}" />
+          <p:commandButton id="close" value="#{bc_msg.close}"
+            onclick="if (confirm('#{bc_msg.close_window_warning}')) { window.close(); } else { return false; }" />
+        </h:panelGrid>
+      </div>
+    </p:panel>
+    
+    <p:contextMenu id="oneOffHolidayMenu" for="calForm:bcTabView:oneOffHolidayTable">
+      <p:menuitem value="#{bc_msg.operation_make_recurring}" update=":calForm" icon="ui-icon ui-icon-refresh"
+        actionListener="#{bc_Bean.makeOneOffHolidayRecurring}" />
+      <p:menuitem value="#{bc_msg.operation_delete_holiday}" update=":calForm" icon="ui-icon ui-icon-close"
+        actionListener="#{bc_Bean.deleteOneOffHoliday}" />
+    </p:contextMenu>
+
+    <p:contextMenu id="recurringHolidayMenu" for="calForm:bcTabView:recurringHolidayTable">
+      <p:menuitem value="#{bc_msg.operation_delete_rec_holiday}" update=":calForm" icon="ui-icon ui-icon-close"
+        actionListener="#{bc_Bean.deleteRecurringHoliday}" />
+    </p:contextMenu>
+
+    <p:dialog header="#{bc_msg.operation_delete_holiday}" widgetVar="deleteHolidayDialog" resizable="false" width="200"
+      hideEffect="fade" modal="true">
+
+      <h:panelGrid id="display" columns="2" cellpadding="4">
+
+        <h:outputText value="Delete holiday:" />
+        <h:outputText value="#{bc_Bean.selectedOneOffHoliday.string}" style="font-weight:bold" />
+
+        <p:commandButton id="deleteOneOffHoliday" value="#{bc_msg.modal_ok}" action="#{bc_Bean.deleteOneOffHoliday}"
+          update=":calForm" rendered="#{bc_Bean.adminUser}" oncomplete="PF('deleteHolidayDialog').hide();" />
+
+        <p:commandButton id="cancelDeleteOneOffHoliday" value="#{bc_msg.modal_cancel}" rendered="#{bc_Bean.adminUser}"
+          oncomplete="PF('deleteHolidayDialog').hide();" />
+
+      </h:panelGrid>
+    </p:dialog>
+
+  </h:form>
+</body>
+</html>

@@ -1,0 +1,18 @@
+## Generated using InventoryBuilder v.V61
+## Object class com.hp.ov.activator.inventorybuilder.sql.routes.FindByArraySQLRoute
+SELECT
+  CR_Location.Name		CR_Location_Name,
+  CR_Location.Description		CR_Location_Description,
+  CR_Location.Region		CR_Location_Region
+FROM
+  CR_Location   CR_Location
+WHERE
+  CR_Location.Name IN [selectIN_?]
+
+
+
+@ order:1;select_IN_substitution
+@ opt:Name;CR_Location;CR_Location;Name
+@ opt:Description;CR_Location;CR_Location;Description
+@ opt:Region;CR_Location;CR_Location;Region
+@ alias:primary_key;CR_Location.Name

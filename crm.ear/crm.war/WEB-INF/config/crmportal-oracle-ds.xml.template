@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--(c) Copyright 2003-2010 Hewlett-Packard Development Company, L.P.  -->
+
+<!-- This file is modeled after docs/examples/jca/oracle-ds.xml -->
+
+<datasources>
+   <local-tx-datasource>
+
+      <!-- This is relative to java:/ -->
+      <jndi-name>crmportal/jdbc/ServicesDB</jndi-name>
+
+      <connection-url>
+         jdbc:oracle:thin:@##DB_URL##
+      </connection-url>
+
+      <valid-connection-checker-class-name>
+         org.jboss.resource.adapter.jdbc.vendor.OracleValidConnectionChecker
+      </valid-connection-checker-class-name>
+
+      <driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
+      
+      <security-domain>CRMPortalDSEncryptDBPassword</security-domain>
+	
+      <min-pool-size>0</min-pool-size>
+
+      <!-- max-pool-size puts an upper bound on the total number of open
+           jdbc connections from the EJBs to the database.  The EJB accesses
+           the database for a brief period during the execution of atomic and
+           compound tasks, and also accesses the database during deployments from
+           Service Builder.  If you decide to increase max-pool-size, 
+           you should ensure your database can handle that many simultaneous connections. -->
+      <max-pool-size>5</max-pool-size>
+
+      <!-- blocking-timeout-millis indicates how long a call will block waiting
+           for a jdbc connection to be available (i.e. returned to the pool).  
+           After this timeout expires, an exception will be thrown. -->
+      <blocking-timeout-millis>10000</blocking-timeout-millis>
+
+      <idle-timeout-minutes>15</idle-timeout-minutes>
+
+   </local-tx-datasource>
+</datasources>

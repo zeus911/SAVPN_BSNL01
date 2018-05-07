@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE Bean SYSTEM "bean.dtd">
+<!--
+###############################################################################
+#
+#    (c) Copyright 2003-2010 Hewlett-Packard Development Company, L.P.
+#
+###############################################################################
+-->
+
+
+<Bean>
+    <Name>VPNMembership</Name>
+    <Solution>CRM</Solution>
+    <ConstraintName>crm_vpn_membership</ConstraintName>
+    <Package>com.hp.ov.activator.crmportal.bean</Package>
+    <DBTable>crm_vpn_membership</DBTable>
+	<DBAlias>crm_vpn_membership</DBAlias>
+    <Fields>
+        <Field update ="false">
+            <Name>vpnId</Name>
+            <Type>String</Type>
+            <Description>Service id of VPN</Description>
+        </Field>
+        <Field update ="false">
+            <Name>siteAttachmentId</Name>
+            <Type>String</Type>
+            <Description>Service id of siteAttachmentID</Description>
+        </Field>
+        <Field>
+            <Name>ConnectivityType</Name>
+            <Type>String</Type>
+            <Description>Type of connectivity in this VPN</Description>
+        </Field>
+    </Fields>
+
+    <Keys>
+        <Key pk="true">
+            <KeyField>vpnId</KeyField>
+            <KeyField>siteAttachmentId</KeyField>
+        </Key>
+        <Key foreignBean="Service">
+            <KeyField foreignField="ServiceId">vpnId</KeyField>
+        </Key>
+        <Key foreignBean="Service">
+            <KeyField foreignField="ServiceId">siteAttachmentId</KeyField>
+        </Key>
+    </Keys>
+
+    <!-- These are the operations to generate for this bean -->
+    <Operations>
+        <Store/>
+        <Update/>
+        <Remove/>
+
+        <!-- findAll method -->
+        <FindBy>
+            <OrderField>vpnId</OrderField>
+            <OrderField>siteAttachmentId</OrderField>
+        </FindBy>
+        <FindBy key="vpnId" >
+            <OrderField>vpnId</OrderField>
+        </FindBy>
+        <FindBy key="siteAttachmentId" >
+            <OrderField>siteAttachmentId</OrderField>
+        </FindBy>
+    </Operations>
+</Bean>
+

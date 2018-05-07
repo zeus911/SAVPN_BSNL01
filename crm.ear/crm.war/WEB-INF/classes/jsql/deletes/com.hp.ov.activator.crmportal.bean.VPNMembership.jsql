@@ -1,0 +1,8 @@
+
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+DELETE FROM
+  crm_vpn_membership
+WHERE
+  vpnId = ? AND siteAttachmentId = ?
+

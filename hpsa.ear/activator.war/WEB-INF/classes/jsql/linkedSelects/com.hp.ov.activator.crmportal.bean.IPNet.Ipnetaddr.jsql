@@ -1,0 +1,30 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+SELECT
+  V_IPNet.PoolName		V_IPNet_PoolName,
+  V_IPNet.Hostmask		V_IPNet_Hostmask,
+  V_IPNet.CE2_IPAddr		V_IPNet_CE2_IPAddr,
+  V_IPNet.Netmask		V_IPNet_Netmask,
+  V_IPNet.CE1_IPAddr		V_IPNet_CE1_IPAddr,
+  V_IPNet.PE2_IPAddr		V_IPNet_PE2_IPAddr,
+  V_IPNet.IPNetAddr		V_IPNet_IPNetAddr,
+  V_IPNet.IPNetAddrStr		V_IPNet_IPNetAddrStr,
+  V_IPNet.PE1_IPAddr		V_IPNet_PE1_IPAddr
+FROM
+  V_IPNet   V_IPNet
+WHERE
+  V_IPNet.IPNetAddr IN [selectIN_?]
+
+
+
+@ order:1;select_IN_substitution
+@ opt:IPNetAddr;V_IPNet;V_IPNet;IPNetAddr
+@ opt:PE1_IPAddr;V_IPNet;V_IPNet;PE1_IPAddr
+@ opt:CE1_IPAddr;V_IPNet;V_IPNet;CE1_IPAddr
+@ opt:PE2_IPAddr;V_IPNet;V_IPNet;PE2_IPAddr
+@ opt:CE2_IPAddr;V_IPNet;V_IPNet;CE2_IPAddr
+@ opt:Netmask;V_IPNet;V_IPNet;Netmask
+@ opt:Hostmask;V_IPNet;V_IPNet;Hostmask
+@ opt:PoolName;V_IPNet;V_IPNet;PoolName
+@ opt:IPNetAddrStr;V_IPNet;V_IPNet;IPNetAddrStr
+@ alias:primary_key;V_IPNet.IPNetAddr

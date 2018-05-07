@@ -1,0 +1,9 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+UPDATE
+  crm_statemapping
+SET
+  NextState = ?
+WHERE
+  CurrentState = ? AND SaResponse = ?
+

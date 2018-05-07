@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+  <h:form id="resultsTabForm">
+    <p:tabView dynamic="true" cache="false" activeIndex="#{SOV_ServicesQueryBean.selectedTabIndex}"
+      widgetVar="sovTabWidget">
+      <p:ajax event="tabChange" listener="#{SOV_ServicesQueryBean.onTabChange}" />
+      <p:tab title="#{sov_msg.sov_jobs_tab}" id="jobsTab">
+        <ui:include src="/jsf/sov/jobsTab.xhtml" />
+      </p:tab>
+      <p:tab title="#{sov_msg.sov_messages_tab}" id="messagesTab">
+        <ui:include src="/jsf/sov/messages.xhtml" />
+      </p:tab>
+      <p:tab title="#{sov_msg.sov_audit_tab}" id="auditTab">
+        <ui:include src="/jsf/sov/audit.xhtml" />
+      </p:tab>
+      <p:tab title="#{sov_msg.sov_transactions_tab}" id="transactionsTab">
+        <ui:include src="/jsf/sov/activeTransactions.xhtml" />
+      </p:tab>
+    </p:tabView>
+  </h:form>
+</ui:composition>

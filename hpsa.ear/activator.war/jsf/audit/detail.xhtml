@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+  <link rel="stylesheet" type="text/css" href="/activator/css/primefaces/hpsa.css" />
+  <script type="text/javascript" src="/activator/javascript/saUtilities.js" ></script>
+</h:head>
+
+<body onmousemove="logoutTimerReset();" onkeydown="logoutTimerReset();">
+
+<h:outputText value="#{auditrb.detail_header}" class="frame-header" />
+
+<h:form id="form">
+
+<p:growl id="growl" showDetail="true"/>
+
+<p:panelGrid columns="2" cellpadding="5" style="width:100%; text-align:left;" styleClass="datagrid">
+  <h:outputText value="#{auditrb.host_name}: " />
+  <h:outputText value="#{auditDetailManager.message.hostname}" />
+  <h:outputText value="#{auditrb.service_id}: " />
+  <h:outputText value="#{auditDetailManager.message.serviceId}" />
+  <h:outputText value="#{auditrb.order_id}: " />
+  <h:outputText value="#{auditDetailManager.message.orderId}" />
+  <h:outputText value="#{auditrb.type}: " />
+  <h:outputText value="#{auditDetailManager.message.workflowType}" />
+  <h:outputText value="#{auditrb.state}: " />
+  <h:outputText value="#{auditDetailManager.message.workflowState}" />
+  <h:outputText value="#{auditrb.event_type}: " />
+  <h:outputText value="#{auditDetailManager.message.eventType}" />
+  <h:outputText value="#{auditrb.date}: " />
+  <h:outputText value="#{auditDetailManager.message.dateTime}" />
+  <h:outputText value="#{auditrb.class}: " />
+  <h:outputText value="#{auditDetailManager.message.clazz}" />
+  <h:outputText value="#{auditrb.job_id}: " />
+  <h:outputText value="#{auditDetailManager.message.jobId}" />
+  <h:outputText value="#{auditrb.user_name}: " />
+  <h:outputText value="#{auditDetailManager.message.userName}" />
+  <h:outputText value="#{auditrb.workflow_name}: " />
+  <h:outputText value="#{auditDetailManager.message.workflowName}" />
+  <h:outputText value="#{auditrb.step_name}: " />
+  <h:outputText value="#{auditDetailManager.message.stepName}" />
+  <h:outputText value="#{auditrb.message}: " />
+  <h:outputText value="#{auditDetailManager.message.message}" />
+</p:panelGrid>
+<p:dataTable var="p" value="#{auditDetailManager.message.parameters}" emptyMessage="#{auditrb.empty_parameters}" style="margin-top:10px; table-layout:auto;">
+  <p:column headerText="#{auditrb.parameter_name}" style="width:15%">
+    <h:outputText value="#{p.name}" />
+  </p:column>
+  <p:column headerText="#{auditrb.parameter_value}" style="width:85%">
+    <h:outputText value="#{p.value}" />
+    <br/>
+    <a href="/activator/auditBlobExport/export_id_#{auditDetailManager.message.auditId}_name_#{p.name}.file?id=#{auditDetailManager.message.auditId}&amp;name=#{p.name}" target="_blank">
+    <h:outputText value="[#{auditrb.download}]" rendered="#{p.truncatedValue}"/>
+    </a>
+  </p:column>
+</p:dataTable>
+<p:commandButton value="#{auditrb.ok}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" onclick="window.close();" style="margin-top:10px;"/>
+
+</h:form>
+
+</body>
+
+</html>

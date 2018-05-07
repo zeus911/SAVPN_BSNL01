@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head>
+  <title>Log Search</title>
+  <script type="text/javascript" src="/activator/javascript/saUtilities.js" />
+  <!--  <link rel="stylesheet" type="text/css" href="hpsa.css" />  -->
+  <link rel="stylesheet" type="text/css" href="/activator/css/primefaces/log_search.css" />
+  <link rel="stylesheet" type="text/css" href="/activator/css/primefaces/hpsa.css" />
+</h:head>
+<body onmousemove="logoutTimerReset();" onkeydown="logoutTimerReset();" onload="top.location='/activator/saMain.jsp'">
+  <h3>Search Logs Stepping Stone</h3>
+  <h:form id="log_search_tmp">
+
+    <p:panel header="Log Entry Details">
+      <h:panelGrid columns="2">
+        <h:outputText style="font-weight:bold;" value="Key" />
+        <h:outputText value="#{LOG_SearchInformationBean.selectedEntry.key}" />
+
+        <h:outputText style="font-weight:bold;" value="MsgNo" />
+        <h:outputText value="#{LOG_SearchInformationBean.selectedEntry.messageNo}" />
+
+        <h:outputText style="font-weight:bold;" value="UniqueID" />
+        <h:outputText value="#{LOG_SearchInformationBean.selectedEntry.uniqueIdentifier}" />
+
+        <h:outputText style="font-weight:bold;" value="File" />
+        <h:outputText value="#{LOG_LogFileLookupBean.logFileHostInfo.logFileName}" />
+
+        <h:outputText style="font-weight:bold;" value="Hostname" />
+        <h:outputText value="#{LOG_LogFileLookupBean.logFileHostInfo.hostname}" />
+
+        <h:outputText style="font-weight:bold;" value="File from URL" />
+        <h:outputText value="#{LOG_LogFileLookupBean.logFileHostInfoFromURL.logFileName}" />
+
+        <h:outputText style="font-weight:bold;" value="Hostname from URL" />
+        <h:outputText value="#{LOG_LogFileLookupBean.logFileHostInfoFromURL.hostname}" />
+
+      </h:panelGrid>
+    </p:panel>
+
+  </h:form>
+</body>
+</html>

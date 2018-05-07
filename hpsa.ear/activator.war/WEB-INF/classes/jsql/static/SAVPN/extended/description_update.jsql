@@ -1,0 +1,1 @@
+UPDATE Extended_Attributes_Catalog SET Description = ? WHERE Table_Name = ? AND Column_Name = ?

@@ -1,0 +1,20 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+SELECT
+  V_EXPMapping.PLP		V_EXPMapping_PLP,
+  V_EXPMapping.ExpValue		V_EXPMapping_ExpValue,
+  V_EXPMapping.Position		V_EXPMapping_Position,
+  V_EXPMapping.QueueName		V_EXPMapping_QueueName,
+  V_EXPMapping.ClassName		V_EXPMapping_ClassName
+FROM
+  V_EXPMapping   V_EXPMapping
+WHERE
+
+
+
+@ opt:Position;V_EXPMapping;V_EXPMapping;Position
+@ opt:ClassName;V_EXPMapping;V_EXPMapping;ClassName
+@ opt:ExpValue;V_EXPMapping;V_EXPMapping;ExpValue
+@ opt:PLP;V_EXPMapping;V_EXPMapping;PLP
+@ opt:QueueName;V_EXPMapping;V_EXPMapping;QueueName
+@ alias:primary_key;V_EXPMapping.Position

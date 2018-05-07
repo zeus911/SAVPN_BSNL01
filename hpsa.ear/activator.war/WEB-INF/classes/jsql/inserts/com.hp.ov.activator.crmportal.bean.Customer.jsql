@@ -1,0 +1,7 @@
+## Generated using InventoryBuilder v. V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+INSERT INTO crm_customer
+  (CustomerId, CompanyName, CompanyAddress, CompanyCity, CompanyZipCode, ContactpersonName, ContactpersonSurname, ContactpersonPhonenumber, ContactpersonEmail, Status, LastUpdateTime, CreationTime, isparent__)
+VALUES
+  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+

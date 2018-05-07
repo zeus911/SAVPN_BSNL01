@@ -1,0 +1,24 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+SELECT
+  V_QoSProfile.Compliant		V_QoSProfile_Compliant,
+  V_QoSProfile.Layer		V_QoSProfile_Layer,
+  V_QoSProfile.Description		V_QoSProfile_Description,
+  V_QoSProfile.QoSProfileName		V_QoSProfile_QoSProfileName,
+  V_QoSProfile.PEQoSProfileName		V_QoSProfile_PEQoSProfileName,
+  V_QoSProfile.CustomerId		V_QoSProfile_CustomerId,
+  V_QoSProfile.Prefix		V_QoSProfile_Prefix
+FROM
+  V_QoSProfile   V_QoSProfile
+WHERE
+
+
+
+@ opt:CustomerId;V_QoSProfile;V_QoSProfile;CustomerId
+@ opt:Prefix;V_QoSProfile;V_QoSProfile;Prefix
+@ opt:QoSProfileName;V_QoSProfile;V_QoSProfile;QoSProfileName
+@ opt:Description;V_QoSProfile;V_QoSProfile;Description
+@ opt:Layer;V_QoSProfile;V_QoSProfile;Layer
+@ opt:PEQoSProfileName;V_QoSProfile;V_QoSProfile;PEQoSProfileName
+@ opt:Compliant;V_QoSProfile;V_QoSProfile;Compliant
+@ alias:primary_key;V_QoSProfile.QoSProfileName

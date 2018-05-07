@@ -1,0 +1,7 @@
+## Generated using InventoryBuilder v. V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+INSERT INTO crm_service
+  (ServiceId, PresName, State, SubmitDate, ModifyDate, Type, CustomerId, ParentServiceId, EndTime, NextOperationTime, LastUpdateTime, isparent__)
+VALUES
+  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+

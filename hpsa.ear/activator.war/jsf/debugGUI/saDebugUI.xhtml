@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head>
+  <title>Debug View</title>
+  <link rel="stylesheet" type="text/css" href="/activator/css/primefaces/hpsa.css" />
+  <h:outputText rendered="#{debug_JobInfoBean.close}"
+    value="&lt;script type='text/javascript'&gt;window.onerror = handleError;function handleError(){return true;}opener.location = opener.location;window.close();&lt;/script&gt;"
+    escape="false" />
+  <script type="text/javascript" src="/activator/javascript/saUtilities.js" />
+   <style type="text/css">
+    .hpsa_null_value {
+      color:#e00;
+      font-weight:bold;
+      font-style:italic;
+    }
+    .hpsa_step_name {
+      color:#0a8;
+      font-weight:bold;
+    }
+    .hpsa_head {
+      border:0px !important;
+      border-collapse:collapse;
+      padding:0px !important;
+      cellspacing:0px;
+      width:100%;
+      background-color: /*c:sabl*/ #0096d6;
+    }
+    .col1 {
+      border:0px !important;
+      border-collapse:collapse;
+      padding:0px;
+      align:left;
+    }
+    .col2 {
+      border:0px !important;
+      border-collapse:collapse;
+      padding:0px;
+      width:100%;
+    }
+    .col3 {
+      border:0px !important;
+      border-collapse:collapse;
+      padding:0px;
+      align:right;
+    }
+  </style>
+</h:head>
+<body onmousemove="logoutTimerReset();" onkeydown="logoutTimerReset();">
+  <h:form id="debugform">
+
+    <p:growl id="growl" showDetail="true" sticky="true" />  
+
+    <h:panelGrid columns="4" columnClasses="col1,col1,col2,col3" styleClass="hpsa_head">
+      <h:graphicImage value="/images/HPLogo-small.png" style="display:block" />
+      <h:graphicImage value="/images/sa_name.png" style="display:block" />
+      <h:graphicImage value="/images/1x1.gif" style="display:block" />
+      <h:graphicImage value="/images/wires_pad_left.jpg" style="display:block" />
+    </h:panelGrid>
+
+    <p:spacer height="6" />
+
+    <p:tabView id="tv" dynamic="true" cache="false">
+      <p:tab title="#{debug_msg.jobdetails_tablabel}" id="jobDetailsTab">
+
+        <!-- =============================================== JOB DETAILS ========================================= -->
+        <p:dataTable value="#{debug_JobInfoBean.job}" var="job" tableStyle="table-layout:auto;">
+          <p:column headerText="#{debug_msg.jobid}">
+            <h:outputText value="#{job.jobId}" />
+          </p:column>
+          <p:column headerText="#{debug_msg.serviceid}">
+            <h:outputText value="#{job.serviceId}" />
+          </p:column>
+          <p:column headerText="#{debug_msg.hostname}">
+            <h:outputText value="#{job.hostName}" />
+          </p:column>
+          <p:column headerText="#{debug_msg.workflow}">
+            <h:outputText value="#{job.name}" />
+          </p:column>
+          <p:column headerText="#{debug_msg.status}">
+            <h:outputText value="#{job.status}" />
+          </p:column>
+          <p:column headerText="#{debug_msg.starttime}">
+            <h:outputText value="#{job.startTime}" />
+          </p:column>
+          <p:column headerText="#{debug_msg.posttime}">
+            <h:outputText value="#{job.postDate}" />
+          </p:column>
+          <p:column headerText="#{debug_msg.step}">
+            <h:outputText styleClass="hpsa_step_name" value="#{job.stepName}" />
+          </p:column>
+          <p:column headerText="#{debug_msg.description}">
+            <h:outputText value="#{job.description}" />
+          </p:column>
+          <p:column headerText="#{debug_msg.queue_name}">
+            <h:outputText value="#{job.queue}" />
+          </p:column>
+        </p:dataTable>
+        <p:spacer height="12" />
+
+        <!-- ========================================= CONFIG BREAK POINT =================================== -->
+        <p:panel header="Configure Break Point">
+          <h:panelGrid columns="1" cellpadding="2">
+            <h:selectOneRadio id="breakpointcategory" value="#{debug_JobInfoBean.breakPointOption}" immediate="true">
+              <p:ajax event="click" update="possiblebreakpointnames"
+                listener="#{debug_JobInfoBean.breakPointCategorySelected}" />
+              <f:selectItem itemValue="Add" itemLabel="#{debug_msg.select_breakpoint}" />
+              <f:selectItem itemValue="Remove" itemLabel="#{debug_msg.remove_breakpoint}" />
+            </h:selectOneRadio>
+
+            <p:selectOneMenu effect="fade" effectDuration="150" id="possiblebreakpointnames" dropdown="true"
+              value="#{debug_JobInfoBean.breakPoint}" disabled="#{debug_JobInfoBean.breakPointDropdownDisabled}"
+              style="width:80%;height:12">
+              <f:selectItems value="#{debug_JobInfoBean.possibleBreakPoints}" />
+            </p:selectOneMenu>
+          </h:panelGrid>
+        </p:panel>
+        <p:spacer height="12" />
+
+        <!-- ========================================= USER CASE-PACKET =================================== -->
+        <p:dataTable id="userCasePacketTable" var="userCasePacketVar" value="#{debug_JobInfoBean.userCasePacket}"
+          resizable="true" tableStyle="table-layout:auto;">
+
+          <f:facet name="header">#{debug_msg.user_casepacket_details}</f:facet>
+
+          <p:column headerText="#{debug_msg.casepacket_name}" sortBy="#{userCasePacketVar.name}" style="width:112px">
+            <h:outputText id="userCasePacketVarName" value="#{userCasePacketVar.name}" />
+            <p:tooltip for="userCasePacketVarName" value="#{userCasePacketVar.name}" />
+          </p:column>
+
+          <p:column headerText="#{debug_msg.casepacket_type}" sortBy="#{userCasePacketVar.type}" style="width:60px">
+            <h:outputText value="#{userCasePacketVar.type}" />
+          </p:column>
+
+          <p:column headerText="#{debug_msg.casepacket_value}" style="width:192px">
+            <p:outputPanel id="userCasePacketVarDisplayValue">
+              <h:outputText rendered="#{userCasePacketVar.nullValue}" value="null" styleClass="hpsa_null_value" />
+              <h:outputText rendered="#{!userCasePacketVar.nullValue}" value="#{userCasePacketVar.truncDisplayValue}" />
+            </p:outputPanel>
+          </p:column>
+
+          <p:column headerText="">
+            <p:commandButton id="userCasePacketVarDetailedDisplayValue" update=":debugform:fullCasePacketValuePanel" ajax="true"
+              onsuccess="PF('fullCasePacketValue').show();" icon="ui-icon-search">
+              <f:setPropertyActionListener value="#{userCasePacketVar}"
+                target="#{debug_JobInfoBean.selectedUserCasePacketVar}" />
+            </p:commandButton>
+          </p:column>
+
+          <p:column headerText="#{debug_msg.casepacket_edit}">
+            <p:panelGrid columns="3" rendered="#{userCasePacketVar.editable}">
+              <p:inputText value="#{userCasePacketVar.editValue}" disabled="#{userCasePacketVar.typeObject}" rendered="#{!userCasePacketVar.typeString}">
+                <p:ajax event="keyup" update="userCasePacketVarDisplayValue,userCasePacketVarDetailedDisplayValue"
+                  listener="#{userCasePacketVar.keyUp}" />
+              </p:inputText>
+              <p:inputTextarea value="#{userCasePacketVar.editValue}" rows="1" disabled="#{userCasePacketVar.typeObject}" autoResize="false" rendered="#{userCasePacketVar.typeString}">
+                <p:ajax event="keyup" update="userCasePacketVarDisplayValue,userCasePacketVarDetailedDisplayValue"
+                  listener="#{userCasePacketVar.areaKeyUp}" />
+              </p:inputTextarea>
+              <h:outputText value="#{debug_msg.or_label}" />
+              <p:selectOneMenu value="#{userCasePacketVar.selectedItem}">
+                <f:selectItems value="#{userCasePacketVar.possibleSelectItems}" />
+                <p:ajax event="change" update="userCasePacketVarDisplayValue,userCasePacketVarDetailedDisplayValue"
+                  listener="#{userCasePacketVar.selectedItemChanged}" />
+              </p:selectOneMenu>
+            </p:panelGrid>
+          </p:column>
+
+        </p:dataTable>
+
+        <p:spacer height="12" />
+
+        <!-- ========================================= COMMAND BUTTONS =================================== -->
+        <div align="center">
+          <p:panel style="border:0px">
+            <h:panelGrid cellspacing="5" columns="4">
+              <p:commandButton id="proceed" value="#{debug_msg.proceed}" action="#{debug_JobInfoBean.proceed}"
+                ajax="false" onsuccess="window.close();" />
+              <p:commandButton id="dump" value="#{debug_msg.dump_casepacket}" onclick="PF('dumpCasePacketDialog').show();" />
+              <p:commandButton id="close" value="#{debug_msg.close}" action="#{debug_JobInfoBean.closeWin}"
+                onclick="window.close();" />
+            </h:panelGrid>
+          </p:panel>
+        </div>
+        <!-- <p:commandButton id="reset" value="#{debug_msg.reset}" /> -->
+        <!-- <p:commandButton id="reset" value="#{debug_msg.reset}" onclick="window.reload();" /> -->
+
+        <p:spacer height="12" />
+
+        <!-- ========================================= SYSTEM CASE-PACKET =================================== -->
+
+        <p:dataTable id="sysCasePacketTable" var="sysCasePacketVar" value="#{debug_JobInfoBean.sysCasePacket}"
+          resizable="true" tableStyle="table-layout:auto;">
+
+          <f:facet name="header">#{debug_msg.sys_casepacket_details}</f:facet>
+
+          <p:column headerText="#{debug_msg.casepacket_name}" sortBy="#{sysCasePacketVar.name}" style="width:112px">
+            <h:outputText id="sysCasePacketVarName" value="#{sysCasePacketVar.name}" />
+            <p:tooltip for="sysCasePacketVarName" value="#{sysCasePacketVar.name}" />
+          </p:column>
+
+          <p:column headerText="#{debug_msg.casepacket_type}" sortBy="#{sysCasePacketVar.type}" style="width:60px">
+            <h:outputText value="#{sysCasePacketVar.type}" />
+          </p:column>
+
+          <p:column headerText="#{debug_msg.casepacket_value}" style="width:192px">
+            <p:outputPanel id="sysCasePacketVarDisplayValue">
+              <h:outputText rendered="#{sysCasePacketVar.nullValue}" value="null" styleClass="hpsa_null_value" />
+              <h:outputText rendered="#{!sysCasePacketVar.nullValue}" value="#{sysCasePacketVar.truncDisplayValue}" />
+            </p:outputPanel>
+          </p:column>
+
+          <p:column headerText="">
+            <p:commandButton id="sysCasePacketVarDetailedDisplayValue" update=":debugform:fullCasePacketValuePanel" ajax="true"
+              onsuccess="PF('fullCasePacketValue').show();" icon="ui-icon-search">
+              <f:setPropertyActionListener value="#{sysCasePacketVar}"
+                target="#{debug_JobInfoBean.selectedSysCasePacketVar}" />
+            </p:commandButton>
+          </p:column>
+
+          <p:column headerText="#{debug_msg.casepacket_edit}">
+            <p:panelGrid columns="3" rendered="#{sysCasePacketVar.editable}">
+              <p:inputText value="#{sysCasePacketVar.editValue}" disabled="#{sysCasePacketVar.typeObject}" rendered="#{!sysCasePacketVar.typeString}">
+                <p:ajax event="keyup" update="sysCasePacketVarDisplayValue,sysCasePacketVarDetailedDisplayValue"
+                  listener="#{sysCasePacketVar.keyUp}" />
+              </p:inputText>
+              <p:inputTextarea value="#{sysCasePacketVar.editValue}" rows="1" disabled="#{sysCasePacketVar.typeObject}" autoResize="false" rendered="#{sysCasePacketVar.typeString}">
+                <p:ajax event="keyup" update="sysCasePacketVarDisplayValue,sysCasePacketVarDetailedDisplayValue"
+                  listener="#{sysCasePacketVar.areaKeyUp}" />
+              </p:inputTextarea>
+              <h:outputText value="#{debug_msg.or_label}" />
+              <p:selectOneMenu value="#{sysCasePacketVar.selectedItem}">
+                <f:selectItems value="#{sysCasePacketVar.possibleSelectItems}" />
+                <p:ajax event="change" update="sysCasePacketVarDisplayValue,sysCasePacketVarDetailedDisplayValue" listener="#{sysCasePacketVar.selectedItemChanged}" />
+              </p:selectOneMenu>
+            </p:panelGrid>
+          </p:column>
+
+        </p:dataTable>
+        <p:spacer height="12" />
+
+        <!-- ========================================= COMBINED DATA TABLE =================================== -->
+        <p:panel visible="false">
+          <p:dataTable id="totalCasePacketTable" var="casePacketVar" value="#{debug_JobInfoBean.totalCasePacket}" tableStyle="table-layout:auto;">
+            <p:column>
+              <h:outputText value="#{casePacketVar.name}" />
+            </p:column>
+            <p:column>
+              <h:outputText value="#{casePacketVar.type}" />
+            </p:column>
+            <p:column>
+              <h:outputText value="#{casePacketVar.value}" />
+            </p:column>
+          </p:dataTable>
+        </p:panel>
+
+      </p:tab>
+      <p:tab title="#{debug_msg.workflowview_tablabel}" actionListener="#{debug_WorkflowImageBean.determineDrawingArea}">
+        <!-- ===============================================  WORKFLOW VIEW  ========================================= -->
+        <p:panel>
+          <h:panelGrid columns="2">
+            <h:outputText value="Zoom: " />
+            <p:selectOneMenu value="#{debug_JobInfoBean.zoomLevel}" effect="fade" effectDuration="150">
+              <f:selectItem itemLabel="5%" itemValue="5" />
+              <f:selectItem itemLabel="10%" itemValue="10" />
+              <f:selectItem itemLabel="25%" itemValue="25" />
+              <f:selectItem itemLabel="50%" itemValue="50" />
+              <f:selectItem itemLabel="75%" itemValue="75" />
+              <f:selectItem itemLabel="90%" itemValue="90" />
+              <f:selectItem itemLabel="100%" itemValue="100" />
+              <f:selectItem itemLabel="125%" itemValue="125" />
+              <f:selectItem itemLabel="150%" itemValue="150" />
+              <f:selectItem itemLabel="200%" itemValue="200" />
+              <p:ajax event="change" listener="#{debug_JobInfoBean.zoomChanged}" update="debugWorkflowImage" />
+            </p:selectOneMenu>
+          </h:panelGrid>
+        </p:panel>
+        <div style="overflow: auto; height: 80%; width: 100%; padding-bottom: 2px">
+          <p:graphicImage id="debugWorkflowImage" value="#{debug_WorkflowImageBean.image}" cache="false"
+            width="#{debug_WorkflowImageBean.width}" height="#{debug_WorkflowImageBean.height}" />
+        </div>
+      </p:tab>
+    </p:tabView>
+
+        <!-- ========================================= COMMAND BUTTONS =================================== -->
+        <div align="center">
+          <p:panel style="border:0px">
+            <h:panelGrid cellspacing="5" columns="4">
+              <p:commandButton id="proceed2" value="#{debug_msg.proceed}" action="#{debug_JobInfoBean.proceed}"
+                ajax="false" onsuccess="window.close();">
+                <f:param name="jobId" value="#{debug_JobInfoBean.jobId}" />
+                <f:param name="queueName" value="#{debug_JobInfoBean.queue}" />
+              </p:commandButton>
+              <p:commandButton id="dump2" value="#{debug_msg.dump_casepacket}" onclick="PF('dumpCasePacketDialog').show();" />
+              <p:commandButton id="close2" value="#{debug_msg.close}" action="#{debug_JobInfoBean.closeWin}"
+                onclick="window.close();" />
+            </h:panelGrid>
+          </p:panel>
+        </div>
+        <!-- <p:commandButton id="reset" value="#{debug_msg.reset}" /> -->
+        <!-- <p:commandButton id="reset" value="#{debug_msg.reset}" onclick="window.reload();" /> -->
+
+
+    <p:dialog header="Case Packet Variable" widgetVar="fullCasePacketValue" modal="true">
+      <p:panelGrid id="fullCasePacketValuePanel" columns="2">
+        <h:outputText value="#{debug_msg.casepacket_name}" />
+        <h:outputText value="#{debug_JobInfoBean.selectedCasePacketVar.name}" />
+        <h:outputText value="#{debug_msg.casepacket_type}" />
+        <h:outputText value="#{debug_JobInfoBean.selectedCasePacketVar.type}" />
+        <h:outputText value="#{debug_msg.casepacket_value}" />
+        <p:inputTextarea cols="80" rows="5" autoResize="false" readonly="true" value="#{debug_JobInfoBean.selectedCasePacketVar.displayValue}" />
+      </p:panelGrid>
+    </p:dialog>
+
+    <p:dialog header="#{debug_msg.dump_casepacket}" widgetVar="dumpCasePacketDialog" modal="true">
+      <h:outputText value="#{debug_msg.select_dump_format}" />
+      <ul>
+        <li><h:commandLink onclick="PF('dumpCasePacketDialog').hide();">
+            <h:outputText value="#{debug_msg.dump_format_pdf}" />
+            <p:dataExporter encoding="utf-8" type="pdf" target="debugform:tv:totalCasePacketTable" fileName="case-packet-dump" />
+          </h:commandLink></li>
+        <li><h:commandLink onclick="PF('dumpCasePacketDialog').hide();">
+            <h:outputText value="#{debug_msg.dump_format_csv}" />
+            <p:dataExporter encoding="utf-8" type="csv" target="debugform:tv:totalCasePacketTable" fileName="case-packet-dump" />
+          </h:commandLink></li>
+      </ul>
+    </p:dialog>
+
+    <p:ajaxStatus id="ajaxStatusPanel" style="position:fixed; right:5px; bottom:5px; width:32px; height:32px;">
+      <f:facet name="start">
+        <h:graphicImage value="#{request.contextPath}/../../activator/images/primefaces/throbber.gif" />
+      </f:facet>
+      <f:facet name="complete">
+        <h:outputText value="" />
+      </f:facet>
+    </p:ajaxStatus>
+
+    <p:blockUI block="tv" trigger="tv">
+      <h:outputText value="#{debug_msg.loading_data}" />
+    </p:blockUI>
+
+  </h:form>
+</body>
+</html>

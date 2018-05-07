@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<server xmlns="urn:jboss:service:7.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="urn:jboss:service:7.0 jboss-service_7_0.xsd">  
+
+  <!-- The standard mbean you will complete for the lab -->
+  <mbean code="com.hp.ov.activator.mwfm.engine.WFManager" name="Mwfm:name=WFManager">
+    <depends>Resmgr:name=RMServer</depends>
+    <attribute name="PathETC">/etc/opt/OV/ServiceActivator</attribute>
+    <attribute name="PathVAR">/var/opt/OV/ServiceActivator</attribute>
+    <attribute name="PathBIN">/opt/OV/ServiceActivator/bin</attribute>
+    <attribute name="JavaHome">/usr/java/jdk1.7.0_80//</attribute>
+    <attribute name="JbossDeployDirectory">/opt/HP/jboss/standalone/deployments</attribute>
+  </mbean>
+
+  <mbean code="com.hp.ov.activator.resmgr.kernel.RMServer" name="Resmgr:name=RMServer">
+    <attribute name="PropertiesFile">/etc/opt/OV/ServiceActivator/config/resmgr.xml</attribute>
+    <attribute name="JbossDeployDirectory">/opt/HP/jboss/standalone/deployments</attribute>
+    <attribute name="ActivatorDirConfig">/etc/opt/OV/ServiceActivator/config</attribute>
+    <attribute name="ActivatorDirVar">/var/opt/OV/ServiceActivator</attribute>
+    <attribute name="ActivatorSSHUsername"></attribute>
+    <attribute name="ActivatorSSHIdentity"></attribute>
+  </mbean>
+
+</server>

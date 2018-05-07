@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE Bean SYSTEM "bean.dtd">
+<!--
+
+###############################################################################
+#
+#    (c) Copyright 2003-2010 Hewlett-Packard Development Company, L.P.
+#
+###############################################################################
+
+-->
+<Bean>
+    <Name>PolicyMapping</Name>
+    <Solution>CRM</Solution>
+    <Package>com.hp.ov.activator.crmportal.bean</Package>
+    <DBTable>V_PolicyMapping</DBTable>
+	 <DBAlias>V_PolicyMapping</DBAlias>
+    <!--    className, profileName, exp, percentage-->
+    <Fields>
+
+        <Field update ="false">
+            <Name>TClassName</Name>
+            <Type>String</Type>
+            <Description>The name of TrafficClass</Description>
+        </Field>
+
+        <Field update ="false">
+            <Name>ProfileName</Name>
+            <Type>String</Type>
+            <Description>The name of profile the mapping belongs to</Description>
+        </Field>
+
+        <Field>
+            <Name>Exp</Name>
+            <Type>String</Type>
+            <Description>MPLS EXP value for remarking selected traffic class</Description>
+        </Field>
+
+        <Field>
+            <Name>Percentage</Name>
+            <Type>String</Type>
+            <Description>The part of bandwidth in the site's link</Description>
+        </Field>
+
+        <Field>
+            <Name>Position</Name>
+            <Type>String</Type>
+            <Description>The position in provider class table</Description>
+        </Field>
+
+				
+		<Field>
+            <Name>PLP</Name>
+            <Type>String</Type>
+            <Description>Loss Bit</Description>
+        </Field>
+
+	   <Field>
+            <Name>queueName</Name>
+            <Type>String</Type>
+            <Description>Name of Queue/Forwarding class</Description>
+        </Field>
+
+		<Field>
+            <Name>CoSName</Name>
+            <Type>String</Type>
+            <Description>Name of Class of Service</Description>
+        </Field>
+
+
+
+    </Fields>
+
+    <Keys>
+        <Key pk="true">
+            <KeyField>TClassName</KeyField>
+            <KeyField>ProfileName</KeyField>
+        </Key>
+
+        <Key foreignBean="Profile">
+            <KeyField foreignField="QoSProfileName">ProfileName</KeyField>
+        </Key>
+
+        <Key>
+            <KeyField>TClassName</KeyField>
+        </Key>
+
+        <Key foreignBean="EXPMapping">
+            <KeyField foreignField="Position">Position</KeyField>
+        </Key>
+
+    </Keys>
+
+    <!-- These are the operations to generate for this bean -->
+    <Operations>
+        <Store/>
+        <Update/>
+        <Remove/>
+        <!-- findAll method -->
+    </Operations>
+
+    <!--
+      <Roles>
+        <Store>InvManager</Store>
+        <Update>InvManager</Update>
+        <Remove>InvManager</Remove>
+      </Roles>
+    -->
+
+
+</Bean>
+

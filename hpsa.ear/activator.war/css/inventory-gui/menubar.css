@@ -1,0 +1,77 @@
+.menu_bar
+{
+	position:fixed;
+	top:0px;
+	left:0px;
+	width:100%;
+    height:20px;
+    background:/*c:sabl*/#0096d6 url(./images/hp_logo.png) no-repeat 99% 0%;
+    font-family:Verdana,Arial,Helvetica,sans-serif;
+    font-size:13px;
+}
+.menu_bar .root_menu_option
+{
+	position:absolute;
+	background:/*c:sabl*/#0096d6;
+	height:18px;
+	padding:2px 5px 0px 5px;
+	color:/*c:whit*/#ffffff;
+	cursor:default;
+    white-space:nowrap;
+}
+.menu_bar .root_menu_option:hover
+{
+  background-color:/*c:ltgy*/#e5e8e8;
+  color:/*c:blck*/#000000;
+}
+.menu_bar .drop_down_menu
+{
+	position : absolute;
+	top : 20px;
+	left : -1px;
+	width : 200px;
+	background:/*c:ltgy*/#e5e8e8;
+	visibility : hidden;
+    border-right:1px solid /*c:mdgy*/#b9b8bb;
+    border-bottom:1px solid /*c:mdgy*/#b9b8bb;
+    border-left:1px solid /*c:mdgy*/#b9b8bb;
+	box-shadow: 5px 5px 5px /*c:dkgy*/#767676;
+ }
+.menu_bar .right_side_menu
+{
+	position:absolute;
+	top:0px;
+	left:100%;
+	width:200px;
+	background:/*c:ltgy*/#e5e8e8;
+	visibility:hidden;
+    border-top:1px solid /*c:mdgy*/#b9b8bb;
+    border-right:1px solid /*c:mdgy*/#b9b8bb;
+    border-bottom:1px solid /*c:mdgy*/#b9b8bb;
+    border-left:1px solid /*c:mdgy*/#b9b8bb;
+	box-shadow:5px 5px 5px /*c:dkgy*/#767676;
+}
+.menu_bar .menu_option
+{
+  position:relative;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:18px;
+  color:/*c:blck*/#000000;
+  cursor:pointer;
+  text-decoration:none;
+  padding-top:2px;
+}
+.menu_bar .menu_option:hover
+{
+	background-color:/*c:mdgy*/#b9b8bb;
+}
+.menu_bar .has_children
+{
+  background:transparent url(./images/arrow_right.png) no-repeat 100% 2px; cursor:default;
+}
+.menu_bar .has_children:hover
+{
+  background-color:/*c:mdgy*/#b9b8bb;
+}

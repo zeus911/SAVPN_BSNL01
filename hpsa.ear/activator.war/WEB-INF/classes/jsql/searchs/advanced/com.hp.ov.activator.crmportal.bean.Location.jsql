@@ -1,0 +1,16 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+SELECT
+  CR_Location.Name		CR_Location_Name,
+  CR_Location.Description		CR_Location_Description,
+  CR_Location.Region		CR_Location_Region
+FROM
+  CR_Location   CR_Location
+WHERE
+
+
+
+@ opt:Name;CR_Location;CR_Location;Name
+@ opt:Description;CR_Location;CR_Location;Description
+@ opt:Region;CR_Location;CR_Location;Region
+@ alias:primary_key;CR_Location.Name

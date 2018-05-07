@@ -1,0 +1,174 @@
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+	<link rel="stylesheet" type="text/css" href="/activator/css/primefaces/hpsa.css"/>
+  <script type="text/javascript" src="/activator/javascript/saUtilities.js" ></script>
+	<script>
+	function goToPoolListParentWindow() {
+    if (document.getElementById("form1:isUpdateError").value == "false") {
+      window.opener.parent.main.location="/activator/jsf/resmgr/pools/lazypoollist.jsf";
+      window.close();
+    } else {
+      document.getElementById("form:savebtn").disabled = false;
+    }
+	}
+	</script>
+  <script>
+  function saveChanges() {
+    var form = document.forms["form1"];
+    var btn = form.elements["form1:updbutton"];
+    document.getElementById("form:savebtn").disabled = true;
+    btn.click();
+  }
+  </script>
+  <script>
+  var eventListenerAdded = false;
+  function resize() {
+    var MIN_HEIGHT = 120;
+    var diff = document.body.clientHeight - 300 - parseInt(document.getElementById("form:_subpools").clientHeight);
+    document.getElementById("form:providerParameters").style.height = Math.max(MIN_HEIGHT, diff);
+    if (!eventListenerAdded) {
+      if (document.all) {
+        document.body.onresize = resize;
+      } else {
+        window.addEventListener("resize", function(){resize()}, false);
+      }
+      eventListenerAdded = true;
+    }
+  }
+  function resizeOnSelect(w) {
+    if (document.all) {
+      if (w == null) {
+        var cw = document.body.clientWidth - 20;
+        document.getElementById("form:providerDetails").style.width = "300";
+        setTimeout("resizeOnSelect(" + cw + ")", 100);
+      } else {
+        document.getElementById("form:providerDetails").style.width = w;
+      }
+    }
+  }
+  </script>
+</h:head>
+
+<body onmousemove="logoutTimerReset();" onkeydown="logoutTimerReset();" onload="resize()">
+
+<h:outputText value="#{rmmsg.pool_create}" class="frame-header" />
+
+<h:form id="form1">
+
+  <p:growl id="pmsgs" />
+
+  <p:panel style="text-align:center; display:none">
+    <p:commandButton id="updbutton" value="#{rmmsg.save}" update="pmsgs isUpdateError" action="#{lazyPoolCreationManager.createPool}" oncomplete="goToPoolListParentWindow();" />
+    <p:commandButton value="#{rmmsg.cancel}" update="pmsgs" onclick="window.close();" />
+  </p:panel>
+
+  <p:panel header="#{rmmsg.pool_details}" style="position:relative; top:0;">
+    <h:panelGrid columns="8" cellpadding="2" id="poolUpdateForm" border="0" >
+      <h:outputLabel for="poolName" value="#{rmmsg.pool_name}:"/>
+      <h:inputText id="poolName" value="#{lazyPoolCreationManager.creatingPool.poolName}" required="true" style="width:120;" />
+      <h:outputLabel for="pluginName" value="#{rmmsg.pool_plugin}:"/>
+      <h:inputText id="pluginName" value="#{lazyPoolCreationManager.creatingPool.plugInName}" required="true" style="width:120;" readonly="true" />
+      <h:outputLabel for="poolTimeout" value="#{rmmsg.pool_timeout}:"/>
+      <h:inputText id="poolTimeout" value="#{lazyPoolCreationManager.creatingPool.poolTimeout}" required="true" style="width:80;" />
+      <h:outputLabel for="borrowingTimeout" value="#{rmmsg.pool_borrowing_timeout}:"/>
+      <h:inputText id="borrowingTimeout" value="#{lazyPoolCreationManager.creatingPool.borrowingTimeout}" required="true" style="width:80;" />
+    </h:panelGrid>
+    <h:panelGrid columns="2" cellpadding="2" border="0" >
+      <h:outputLabel for="poolDescription" value="#{rmmsg.pool_description}:"/>
+      <h:inputText id="poolDescription" value="#{lazyPoolCreationManager.creatingPool.description}" required="true" style="width:750;" />
+    </h:panelGrid>
+  </p:panel>
+  
+  <h:inputHidden id="isUpdateError" value="#{lazyPoolCreationManager.updError}" />
+
+</h:form>
+
+<h:form id="form">
+
+  <p:growl id="msgs" />
+
+  <p:panel id="providerDetails" header="#{rmmsg.provider_details}" style="position:relative; top:-10;">
+  
+    <h:panelGrid columns="8" cellpadding="2" id="provForm" border="0" >
+      <h:outputLabel for="providerName" value="#{rmmsg.provider_name}:"/>
+      <h:inputText id="providerName" value="#{lazyPoolCreationManager.creatingPoolConnProvider.connProviderInstance}" required="true" style="width:120;" />
+      <h:outputLabel for="maxConnections" value="#{rmmsg.provider_max_conn}:"/>
+      <h:inputText id="maxConnections" value="#{lazyPoolCreationManager.creatingPoolConnProvider.maxConnections}" required="true" style="width:80;" />
+      <h:outputLabel for="idleConnectionsTimeout" value="#{rmmsg.provider_idle_conn_to}:"/>
+      <h:inputText id="idleConnectionsTimeout" value="#{lazyPoolCreationManager.creatingPoolConnProvider.idleConnTimeout}" required="true" style="width:80;" />
+      <h:outputLabel for="inUseConnTimeout" value="#{rmmsg.provider_in_use_conn_to}:"/>
+      <h:inputText id="inUseConnTimeout" value="#{lazyPoolCreationManager.creatingPoolConnProvider.inUseConnTimeout}" required="true" style="width:80;" />
+    </h:panelGrid>
+    <h:panelGrid columns="2" cellpadding="2" border="0" >
+      <h:outputLabel for="providerParameters" value="#{rmmsg.provider_parameters}:"/>
+      <h:inputTextarea id="providerParameters" value="#{lazyPoolCreationManager.creatingPoolConnProvider.providerParameters}" style="width:550; height:120;" />
+    </h:panelGrid>
+    
+    <p:commandButton value="#{rmmsg.add}/#{rmmsg.update}" update="configprov msgs @parent" action="#{lazyPoolCreationManager.onPoolConnProviderAdded}"
+                     style="position:absolute; top:70px; left:710px;" oncomplete="resizeOnSelect()">  
+      <p:collector value="#{lazyPoolCreationManager.creatingPoolConnProvider}" addTo="#{lazyPoolCreationManager.providerConfList}" />  
+    </p:commandButton>
+    <p:commandButton value="#{rmmsg.remove}" update="configprov @parent" action="#{lazyPoolCreationManager.onPoolConnProviderDeleted}" oncomplete="resizeOnSelect()"
+                     style="position:absolute; top:110px; left:710px;" disabled="#{!lazyPoolCreationManager.updatingPoolConnProviderSelected}">
+      <p:collector value="#{lazyPoolCreationManager.creatingPoolConnProvider}" removeFrom="#{lazyPoolCreationManager.providerConfList}" />
+    </p:commandButton>
+    <!-- The unselect button below is only needed while the rowUnselect ajax event is not working (it stopped working with PF3 M3).
+         Once the event works just remove this button and the method lazyPoolCreationManager.onPoolConfigUnselect which receives no parameter -->
+    <p:commandButton value="#{rmmsg.unselect}" update="configprov @parent" action="#{lazyPoolCreationManager.onPoolConfigUnselect}" oncomplete="resizeOnSelect()"
+                     style="position:absolute; top:150px; left:710px;" disabled="#{!lazyPoolCreationManager.updatingPoolConnProviderSelected}" />
+    
+    <p:outputPanel id="configprov">
+      <p:dataTable var="spool" value="#{lazyPoolCreationManager.providerConfList}" paginator="false" style="width:100%" id="_subpools" tableStyle="table-layout:auto;"
+          selection="#{lazyPoolCreationManager.updatingPoolConnProvider}" selectionMode="single" emptyMessage="#{rmmsg.no_providers_found}">
+        
+        <p:ajax event="rowSelect" listener="#{lazyPoolCreationManager.onPoolConfigSelect}" update=":form:providerDetails" oncomplete="resizeOnSelect()" />
+        <p:ajax event="rowUnselect" listener="#{lazyPoolCreationManager.onPoolConfigUnselect}" update=":form:providerDetails" oncomplete="resizeOnSelect()" />
+
+        <f:facet name="header">
+          <h:outputText value="#{rmmsg.provider_configurations}" />
+        </f:facet>
+        <p:column>
+          <f:facet name="header">
+            <h:outputText value="#{rmmsg.provider_name}" />
+          </f:facet>
+          <h:outputText value="#{spool.connProviderInstance}" />
+        </p:column>
+        <p:column styleClass="td-numbered">
+          <f:facet name="header">
+            <h:outputText value="#{rmmsg.provider_max_conn}" />
+          </f:facet>
+          <h:outputText value="#{spool.maxConnections}" />
+        </p:column>
+        <p:column styleClass="td-numbered">
+          <f:facet name="header">
+            <h:outputText value="#{rmmsg.provider_idle_conn_to}" />
+          </f:facet>
+          <h:outputText value="#{spool.idleConnTimeout}" />
+        </p:column>
+        <p:column styleClass="td-numbered">
+          <f:facet name="header">
+            <h:outputText value="#{rmmsg.provider_in_use_conn_to}" />
+          </f:facet>
+          <h:outputText value="#{spool.inUseConnTimeout}" />
+        </p:column>
+      </p:dataTable>
+    </p:outputPanel>
+    
+    <script>resize();</script>
+    
+  </p:panel>
+  
+  <p:panel style="text-align:center;">
+    <p:commandButton type="button" value="#{rmmsg.save}" onclick="saveChanges()" id="savebtn"/>
+    <p:commandButton type="button" value="#{rmmsg.cancel}" update="pmsgs" onclick="window.close();" />
+  </p:panel>
+  
+</h:form>
+
+</body>
+
+</html>

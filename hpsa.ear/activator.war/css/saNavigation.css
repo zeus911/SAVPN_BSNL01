@@ -1,0 +1,155 @@
+/**************************************************************************/
+/*    hp OpenView service activator                                       */
+/*    (c) Copyright 2010 Hewlett-Packard Development Company, L.P.		  */
+/**************************************************************************/
+
+/**************************************************/
+/*    Styles used by the navigational pane        */
+/**************************************************/
+body {
+  background-color: /*c:whit*/#ffffff;
+}
+
+a {
+  color: /*c:saab*/#007dba;
+  text-decoration: none;
+}
+
+.execMenu {
+  background-color: /*c:gy20*/#cccccc;
+  font-family: Verdana, Helvetica, Arial, Sans-serif;
+  font-size: 8pt;
+  color: /*c:blck*/#000000;
+  text-align: left;
+  cursor: pointer;
+  padding: 1px 4px 1px 6px;
+}
+
+.menuSelected   {
+  background-color: /*c:sahb*/#006699; 
+  font-family: Verdana, Helvetica, Arial, Sans-serif;
+  font-size: 8pt;
+  color: /*c:whit*/#ffffff;
+  text-align: left;
+  cursor: pointer;
+  padding: 1px 4px 1px 6px;
+}
+
+.menuUnselected {
+  background-color: /*c:ltgy*/#e5e8e8;
+  font-family: Verdana, Helvetica, Arial, Sans-serif;
+  font-size: 8pt;
+  color: /*c:blck*/#000000;
+  text-align: left;
+  cursor: pointer;
+  padding: 1px 4px 1px 6px;
+}
+
+.counterTable {
+  background-color: /*c:whit*/#ffffff;
+  font-family: Verdana, Helvetica, Arial, Sans-serif;
+  font-size: 8pt;
+  color: /*c:blck*/#000000;
+  text-align: left;
+  cursor: default;
+  padding: 0px 0px 0px 0px;
+}
+
+.counterTableNumber {
+  background-color: /*c:whit*/#ffffff;
+  font-family: Verdana, Helvetica, Arial, Sans-serif;
+  font-size: 8pt;
+  color: /*c:blck*/#000000;
+  text-align: right;
+  cursor: default;
+  padding: 0px 0px 0px 0px;
+}
+
+
+
+.menuImage {
+  border: 0px;
+  margin: 0px 0px 0px 0px;
+  margin-bottom: 0px;
+  margin-left: 1px;
+  margin-right: 0px;
+  margin-top: 2px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+}
+
+.bodyContent {
+  overflow-y: auto;
+  height: 100%;
+  width: 100%;
+}
+.bodyClass{
+  overflow-x: hidden;
+  height: 100%;
+}
+.menuHead {
+  background-color: /*c:sabl*/#0096d6;
+  font-weight: bold;
+  color: /*c:whit*/#ffffff;
+  font-size: 9pt;
+  width: 140px;
+}
+.menuHead:hover {
+  background-color: /*c:sahb*/#006699;
+}
+.divCntrl {
+  position: absolute;
+  visibility: hide;
+}
+.menuItems {
+  opacity:100;
+  background-color: /*c:ltgy*/#e5e8e8;
+  cursor: pointer;
+  color: /*c:whit*/#ffffff;
+  margin: 0px 0px 7px 0px;
+  font-size: 8pt;
+  display: block;
+  position: relative;
+  visibility: hide;
+  width: 140px;
+}
+.invMenuItems{
+  background-color: /*c:ltgy*/#e5e8e8;
+  cursor: pointer;
+  color: /*c:whit*/#ffffff;
+  padding: 1px 0px 1px 8px;
+  font-size: 8pt;
+  display: block;
+  position: relative;
+  visibility: hide;
+}
+.menuItem {
+  background-color: /*c:ltgy*/#e5e8e8;
+  color: /*c:red*/#ff0000;
+  padding: 0px 0px 0px 0px;
+  font-size: 8pt;
+  cursor: pointer;
+}
+
+.logo{
+  padding : 0px 0px 10px 0px;
+}
+
+.errorMessage {
+  font-family: Verdana, Helvetica, Arial, Sans-serif;
+  font-size: 8pt;
+  color: /*c:red*/#ff0000;
+}
+
+.separator {
+  padding: 0px 0px 0px 0px;
+  margin: 0px 4px 0px 4px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  overflow: hidden;
+  width: 132px;
+  height: 2px;
+  background: /*c:sabl*/#0096d6;
+}

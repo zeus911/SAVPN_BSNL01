@@ -1,0 +1,369 @@
+/**************************************************************************/
+/*    hp OpenView service activator                                       */
+/*    (c) Copyright 2003-2010 Hewlett-Packard Development Company, L.P.  */
+/**************************************************************************/
+
+
+/**************************************************/
+/*    Table styles                                */
+/**************************************************/
+
+table {
+        border: 0px;
+        border-collapse: collapse;
+        border-spacing: 0px; 
+        padding: 0px;
+}
+
+.activatorTable{ 
+        width: 100%; 
+}
+
+.tableHeading{ 
+        background: #336699;            
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 10pt;
+        font-weight: bold;
+        color: white;
+        text-align: left;
+        vertical-align: top;
+}
+
+.mainHeading{ 
+        background: #336699;
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 8pt;
+        line-height: 1.5;
+        color: white;
+        text-align: center;
+        vertical-align: middle;
+        border: 2px solid white;
+        padding: 1px, 3px;
+}
+
+td.mainHeading a:visited {
+        color: White;
+}
+
+td.mainHeading a:active {
+        color: White;
+}
+
+td.mainHeading a {
+        color: White;
+}
+
+.queueHeading { 
+        background: #3399CC;
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 8pt;
+        line-height: 1.3;
+        color: black;
+        text-align: left;
+        vertical-align: middle;
+        padding: 1px, 3px;
+}
+
+.tableRowError {
+        background-color: #FFB6C1;
+}
+
+.tableRowWarning { 
+        background-color: #FEFF77;
+}
+
+.tableRow{ 
+        background-color: #E6E6E6;
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 10pt;
+}
+
+.tableRowInfo { 
+        background-color: #E6E6E6;
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 10pt;
+}
+
+.tableOddRow { 
+        background-color: #E6E6E6;
+        cursor:  pointer;
+        cursor:  hand;
+}
+
+.row1 { 
+        background-color: #E6E6E6;
+        cursor:  pointer;
+        cursor:  hand;
+}
+
+.tableOddRowNoPointer { 
+        background-color: #E6E6E6;
+}
+
+.tableEvenRow{ 
+        background-color: #CCCCCC; 
+        cursor:  pointer;
+        cursor:  hand;        
+}
+.row0{ 
+        background-color: #CCCCCC; 
+        cursor:  pointer;
+        cursor:  hand;        
+}
+
+.tableEvenRowNoPointer { 
+        background-color: #CCCCCC; 
+}
+
+.tableRowSelect { 
+        background-color: #8cbdde;
+        cursor:  pointer;
+        cursor:  hand;
+        width: "100%";
+}
+
+.tableCell{ 
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 8pt;
+        color: black; 
+        border: 2px solid white;
+        padding: 1px, 3px;
+        cursor:  pointer;
+        cursor:  hand;
+}
+
+.tableCellNoPointer { 
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 8pt;
+        color: black; 
+        border: 2px solid white;
+        padding: 1px, 3px;
+}
+
+/**************************************************/
+/*    Main navigation bar styles                  */
+/**************************************************/
+.navHeading {  
+        background: #336699;            
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 9pt;
+        font-weight: bold;
+        color: white;
+        text-align: left;
+}
+
+.navSubHeading  {  
+        background: #336699;            
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-weight: bold;
+        font-size: 8pt;
+        color: white;
+        text-align: left;
+}
+
+.navRow{ 
+        background: #E6E6E6;
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 8pt;
+        color: black;
+        text-align: left;
+}
+
+
+/**************************************************/
+/*    Navigation bar action menu styles           */
+/**************************************************/
+.actRow{  
+        background: #E6E6E6;
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 8pt;
+        color: black;
+        text-align: left;
+}
+
+.actHeading {  
+        background: #336699;
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 9pt;
+        font-weight: bold;
+        color: white;
+        text-align: left;
+}
+
+.actSubHeading  {
+        background: #BDCECE;            
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 8pt;
+        font-weight: bold;
+        color: black;
+        text-align: left;
+}
+
+
+/**************************************************/
+/*    Link Styles                                 */
+/**************************************************/
+a       {
+        text-decoration: none;
+        color: blue;
+}
+
+a:link          {
+        text-decoration: none;
+        color: black;
+}
+
+a:visited       {
+        text-decoration: none;
+        color: black;
+}
+
+a:active        {
+        text-decoration: none;
+        color: black;
+}
+
+
+/**************************************************/
+/*    Header styles                               */
+/**************************************************/
+h1 {    font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 16pt;
+        color: #08396B;
+   }
+
+h2 {
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 12pt;
+        color: #08396B;
+   }
+
+h3 {
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 10pt;
+        color: #08396B;
+   }
+
+.title {
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-weight: bold;
+        font-size: 8pt;
+        color: white;
+        line-height: .9;
+   }
+
+.welcome {    
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 7pt;
+        color: white;
+        vertical-align: top;
+   }
+
+body {
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 8pt
+   }
+
+
+/**************************************************/
+/*    Track page styles                           */
+/**************************************************/
+td.UNDO { 
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 8pt;
+        color: black; 
+        background-color: #FFEBB5;
+        text-align: left;
+        border-right: 1px solid #4F4F4F;
+        border-bottom: 1px solid #4F4F4F;
+}
+
+td.INTERRUPTED { 
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 8pt;
+        color: black; 
+        background-color: #FFEBB5;
+        text-align: left;
+        border-right: 1px solid #4F4F4F;
+        border-bottom: 1px solid #4F4F4F;
+}
+
+td.DOING{
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 8pt;
+        color: black; 
+        background-color: #D5E5F3;
+        text-align: left;
+        border-right: 1px solid #4F4F4F;
+        border-bottom: 1px solid #4F4F4F;
+}
+
+td.DONE {
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 8pt;
+        color: black; 
+        background-color: #99CCCC;
+        text-align: left;
+        border-right: 1px solid #4F4F4F;
+        border-bottom: 1px solid #4F4F4F;
+}
+
+td.ACTIVE{
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 8pt;
+        color: black; 
+        background-color: #E7E7E7;
+        text-align: left;
+        border-right: 1px solid #4F4F4F;
+        border-bottom: 1px solid #4F4F4F;
+}
+
+td.STATE{
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 8pt;
+        color: black; 
+        background-color: #E7E7E7;
+        text-align: left;
+        border-right: 1px solid #4F4F4F;
+        border-bottom: 1px solid #4F4F4F;
+}
+
+td.JOBID{
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 8pt;
+        color: black;
+        background-color: #FFFFB2;
+        text-align: left;
+        border-right: 1px solid #4F4F4F;
+        border-bottom: 1px solid #4F4F4F;
+}
+
+td.WORKFLOW{
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 8pt;
+        color: black; 
+        background-color: #E7E7E7;
+        text-align: left;
+        border-right: 1px solid #4F4F4F;
+        border-bottom: 1px solid #4F4F4F;
+}
+
+td.STARTTIME{
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 8pt;
+        color: black; 
+        background-color: #E7E7E7;
+        text-align: left;
+        border-right: 1px solid #4F4F4F;
+        border-bottom: 1px solid #4F4F4F;
+}
+/**************************************************/
+/*    About styles                                */
+/**************************************************/
+.about { 
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 8pt;
+        font-weight: bold;
+        text-align: center;
+        color: #336699; 
+}

@@ -1,0 +1,20 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+SELECT
+  V_IPNet.PoolName		V_IPNet_PoolName,
+  V_IPNet.Hostmask		V_IPNet_Hostmask,
+  V_IPNet.CE2_IPAddr		V_IPNet_CE2_IPAddr,
+  V_IPNet.Netmask		V_IPNet_Netmask,
+  V_IPNet.CE1_IPAddr		V_IPNet_CE1_IPAddr,
+  V_IPNet.PE2_IPAddr		V_IPNet_PE2_IPAddr,
+  V_IPNet.IPNetAddr		V_IPNet_IPNetAddr,
+  V_IPNet.IPNetAddrStr		V_IPNet_IPNetAddrStr,
+  V_IPNet.PE1_IPAddr		V_IPNet_PE1_IPAddr
+FROM
+  V_IPNet   V_IPNet
+WHERE
+  V_IPNet.PoolName = ?
+ORDER BY V_IPNet.IPNetAddrStr ASC 
+
+
+@ order:1;IPNet.PoolName

@@ -1,0 +1,22 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+SELECT
+  crm_service.PresName		crm_service_PresName,
+  crm_service.Type		crm_service_Type,
+  crm_service.LastUpdateTime		crm_service_LastUpdateTime,
+  crm_service.ModifyDate		crm_service_ModifyDate,
+  crm_service.ParentServiceId		crm_service_ParentServiceId,
+  crm_service.SubmitDate		crm_service_SubmitDate,
+  crm_service.State		crm_service_State,
+  crm_service.CustomerId		crm_service_CustomerId,
+  crm_service.NextOperationTime		crm_service_NextOperationTime,
+  crm_service.EndTime		crm_service_EndTime,
+  crm_service.ServiceId		crm_service_ServiceId
+FROM
+  crm_service   crm_service
+WHERE
+  crm_service.State = ?
+ORDER BY crm_service.ServiceId ASC 
+
+
+@ order:1;Service.State

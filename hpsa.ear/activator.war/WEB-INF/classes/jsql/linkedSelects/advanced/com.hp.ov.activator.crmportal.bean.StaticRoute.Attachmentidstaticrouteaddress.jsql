@@ -1,0 +1,15 @@
+## Generated using InventoryBuilder v.V61
+## Object class com.hp.ov.activator.inventorybuilder.sql.routes.FindByArraySQLRoute
+SELECT
+  crm_staticRoute.StaticRouteAddress		crm_staticRoute_Stat26,
+  crm_staticRoute.AttachmentId		crm_staticRoute_AttachmentId
+FROM
+  crm_staticRoute   crm_staticRoute
+WHERE
+  crm_staticRoute.AttachmentId IN [selectIN_?]
+
+
+
+@ order:1;select_IN_substitution
+@ opt:AttachmentId;crm_staticRoute;crm_staticRoute;AttachmentId
+@ opt:StaticRouteAddress;crm_staticRoute;crm_staticRoute;StaticRouteAddress

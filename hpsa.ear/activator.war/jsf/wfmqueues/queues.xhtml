@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+  <link rel="stylesheet" type="text/css" href="/activator/css/primefaces/hpsa.css" />
+  <script type="text/javascript" src="/activator/javascript/saUtilities.js" ></script>
+</h:head>
+
+<body onmousemove="logoutTimerReset();" onkeydown="logoutTimerReset();">
+
+<h:outputText value="#{wfmqrb.title}" class="frame-header" />
+
+<h:form id="form">
+
+<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
+<p:panel rendered="#{!wfmQueueManager.moduleConfigured}">
+  <h:outputText styleClass="td-orange" value="#{wfmQueueManager.moduleConfiguredErrorMessage}" />
+</p:panel>
+
+<p:tabView id="tabview" var="tab" value="#{wfmQueueManager.tabs}" dynamic="true" cache="false" activeIndex="#{wfmQueueManager.activeTabIndex}" rendered="#{wfmQueueManager.isQueueFound}">
+  <p:ajax event="tabChange" listener="#{wfmQueueManager.onTabChange}" />
+  <p:tab title="#{tab.title}">
+    <p:treeTable id="tree" value="#{tab.root}" var="data"
+        selectionMode="single" selection="#{tab.selectedNode}">
+      <p:column>
+        <f:facet name="header">#{wfmqrb.name}</f:facet>
+        <h:outputText value="#{data.queueData.label}" title="#{data.queueData.exceptionMessage}"/>
+        <p:graphicImage value="#{request.contextPath}/../images/warning.gif" width="10" height="10" style="margin-left:5px" rendered="#{data.queueData.hasException}"/>
+      </p:column>
+      <p:column>
+        <f:facet name="header">#{wfmqrb.host_name}</f:facet>
+        <h:outputText value="#{data.queueData.clusterNodeName}" title="#{data.queueData.exceptionMessage}"/>
+      </p:column>
+      <p:column>
+        <f:facet name="header">#{wfmqrb.locked_input}</f:facet>
+        <h:outputText value="#{data.queueData.lockedInputAS}" title="#{data.queueData.exceptionMessage}"/>
+      </p:column>
+      <p:column>
+        <f:facet name="header">#{wfmqrb.locked_output}</f:facet>
+        <h:outputText value="#{data.queueData.lockedOutputAS}" title="#{data.queueData.exceptionMessage}"/>
+      </p:column>
+      <p:column>
+        <f:facet name="header">#{wfmqrb.permanent_threads_count}</f:facet>
+        <h:outputText value="#{data.queueData.permanentThreadsCount}" title="#{data.queueData.exceptionMessage}"/>
+      </p:column>
+      <p:column>
+        <f:facet name="header">#{wfmqrb.max_running_jobs}</f:facet>
+        <h:outputText value="#{data.queueData.maxRunningJobs}" title="#{data.queueData.exceptionMessage}"/>
+      </p:column>
+      <p:column>
+        <f:facet name="header">#{wfmqrb.queued_jobs}</f:facet>
+        <h:outputText value="#{data.queueData.queuedElements}" title="#{data.queueData.exceptionMessage}"/>
+      </p:column>
+      <p:column>
+        <f:facet name="header">#{wfmqrb.processed_jobs}</f:facet>
+        <h:outputText value="#{data.queueData.processedElements}" title="#{data.queueData.exceptionMessage}"/>
+      </p:column>
+      <p:column>
+        <f:facet name="header">#{wfmqrb.running_jobs}</f:facet>
+        <h:outputText value="#{data.queueData.runningElements}" title="#{data.queueData.exceptionMessage}"/>
+      </p:column>
+      <p:column>
+        <f:facet name="header">#{wfmqrb.queued_items_ttl}</f:facet>
+        <h:outputText value="#{data.queueData.queuedItemsTTL}" title="#{data.queueData.exceptionMessage}"/>
+      </p:column>
+      <p:column>
+        <f:facet name="header">#{wfmqrb.cached_queued_items}</f:facet>
+        <h:outputText value="#{data.queueData.cachedQueuedItems}" title="#{data.queueData.exceptionMessage}"/>
+      </p:column>
+      <p:column>
+        <p:splitButton value="#{wfmqrb.update}" icon="ui-icon-arrowrefresh-1-w" type="button" onclick="handleEditRequest([{name:'id', value:'#{data.id}'}])">
+          <p:menuitem value="#{wfmqrb.view}" icon="ui-icon-search" onclick="handleViewRequest([{name:'id', value:'#{data.id}'}])" />
+          <p:menuitem value="#{wfmqrb.delete}" icon="ui-icon-close" onclick="handleDeleteRequest([{name:'id', value:'#{data.id}'}])" rendered="#{data.queueData.deleteAllowed}" />
+          <p:separator />
+          <p:menuitem value="#{wfmqrb.lock_input}" icon="ui-icon-locked" oncomplete="handleLockInputRequest([{name:'id', value:'#{data.id}'}])" rendered="#{!data.queueData.lockedInput}" />
+          <p:menuitem value="#{wfmqrb.unlock_input}" icon="ui-icon-unlocked" oncomplete="handleUnlockInputRequest([{name:'id', value:'#{data.id}'}])" rendered="#{data.queueData.lockedInput}" />
+          <p:menuitem value="#{wfmqrb.lock_output}" icon="ui-icon-locked" oncomplete="handleLockOutputRequest([{name:'id', value:'#{data.id}'}])" rendered="#{!data.queueData.lockedOutput}" />
+          <p:menuitem value="#{wfmqrb.unlock_output}" icon="ui-icon-unlocked" oncomplete="handleUnlockOutputRequest([{name:'id', value:'#{data.id}'}])" rendered="#{data.queueData.lockedOutput}" />
+          <p:menuitem value="#{wfmqrb.kill}" icon="ui-icon-cancel" oncomplete="handleKillRequest([{name:'id', value:'#{data.id}'}])" />
+        </p:splitButton>
+      </p:column>
+    </p:treeTable>
+  </p:tab>
+</p:tabView>
+
+<p:dialog id="dlgedit" widgetVar="dlgedit" header="#{wfmQueueManager.operationHeader}"
+    showEffect="fade" hideEffect="fade" modal="true" draggable="false" resizable="false" visible="#{wfmQueueManager.createRequest}">
+  <p:panelGrid cellpadding="5" style="width:100%; text-align:left;" styleClass="datagrid">
+    <p:row>
+    <p:column>
+    <h:outputText value="#{wfmqrb.name}: " />
+    </p:column>
+    <p:column>
+    <h:inputText value="#{wfmQueueManager.editingQueueData.name}" label="#{wfmqrb.name}" style="width:100%" readonly="#{wfmQueueManager.updateMode}" />
+    </p:column>
+    <p:column>
+    <h:outputText value="#{wfmqrb.solution}: " />
+    </p:column>
+    <p:column>
+    <h:inputText value="#{wfmQueueManager.editingQueueData.solutionName}" label="#{wfmqrb.solution}" style="width:100%" readonly="#{wfmQueueManager.updateMode}" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{wfmqrb.locked_input}: " />
+    </p:column>
+    <p:column>
+    <h:selectOneRadio value="#{wfmQueueManager.editingQueueData.lockedInput}" label="#{wfmqrb.locked_input}" >
+      <f:selectItem itemLabel="#{wfmqrb.no}" itemValue="false" />
+      <f:selectItem itemLabel="#{wfmqrb.yes}" itemValue="true" />
+    </h:selectOneRadio>
+    </p:column>
+    <p:column>
+    <h:outputText value="#{wfmqrb.locked_output}: " />
+    </p:column>
+    <p:column>
+    <h:selectOneRadio value="#{wfmQueueManager.editingQueueData.lockedOutput}" label="#{wfmqrb.locked_output}" >
+      <f:selectItem itemLabel="#{wfmqrb.no}" itemValue="false" />
+      <f:selectItem itemLabel="#{wfmqrb.yes}" itemValue="true" />
+    </h:selectOneRadio>
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{wfmqrb.queue_class}: " />
+    </p:column>
+    <p:column>
+    <h:inputText value="#{wfmQueueManager.editingQueueData.queueingClassName}" label="#{wfmqrb.queue_class}" style="width:100%" />
+    </p:column>
+    <p:column>
+    <h:outputText value="#{wfmqrb.max_running_jobs}: " />
+    </p:column>
+    <p:column>
+    <h:inputText value="#{wfmQueueManager.editingQueueData.maxRunningJobs}" label="#{wfmqrb.max_running_jobs}" style="width:100%" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{wfmqrb.permanent_threads_count}: " />
+    </p:column>
+    <p:column>
+    <h:inputText value="#{wfmQueueManager.editingQueueData.permanentThreadsCount}" label="#{wfmqrb.permanent_threads_count}" style="width:100%" />
+    </p:column>
+    <p:column>
+    <h:outputText value="#{wfmqrb.queued_items_ttl}: " />
+    </p:column>
+    <p:column>
+    <h:inputText value="#{wfmQueueManager.editingQueueData.queuedItemsTTL}" label="#{wfmqrb.queued_items_ttl}" style="width:100%" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{wfmqrb.cached_queued_items}: " />
+    </p:column>
+    <p:column>
+    <h:inputText value="#{wfmQueueManager.editingQueueData.cachedQueuedItems}" label="#{wfmqrb.cached_queued_items}" style="width:100%" />
+    </p:column>
+    </p:row>
+    <p:row>
+    <p:column>
+    <h:outputText value="#{wfmqrb.description}: " />
+    </p:column>
+    <p:column colspan="3">
+    <h:inputTextarea value="#{wfmQueueManager.editingQueueData.description}" label="#{wfmqrb.description}" style="width:100%; height:75px;" />
+    </p:column>
+    </p:row>
+  </p:panelGrid>
+  <p:panelGrid columns="1" cellpadding="0" style="width:100%; text-align:center; margin-top:10px;" styleClass="datagrid">
+    <p:commandButton type="submit" value="#{wfmqrb.ok}" partialSubmit="true" process="@this,:form:dlgedit" update=":form:messages,:form:result,:form:tabview"
+        actionListener="#{wfmQueueManager.save}" oncomplete="if(document.getElementById('form:result').value==''){PF('dlgedit').hide();}" />
+  </p:panelGrid>
+</p:dialog>
+
+<p:remoteCommand name="handleEditRequest" partialSubmit="true" process="@this" actionListener="#{wfmQueueManager.onBeforeUpdate}"
+    update=":form:messages,:form:dlgedit" oncomplete="PF('dlgedit').show()" />
+
+<p:dialog id="dlgview" widgetVar="dlgview" header="#{wfmQueueManager.operationHeader}"
+    showEffect="fade" hideEffect="fade" modal="true" draggable="false" resizable="false">
+  <p:panelGrid columns="2" cellpadding="5" style="width:100%; text-align:left;" styleClass="datagrid">
+    <h:outputText value="#{wfmqrb.name}: " />
+    <h:outputText value="#{wfmQueueManager.editingQueueData.name}" />
+    <h:outputText value="#{wfmqrb.solution}: " />
+    <h:outputText value="#{wfmQueueManager.editingQueueData.solutionName}" />
+    <h:outputText value="#{wfmqrb.locked_input}: " />
+    <h:outputText value="#{wfmQueueManager.editingQueueData.lockedInputAS}" />
+    <h:outputText value="#{wfmqrb.locked_output}: " />
+    <h:outputText value="#{wfmQueueManager.editingQueueData.lockedOutputAS}" />
+    <h:outputText value="#{wfmqrb.queue_class}: " />
+    <h:outputText value="#{wfmQueueManager.editingQueueData.queueingClassName}" />
+    <h:outputText value="#{wfmqrb.max_running_jobs}: " />
+    <h:outputText value="#{wfmQueueManager.editingQueueData.maxRunningJobs}" />
+    <h:outputText value="#{wfmqrb.permanent_threads_count}: " />
+    <h:outputText value="#{wfmQueueManager.editingQueueData.permanentThreadsCount}" />
+    <h:outputText value="#{wfmqrb.queued_items_ttl}: " />
+    <h:outputText value="#{wfmQueueManager.editingQueueData.queuedItemsTTL}" />
+    <h:outputText value="#{wfmqrb.cached_queued_items}: " />
+    <h:outputText value="#{wfmQueueManager.editingQueueData.cachedQueuedItems}" />
+    <h:outputText value="#{wfmqrb.description}: " />
+    <h:outputText value="#{wfmQueueManager.editingQueueData.description}" />
+  </p:panelGrid>
+  <p:panelGrid columns="1" cellpadding="0" style="width:100%; text-align:center; margin-top:10px;" styleClass="datagrid">
+    <p:commandButton type="button" value="#{wfmqrb.ok}" onclick="PF('dlgview').hide();" />
+  </p:panelGrid>
+</p:dialog>
+
+<p:remoteCommand name="handleViewRequest" partialSubmit="true" process="@this" actionListener="#{wfmQueueManager.onBeforeView}"
+    update=":form:messages,:form:dlgview" oncomplete="PF('dlgview').show()" />
+
+<p:confirmDialog id="dlgdel" widgetVar="dlgdel" header="#{wfmQueueManager.operationHeader}"
+    message="#{wfmqrb.delete_confirm}" modal="true" draggable="false" resizable="false" height="60" width="350"
+    showEffect="fade" hideEffect="fade">
+  <p:commandButton value="#{wfmqrb.delete}" oncomplete="PF('dlgdel').hide();" actionListener="#{wfmQueueManager.delete}"
+      partialSubmit="true" process="@this" update=":form:messages,:form:tabview" />
+  <p:commandButton type="button" value="#{wfmqrb.cancel}" style="margin-left:5;" onclick="PF('dlgdel').hide();" />
+</p:confirmDialog>
+
+<p:remoteCommand name="handleDeleteRequest" partialSubmit="true" process="@this" actionListener="#{wfmQueueManager.onBeforeDelete}"
+    update=":form:messages,:form:dlgdel" oncomplete="PF('dlgdel').show()" />
+
+<p:confirmDialog id="dlglockinput" widgetVar="dlglockinput" header="#{wfmQueueManager.operationHeader}"
+    message="#{wfmqrb.lock_input_confirm}" modal="true" draggable="false" resizable="false" height="60" width="350"
+    showEffect="fade" hideEffect="fade">
+  <p:commandButton value="#{wfmqrb.lock_input}" oncomplete="PF('dlglockinput').hide();" actionListener="#{wfmQueueManager.lockInput}"
+      partialSubmit="true" process="@this" update=":form:messages,:form:tabview" />
+  <p:commandButton type="button" value="#{wfmqrb.cancel}" style="margin-left:5;" onclick="PF('dlglockinput').hide();" />
+</p:confirmDialog>
+
+<p:remoteCommand name="handleLockInputRequest" partialSubmit="true" process="@this" actionListener="#{wfmQueueManager.onBeforeLockInput}"
+    update=":form:messages,:form:dlglockinput" oncomplete="PF('dlglockinput').show()" />
+
+<p:confirmDialog id="dlgunlockinput" widgetVar="dlgunlockinput" header="#{wfmQueueManager.operationHeader}"
+    message="#{wfmqrb.unlock_input_confirm}" modal="true" draggable="false" resizable="false" height="60" width="350"
+    showEffect="fade" hideEffect="fade">
+  <p:commandButton value="#{wfmqrb.unlock_input}" oncomplete="PF('dlgunlockinput').hide();" actionListener="#{wfmQueueManager.unlockInput}"
+      partialSubmit="true" process="@this" update=":form:messages,:form:tabview" />
+  <p:commandButton type="button" value="#{wfmqrb.cancel}" style="margin-left:5;" onclick="PF('dlgunlockinput').hide();" />
+</p:confirmDialog>
+
+<p:remoteCommand name="handleUnlockInputRequest" partialSubmit="true" process="@this" actionListener="#{wfmQueueManager.onBeforeUnlockInput}"
+    update=":form:messages,:form:dlgunlockinput" oncomplete="PF('dlgunlockinput').show()" />
+
+<p:confirmDialog id="dlglockoutput" widgetVar="dlglockoutput" header="#{wfmQueueManager.operationHeader}"
+    message="#{wfmqrb.lock_output_confirm}" modal="true" draggable="false" resizable="false" height="60" width="350"
+    showEffect="fade" hideEffect="fade">
+  <p:commandButton value="#{wfmqrb.lock_output}" oncomplete="PF('dlglockoutput').hide();" actionListener="#{wfmQueueManager.lockOutput}"
+      partialSubmit="true" process="@this" update=":form:messages,:form:tabview" />
+  <p:commandButton type="button" value="#{wfmqrb.cancel}" style="margin-left:5;" onclick="PF('dlglockoutput').hide();" />
+</p:confirmDialog>
+
+<p:remoteCommand name="handleLockOutputRequest" partialSubmit="true" process="@this" actionListener="#{wfmQueueManager.onBeforeLockOutput}"
+    update=":form:messages,:form:dlglockoutput" oncomplete="PF('dlglockoutput').show()" />
+
+<p:confirmDialog id="dlgunlockoutput" widgetVar="dlgunlockoutput" header="#{wfmQueueManager.operationHeader}"
+    message="#{wfmqrb.unlock_output_confirm}" modal="true" draggable="false" resizable="false" height="60" width="350"
+    showEffect="fade" hideEffect="fade">
+  <p:commandButton value="#{wfmqrb.unlock_output}" oncomplete="PF('dlgunlockoutput').hide();" actionListener="#{wfmQueueManager.unlockOutput}"
+      partialSubmit="true" process="@this" update=":form:messages,:form:tabview" />
+  <p:commandButton type="button" value="#{wfmqrb.cancel}" style="margin-left:5;" onclick="PF('dlgunlockoutput').hide();" />
+</p:confirmDialog>
+
+<p:remoteCommand name="handleUnlockOutputRequest" partialSubmit="true" process="@this" actionListener="#{wfmQueueManager.onBeforeUnlockOutput}"
+    update=":form:messages,:form:dlgunlockoutput" oncomplete="PF('dlgunlockoutput').show()" />
+
+<p:confirmDialog id="dlgkill" widgetVar="dlgkill" header="#{wfmQueueManager.operationHeader}"
+    message="#{wfmqrb.kill_confirm}" modal="true" draggable="false" resizable="false" height="60" width="350"
+    showEffect="fade" hideEffect="fade">
+  <p:commandButton value="#{wfmqrb.kill}" oncomplete="PF('dlgkill').hide();" actionListener="#{wfmQueueManager.kill}"
+      partialSubmit="true" process="@this" update=":form:messages,:form:tabview" />
+  <p:commandButton type="button" value="#{wfmqrb.cancel}" style="margin-left:5;" onclick="PF('dlgkill').hide();" />
+</p:confirmDialog>
+
+<p:remoteCommand name="handleKillRequest" partialSubmit="true" process="@this" actionListener="#{wfmQueueManager.onBeforeKill}"
+    update=":form:messages,:form:dlgkill" oncomplete="PF('dlgkill').show()" />
+
+<h:inputHidden id="result" value="#{wfmQueueManager.saveResult}" />
+
+<p:ajaxStatus id="ajaxStatusPanel" style="position:fixed; right:5px; bottom:5px; width:32px; height:32px;">
+  <f:facet name="start">
+    <h:graphicImage value="#{request.contextPath}/../../activator/images/primefaces/throbber.gif" />
+  </f:facet>
+  <f:facet name="complete">
+    <h:outputText value="" />
+  </f:facet>
+</p:ajaxStatus>
+
+</h:form>
+
+</body>
+
+</html>

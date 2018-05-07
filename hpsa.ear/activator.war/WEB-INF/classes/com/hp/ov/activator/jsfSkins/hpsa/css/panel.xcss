@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f="http://jsf.exadel.com/template"
+	xmlns:u="http://jsf.exadel.com/template/util"
+	xmlns="http://www.w3.org/1999/xhtml">
+
+	<u:selector name=".rich-panel">
+		<u:style name="padding" value="0px 0px 0px 0px" />
+		<u:style name="margin-top" value="4px" />
+		<u:style name="margin-bottom" value="4px" />
+<!--
+		<u:style name="margin-left" value="2px" />
+		<u:style name="margin-right" value="2px" />
+-->
+		<u:style name="border-color" value="borderColor" />
+		<u:style name="border-width" value="2px" />
+	</u:selector>
+	
+    <u:selector name=".rich-panel-header">
+		<u:style name="padding" value="2px 4px 5px 4px" />
+		<u:style name="border-width" value="0px" />
+	</u:selector>
+	
+	<u:selector name=".rich-panel-body">
+		<u:style name="padding" value="6px 6px 6px 6px" />
+	</u:selector>
+
+</f:template>

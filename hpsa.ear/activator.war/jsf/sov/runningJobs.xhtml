@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+  <p:contextMenu for="sovRunningJobsTable">
+    <p:menuitem value="Stop Job" actionListener="#{SOV_RunningJobsBean.stopJob}"
+      onclick="if (!confirm('#{SOV_RunningJobsBean.msgStopJob}' + sovRunningJobsTableVar.selection)) return false;"
+      rendered="#{SOV_JobAction.admin}" icon="ui-icon ui-icon-stop"
+      update="sovRunningJobsTable, :servicesQueryForm:sovGrowl" />
+    <p:menuitem value="Stop Job (Forced)" actionListener="#{SOV_RunningJobsBean.stopJobForced}"
+      onclick="if (!confirm('#{SOV_RunningJobsBean.msgStopJobForced}' + sovRunningJobsTableVar.selection)) return false;"
+      rendered="#{SOV_JobAction.admin}" icon="ui-icon ui-icon-stop"
+      update="sovRunningJobsTable, :servicesQueryForm:sovGrowl" />
+    <p:menuitem value="Change Roles" rendered="#{SOV_JobAction.roleChangeEnabled}"
+      onclick="return changeRoles(sovRunningJobsTableVar.selection, 'RunningJobs');" icon="ui-icon ui-icon-refresh" />
+    <p:menuitem value="Change Priority" rendered="#{SOV_JobAction.admin}"
+      onclick="return changePriority(sovRunningJobsTableVar.selection);" icon="ui-icon ui-icon-refresh" />
+  </p:contextMenu>
+
+  <p:dataTable id="sovRunningJobsTable" value="#{SOV_RunningJobsBean.values}" var="row" resizableColumns="false"
+    rowKey="#{row.id}" selection="#{SOV_RunningJobsBean.selectedRow}" selectionMode="single"
+    widgetVar="sovRunningJobsTableVar">
+    <p:columns columnIndexVar="colIndex" id="#{row.data[colIndex]}_#{colIndex}" value="#{SOV_RunningJobsBean.columns}"
+      var="col">
+      <f:facet name="header">
+        <h:outputText value="#{col.name}" />
+      </f:facet>
+      <h:outputText value="#{row.data[colIndex]}" />
+    </p:columns>
+  </p:dataTable>
+
+</ui:composition>

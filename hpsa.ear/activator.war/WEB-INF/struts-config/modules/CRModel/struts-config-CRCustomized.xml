@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE struts-config PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+"http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="ChannelizedInterfaceForm" 
+			type="com.hp.ov.activator.inventory.CRModel.ChannelizedInterfaceForm"/>
+		<form-bean name="RouterInterfaceUploadForm" 
+			type="com.hp.ov.activator.inventory.CRModel.RouterInterfaceUploadForm"/>
+		<form-bean name="AggregatedRouterForm" 
+			type="com.hp.ov.activator.inventory.CRModel.AggregatedRouterForm"/>
+      
+        <form-bean name="PEAccessNetworkForm" 
+            type="com.hp.ov.activator.inventory.CRModel.PEAccessNetworkForm"/>
+	</form-beans>
+
+
+	<action-mappings>
+       	<action path="/CreationCommitAggregatedRouterAction"
+			type="com.hp.ov.activator.inventory.CRModel.CreationCommitAggregatedRouterAction"
+			name="AggregatedRouterForm"
+			scope="request"
+			input="CreationFormAggregatedRouterInput">
+			<forward name="success" path="/jsp/inventory/CRModel/ViewAggregatedRouter.jsp" contextRelative="true"/>
+			<forward name="error" path="/CreationFormAggregatedRouterAction.do"/>
+			<forward name="failure" path="/jsp/inventory/CreationInstanceFailure.jsp" contextRelative="true"/>
+			<forward name="CreationFormAggregatedRouterInput" path="/CreationFormAggregatedRouterAction.do"/>
+		</action>
+	</action-mappings>
+
+
+
+   
+	<message-resources null="false" key="ChannelizedInterfaceApplicationResources"
+		parameter="resources.CRModel.ChannelizedInterfaceApplicationResources"/>
+	<message-resources null="false" key="RouterInterfaceUploadApplicationResources"
+		parameter="resources.CRModel.RouterInterfaceUploadApplicationResources"/>
+	<message-resources null="false" key="AggregatedRouterResources"
+		parameter="resources.CRModel.AggregatedRouterResources"/>
+    
+    <message-resources null="false" key="PEAccessNetworkApplicationResources"
+        parameter="resources.CRModel.PEAccessNetworkApplicationResources"/>
+        
+</struts-config>
+

@@ -1,0 +1,17 @@
+## Generated using InventoryBuilder v.V61
+## Object class com.hp.ov.activator.inventorybuilder.sql.routes.FindByArraySQLRoute
+SELECT
+  crm_serviceparam.Attribute		crm_serviceparam_Attribute,
+  crm_serviceparam.Value		crm_serviceparam_Value,
+  crm_serviceparam.ServiceId		crm_serviceparam_ServiceId
+FROM
+  crm_serviceparam   crm_serviceparam
+WHERE
+  crm_serviceparam.ServiceId IN [selectIN_?]
+
+
+
+@ order:1;select_IN_substitution
+@ opt:ServiceId;crm_serviceparam;crm_serviceparam;ServiceId
+@ opt:Attribute;crm_serviceparam;crm_serviceparam;Attribute
+@ opt:Value;crm_serviceparam;crm_serviceparam;Value

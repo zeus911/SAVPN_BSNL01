@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+
+  <global-forwards>
+    <forward name="error" path="/jsp/inventory/CRModel/NNMi-CL/error.jsp" contextRelative="true" />
+  </global-forwards>
+
+
+  <action-mappings>
+
+    <action path="/NNMiShowL2ConnectionAction" type="com.hp.ov.activator.cr.struts.nnm.cl.NNMiShowL2ConnectionAction"
+      validate="false">
+      <forward name="success" path="/jsp/inventory/CRModel/NNMi-CL/ShowL2.jsp" contextRelative="true" />
+    </action>
+
+    <action path="/NNMiShowL3ConnectionAction" type="com.hp.ov.activator.cr.struts.nnm.cl.NNMiShowL3ConnectionAction"
+      validate="false">
+      <forward name="success" path="/jsp/inventory/CRModel/NNMi-CL/ShowL3.jsp" contextRelative="true" />
+    </action>
+
+    <action path="/NNMiShowIfaceFormAction" type="com.hp.ov.activator.cr.struts.nnm.cl.NNMiShowIfaceFormAction"
+      validate="false">
+      <forward name="success" path="/jsp/inventory/CRModel/NNMi-CL/ShowIface.jsp" contextRelative="true" />
+    </action>
+
+  </action-mappings>
+
+
+</struts-config>

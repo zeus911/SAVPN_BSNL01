@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE Bean SYSTEM "bean.dtd">
+<!--
+###############################################################################
+#
+#    (c) Copyright 2003-2010 Hewlett-Packard Development Company, L.P.
+#
+###############################################################################
+
+###############################################################################
+#
+# $Source: /tmp/vpn/SA_VPN_SP/jboss/server/default/deploy/crmportal.sar/crm.war/WEB-INF/src/inventory/customer.xml,v $
+# $Revision: 1.10 $
+# $Date: 2010-10-05 14:19:04 $
+# $Author: shiva $
+#
+###############################################################################
+#
+# <Description> 
+#
+###############################################################################
+-->
+
+
+<Bean>
+  <Name>Customer</Name>
+  <Solution>CRM</Solution>
+  <ConstraintName>crm_customer</ConstraintName>
+  <Package>com.hp.ov.activator.crmportal.bean</Package>
+  <DBTable>crm_customer</DBTable>
+  <DBAlias>crm_customer</DBAlias>
+  <Fields>
+     <Field update ="false">
+        <Name>CustomerId</Name>
+        <Type>String</Type>
+        <Description>Unique customer identifier</Description>
+     </Field>
+     <Field mandatory="false">
+        <Name>CompanyName</Name>
+        <Type>String</Type>
+        <Description>Name of company</Description>
+     </Field>
+     <Field mandatory="false">
+        <Name>CompanyAddress</Name>
+        <Type>String</Type>
+        <Description>Company address, both street and number</Description>
+     </Field>
+     <Field mandatory="false">
+        <Name>CompanyCity</Name>
+        <Type>String</Type>
+        <Description>The city in which the company is located</Description>
+     </Field>
+     <Field mandatory="false">
+        <Name>CompanyZipCode</Name>
+        <Type>String</Type>
+        <Description>Postal code</Description>
+     </Field>
+     <Field mandatory="false">
+        <Name>ContactpersonName</Name>
+        <Type>String</Type>
+        <Description>First name of the contact person</Description>
+     </Field>
+     <Field mandatory="false">
+        <Name>ContactpersonSurname</Name>
+        <Type>String</Type>
+        <Description>Surname of the contact person</Description>
+     </Field>
+     <Field mandatory="false">
+        <Name>ContactpersonPhonenumber</Name>
+        <Type>String</Type>
+        <Description>Phone number of the contact person</Description>
+     </Field>
+     <Field mandatory="false">
+        <Name>ContactpersonEmail</Name>
+        <Type>String</Type>
+        <Description>E-mail address of the contact person</Description>
+     </Field>
+     <Field>
+        <Name>Status</Name>
+        <Type>String</Type>
+        <Description>Customer's current status</Description>
+     	<ListOfValues>
+      		<Value>Active</Value>        
+        	<Value>Deleted</Value>
+      	</ListOfValues>        
+     </Field>
+     <Field>
+        <Name>LastUpdateTime</Name>
+        <Type>long</Type>
+        <Description>Time of the update of the service</Description>
+     </Field>
+	  <Field>
+        <Name>CreationTime</Name>
+        <Type>String</Type>
+        <Description>Timestamp of creation of customer in DB in YYYY.MM.DD HH24:MI:SS format</Description>
+     </Field>
+
+  </Fields>
+
+  <Keys>
+    <Key pk="true">
+      <KeyField>CustomerId</KeyField>
+    </Key>
+  </Keys>
+
+  <!-- These are the operations to generate for this bean -->
+  <Operations>
+    <Store/>
+    <Update/>
+    <Remove/>
+
+    <!-- findAll method -->
+    <FindBy>
+      <OrderField>CompanyName</OrderField>
+    </FindBy>
+  </Operations>
+</Bean>
+

@@ -1,0 +1,17 @@
+## Generated using InventoryBuilder v.V61
+## Object class com.hp.ov.activator.inventorybuilder.sql.routes.FindByArraySQLRoute
+SELECT
+  crm_statemapping.SaResponse		crm_statemapping_SaResponse,
+  crm_statemapping.NextState		crm_statemapping_NextState,
+  crm_statemapping.CurrentState		crm_statemapping_CurrentState
+FROM
+  crm_statemapping   crm_statemapping
+WHERE
+  crm_statemapping.NextState IN [selectIN_?]
+
+
+
+@ order:1;select_IN_substitution
+@ opt:CurrentState;crm_statemapping;crm_statemapping;CurrentState
+@ opt:SaResponse;crm_statemapping;crm_statemapping;SaResponse
+@ opt:NextState;crm_statemapping;crm_statemapping;NextState

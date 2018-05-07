@@ -1,0 +1,9 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+UPDATE
+  crm_service
+SET
+  PresName = ?, State = ?, SubmitDate = ?, ModifyDate = ?, Type = ?, CustomerId = ?, ParentServiceId = ?, EndTime = ?, NextOperationTime = ?, LastUpdateTime = ?
+WHERE
+  ServiceId = ?
+

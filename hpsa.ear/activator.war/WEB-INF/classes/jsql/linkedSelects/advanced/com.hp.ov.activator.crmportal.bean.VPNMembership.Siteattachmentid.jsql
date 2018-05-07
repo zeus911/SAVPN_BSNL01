@@ -1,0 +1,17 @@
+## Generated using InventoryBuilder v.V61
+## Object class com.hp.ov.activator.inventorybuilder.sql.routes.FindByArraySQLRoute
+SELECT
+  crm_vpn_membership.siteAttachmentId		crm_vpn_membership_s31,
+  crm_vpn_membership.vpnId		crm_vpn_membership_vpnId,
+  crm_vpn_membership.ConnectivityType		crm_vpn_membership_C32
+FROM
+  crm_vpn_membership   crm_vpn_membership
+WHERE
+  crm_vpn_membership.siteAttachmentId IN [selectIN_?]
+
+
+
+@ order:1;select_IN_substitution
+@ opt:vpnId;crm_vpn_membership;crm_vpn_membership;vpnId
+@ opt:siteAttachmentId;crm_vpn_membership;crm_vpn_membership;siteAttachmentId
+@ opt:ConnectivityType;crm_vpn_membership;crm_vpn_membership;ConnectivityType

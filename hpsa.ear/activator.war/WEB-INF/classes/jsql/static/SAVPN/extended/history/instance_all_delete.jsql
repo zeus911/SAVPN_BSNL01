@@ -1,0 +1,1 @@
+DELETE FROM hist_instance_attributes WHERE classname = ? AND pk = ?

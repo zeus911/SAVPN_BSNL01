@@ -1,0 +1,9 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+UPDATE
+  IGW_TRUNKTYPE
+SET
+  NAME = ?
+WHERE
+  TRUNKTYPE_ID = ?
+

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f="http://jsf.exadel.com/template"
+	xmlns:u="http://jsf.exadel.com/template/util"
+	xmlns="http://www.w3.org/1999/xhtml">
+	<f:verbatim>
+	<![CDATA[
+		.rich-tab-active {
+		}
+		.rich-tab-bottom-line {
+		}
+		.rich-tab-disabled {
+		}
+		.rich-tab-header {
+		}
+		.rich-tab-inactive {
+		}
+		.rich-tabhdr-cell-active {
+		}
+		.rich-tabhdr-cell-disabled {
+		}
+		.rich-tabhdr-cell-inactive {
+		}
+		.rich-tabhdr-side-border {
+		}
+		.rich-tabhdr-side-cell {
+		}
+		.rich-tabpanel {
+		}
+		.rich-tabpanel-content {
+		}
+		.rich-tabpanel-content-position {
+		}
+	]]>
+	</f:verbatim>
+
+	<u:selector name=".rich-tabpanel">
+        <u:style name="margin-top" value="4px" />
+        <u:style name="margin-bottom" value="4px" />
+<!--
+        <u:style name="margin-left" value="2px" />
+        <u:style name="margin-right" value="2px" />
+-->
+	</u:selector>
+
+	<u:selector name=".rich-tabpanel-content">
+        <u:style name="padding" value="6px 6px 6px 6px" />
+        <u:style name="border-width" skin="hpsaBorderWidth" />
+        <u:style name="border-style" value="solid" />
+        <u:style name="border-color" skin="hpsaBlue" />
+        <u:style name="background-color" skin="controlBackgroundColor" />
+	</u:selector>
+
+	<u:selector name=".rich-tab-active">
+       <u:style name="font-weight" value="bold" />
+       <u:style name="color" skin="headerTextColor" />
+       <u:style name="background-color" skin="hpsaBlue" />
+       <u:style name="background-image" value="url(/activator/images/1x1.gif)" />       
+ 	</u:selector>
+
+	<u:selector name=".rich-tab-disabled">
+       <u:style name="font-weight" value="bold" />
+       <u:style name="color" skin="hpsaDarkGrey" />
+       <u:style name="background-color" skin="hpsaMediumGrey" />
+       <u:style name="background-image" value="url(/activator/images/1x1.gif)" />       
+	</u:selector>
+
+	<u:selector name=".rich-tab-inactive">
+       <u:style name="font-weight" value="bold" />
+       <u:style name="color" skin="hpsaBlue" />
+       <u:style name="background-color" skin="hpsaLightGrey" />
+       <u:style name="background-image" value="url(/activator/images/1x1.gif)" />       
+	</u:selector>
+
+	<u:selector name=".rich-tab-bottom-line">
+       <u:style name="border" value="0px" />
+	</u:selector>
+</f:template>

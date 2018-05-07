@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--
+********* IMPORTANT: This UI is also included in the Service Order View UI (SOV UI). Any changes made in this UI must be also made in SOV UI, and vice versa. *********
+-->
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+  <link rel="stylesheet" type="text/css" href="/activator/css/primefaces/hpsa.css" />
+  <script type="text/javascript" src="/activator/javascript/saUtilities.js" ></script>
+</h:head>
+
+<body onmousemove="logoutTimerReset();" onkeydown="logoutTimerReset();">
+
+<h:outputText value="#{msgsrb.messages}" class="frame-header" />
+
+<h:form id="form">
+
+<p:growl id="growl" showDetail="true" closable="true" showSummary="true" />
+
+<p:tabView id="tabview" var="tab" value="#{messageManager.tabs}" dynamic="true" cache="false" rendered="#{messageManager.hasTabs}" style="border:0px solid;">
+  <p:ajax event="tabChange" listener="#{messageManager.onTabChange}" />
+  <p:tab title="#{tab.title}">
+    <p:contextMenu for="messages" id="ops" style="width:210px;">
+      <p:menuitem value="#{msgsrb.delete_op}" icon="ui-icon-stop" onclick="PF('dlgdeljob').show();"
+          rendered="#{tab.isDeleteOperationAllowed}" />
+      <p:menuitem value="#{msgsrb.delete_all_op}" icon="ui-icon-stop" onclick="PF('dlgdelalljob').show();"
+          rendered="#{tab.isDeleteAllOperationAllowed}" />
+    </p:contextMenu>
+    <p:dataTable id="messages" var="message" value="#{tab.messages}" selection="#{messageManager.selectedMessage}" selectionMode="single"
+        lazy="true" paginator="true" rows="#{messageManager.pageSize}"
+        paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+        emptyMessage="#{msgsrb.empty_queue}" resizableColumns="true" tableStyle="table-layout:auto;">
+      <p:ajax event="contextMenu" listener="#{messageManager.onRowSelect}" update=":form:growl,:form:dlgdelalljob"/>
+      <p:columns value="#{tab.columns}" var="column" sortBy="#{column.property}" columnIndexVar="colIndex" resizable="true" style="white-space:normal;">
+        <f:facet name="header">
+          #{column.header}
+        </f:facet>
+        #{message[column.property]}
+      </p:columns>
+    </p:dataTable>
+  </p:tab>
+</p:tabView>
+
+<p:panel id="emptyp" visible="#{!messageManager.hasTabs}">
+  <h:outputText value="#{msgsrb.no_queues}" />
+</p:panel>
+
+<p:poll interval="#{messageManager.refreshRate}" update=":form:growl,:form:tabview,:form:emptyp"
+    listener="#{messageManager.onPoll}" rendered="#{messageManager.isRefreshAllowed}" />
+
+<p:confirmDialog id="dlgdeljob" widgetVar="dlgdeljob" header="#{msgsrb.delete_op}" showEffect="fade" hideEffect="fade">
+  <f:facet name="message">
+    <h:outputLabel value="#{msgsrb.delete_confirm}" />
+  </f:facet>
+  <p:commandButton value="#{msgsrb.ok}" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      update=":form:tabview,:form:emptyp,:form:growl" actionListener="#{messageManager.deleteMessage}" onclick="PF('dlgdeljob').hide();"/>
+  <p:commandButton value="#{msgsrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgdeljob').hide();"/>
+</p:confirmDialog>
+
+<p:confirmDialog id="dlgdelalljob" widgetVar="dlgdelalljob" header="#{msgsrb.delete_all_op}" showEffect="fade" hideEffect="fade">
+  <f:facet name="message">
+    <h:outputFormat value="#{msgsrb.delete_all_confirm}">
+      <f:param value="#{messageManager.selectedTab.name}" />
+    </h:outputFormat>
+  </f:facet>
+  <p:commandButton value="#{msgsrb.ok}" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+      update=":form:tabview,:form:emptyp,:form:growl" actionListener="#{messageManager.deleteAllMessages}" onclick="PF('dlgdelalljob').hide();"/>
+  <p:commandButton value="#{msgsrb.cancel}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('dlgdelalljob').hide();"/>
+</p:confirmDialog>
+
+<p:ajaxStatus id="ajaxStatusPanel" style="position:fixed; right:5px; bottom:5px; width:32px; height:32px;">
+  <f:facet name="start">
+    <h:graphicImage value="#{request.contextPath}/../../activator/images/primefaces/throbber.gif" />
+  </f:facet>
+  <f:facet name="complete">
+    <h:outputText value="" />
+  </f:facet>
+</p:ajaxStatus>
+
+</h:form>
+
+</body>
+
+</html>

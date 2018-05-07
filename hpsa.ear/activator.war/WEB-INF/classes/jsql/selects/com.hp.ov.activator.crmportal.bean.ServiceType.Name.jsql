@@ -1,0 +1,16 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+SELECT
+  crm_servicetype.Name		crm_servicetype_Name,
+  crm_servicetype.ParentServType		crm_servicetype_ParentServType,
+  crm_servicetype.Description		crm_servicetype_Description
+FROM
+  crm_servicetype   crm_servicetype
+WHERE
+  crm_servicetype.Name = ?
+ORDER BY 
+crm_servicetype.Name
+
+
+@ order:1;ServiceType.Name
+@ alias:own_table_alias;crm_servicetype

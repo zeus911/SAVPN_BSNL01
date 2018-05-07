@@ -1,0 +1,135 @@
+/*
+ * Some defaults of the menu body
+ */
+body    {
+            font-family: Verdana, Helvetica, Arial, Sans-serif;
+            font-size: 8pt;
+            color: white;
+            width: 134px;
+            padding: 2px;
+            background-color: whitesmoke;
+        }
+
+/*
+ * Make backgrounds of paragraphs and headings hp blue
+ */
+p       {
+            font-weight: bold;
+            background-color: #26558e;
+            width: 100%;
+            padding: 1px;
+        }
+
+/*
+ * Remove bottom marging towards the menu lists
+ */
+h1      {    
+            font-size: 10pt;
+            background-color: #26558e;
+            width: 100%;
+            padding: 1px;
+            margin-bottom: 0;
+        }
+
+h2      {
+            font-size: 14pt;
+        }
+
+h3      {
+            font-size: 12pt;
+        }
+
+h4      { 
+            font-size: 10pt;
+        }
+
+/*
+ * Remove default decorations of links (under score)
+ */
+a       {
+            color: black;
+            cursor: hand;
+            text-decoration: none;
+        }
+
+/* 
+ * Make the menu using lists. Remove default bullets and move list to the left.
+ * Set background a little darker than body color
+ */
+    ul      {
+                list-style-type: none;
+                width: 100%;
+                padding: 1px;
+                margin: 0;
+                background-color: #E6E6E6;
+            }
+
+    /*
+     * Avoid gap between links in IE
+     */
+    ul li   {
+                display: inline;
+            }
+
+    /*
+     * Make the menu links (a's under ul's) wide
+     */
+    ul a    {
+                display: block
+            }
+
+    /*
+     * Provides the skip activation link in red
+     */
+    ul.admin a {
+                color: red;
+            }
+
+    /*
+     * Highlight the link with blue when hovering
+     */
+    a:hover {
+                background-color: #8CBDDE;
+            }
+
+    /*
+     * When pressing, the link becomes grey!
+     */
+    a:active    {
+                background-color: #CCCCCC;
+            }
+
+    /*
+     * Seems to affect the 'List' link only !?
+     */
+    a:focus    {
+                background-color: #CCCCCC;
+            }
+
+    /* 
+     * To remove any sign of the darker background defined on <ul>
+     */
+    ul.button   {
+            background-color: whitesmoke;
+        }
+
+    /* 
+     * To position the 2 footer buttons correctly the class 'Button' is applied to the
+     */
+    .button li    {
+            float: left;
+            margin-left:  10px;
+            margin-right: 14px;
+            width: 4em;
+        }
+
+    /*
+     * To size the logo img according to width !?
+     */
+    img.logo    {
+            width: 134px;
+        }
+
+/*
+   vim:softtabstop=4:shiftwidth=4:expandtab
+ */

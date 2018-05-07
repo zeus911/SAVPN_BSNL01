@@ -1,0 +1,27 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+SELECT
+  V_PolicyMapping.CoSName		V_PolicyMapping_CoSName,
+  V_PolicyMapping.PLP		V_PolicyMapping_PLP,
+  V_PolicyMapping.Percentage		V_PolicyMapping_Percentage,
+  V_PolicyMapping.Exp		V_PolicyMapping_Exp,
+  V_PolicyMapping.ProfileName		V_PolicyMapping_ProfileName,
+  V_PolicyMapping.TClassName		V_PolicyMapping_TClassName,
+  V_PolicyMapping.queueName		V_PolicyMapping_queueName,
+  V_PolicyMapping.Position		V_PolicyMapping_Position
+FROM
+  V_PolicyMapping   V_PolicyMapping
+WHERE
+  V_PolicyMapping.ProfileName IN [selectIN_?]
+
+
+
+@ order:1;select_IN_substitution
+@ opt:TClassName;V_PolicyMapping;V_PolicyMapping;TClassName
+@ opt:ProfileName;V_PolicyMapping;V_PolicyMapping;ProfileName
+@ opt:Exp;V_PolicyMapping;V_PolicyMapping;Exp
+@ opt:Percentage;V_PolicyMapping;V_PolicyMapping;Percentage
+@ opt:Position;V_PolicyMapping;V_PolicyMapping;Position
+@ opt:PLP;V_PolicyMapping;V_PolicyMapping;PLP
+@ opt:queueName;V_PolicyMapping;V_PolicyMapping;queueName
+@ opt:CoSName;V_PolicyMapping;V_PolicyMapping;CoSName

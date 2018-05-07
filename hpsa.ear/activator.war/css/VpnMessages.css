@@ -1,0 +1,32 @@
+/**************************************************************************/
+/*    hp OpenView service activator                                       */
+/*    (c) Copyright 2003-2010 Hewlett-Packard Development Company, L.P.  */
+/**************************************************************************/
+
+
+/**************************************************/
+/*    Table styles                                */
+/**************************************************/
+
+table {
+        border: 0px;
+        border-collapse: collapse;
+        border-spacing: 0px; 
+        padding: 0px;
+}
+
+
+
+
+.tableRowRed{ 
+		background-color: #FF0000;
+        font-family: Verdana, Helvetica, Arial, Sans-serif;
+        font-size: 8pt;
+        color: black; 
+        border: 2px solid white;
+        padding: 1px, 3px;
+        cursor:  pointer;
+        cursor:  hand;
+}
+
+

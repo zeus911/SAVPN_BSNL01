@@ -1,0 +1,16 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+SELECT
+  V_RateLimit.Description		V_RateLimit_Description,
+  V_RateLimit.RateLimitName		V_RateLimit_RateLimitName,
+  V_RateLimit.AverageBW		V_RateLimit_AverageBW
+FROM
+  V_RateLimit   V_RateLimit
+WHERE
+  V_RateLimit.RateLimitName = ?
+ORDER BY 
+V_RateLimit.RateLimitName
+
+
+@ order:1;CAR.RateLimitName
+@ alias:own_table_alias;V_RateLimit

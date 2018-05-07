@@ -1,0 +1,18 @@
+## Generated using InventoryBuilder v.V61
+## For simplify purposes all the reserved SQL words MUST BE UPPERCASE
+SELECT
+  V_VlanRange.StartValue		V_VlanRange_StartValue,
+  V_VlanRange.Description		V_VlanRange_Description,
+  V_VlanRange.Region		V_VlanRange_Region,
+  V_VlanRange.EndValue		V_VlanRange_EndValue,
+  V_VlanRange.Allocation		V_VlanRange_Allocation,
+  V_VlanRange.Usage		V_VlanRange_Usage
+FROM
+  V_VlanRange   V_VlanRange
+WHERE
+  V_VlanRange.Region = ?
+ORDER BY 
+V_VlanRange.Usage, V_VlanRange.Allocation, V_VlanRange.StartValue, V_VlanRange.Region
+
+
+@ order:1;VlanRange.Region
